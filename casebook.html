@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="feedback-endpoint" content="">
   <title>Power Markets Casebook</title>
   <style>
     :root {
@@ -1019,8 +1020,17 @@
       border-color: var(--accent-soft);
     }
 
+    .feedback-honeypot {
+      position: absolute;
+      left: -10000px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
     .feedback-note,
-    .feedback-error {
+    .feedback-error,
+    .feedback-success {
       margin: 0.65rem 0 0;
       color: var(--muted);
       font-size: 0.86rem;
@@ -1030,6 +1040,11 @@
     .feedback-error {
       color: #8a3b1c;
       font-weight: 800;
+    }
+
+    .feedback-success {
+      color: var(--accent-dark);
+      font-weight: 850;
     }
 
     .feedback-actions {
@@ -1424,7 +1439,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.23.0
+        v0.24.0
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -6036,11 +6051,15 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Your note
         <textarea id="feedback-comment" autocomplete="off" spellcheck="true"></textarea>
       </label>
-      <p class="feedback-note">This opens a prefilled GitHub issue that you can review before submitting.</p>
+      <label class="feedback-honeypot" for="feedback-website">Website
+        <input id="feedback-website" type="text" autocomplete="off" tabindex="-1">
+      </label>
+      <p class="feedback-note" id="feedback-note">This sends the selected passage and your note to the course issue tracker.</p>
       <p class="feedback-error" id="feedback-error" hidden>Please add a short note.</p>
+      <p class="feedback-success" id="feedback-success" hidden>Feedback sent. Thank you.</p>
       <div class="feedback-actions">
         <button class="feedback-secondary" id="feedback-cancel" type="button">Cancel</button>
-        <button class="feedback-primary" id="feedback-submit" type="button">Open GitHub issue</button>
+        <button class="feedback-primary" id="feedback-submit" type="button">Send feedback</button>
       </div>
     </div>
   </div>
@@ -6843,9 +6862,18 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         const contextEl = document.getElementById("feedback-context");
         const selectedEl = document.getElementById("feedback-selected");
         const commentEl = document.getElementById("feedback-comment");
+        const websiteEl = document.getElementById("feedback-website");
+        const noteEl = document.getElementById("feedback-note");
         const errorEl = document.getElementById("feedback-error");
+        const successEl = document.getElementById("feedback-success");
+        const endpointMeta = document.querySelector('meta[name="feedback-endpoint"]');
+        const feedbackEndpoint = (endpointMeta?.content || "").trim();
         const issueUrl = "https://github.com/SofianeBo/power-market-notes/issues/new";
         if (!chip || !modal || !submitButton || !commentEl) return;
+        if (!feedbackEndpoint) {
+          submitButton.textContent = "Open GitHub issue";
+          if (noteEl) noteEl.textContent = "This opens a prefilled GitHub issue that you can review before submitting.";
+        }
 
         const chapterById = new Map(chapters.map((chapter) => [chapter.id, chapter]));
         let activePayload = null;
@@ -6858,6 +6886,18 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
 
         const markdownQuote = function (text) {
           return (text || "").split(/\n+/).map((line) => "> " + line.trim()).join("\n");
+        };
+
+        const setError = function (message) {
+          if (!errorEl) return;
+          errorEl.textContent = message;
+          errorEl.hidden = false;
+          if (successEl) successEl.hidden = true;
+        };
+
+        const clearMessages = function () {
+          if (errorEl) errorEl.hidden = true;
+          if (successEl) successEl.hidden = true;
         };
 
         const elementFromNode = function (node) {
@@ -6940,7 +6980,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           contextEl.textContent = [payload.product, payload.chapter, payload.section, payload.version].filter(Boolean).join(" / ");
           selectedEl.textContent = payload.selected;
           commentEl.value = "";
-          if (errorEl) errorEl.hidden = true;
+          if (websiteEl) websiteEl.value = "";
+          clearMessages();
           modal.hidden = false;
           hideChip();
           window.setTimeout(() => commentEl.focus(), 0);
@@ -6948,48 +6989,85 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
 
         const closeModal = function () {
           modal.hidden = true;
-          if (errorEl) errorEl.hidden = true;
+          clearMessages();
         };
 
-        const submitFeedback = function () {
-          if (!activePayload) return;
-          const comment = commentEl.value.trim();
-          if (comment.length < 2) {
-            if (errorEl) errorEl.hidden = false;
-            commentEl.focus();
-            return;
-          }
-          const title = truncate("Feedback: " + activePayload.chapter, 96);
+        const buildIssueUrl = function (payload, comment) {
+          const title = truncate("Feedback: " + payload.chapter, 96);
           const bodyLines = [
             "## Comment",
             comment,
             "",
             "## Location",
-            "- Version: " + activePayload.version,
-            "- Product: " + activePayload.product,
-            "- URL: " + activePayload.url,
-            "- Chapter: " + activePayload.chapter,
+            "- Version: " + payload.version,
+            "- Product: " + payload.product,
+            "- URL: " + payload.url,
+            "- Chapter: " + payload.chapter,
           ];
-          if (activePayload.section) bodyLines.push("- Section: " + activePayload.section);
+          if (payload.section) bodyLines.push("- Section: " + payload.section);
           bodyLines.push(
             "",
             "## Selected text",
-            markdownQuote(activePayload.selected),
+            markdownQuote(payload.selected),
             "",
             "## Nearby context",
-            activePayload.prefix ? "- Before: " + activePayload.prefix : "- Before:",
-            activePayload.suffix ? "- After: " + activePayload.suffix : "- After:"
+            payload.prefix ? "- Before: " + payload.prefix : "- Before:",
+            payload.suffix ? "- After: " + payload.suffix : "- After:"
           );
-          const body = bodyLines.join("\n");
           const params = new URLSearchParams({
             title: title,
-            body: body,
+            body: bodyLines.join("\n"),
             labels: "public-feedback,needs-triage"
           });
-          const target = issueUrl + "?" + params.toString();
+          return issueUrl + "?" + params.toString();
+        };
+
+        const openIssueDraft = function (payload, comment) {
+          const target = buildIssueUrl(payload, comment);
           const opened = window.open(target, "_blank", "noopener,noreferrer");
           if (!opened) window.location.href = target;
           closeModal();
+        };
+
+        const submitFeedback = async function () {
+          if (!activePayload) return;
+          const comment = commentEl.value.trim();
+          if (comment.length < 2) {
+            setError("Please add a short note.");
+            commentEl.focus();
+            return;
+          }
+          if (!feedbackEndpoint) {
+            openIssueDraft(activePayload, comment);
+            return;
+          }
+          clearMessages();
+          submitButton.disabled = true;
+          const previousLabel = submitButton.textContent;
+          submitButton.textContent = "Sending...";
+          try {
+            const response = await fetch(feedbackEndpoint, {
+              method: "POST",
+              headers: { "Content-Type": "text/plain;charset=UTF-8" },
+              body: JSON.stringify({
+                ...activePayload,
+                comment: comment,
+                website: websiteEl ? websiteEl.value : ""
+              })
+            });
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok || !data.ok) {
+              throw new Error(data.error || "Feedback could not be sent.");
+            }
+            if (successEl) successEl.hidden = false;
+            window.setTimeout(closeModal, 1200);
+          } catch (_error) {
+            setError("Could not send feedback. Opening a GitHub issue draft instead.");
+            openIssueDraft(activePayload, comment);
+          } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = previousLabel;
+          }
         };
 
         document.addEventListener("selectionchange", () => {
