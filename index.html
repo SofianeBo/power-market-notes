@@ -5,8 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="feedback-endpoint" content="https://power-market-feedback.sofianebo-power-market.workers.dev/feedback">
   <title>Power Markets: Technical Onboarding Notes</title>
+  <script>
+    (function () {
+      try {
+        const saved = localStorage.getItem("power-course-theme");
+        const systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.dataset.theme = saved || (systemDark ? "dark" : "light");
+      } catch (_error) {
+      }
+    })();
+  </script>
   <style>
     :root {
+      color-scheme: light;
       --bg: #edf3f1;
       --bg-soft: #f7faf9;
       --surface: #ffffff;
@@ -31,6 +42,29 @@
       --measure: 78ch;
     }
 
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #0f1715;
+      --bg-soft: #16221f;
+      --surface: #18231f;
+      --surface-2: #13201c;
+      --ink: #e8f0ed;
+      --muted: #a8b8b3;
+      --muted-2: #7f918b;
+      --line: #2d403a;
+      --line-strong: #4b625b;
+      --accent: #55c6b8;
+      --accent-dark: #80ded2;
+      --accent-soft: #16372f;
+      --blue: #82b7f2;
+      --amber: #e1b861;
+      --rose: #ee8ca1;
+      --violet: #b49af0;
+      --green: #8ed29b;
+      --code-bg: #101a17;
+      --shadow: 0 24px 64px rgba(0, 0, 0, 0.34);
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -47,6 +81,12 @@
       color: var(--ink);
       font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.65;
+    }
+
+    :root[data-theme="dark"] body {
+      background:
+        linear-gradient(180deg, rgba(25, 37, 33, 0.92), rgba(15, 23, 21, 0.84) 22rem),
+        var(--bg);
     }
 
     a {
@@ -92,6 +132,11 @@
       backdrop-filter: blur(18px);
     }
 
+    :root[data-theme="dark"] .topbar {
+      border-bottom-color: rgba(75, 98, 91, 0.76);
+      background: rgba(19, 31, 28, 0.88);
+    }
+
     .brand-mark {
       display: inline-flex;
       align-items: center;
@@ -109,6 +154,43 @@
       border-radius: 3px;
       background: linear-gradient(135deg, var(--accent), #79a55a);
       box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.12);
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      min-height: 2rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.28rem 0.62rem 0.28rem 0.34rem;
+      background: color-mix(in srgb, var(--surface) 86%, transparent);
+      color: var(--muted);
+      font: inherit;
+      font-size: 0.76rem;
+      font-weight: 820;
+      line-height: 1;
+      cursor: pointer;
+      transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+    }
+
+    .theme-toggle:hover,
+    .theme-toggle:focus {
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+    }
+
+    .theme-toggle-knob {
+      width: 1.12rem;
+      height: 1.12rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), #79a55a);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent);
+      transition: transform 160ms ease;
+    }
+
+    .theme-toggle[aria-pressed="true"] .theme-toggle-knob {
+      transform: translateX(0.18rem);
     }
 
     .top-actions {
@@ -169,6 +251,10 @@
       background: rgba(255, 255, 255, 0.86);
       border-right: 1px solid var(--line);
       padding: 1rem 0.9rem 1.4rem;
+    }
+
+    :root[data-theme="dark"] .sidebar {
+      background: rgba(19, 31, 28, 0.86);
     }
 
     .sidebar-brand {
@@ -1152,6 +1238,83 @@
       border-radius: 6px;
     }
 
+    :root[data-theme="dark"] .reader-section,
+    :root[data-theme="dark"] .term-popover,
+    :root[data-theme="dark"] .selection-toolbar,
+    :root[data-theme="dark"] .feedback-modal,
+    :root[data-theme="dark"] .feedback-close,
+    :root[data-theme="dark"] .feedback-secondary,
+    :root[data-theme="dark"] .feedback-label textarea,
+    :root[data-theme="dark"] .glossary-list,
+    :root[data-theme="dark"] .arc-link,
+    :root[data-theme="dark"] .home-contact a,
+    :root[data-theme="dark"] .tool-input,
+    :root[data-theme="dark"] .rail-buttons a,
+    :root[data-theme="dark"] .chapter-pager a {
+      background: var(--surface);
+      color: var(--ink);
+    }
+
+    :root[data-theme="dark"] .reader-section {
+      background: color-mix(in srgb, var(--surface) 94%, var(--section-color, var(--accent)) 6%);
+    }
+
+    :root[data-theme="dark"] .section-kind-model,
+    :root[data-theme="dark"] .section-kind-definitions,
+    :root[data-theme="dark"] .section-kind-numbers,
+    :root[data-theme="dark"] .section-kind-example {
+      --section-bg: color-mix(in srgb, var(--surface) 92%, var(--section-color, var(--accent)) 8%);
+    }
+
+    :root[data-theme="dark"] h1,
+    :root[data-theme="dark"] h2,
+    :root[data-theme="dark"] h3,
+    :root[data-theme="dark"] h4,
+    :root[data-theme="dark"] strong,
+    :root[data-theme="dark"] .home-copy p,
+    :root[data-theme="dark"] .arc-summary,
+    :root[data-theme="dark"] .arc-points,
+    :root[data-theme="dark"] .capability-grid p,
+    :root[data-theme="dark"] .home-author p,
+    :root[data-theme="dark"] .feedback-modal h2,
+    :root[data-theme="dark"] .feedback-selected,
+    :root[data-theme="dark"] .feedback-label,
+    :root[data-theme="dark"] .glossary-list dt,
+    :root[data-theme="dark"] .glossary-list dd,
+    :root[data-theme="dark"] .rail-title,
+    :root[data-theme="dark"] .reader-section summary,
+    :root[data-theme="dark"] .course-nav a,
+    :root[data-theme="dark"] .toc-volume-toggle {
+      color: var(--ink);
+    }
+
+    :root[data-theme="dark"] .home-section-heading p,
+    :root[data-theme="dark"] .home-version,
+    :root[data-theme="dark"] .feedback-context,
+    :root[data-theme="dark"] .feedback-note,
+    :root[data-theme="dark"] .rail-label,
+    :root[data-theme="dark"] .rail-nav a,
+    :root[data-theme="dark"] .sidebar-brand span,
+    :root[data-theme="dark"] .tool-label {
+      color: var(--muted);
+    }
+
+    :root[data-theme="dark"] blockquote,
+    :root[data-theme="dark"] th,
+    :root[data-theme="dark"] .glossary-list dt {
+      background: var(--surface-2);
+      color: var(--ink);
+    }
+
+    :root[data-theme="dark"] .reading-rail {
+      background: rgba(19, 31, 28, 0.78);
+    }
+
+    :root[data-theme="dark"] .user-highlight {
+      background: #6c5720;
+      box-shadow: 0 0 0 4px #6c5720;
+    }
+
     .glossary-list {
       display: grid;
       grid-template-columns: minmax(10rem, 0.7fr) minmax(0, 1.5fr);
@@ -1436,6 +1599,10 @@
   <a class="skip-link" href="#course">Skip to course</a>
   <header class="topbar" aria-label="Reader header">
     <a class="brand-mark" href="#home">Power Markets</a>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+      <span class="theme-toggle-knob" aria-hidden="true"></span>
+      <span class="theme-toggle-text">Dark</span>
+    </button>
   </header>
   <div class="layout">
     <aside class="sidebar" aria-label="Reader navigation">
@@ -1600,7 +1767,7 @@
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.25.4
+        v0.25.5
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -23444,6 +23611,41 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         });
       }
 
+      function setupTheme() {
+        const button = document.getElementById("theme-toggle");
+        if (!button) return;
+        const label = button.querySelector(".theme-toggle-text");
+        const key = "power-course-theme";
+        const currentTheme = function () {
+          return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+        };
+        const applyTheme = function (theme) {
+          const next = theme === "dark" ? "dark" : "light";
+          document.documentElement.dataset.theme = next;
+          button.setAttribute("aria-pressed", String(next === "dark"));
+          button.setAttribute("aria-label", next === "dark" ? "Switch to light mode" : "Switch to dark mode");
+          if (label) label.textContent = next === "dark" ? "Light" : "Dark";
+        };
+        let saved = "";
+        try {
+          saved = localStorage.getItem(key) || "";
+        } catch (_error) {
+        }
+        if (saved === "dark" || saved === "light") {
+          applyTheme(saved);
+        } else {
+          applyTheme(currentTheme());
+        }
+        button.addEventListener("click", () => {
+          const next = currentTheme() === "dark" ? "light" : "dark";
+          applyTheme(next);
+          try {
+            localStorage.setItem(key, next);
+          } catch (_error) {
+          }
+        });
+      }
+
       function setupPrint() {
         const button = document.getElementById("print-pdf");
         let printState = [];
@@ -23471,6 +23673,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
       const version = (document.querySelector(".course-version")?.textContent || "course").trim();
       const store = storage(version);
       const tocApi = setupToc(chapters);
+      setupTheme();
       setupTocFilter();
       setupSectionControls();
       annotateGlossaryTerms();
