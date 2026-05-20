@@ -1442,7 +1442,7 @@
     <aside class="sidebar" aria-label="Reader navigation">
       <div class="sidebar-brand">
         <strong>Power Markets Notes</strong>
-        <span>Technical onboarding notes, applied cases, citations, numerical anchors, and decision-focused models.</span>
+        <span>Applied cases, numerical anchors, and decision-focused models for power-market work.</span>
       </div>
       <div class="reader-tools" aria-label="Reader tools">
         <label class="tool-label" for="toc-filter">
@@ -1493,7 +1493,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.24.4
+        v0.24.5
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -7205,7 +7205,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
       if (brandTitle) brandTitle.textContent = rootTitle();
       const brandSubtitle = document.querySelector(".sidebar-brand span");
       if (brandSubtitle && isCasebookProduct()) {
-        brandSubtitle.textContent = "Applied decision cases with citations, numerical screens, and commercial memos.";
+        brandSubtitle.textContent = "Applied decision cases with numerical screens and commercial memos.";
       }
       const chapters = collectChapters();
       buildHome(chapters);
