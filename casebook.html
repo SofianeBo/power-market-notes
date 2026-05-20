@@ -1263,7 +1263,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.22.6
+        v0.22.7
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -4201,6 +4201,13 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Obligation to plan for balance and financially settle imbalances
         under market rules.
         </dd>
+        <dt id="glossary-balancing-capacity" data-term="Balancing capacity" data-definition="MW held available for balancing service under TSO product rules, whether or not activation occurs.">
+        Balancing capacity
+        </dt>
+        <dd>
+        MW held available for balancing service under TSO product rules,
+        whether or not activation occurs.
+        </dd>
         <dt id="glossary-balancing-energy" data-term="Balancing energy" data-definition="Energy delivered or absorbed when balancing bids or reserves are activated.">
         Balancing energy
         </dt>
@@ -4234,6 +4241,13 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         <dd>
         Mismatch between the exposure being hedged and the
         instrument/reference used to hedge it.
+        </dd>
+        <dt id="glossary-battery-duration" data-term="Battery duration" data-definition="Battery energy capacity divided by power rating, usually expressed in hours.">
+        Battery duration
+        </dt>
+        <dd>
+        Battery energy capacity divided by power rating, usually
+        expressed in hours.
         </dd>
         <dt id="glossary-behavioral-market-power" data-term="Behavioral market power" data-definition="Actual conduct that uses market-power potential through bidding, withholding, scheduling, or dispatch choices.">
         Behavioral market power
@@ -4644,13 +4658,6 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Distribution System Operator: entity responsible for operating a
         distribution network.
         </dd>
-        <dt id="glossary-duration" data-term="Duration" data-definition="Battery energy capacity divided by power rating, usually expressed in hours.">
-        Duration
-        </dt>
-        <dd>
-        Battery energy capacity divided by power rating, usually
-        expressed in hours.
-        </dd>
         <dt id="glossary-duration-hedge" data-term="Duration hedge" data-definition="Extra battery energy capacity bought partly to handle uncertainty in spreads, delivery obligations, reserve calls, curtailment windows, or grid constraints.">
         Duration hedge
         </dt>
@@ -4947,6 +4954,14 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Bridge from gross physical value to equity cash flow that shows
         capture, curtailment, contract, grid, BESS, opex, debt, and
         residual effects layer by layer.
+        </dd>
+        <dt id="glossary-ipp" data-term="IPP" data-definition="Independent Power Producer: company that owns or operates generation assets and sells electricity or related products without being the incumbent utility.">
+        IPP
+        </dt>
+        <dd>
+        Independent Power Producer: company that owns or operates
+        generation assets and sells electricity or related products
+        without being the incumbent utility.
         </dd>
         <dt id="glossary-irr" data-term="IRR" data-definition="Internal rate of return: discount rate that makes project NPV equal zero.">
         IRR
@@ -6430,7 +6445,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
       }
 
       function glossaryTerms() {
-        const deny = new Set(["Power", "Energy", "Load", "Floor", "Cap", "Voltage", "Dispatch"]);
+        const deny = new Set(["Power", "Energy", "Load", "Floor", "Cap", "Voltage", "Dispatch", "Duration"]);
         return Array.from(document.querySelectorAll(".glossary-list dt[data-term]"))
           .map((dt) => ({
             term: dt.dataset.term || dt.textContent.trim(),

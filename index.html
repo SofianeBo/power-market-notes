@@ -1379,7 +1379,7 @@
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.22.6
+        v0.22.7
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -1687,9 +1687,13 @@
         guideline, TSOs are responsible for organizing balancing
         activities and maintaining system balance within their
         mandates.</p>
-        <p>Balancing energy: energy activated by TSOs to perform
-        balancing, provided by balancing service providers in the eSett
-        terminology.</p>
+        <p>Balancing capacity: power capability kept available for
+        balancing service under product rules, usually measured in MW.
+        The asset may be paid for readiness even before energy is
+        activated.</p>
+        <p>Balancing energy: energy delivered or absorbed after
+        activation for balancing, usually measured in MWh and provided
+        by balancing service providers in the eSett terminology.</p>
         </section>
         <section id="numerical-intuition-1" class="level4">
         <h4>Numerical Intuition</h4>
@@ -1703,7 +1707,7 @@ If it lasts 1 hour: 5 MW x 1 h = 5 MWh</code></pre>
         <p>If the error lasts only 15 minutes:</p>
         <pre class="text"><code>5 MW x 0.25 h = 1.25 MWh</code></pre>
         <p>The power error is still 5 MW. The energy volume is smaller
-        because the duration is shorter.</p>
+        because the error lasts for less time.</p>
         <section id="worked-estimate-1" class="level5">
         <h5>Worked Estimate</h5>
         <p>Suppose an IPP has 500 MW of weather-dependent generation in
@@ -1717,7 +1721,8 @@ If it lasts 1 hour: 5 MW x 1 h = 5 MWh</code></pre>
         lesson is scaling:</p>
         <ul>
         <li>double the portfolio, double the MW error;</li>
-        <li>double the duration, double the MWh exposure;</li>
+        <li>double the time length of the error, double the MWh
+        exposure;</li>
         <li>errors that are correlated across many assets matter more
         than errors that cancel inside the portfolio.</li>
         </ul>
@@ -3143,8 +3148,8 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <li>Ancillary service: service procured to support secure
         operation of the power system, beyond ordinary energy
         delivery.</li>
-        <li>Reserve capacity: MW held available for possible
-        activation.</li>
+        <li>Reserve capacity or balancing capacity: MW held available
+        for possible activation under product rules.</li>
         <li>Balancing energy: MWh delivered or absorbed when a reserve
         is activated.</li>
         <li>Activation: instruction or automatic response that turns
@@ -3724,7 +3729,7 @@ reactive MVAr obligation or headroom</code></pre>
         as if it were at full output for fraction <code>CF</code> of the
         period, over <code>H</code> hours it produces
         <code>P x CF x H</code> MWh.</p>
-        <pre class="text"><code>Duration = energy capacity / power rating</code></pre>
+        <pre class="text"><code>Battery duration = energy capacity / power rating</code></pre>
         <p>Meaning: a <code>200 MWh / 100 MW</code> battery can
         discharge at full power for about 2 hours before considering
         usable-energy and operating limits.</p>
@@ -4150,8 +4155,8 @@ RTE: how much energy survives the round trip</code></pre>
         <li>Power rating: maximum charge or discharge rate, in MW.</li>
         <li>Energy capacity: amount of stored energy, in MWh. Nameplate
         and usable capacity may differ.</li>
-        <li>Duration: energy capacity divided by power rating, in
-        hours.</li>
+        <li>Battery duration: energy capacity divided by power rating,
+        in hours.</li>
         <li>State of charge: stored energy at a moment, expressed in MWh
         or percent of usable capacity.</li>
         <li>Round-trip efficiency: energy discharged divided by energy
@@ -20258,6 +20263,13 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Obligation to plan for balance and financially settle imbalances
         under market rules.
         </dd>
+        <dt id="glossary-balancing-capacity" data-term="Balancing capacity" data-definition="MW held available for balancing service under TSO product rules, whether or not activation occurs.">
+        Balancing capacity
+        </dt>
+        <dd>
+        MW held available for balancing service under TSO product rules,
+        whether or not activation occurs.
+        </dd>
         <dt id="glossary-balancing-energy" data-term="Balancing energy" data-definition="Energy delivered or absorbed when balancing bids or reserves are activated.">
         Balancing energy
         </dt>
@@ -20291,6 +20303,13 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         <dd>
         Mismatch between the exposure being hedged and the
         instrument/reference used to hedge it.
+        </dd>
+        <dt id="glossary-battery-duration" data-term="Battery duration" data-definition="Battery energy capacity divided by power rating, usually expressed in hours.">
+        Battery duration
+        </dt>
+        <dd>
+        Battery energy capacity divided by power rating, usually
+        expressed in hours.
         </dd>
         <dt id="glossary-behavioral-market-power" data-term="Behavioral market power" data-definition="Actual conduct that uses market-power potential through bidding, withholding, scheduling, or dispatch choices.">
         Behavioral market power
@@ -20701,13 +20720,6 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Distribution System Operator: entity responsible for operating a
         distribution network.
         </dd>
-        <dt id="glossary-duration" data-term="Duration" data-definition="Battery energy capacity divided by power rating, usually expressed in hours.">
-        Duration
-        </dt>
-        <dd>
-        Battery energy capacity divided by power rating, usually
-        expressed in hours.
-        </dd>
         <dt id="glossary-duration-hedge" data-term="Duration hedge" data-definition="Extra battery energy capacity bought partly to handle uncertainty in spreads, delivery obligations, reserve calls, curtailment windows, or grid constraints.">
         Duration hedge
         </dt>
@@ -21004,6 +21016,14 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Bridge from gross physical value to equity cash flow that shows
         capture, curtailment, contract, grid, BESS, opex, debt, and
         residual effects layer by layer.
+        </dd>
+        <dt id="glossary-ipp" data-term="IPP" data-definition="Independent Power Producer: company that owns or operates generation assets and sells electricity or related products without being the incumbent utility.">
+        IPP
+        </dt>
+        <dd>
+        Independent Power Producer: company that owns or operates
+        generation assets and sells electricity or related products
+        without being the incumbent utility.
         </dd>
         <dt id="glossary-irr" data-term="IRR" data-definition="Internal rate of return: discount rate that makes project NPV equal zero.">
         IRR
@@ -22561,7 +22581,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
       }
 
       function glossaryTerms() {
-        const deny = new Set(["Power", "Energy", "Load", "Floor", "Cap", "Voltage", "Dispatch"]);
+        const deny = new Set(["Power", "Energy", "Load", "Floor", "Cap", "Voltage", "Dispatch", "Duration"]);
         return Array.from(document.querySelectorAll(".glossary-list dt[data-term]"))
           .map((dt) => ({
             term: dt.dataset.term || dt.textContent.trim(),
