@@ -660,6 +660,10 @@
       margin-top: 0.95rem;
     }
 
+    .home-actions {
+      margin-top: 1.05rem;
+    }
+
     .arc-link {
       display: inline-flex;
       align-items: center;
@@ -1609,7 +1613,7 @@
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.24.5
+        v0.25.0
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -1794,7 +1798,8 @@
         <li>With what confidence?</li>
         <li>With what obligation if actual delivery differs?</li>
         </ul>
-        <p>The beginner mistake is to stop after the first question.</p>
+        <p>A complete market question cannot stop after the first
+        item.</p>
         </section>
         <section id="example" class="level4">
         <h4>Example</h4>
@@ -1877,11 +1882,12 @@
         carries the cost.</p>
         <section id="opening-puzzle-1" class="level4">
         <h4>Opening Puzzle</h4>
-        <p>In most data problems, an error can wait.</p>
-        <p>If tomorrow’s sales forecast is off by 1%, the accountant can
-        correct the report later. If a solar forecast is off by 1% in
-        the delivery hour, the grid still has to balance now.</p>
-        <p>The machine does not wait for the model to be retrained.</p>
+        <p>Many forecasts are judged after the fact. A power-system
+        forecast is different because the error appears as a physical
+        imbalance during delivery.</p>
+        <p>If a solar portfolio produces 1% less than scheduled in the
+        delivery hour, the grid has to cover the missing MW immediately.
+        Imbalance settlement then assigns the financial consequence.</p>
         </section>
         <section id="first-principles-model-1" class="level4">
         <h4>First-Principles Model</h4>
@@ -6220,13 +6226,13 @@ extra visible value = 1.05 million EUR/year</code></pre>
         argues about the label.</p>
         <section id="opening-puzzle-18" class="level4">
         <h4>Opening Puzzle</h4>
-        <p>A customer asks for a ten-year solar PPA. Sales hears “fixed
-        price.” Finance hears “contracted revenue.” The customer hears
-        “green electricity.” The trader asks who nominates. The lender
-        asks who pays if the buyer defaults. The asset manager asks what
-        happens when the plant is curtailed.</p>
-        <p>They are all listening to the same sentence and hearing
-        different risks.</p>
+        <p>A customer asks for a ten-year solar PPA. Sales sees a
+        fixed-price offer. Finance sees contracted revenue. The trader
+        asks who nominates. The lender asks who pays if the buyer
+        defaults. The asset manager asks what happens when the plant is
+        curtailed.</p>
+        <p>Each function is reading a different risk allocation into the
+        same short phrase.</p>
         <p>So the first PPA question is:</p>
         <pre class="text"><code>Which risk moves to whom, and what cash flow follows when reality disagrees with the contract?</code></pre>
         </section>
@@ -17691,12 +17697,14 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <a href="#ref-31">[31]</a> <a href="#ref-33">[33]</a>
         <a href="#ref-42">[42]</a></sup>
         </p>
-        <p>A buyer does not ask for “solar” in the abstract. It asks for
-        price certainty, evidence of clean supply, a volume shape, and
-        someone to carry the mismatch between production and
-        consumption. The seller can accept that mismatch, sell a simpler
-        product, or price the shape explicitly. The work product is a
-        quote stack and a decision memo.</p>
+        <p>A buyer asking for “solar plus storage” is usually asking for
+        several things at once: price certainty, evidence of clean
+        supply, a volume shape, and someone to carry the mismatch
+        between production and consumption. The seller can accept that
+        mismatch, sell a simpler product, or price the shape explicitly.
+        The work product is a quote stack and a decision memo that make
+        the residual obligation visible before the term sheet turns it
+        into risk.</p>
         <section id="decision-question" class="level4">
         <h4>Decision Question</h4>
         <p>Should a renewable independent power producer (IPP) offer a
@@ -22356,6 +22364,23 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         return rootTitle().toLowerCase().includes("casebook");
       }
 
+      function isLocalSiteFile() {
+        return window.location.protocol === "file:" && window.location.pathname.includes("/Course/site/");
+      }
+
+      function publicAssetPath(relativePath) {
+        return isLocalSiteFile() ? "../" + relativePath : relativePath;
+      }
+
+      function courseHomePath() {
+        return isLocalSiteFile() ? "power-markets-course.html" : "index.html";
+      }
+
+      function pdfPath(kind, versionText) {
+        const version = (versionText.match(/v[\d.]+/) || [""])[0];
+        return publicAssetPath("pdf/power-markets-" + kind + "-" + version + ".pdf");
+      }
+
       function normalizeTitle(text) {
         const match = text.match(/^(?:Chapter|Case)\s+(\d+)\.\s*(.+)$/i);
         if (!match) return { number: "", title: text, full: text };
@@ -22562,9 +22587,29 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         const p = document.createElement("p");
         p.className = "home-lede";
         p.textContent = casebook
-          ? "The Casebook is where concepts become decisions. Each case gives enough facts to build a professional artifact, then asks for the recommendation, the binding constraint, and the assumption that would change the answer."
+          ? "The Casebook turns the lectures into bounded commercial tasks. Each case asks for a concrete artifact: a quote stack, duration screen, site screen, partner scorecard, product memo, or operating-model choice."
           : "These notes are for building working judgment in power markets, especially around renewable portfolios. The path starts with the constraints that make electricity hard to commercialize: balance, network limits, timing, responsibility, settlement, and risk allocation. It then turns those constraints into recurring decisions: where to build, how to structure a PPA, how much storage duration to buy, what a dispatch model is allowed to assume, how to govern partners, and which market claims deserve capital.";
-        copy.append(h1, versionLine, p);
+        const heroActions = document.createElement("div");
+        heroActions.className = "arc-actions home-actions";
+        const mainPdf = document.createElement("a");
+        mainPdf.className = "arc-link";
+        mainPdf.href = pdfPath(casebook ? "casebook" : "course", version);
+        mainPdf.textContent = casebook ? "Download Casebook PDF" : "Download Course PDF";
+        heroActions.appendChild(mainPdf);
+        if (!casebook) {
+          const casebookPdf = document.createElement("a");
+          casebookPdf.className = "arc-link";
+          casebookPdf.href = pdfPath("casebook", version);
+          casebookPdf.textContent = "Download Casebook PDF";
+          heroActions.appendChild(casebookPdf);
+        } else {
+          const courseLink = document.createElement("a");
+          courseLink.className = "arc-link";
+          courseLink.href = courseHomePath();
+          courseLink.textContent = "Open Course";
+          heroActions.appendChild(courseLink);
+        }
+        copy.append(h1, versionLine, p, heroActions);
         hero.append(copy);
 
         const arcHeading = document.createElement("div");

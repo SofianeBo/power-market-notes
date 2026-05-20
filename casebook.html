@@ -660,6 +660,10 @@
       margin-top: 0.95rem;
     }
 
+    .home-actions {
+      margin-top: 1.05rem;
+    }
+
     .arc-link {
       display: inline-flex;
       align-items: center;
@@ -1493,7 +1497,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.24.5
+        v0.25.0
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -1517,12 +1521,14 @@
         <a href="#ref-4">[4]</a> <a href="#ref-5">[5]</a>
         <a href="#ref-6">[6]</a></sup>
         </p>
-        <p>A buyer does not ask for “solar” in the abstract. It asks for
-        price certainty, evidence of clean supply, a volume shape, and
-        someone to carry the mismatch between production and
-        consumption. The seller can accept that mismatch, sell a simpler
-        product, or price the shape explicitly. The work product is a
-        quote stack and a decision memo.</p>
+        <p>A buyer asking for “solar plus storage” is usually asking for
+        several things at once: price certainty, evidence of clean
+        supply, a volume shape, and someone to carry the mismatch
+        between production and consumption. The seller can accept that
+        mismatch, sell a simpler product, or price the shape explicitly.
+        The work product is a quote stack and a decision memo that make
+        the residual obligation visible before the term sheet turns it
+        into risk.</p>
         <section id="decision-question" class="level4">
         <h4>Decision Question</h4>
         <p>Should a renewable independent power producer (IPP) offer a
@@ -6148,6 +6154,23 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         return rootTitle().toLowerCase().includes("casebook");
       }
 
+      function isLocalSiteFile() {
+        return window.location.protocol === "file:" && window.location.pathname.includes("/Course/site/");
+      }
+
+      function publicAssetPath(relativePath) {
+        return isLocalSiteFile() ? "../" + relativePath : relativePath;
+      }
+
+      function courseHomePath() {
+        return isLocalSiteFile() ? "power-markets-course.html" : "index.html";
+      }
+
+      function pdfPath(kind, versionText) {
+        const version = (versionText.match(/v[\d.]+/) || [""])[0];
+        return publicAssetPath("pdf/power-markets-" + kind + "-" + version + ".pdf");
+      }
+
       function normalizeTitle(text) {
         const match = text.match(/^(?:Chapter|Case)\s+(\d+)\.\s*(.+)$/i);
         if (!match) return { number: "", title: text, full: text };
@@ -6354,9 +6377,29 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         const p = document.createElement("p");
         p.className = "home-lede";
         p.textContent = casebook
-          ? "The Casebook is where concepts become decisions. Each case gives enough facts to build a professional artifact, then asks for the recommendation, the binding constraint, and the assumption that would change the answer."
+          ? "The Casebook turns the lectures into bounded commercial tasks. Each case asks for a concrete artifact: a quote stack, duration screen, site screen, partner scorecard, product memo, or operating-model choice."
           : "These notes are for building working judgment in power markets, especially around renewable portfolios. The path starts with the constraints that make electricity hard to commercialize: balance, network limits, timing, responsibility, settlement, and risk allocation. It then turns those constraints into recurring decisions: where to build, how to structure a PPA, how much storage duration to buy, what a dispatch model is allowed to assume, how to govern partners, and which market claims deserve capital.";
-        copy.append(h1, versionLine, p);
+        const heroActions = document.createElement("div");
+        heroActions.className = "arc-actions home-actions";
+        const mainPdf = document.createElement("a");
+        mainPdf.className = "arc-link";
+        mainPdf.href = pdfPath(casebook ? "casebook" : "course", version);
+        mainPdf.textContent = casebook ? "Download Casebook PDF" : "Download Course PDF";
+        heroActions.appendChild(mainPdf);
+        if (!casebook) {
+          const casebookPdf = document.createElement("a");
+          casebookPdf.className = "arc-link";
+          casebookPdf.href = pdfPath("casebook", version);
+          casebookPdf.textContent = "Download Casebook PDF";
+          heroActions.appendChild(casebookPdf);
+        } else {
+          const courseLink = document.createElement("a");
+          courseLink.className = "arc-link";
+          courseLink.href = courseHomePath();
+          courseLink.textContent = "Open Course";
+          heroActions.appendChild(courseLink);
+        }
+        copy.append(h1, versionLine, p, heroActions);
         hero.append(copy);
 
         const arcHeading = document.createElement("div");
