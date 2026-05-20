@@ -49,10 +49,6 @@
       line-height: 1.65;
     }
 
-    body.highlight-active {
-      cursor: copy;
-    }
-
     a {
       color: var(--accent-dark);
       text-decoration-thickness: 1px;
@@ -961,24 +957,37 @@
       display: none;
     }
 
-    .feedback-chip {
+    .selection-toolbar {
       position: fixed;
       z-index: 40;
       display: inline-flex;
       align-items: center;
-      gap: 0.35rem;
-      min-height: 2.25rem;
-      padding: 0 0.75rem;
-      border: 1px solid var(--accent-soft);
+      gap: 0.3rem;
+      padding: 0.28rem;
+      border: 1px solid var(--line-strong);
       border-radius: 999px;
       background: #ffffff;
-      color: var(--accent-dark);
       box-shadow: 0 14px 34px rgba(16, 31, 39, 0.16);
+    }
+
+    .selection-toolbar button {
+      min-height: 2.05rem;
+      border: 0;
+      border-radius: 999px;
+      padding: 0 0.68rem;
+      background: transparent;
+      color: var(--accent-dark);
       font: 800 0.78rem/1 var(--font-sans);
       cursor: pointer;
     }
 
-    .feedback-chip[hidden] {
+    .selection-toolbar button:hover,
+    .selection-toolbar button:focus {
+      background: var(--accent-soft);
+      outline: none;
+    }
+
+    .selection-toolbar[hidden] {
       display: none;
     }
 
@@ -1135,15 +1144,6 @@
 
     .reader-block {
       transition: background 140ms ease, box-shadow 140ms ease;
-    }
-
-    body.highlight-active .reader-block {
-      border-radius: 6px;
-    }
-
-    body.highlight-active .reader-block:hover {
-      background: #fff7cc;
-      box-shadow: 0 0 0 4px #fff7cc;
     }
 
     .user-highlight {
@@ -1355,7 +1355,7 @@
       .sidebar,
       .skip-link,
       .term-popover,
-      .feedback-chip,
+      .selection-toolbar,
       .feedback-modal-backdrop,
       .reading-rail,
       .reader-home,
@@ -1436,11 +1436,6 @@
   <a class="skip-link" href="#course">Skip to course</a>
   <header class="topbar" aria-label="Reader header">
     <a class="brand-mark" href="#home">Power Markets</a>
-    <nav class="top-actions" aria-label="Reader actions">
-      <a class="top-link" href="#home">Home</a>
-      <button class="top-button" id="resume-reading" type="button">Resume</button>
-      <button class="top-button" id="print-pdf" type="button">Print / PDF</button>
-    </nav>
   </header>
   <div class="layout">
     <aside class="sidebar" aria-label="Reader navigation">
@@ -1453,14 +1448,6 @@
           Find
           <input class="tool-input" id="toc-filter" type="search" placeholder="Filter chapters and cases">
         </label>
-        <div class="tool-row">
-          <button class="tool-button" id="expand-sections" type="button">Expand</button>
-          <button class="tool-button" id="collapse-sections" type="button">Collapse</button>
-        </div>
-        <div class="tool-row">
-          <button class="tool-button" id="highlight-mode" type="button" aria-pressed="false">Highlight</button>
-          <a class="tool-link" href="#glossary">Glossary</a>
-        </div>
       </div>
       <nav id="TOC" class="course-nav" aria-label="Table of contents">
         <ul>
@@ -1613,7 +1600,7 @@
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.25.1
+        v0.25.2
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -22308,7 +22295,10 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
     </aside>
   </div>
   <div class="term-popover" id="term-popover" role="tooltip" hidden></div>
-  <button class="feedback-chip" id="feedback-chip" type="button" hidden>Send feedback</button>
+  <div class="selection-toolbar" id="selection-toolbar" hidden>
+    <button id="selection-highlight" type="button">Highlight</button>
+    <button id="feedback-chip" type="button">Send feedback</button>
+  </div>
   <div class="feedback-modal-backdrop" id="feedback-modal" hidden>
     <div class="feedback-modal" role="dialog" aria-modal="true" aria-labelledby="feedback-title">
       <div class="feedback-modal-header">
@@ -22714,8 +22704,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         feedbackTitle.textContent = "Feedback";
         const feedbackText = document.createElement("p");
         feedbackText.textContent = casebook
-          ? "Feedback and practitioner input are welcome. When reading a case, select the relevant passage and press Send feedback so the note arrives with its location. The aim is to keep the material practical, useful, and reliable."
-          : "Feedback and practitioner input are welcome. When reading a lecture, select the relevant passage and press Send feedback so the note arrives with its location. The aim is to keep the material practical, useful, and reliable.";
+          ? "Feedback and practitioner input are welcome. When reading a case, select the relevant passage to highlight it locally or send feedback with its location. The aim is to keep the material practical, useful, and reliable."
+          : "Feedback and practitioner input are welcome. When reading a lecture, select the relevant passage to highlight it locally or send feedback with its location. The aim is to keep the material practical, useful, and reliable.";
         feedback.append(feedbackTitle, feedbackText);
 
         const author = document.createElement("footer");
@@ -23145,11 +23135,9 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
       }
 
       function setupHighlights() {
-        const button = document.getElementById("highlight-mode");
-        if (!button) return;
         const version = (document.querySelector(".course-version")?.textContent || "course").trim().replace(/\s+/g, "-");
         const storageKey = "power-course-highlights-" + version;
-        const blocks = Array.from(article.querySelectorAll("p, li, pre"))
+        const blocks = Array.from(article.querySelectorAll("p, li, pre, td, th"))
           .filter((block) => !block.closest(".bibliography, .glossary-list, .lecture-refs, .reader-home, .chapter-pager"));
         blocks.forEach((block, index) => {
           block.classList.add("reader-block");
@@ -23170,28 +23158,35 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         for (const block of blocks) {
           if (saved.has(block.dataset.readerBlock)) block.classList.add("user-highlight");
         }
-        button.addEventListener("click", () => {
-          const next = button.getAttribute("aria-pressed") !== "true";
-          button.setAttribute("aria-pressed", String(next));
-          button.textContent = next ? "Highlight On" : "Highlight";
-          document.body.classList.toggle("highlight-active", next);
-        });
-        article.addEventListener("click", (event) => {
-          if (button.getAttribute("aria-pressed") !== "true") return;
+        const highlightIds = function (ids) {
+          let changed = false;
+          for (const id of ids || []) {
+            const block = blocks.find((item) => item.dataset.readerBlock === id);
+            if (!block || block.classList.contains("user-highlight")) continue;
+            block.classList.add("user-highlight");
+            saved.add(id);
+            changed = true;
+          }
+          if (changed) persist();
+          return changed;
+        };
+        article.addEventListener("dblclick", (event) => {
           if (event.target.closest("a, button, summary")) return;
           const block = event.target.closest(".reader-block");
           if (!block) return;
-          event.preventDefault();
           const id = block.dataset.readerBlock;
           block.classList.toggle("user-highlight");
           if (block.classList.contains("user-highlight")) saved.add(id);
           else saved.delete(id);
           persist();
         });
+        return { blocks, highlightIds };
       }
 
-      function setupFeedback(chapters) {
+      function setupFeedback(chapters, highlightApi) {
+        const toolbar = document.getElementById("selection-toolbar");
         const chip = document.getElementById("feedback-chip");
+        const highlightButton = document.getElementById("selection-highlight");
         const modal = document.getElementById("feedback-modal");
         const closeButton = document.getElementById("feedback-close");
         const cancelButton = document.getElementById("feedback-cancel");
@@ -23206,7 +23201,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         const endpointMeta = document.querySelector('meta[name="feedback-endpoint"]');
         const feedbackEndpoint = (endpointMeta?.content || "").trim();
         const issueUrl = "https://github.com/SofianeBo/power-market-notes/issues/new";
-        if (!chip || !modal || !submitButton || !commentEl) return;
+        if (!toolbar || !chip || !modal || !submitButton || !commentEl) return;
         if (!feedbackEndpoint) {
           submitButton.textContent = "Open GitHub issue";
           if (noteEl) noteEl.textContent = "This opens a prefilled GitHub issue that you can review before submitting.";
@@ -23275,6 +23270,18 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           const suffix = index >= 0 ? truncate(blockText.slice(index + selected.length, index + selected.length + 220), 260) : "";
           const version = (document.querySelector(".course-version")?.textContent || "unknown version").trim();
           const product = rootTitle();
+          const highlightIds = highlightApi && Array.isArray(highlightApi.blocks)
+            ? highlightApi.blocks
+                .filter((candidate) => {
+                  try {
+                    return range.intersectsNode(candidate);
+                  } catch (_error) {
+                    return false;
+                  }
+                })
+                .map((candidate) => candidate.dataset.readerBlock)
+                .filter(Boolean)
+            : [];
 
           return {
             rect: rect,
@@ -23285,29 +23292,31 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
             section: sectionTitle || "",
             selected: selected,
             prefix: prefix,
-            suffix: suffix
+            suffix: suffix,
+            highlightIds: highlightIds
           };
         };
 
-        const hideChip = function () {
-          chip.hidden = true;
+        const hideToolbar = function () {
+          toolbar.hidden = true;
         };
 
-        const showChipForSelection = function () {
+        const showToolbarForSelection = function () {
           if (!modal.hidden) return;
           const payload = currentSelectionPayload();
           if (!payload) {
             activePayload = null;
-            hideChip();
+            hideToolbar();
             return;
           }
           activePayload = payload;
-          chip.hidden = false;
-          const chipWidth = chip.offsetWidth || 130;
+          if (highlightButton) highlightButton.disabled = !payload.highlightIds.length;
+          toolbar.hidden = false;
+          const chipWidth = toolbar.offsetWidth || 220;
           const top = Math.max(76, payload.rect.top - 44);
           const left = Math.min(window.innerWidth - chipWidth - 12, Math.max(12, payload.rect.left));
-          chip.style.top = top + "px";
-          chip.style.left = left + "px";
+          toolbar.style.top = top + "px";
+          toolbar.style.left = left + "px";
         };
 
         const openModal = function () {
@@ -23320,7 +23329,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           if (websiteEl) websiteEl.value = "";
           clearMessages();
           modal.hidden = false;
-          hideChip();
+          hideToolbar();
           window.setTimeout(() => commentEl.focus(), 0);
         };
 
@@ -23408,21 +23417,28 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         };
 
         document.addEventListener("selectionchange", () => {
-          window.setTimeout(showChipForSelection, 0);
+          window.setTimeout(showToolbarForSelection, 0);
         });
-        document.addEventListener("mouseup", showChipForSelection);
+        document.addEventListener("mouseup", showToolbarForSelection);
         document.addEventListener("keyup", (event) => {
           if (event.key === "Escape") {
-            hideChip();
+            hideToolbar();
             return;
           }
-          showChipForSelection();
+          showToolbarForSelection();
         });
-        window.addEventListener("scroll", hideChip, { passive: true });
-        window.addEventListener("resize", hideChip);
+        window.addEventListener("scroll", hideToolbar, { passive: true });
+        window.addEventListener("resize", hideToolbar);
         window.addEventListener("hashchange", () => {
-          hideChip();
+          hideToolbar();
           closeModal();
+        });
+        highlightButton?.addEventListener("click", (event) => {
+          event.preventDefault();
+          if (!activePayload) return;
+          highlightApi?.highlightIds(activePayload.highlightIds || []);
+          window.getSelection()?.removeAllRanges();
+          hideToolbar();
         });
         chip.addEventListener("click", (event) => {
           event.preventDefault();
@@ -23470,8 +23486,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
       setupSectionControls();
       annotateGlossaryTerms();
       setupTooltips();
-      setupHighlights();
-      setupFeedback(chapters);
+      const highlightApi = setupHighlights();
+      setupFeedback(chapters, highlightApi);
       setupPrint();
       setupRoute(chapters, tocApi, store);
     })();
