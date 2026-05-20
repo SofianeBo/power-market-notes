@@ -1362,7 +1362,7 @@
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.22.2
+        v0.22.3
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -22475,7 +22475,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           const target = element || document.getElementById("home") || root;
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
-              const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - 12);
+              const topbarHeight = document.querySelector(".topbar")?.getBoundingClientRect().height || 0;
+              const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - topbarHeight - 18);
               window.scrollTo({ top, left: 0, behavior: "auto" });
             });
           });
@@ -22522,7 +22523,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           target?.closest("details.reader-section")?.setAttribute("open", "");
           let scrollTarget = document.getElementById("home");
           if (currentChapter) {
-            scrollTarget = currentChapter.section;
+            scrollTarget = currentChapter.section.querySelector(":scope > h3") || currentChapter.section;
             if (target && target !== currentChapter.section && currentChapter.section.contains(target)) {
               scrollTarget = target;
             }
