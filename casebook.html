@@ -385,6 +385,14 @@
       padding: clamp(1.35rem, 3vw, 2.8rem);
     }
 
+    body.reader-view-chapter main {
+      padding-top: 0.45rem;
+    }
+
+    body.reader-view-chapter .course-shell {
+      padding-top: 1rem;
+    }
+
     h1,
     h2,
     h3,
@@ -502,10 +510,16 @@
     body.reader-view-home .course-shell > section.level1 > h1,
     body.reader-view-home .course-shell > section.level1 > .course-version,
     body.reader-view-home .course-shell > section.level1 > blockquote,
+    body.reader-view-home .course-shell > section.level1 > p,
+    body.reader-view-home .course-shell > section.level1 > ul,
+    body.reader-view-home .course-shell > section.level1 > ol,
     body.reader-view-home .course-shell > section.level1 > section.level2:not(.reader-home),
     body.reader-view-chapter .course-shell > section.level1 > h1,
     body.reader-view-chapter .course-shell > section.level1 > .course-version,
     body.reader-view-chapter .course-shell > section.level1 > blockquote,
+    body.reader-view-chapter .course-shell > section.level1 > p,
+    body.reader-view-chapter .course-shell > section.level1 > ul,
+    body.reader-view-chapter .course-shell > section.level1 > ol,
     body.reader-view-chapter .course-shell > section.level1 > #how-to-read-this,
     body.reader-view-chapter .course-shell > section.level1 > section.level2 > h2,
     body.reader-view-chapter #glossary,
@@ -513,6 +527,9 @@
     body.reader-view-utility .course-shell > section.level1 > h1,
     body.reader-view-utility .course-shell > section.level1 > .course-version,
     body.reader-view-utility .course-shell > section.level1 > blockquote,
+    body.reader-view-utility .course-shell > section.level1 > p,
+    body.reader-view-utility .course-shell > section.level1 > ul,
+    body.reader-view-utility .course-shell > section.level1 > ol,
     body.reader-view-utility .course-shell > section.level1 > section.level2,
     body.reader-view-utility .reader-home {
       display: none;
@@ -1246,7 +1263,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.22.4
+        v0.22.5
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
