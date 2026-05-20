@@ -1379,7 +1379,7 @@
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.22.5
+        v0.22.6
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -1466,7 +1466,9 @@
         <section id="opening-puzzle" class="level4">
         <h4>Opening Puzzle</h4>
         <p>Suppose someone says: “We generated 1 MWh.”</p>
-        <p>That sounds complete. It is not.</p>
+        <p>Before using that sentence in a power-market decision, ask
+        for the missing coordinates: over what interval, at which
+        connection point, and under what obligation?</p>
         <p>One megawatt-hour could mean:</p>
         <ul>
         <li>1 MW delivered steadily for 1 hour.</li>
@@ -1475,9 +1477,8 @@
         <li>Energy delivered in the wrong place, at the wrong hour, when
         nobody can use it.</li>
         </ul>
-        <p>The unit <code>MWh</code> tells you how much energy. It does
-        not tell you whether the energy arrived when the system needed
-        power.</p>
+        <p>The unit <code>MWh</code> gives the energy total. The market
+        still needs timing, location, and reliability.</p>
         <p>That is the first power-market instinct: electricity is
         energy plus time, location, and reliability.</p>
         </section>
@@ -1492,8 +1493,8 @@
         <p>If power is measured in MW and time in hours, energy is
         measured in MWh:</p>
         <pre class="text"><code>1 MW x 1 hour = 1 MWh</code></pre>
-        <p>This is a unit identity, not a market forecast. But it is the
-        small hinge on which the whole course turns.</p>
+        <p>This unit identity is the small hinge on which the whole
+        course turns.</p>
         <p>A project with high annual energy may still fail a commercial
         obligation if its hourly power arrives at the wrong times. A
         buyer does not live in an annual spreadsheet. A factory, a city,
@@ -1537,8 +1538,9 @@
         <p>Imagine a customer consumes <code>1 TWh/year</code>.</p>
         <p>Average power is:</p>
         <pre class="text"><code>1,000,000 MWh/year / 8,760 hours/year ~= 114 MW</code></pre>
-        <p>That does not mean the customer always consumes 114 MW. It
-        means the annual energy is equivalent to a flat 114 MW load.</p>
+        <p>A flat 114 MW load would consume the same annual energy. The
+        customer’s actual load can still move far above and below that
+        average.</p>
         <p>If the customer’s peak is 200 MW, a 114 MW average tells you
         only part of the story. If a solar project produces much of its
         energy at noon, annual matching does not guarantee hourly
@@ -1574,7 +1576,8 @@
         <pre class="text"><code>10 MW x 3 h = 30 MWh</code></pre>
         <p>A 30 MW generator running for 1 hour also produces:</p>
         <pre class="text"><code>30 MW x 1 h = 30 MWh</code></pre>
-        <p>Same energy. Different power profile.</p>
+        <p>The energy total is the same, but the power profile is
+        different.</p>
         <p>If the buyer needs 10 MW for three hours, the first generator
         naturally matches the buyer better. The second generator creates
         a surplus in one hour and a shortage in two other hours unless
@@ -1582,7 +1585,8 @@
         </section>
         <section id="in-practice" class="level4">
         <h4>In Practice</h4>
-        <p>For an IPP, the unit distinction is not academic.</p>
+        <p>For an IPP, this unit distinction changes how a product is
+        priced and promised.</p>
         <p>When someone proposes a solar PPA, ask both “How many MWh per
         year?” and “What hourly shape are we selling, and who carries
         the mismatch between production and customer demand?”</p>
@@ -1590,7 +1594,8 @@
         says Swedish production and consumption statistics are based on
         measured hourly values reported to eSett. That is a useful
         institutional clue: the real machine is recorded hourly because
-        annual totals are not enough to run or settle the system.</p>
+        running and settling the system requires more than annual
+        totals.</p>
         </section>
         <section id="misconceptions" class="level4">
         <h4>Misconceptions</h4>
@@ -1618,9 +1623,9 @@
         arrive in each hour or moment. Two assets can produce the same
         MWh and still solve different problems if one matches the
         buyer’s shape and the other creates surplus and shortage. Annual
-        MWh is a useful total, but it is not the product by itself. The
-        market question is how much energy, delivered at what rate,
-        where, when, and with what obligation if reality differs.</p>
+        MWh is a useful total. Product definition also needs delivery
+        rate, location, timing, reliability, and the obligation if
+        reality differs.</p>
         <div class="lecture-end">
 
         </div>
@@ -4955,9 +4960,8 @@ and data available at the time, what should a feasible operator have done?</code
         <h4>Opening Puzzle</h4>
         <p>A solar plant can be technically excellent and financially
         mediocre.</p>
-        <p>That sounds odd at first. If the panels work, the inverter
-        works, and the site produces electricity, why is there still a
-        problem? Because a power asset is two machines at once:</p>
+        <p>A site can produce electricity and still fail the financial
+        test. A power asset is two machines at once:</p>
         <ul>
         <li>a physical machine that turns weather and equipment into
         MWh</li>
@@ -5383,9 +5387,9 @@ operating_cash_before_debt =
         <p>The undiscounted gross margin delayed by choosing A over B
         is:</p>
         <pre class="text"><code>2 years x 4.0 million EUR/year = 8.0 million EUR timing exposure</code></pre>
-        <p>This is not NPV. It ignores capex timing, discounting, taxes,
-        development cost, financing, and option value. It is a
-        first-pass alarm: a <code>0.2 million EUR/year</code> margin
+        <p>This first-pass alarm ignores capex timing, discounting,
+        taxes, development cost, financing, and option value. Its
+        purpose is narrower: a <code>0.2 million EUR/year</code> margin
         advantage cannot be discussed without the two-year delay,
         grid-right certainty, and opportunity cost of development
         resources.</p>
@@ -8101,9 +8105,8 @@ unpriced_option_value</code></pre>
         <section id="opening-puzzle-23" class="level4">
         <h4>Opening Puzzle</h4>
         <p>“Should we build a two-hour or four-hour battery?”</p>
-        <p>That sounds like an engineering question. It is also a
-        product question, a grid question, a contract question, and a
-        capital-allocation question.</p>
+        <p>Answering the question requires product, grid, contract, and
+        capital-allocation evidence, not duration labels alone.</p>
         <p>Two hours for what?</p>
         <ul>
         <li>catching one price spike</li>
@@ -8200,8 +8203,8 @@ extra energy block scale = 200,000 x 175 = USD 35,000,000</code></pre>
         <pre class="text"><code>cycles_needed = 3,500,000 / (200 x 25) = 700 cycles/year</code></pre>
         <p>At <code>USD 75/MWh</code> net value:</p>
         <pre class="text"><code>cycles_needed = 3,500,000 / (200 x 75) = about 233 cycles/year</code></pre>
-        <p>This is the useful screen. It does not say “buy four hours”
-        or “avoid four hours.” It says:</p>
+        <p>This screen tells the team what evidence must support the
+        duration decision:</p>
         <pre class="text"><code>show me the cycles, the margin, the contract, and the constraint.</code></pre>
         </section>
         </section>
@@ -8604,9 +8607,9 @@ extra energy block scale = 200,000 x 175 = USD 35,000,000</code></pre>
         <pre class="text"><code>2h is better under assumptions A, B, C.
 4h becomes better if X happens.
 Both fail if Y is true.</code></pre>
-        <p>That is much more useful than saying “the optimum is 2.7
-        hours” because a global scenario chart said the fleet average
-        moves there.</p>
+        <p>That is more useful than quoting a global fleet-average
+        duration, because the project decision depends on the site,
+        contract, grid rights, and portfolio need.</p>
         </section>
         <section id="recap-23" class="level4">
         <h4>Recap</h4>
@@ -11088,9 +11091,9 @@ The marginal portfolio risk is materially different.</code></pre>
 1.5 EUR/MWh x 500,000 MWh = EUR 750,000/year</code></pre>
         <p>That number might justify better data rights, a revised
         incentive fee, tighter reporting, or partial internalization of
-        analytics. It might not justify building a full trading desk.
-        The model should inform the operating decision, not
-        automatically prescribe it.</p>
+        analytics. Building a full trading desk would need a larger and
+        more durable case. The model should inform the operating
+        decision, not automatically prescribe it.</p>
         </section>
         </section>
         <section id="mechanism-building-a-shadow-trading-benchmark"
