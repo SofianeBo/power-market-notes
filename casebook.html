@@ -1246,7 +1246,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.22.3
+        v0.22.4
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -6395,7 +6395,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           target?.closest("details.reader-section")?.setAttribute("open", "");
           let scrollTarget = document.getElementById("home");
           if (currentChapter) {
-            scrollTarget = currentChapter.section.querySelector(":scope > h3") || currentChapter.section;
+            scrollTarget = currentChapter.section;
             if (target && target !== currentChapter.section && currentChapter.section.contains(target)) {
               scrollTarget = target;
             }
