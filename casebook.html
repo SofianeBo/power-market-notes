@@ -1264,7 +1264,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.22.8
+        v0.22.9
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -1675,6 +1675,10 @@
         <h4>Scenario Data</h4>
         <p>These are scenario assumptions for the case.</p>
         <table>
+        <colgroup>
+        <col style="width: 42%" />
+        <col style="width: 57%" />
+        </colgroup>
         <thead>
         <tr>
         <th>Item</th>
@@ -1710,6 +1714,13 @@
         <tr>
         <td>Degradation allowance</td>
         <td style="text-align: right;">included in net margin</td>
+        </tr>
+        <tr>
+        <td>Insurance policy</td>
+        <td style="text-align: right;">scenario assumes the modeled
+        operating plan is insurable; if a policy caps cycles or duty
+        cycle below the modeled plan, rerun the screen under that
+        cap</td>
         </tr>
         </tbody>
         </table>
@@ -1814,11 +1825,11 @@
         hours</td>
         </tr>
         <tr>
-        <td>Cycle and warranty budget</td>
-        <td>modeled throughput is consistent with degradation allowance
-        and warranty terms</td>
-        <td>optimizer earns value by consuming life not priced in the
-        case</td>
+        <td>Cycle, warranty, and insurance budget</td>
+        <td>modeled throughput is consistent with degradation allowance,
+        warranty terms, and insurance policy</td>
+        <td>optimizer earns value by consuming life or coverage headroom
+        not priced in the case</td>
         </tr>
         <tr>
         <td>Grid import and export rights</td>
@@ -1946,9 +1957,9 @@
         management</li>
         <li>historical or forecast price data showing enough multi-hour
         scarcity events after degradation and fees</li>
-        <li>warranty and augmentation terms showing that the value can
-        be captured without consuming battery life faster than
-        priced</li>
+        <li>warranty, insurance, and augmentation terms showing that the
+        value can be captured without consuming battery life or coverage
+        headroom faster than priced</li>
         </ul>
         </section>
         <section id="assumption-flip-1" class="level4">
@@ -1957,6 +1968,13 @@
         earn 70 EUR/MWh net value for 160 cycles/year.</p>
         <pre class="text"><code>60 MWh x 160 cycles/year x 70 EUR/MWh + 70,000 EUR/year
 = 742,000 EUR/year</code></pre>
+        <p>It can also change in the other direction if an insurance
+        policy caps eligible operation below the modeled cycle need. In
+        that case, replace the modeled useful cycles with the
+        policy-compatible cycle count before comparing duration blocks.
+        The project may still proceed, but only after the owner obtains
+        different coverage, changes the operating plan, or prices the
+        lost optionality.</p>
         <p>That clears the 700,000 EUR/year hurdle. The case for 4 hours
         is therefore not philosophical. It depends on the frequency and
         value of longer scarcity windows.</p>
@@ -2358,9 +2376,9 @@
         </p>
         <p>A battery revenue stack is a set of coupled obligations on
         the same MW, MWh, state of charge, grid rights, cycle budget,
-        and control system. When a service saturates, test which
-        obligations remain valuable after opportunity cost and downside
-        are counted.</p>
+        insurance policy, and control system. When a service saturates,
+        test which obligations remain valuable after opportunity cost
+        and downside are counted.</p>
         <section id="decision-question-3" class="level4">
         <h4>Decision Question</h4>
         <p>Should the asset owner contract part of the battery’s
@@ -2431,6 +2449,12 @@
         <tr>
         <td>Lender-counted share of fixed floor</td>
         <td style="text-align: right;">100% scenario assumption</td>
+        </tr>
+        <tr>
+        <td>Insurance cycle limit</td>
+        <td style="text-align: right;">scenario assumes no binding limit
+        beyond the modeled cycle budget; verify policy terms before
+        using the stack</td>
         </tr>
         </tbody>
         </table>
@@ -2576,8 +2600,8 @@
         capacity, arbitrage, or response to a new market product. The
         term sheet should therefore state the priority order for reserve
         obligations, customer shape delivery, merchant arbitrage,
-        degradation limits, minimum state of charge, and emergency
-        override.</p>
+        degradation limits, insurance-cycle limits, minimum state of
+        charge, and emergency override.</p>
         <p>The commercial team should price shaped PPA flexibility at
         least at its opportunity cost, not at the accounting cost of the
         battery. If the customer cannot pay the opportunity cost, the
@@ -2604,6 +2628,11 @@
         <p>Use last year’s reserve revenue, an arbitrage forecast, and a
         shaped-PPA premium as three additive upside lines, then haircut
         the total for prudence.</p>
+        <p>The same failure appears when the stack ignores policy
+        constraints. If the insurance contract allows fewer cycles,
+        different duty cycles, or fewer operating modes than the
+        optimizer assumes, part of the stack is unavailable unless the
+        owner changes coverage or changes operation.</p>
         <p>That still double-counts flexibility. The same MW, MWh, state
         of charge, control rights, cycle budget, and grid connection
         must serve every product. Revenue stacking is constrained
@@ -4733,6 +4762,14 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         operating costs, debt service, reserves, and other senior
         claims.
         </dd>
+        <dt id="glossary-equivalent-full-cycle" data-term="Equivalent full cycle" data-definition="One full charge-discharge equivalent measured by throughput relative to usable energy capacity; partial cycles can add up to equivalent full cycles depending on the convention used.">
+        Equivalent full cycle
+        </dt>
+        <dd>
+        One full charge-discharge equivalent measured by throughput
+        relative to usable energy capacity; partial cycles can add up to
+        equivalent full cycles depending on the convention used.
+        </dd>
         <dt id="glossary-etrm" data-term="ETRM" data-definition="Energy trading and risk management system used to record, value, monitor, and control trades, positions, limits, settlement, and reporting.">
         ETRM
         </dt>
@@ -4954,6 +4991,25 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         </dt>
         <dd>
         Resistance of rotating mass to sudden frequency change.
+        </dd>
+        <dt id="glossary-insurance-cycle-cap" data-term="Insurance cycle cap" data-definition="Insurance-policy limit on annual or lifetime cycling, throughput, depth of discharge, or duty cycle. It can bind even when the physical model and OEM warranty would allow more operation.">
+        Insurance cycle cap
+        </dt>
+        <dd>
+        Insurance-policy limit on annual or lifetime cycling,
+        throughput, depth of discharge, or duty cycle. It can bind even
+        when the physical model and OEM warranty would allow more
+        operation.
+        </dd>
+        <dt id="glossary-insurance-operating-covenant" data-term="Insurance operating covenant" data-definition="Condition in an insurance policy or endorsement that limits how an asset may be operated while keeping coverage, pricing, or claim eligibility intact. For BESS this may include cycle, throughput, duty-cycle, safety, monitoring, or approved-use restrictions.">
+        Insurance operating covenant
+        </dt>
+        <dd>
+        Condition in an insurance policy or endorsement that limits how
+        an asset may be operated while keeping coverage, pricing, or
+        claim eligibility intact. For BESS this may include cycle,
+        throughput, duty-cycle, safety, monitoring, or approved-use
+        restrictions.
         </dd>
         <dt id="glossary-intraday-market" data-term="Intraday market" data-definition="Market after day-ahead clearing where participants adjust positions closer to delivery.">
         Intraday market

@@ -1380,7 +1380,7 @@
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.22.8
+        v0.22.9
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -8165,6 +8165,13 @@ duration_h = usable_energy_MWh / discharge_power_MW</code></pre>
   = extra_energy_MWh
     x useful_cycles_per_year
     x net_value_per_MWh</code></pre>
+        <p>The word <code>useful</code> matters. It is capped by the
+        tightest real constraint:</p>
+        <pre class="text"><code>useful_cycles_per_year =
+  min(physical_opportunity_cycles,
+      warranty_compatible_cycles,
+      insurance_permitted_cycles,
+      grid_and_product_eligible_cycles)</code></pre>
         <p>The extra duration clears the hurdle only if:</p>
         <pre class="text"><code>annual_incremental_value
 &gt;
@@ -8181,6 +8188,11 @@ annualized_extra_capex
         limits.</p>
         <p>Incremental duration: additional MWh added while holding MW
         roughly fixed.</p>
+        <p>Insurance cycle cap: insurance-policy limit on cycling,
+        throughput, depth of discharge, duty cycle, or approved
+        operation. It is project-specific and should be read from the
+        policy or endorsement, not inferred from the technical
+        model.</p>
         <p>Net value per MWh: value of discharging an additional MWh
         after charging cost, efficiency loss, degradation, fees, and
         opportunity cost.</p>
@@ -8551,7 +8563,8 @@ extra energy block scale = 200,000 x 175 = USD 35,000,000</code></pre>
         <p>If the story is “this contract has a persistent evening
         delivery obligation, this site has solar curtailment at noon,
         this grid connection allows charging, and the extra MWh survives
-        degradation and tariff costs,” then model it properly.</p>
+        degradation, insurance, and tariff costs,” then model it
+        properly.</p>
         <p>The same screen works for <code>1h</code>, <code>2h</code>,
         and <code>4h</code> when each block is valued at the margin. The
         next table is an illustrative scenario screen, not a market
@@ -8622,7 +8635,8 @@ extra energy block scale = 200,000 x 175 = USD 35,000,000</code></pre>
         <li>product: PPA shape, reserve sustain requirement, arbitrage
         horizon, capacity-credit method</li>
         <li>economics: incremental capex, fixed O&amp;M, degradation,
-        augmentation, fees, taxes if relevant</li>
+        insurance-policy constraints, augmentation, fees, taxes if
+        relevant</li>
         <li>uncertainty: spread compression, rule changes, forecast
         error, counterparty/control rights</li>
         <li>sensitivity: the assumption-flip test that changes the
@@ -8641,12 +8655,13 @@ Both fail if Y is true.</code></pre>
         <p>Battery duration is a marginal investment choice. The extra
         hour only works when the added MWh repeatedly earns more through
         useful cycles and net value than it costs through capital,
-        degradation, tariffs, risk, and opportunity cost. That turns the
-        opening <code>2h</code> versus <code>4h</code> question into a
-        screen: show the contract shape, spread persistence, curtailment
-        window, grid rights, warranty limits, and portfolio need that
-        will keep the marginal MWh busy. Once duration clears that test,
-        the next decision is how to dispatch the battery.</p>
+        degradation, insurance restrictions, tariffs, risk, and
+        opportunity cost. That turns the opening <code>2h</code> versus
+        <code>4h</code> question into a screen: show the contract shape,
+        spread persistence, curtailment window, grid rights, warranty
+        and insurance limits, and portfolio need that will keep the
+        marginal MWh busy. Once duration clears that test, the next
+        decision is how to dispatch the battery.</p>
         <div class="lecture-end">
 
         </div>
@@ -9553,8 +9568,8 @@ rebalance_value =
         can shrink to a thin margin or become uneconomic once the
         battery’s operating limits are priced. The commercial test is
         whether this specific cycle pays enough for energy losses,
-        degradation, fees, opportunity cost, and the warranty or
-        augmentation consequences it creates.</p>
+        degradation, fees, opportunity cost, and the warranty,
+        insurance, or augmentation consequences it creates.</p>
         <section id="opening-puzzle-26" class="level4">
         <h4>Opening Puzzle</h4>
         <p>A battery can make money while becoming less valuable.</p>
@@ -9564,8 +9579,9 @@ rebalance_value =
         <p>But the battery does not move energy for free. It loses
         energy as heat. It uses some of its finite cycle life. It may
         move closer to an augmentation date. It may also consume
-        warranty headroom or violate an operating envelope if the
-        dispatch is too aggressive.</p>
+        warranty headroom, breach an insurance operating covenant, or
+        violate another operating envelope if the dispatch is too
+        aggressive.</p>
         <p>Ask:</p>
         <pre class="text"><code>Is the spread positive after losses, degradation, fees, tariffs,
 opportunity cost, and operating limits?</code></pre>
@@ -9592,7 +9608,7 @@ opportunity cost, and operating limits?</code></pre>
   - degradation_cost
   - grid_and_market_fees
   - opportunity_cost
-  - warranty_or_availability_penalties</code></pre>
+  - warranty_insurance_or_availability_penalties</code></pre>
         <p>Positive gross spread is only the beginning.</p>
         </section>
         <section id="definitions-22" class="level4">
@@ -9613,6 +9629,10 @@ opportunity cost, and operating limits?</code></pre>
         <p>Warranty envelope: the operating conditions under which
         promised performance, remedies, or availability commitments
         remain valid.</p>
+        <p>Insurance operating covenant: condition in an insurance
+        policy or endorsement that limits how the asset may be operated
+        while keeping coverage, pricing, or claim eligibility
+        intact.</p>
         <p>Augmentation: adding, replacing, or refurbishing capacity or
         components to maintain contracted or economic performance.</p>
         <p>Degradation-adjusted spread: spread after charging cost,
@@ -9689,7 +9709,7 @@ degradation_cost = 16 EUR/MWh discharged</code></pre>
         </colgroup>
         <thead>
         <tr>
-        <th>Warranty or performance dimension</th>
+        <th>Warranty, insurance, or performance dimension</th>
         <th>Dispatch implication</th>
         </tr>
         </thead>
@@ -9697,6 +9717,11 @@ degradation_cost = 16 EUR/MWh discharged</code></pre>
         <tr>
         <td>Annual throughput</td>
         <td>Too many cycles this year may consume future value</td>
+        </tr>
+        <tr>
+        <td>Insurance cycle cap</td>
+        <td>The insurer may restrict annual or lifetime cycling, duty
+        cycles, or approved operating modes</td>
         </tr>
         <tr>
         <td>Depth of discharge</td>
@@ -9729,9 +9754,9 @@ degradation_cost = 16 EUR/MWh discharged</code></pre>
         </tr>
         </tbody>
         </table>
-        <p>Actual warranty language is project-specific. The modeling
-        conclusion is general:</p>
-        <pre class="text"><code>dispatch consumes contractual headroom as well as physical life</code></pre>
+        <p>Actual warranty and insurance language is project-specific.
+        The modeling conclusion is general:</p>
+        <pre class="text"><code>dispatch consumes contractual and insurability headroom as well as physical life</code></pre>
         <p>Illustrative throughput check:</p>
         <ul>
         <li>battery: <code>30 MW / 60 MWh</code></li>
@@ -9747,7 +9772,29 @@ degradation_cost = 16 EUR/MWh discharged</code></pre>
         outages, test cycles, or emergency actions. The model can still
         choose that operating plan, but it must say what changes: higher
         degradation cost, reduced merchant activity, a different PPA
-        promise, OEM approval, augmentation timing, or lower financeable
+        promise, OEM approval, insurance endorsement, augmentation
+        timing, or lower financeable value.</p>
+        </section>
+        <section id="insurance-can-bind-the-dispatch-plan"
+        class="level4">
+        <h4>Insurance Can Bind The Dispatch Plan</h4>
+        <p>Insurance is a separate diligence item from physical
+        degradation and OEM warranty. A project policy may restrict
+        cycling, duty cycle, fire-safety operation, monitoring, approved
+        revenue modes, or claim eligibility. The exact language is
+        negotiated and project-specific, so the course does not use a
+        universal insurance-cycle number.</p>
+        <p>The modeling rule is:</p>
+        <pre class="text"><code>useful_cycles_per_year =
+  min(physical_opportunity_cycles,
+      warranty_compatible_cycles,
+      insurance_permitted_cycles,
+      grid_and_product_eligible_cycles)</code></pre>
+        <p>If the policy allows fewer cycles than the dispatch model
+        needs, the model should not quietly average the difference away.
+        The decision owner has to change one of the inputs: obtain an
+        endorsement, pay for different coverage, reduce cycling, change
+        the revenue stack, reprice the contract, or lower the asset
         value.</p>
         </section>
         <section id="degradation-belongs-inside-the-optimizer"
@@ -9824,7 +9871,7 @@ or weaken contract performance?</code></pre>
         </section>
         <section id="in-practice-22" class="level4">
         <h4>In Practice</h4>
-        <p>A BESS valuation should show at least four degradation
+        <p>A BESS valuation should show at least five operating-headroom
         views.</p>
         <table>
         <colgroup>
@@ -9851,6 +9898,11 @@ or weaken contract performance?</code></pre>
         <td>Which operations are allowed, excluded, or costly?</td>
         </tr>
         <tr>
+        <td>Insurance operating covenant</td>
+        <td>Which operations would threaten coverage, premium,
+        exclusions, or claim eligibility?</td>
+        </tr>
+        <tr>
         <td>Augmentation path</td>
         <td>When does capacity need to be restored, and at what
         cost?</td>
@@ -9861,7 +9913,7 @@ or weaken contract performance?</code></pre>
         <pre class="text"><code>do not bid below degradation-adjusted break-even unless another obligation pays for it</code></pre>
         <p>For an investment case, the capital rule is:</p>
         <pre class="text"><code>do not count revenue that depends on using the battery harder than the warranty,
-availability plan, or augmentation budget can support</code></pre>
+insurance policy, availability plan, or augmentation budget can support</code></pre>
         </section>
         <section id="recap-26" class="level4">
         <h4>Recap</h4>
@@ -9870,13 +9922,13 @@ availability plan, or augmentation budget can support</code></pre>
         operative metric is degradation-adjusted spread: discharge
         revenue minus charging energy adjusted for RTE, degradation
         cost, fees, tariffs, opportunity cost, and any warranty,
-        availability, or augmentation consequences. That turns the
-        opening trade into a different decision. A high gross spread can
-        fail once it consumes too much wear or contractual headroom,
-        while a lower gross spread can be worth taking if it preserves
-        optionality or supports a bankable obligation. Revenue stack,
-        duration, dispatch, and degradation have to be modeled
-        together.</p>
+        insurance, availability, or augmentation consequences. That
+        turns the opening trade into a different decision. A high gross
+        spread can fail once it consumes too much wear or contractual
+        headroom, while a lower gross spread can be worth taking if it
+        preserves optionality or supports a bankable obligation. Revenue
+        stack, duration, dispatch, degradation, and insurability have to
+        be modeled together.</p>
         <div class="lecture-end">
 
         </div>
@@ -17794,6 +17846,10 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <h4>Scenario Data</h4>
         <p>These are scenario assumptions for the case.</p>
         <table>
+        <colgroup>
+        <col style="width: 42%" />
+        <col style="width: 57%" />
+        </colgroup>
         <thead>
         <tr>
         <th>Item</th>
@@ -17829,6 +17885,13 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <tr>
         <td>Degradation allowance</td>
         <td style="text-align: right;">included in net margin</td>
+        </tr>
+        <tr>
+        <td>Insurance policy</td>
+        <td style="text-align: right;">scenario assumes the modeled
+        operating plan is insurable; if a policy caps cycles or duty
+        cycle below the modeled plan, rerun the screen under that
+        cap</td>
         </tr>
         </tbody>
         </table>
@@ -17933,11 +17996,11 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         hours</td>
         </tr>
         <tr>
-        <td>Cycle and warranty budget</td>
-        <td>modeled throughput is consistent with degradation allowance
-        and warranty terms</td>
-        <td>optimizer earns value by consuming life not priced in the
-        case</td>
+        <td>Cycle, warranty, and insurance budget</td>
+        <td>modeled throughput is consistent with degradation allowance,
+        warranty terms, and insurance policy</td>
+        <td>optimizer earns value by consuming life or coverage headroom
+        not priced in the case</td>
         </tr>
         <tr>
         <td>Grid import and export rights</td>
@@ -18065,9 +18128,9 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         management</li>
         <li>historical or forecast price data showing enough multi-hour
         scarcity events after degradation and fees</li>
-        <li>warranty and augmentation terms showing that the value can
-        be captured without consuming battery life faster than
-        priced</li>
+        <li>warranty, insurance, and augmentation terms showing that the
+        value can be captured without consuming battery life or coverage
+        headroom faster than priced</li>
         </ul>
         </section>
         <section id="assumption-flip-1" class="level4">
@@ -18076,6 +18139,13 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         earn 70 EUR/MWh net value for 160 cycles/year.</p>
         <pre class="text"><code>60 MWh x 160 cycles/year x 70 EUR/MWh + 70,000 EUR/year
 = 742,000 EUR/year</code></pre>
+        <p>It can also change in the other direction if an insurance
+        policy caps eligible operation below the modeled cycle need. In
+        that case, replace the modeled useful cycles with the
+        policy-compatible cycle count before comparing duration blocks.
+        The project may still proceed, but only after the owner obtains
+        different coverage, changes the operating plan, or prices the
+        lost optionality.</p>
         <p>That clears the 700,000 EUR/year hurdle. The case for 4 hours
         is therefore not philosophical. It depends on the frequency and
         value of longer scarcity windows.</p>
@@ -18467,9 +18537,9 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         </p>
         <p>A battery revenue stack is a set of coupled obligations on
         the same MW, MWh, state of charge, grid rights, cycle budget,
-        and control system. When a service saturates, test which
-        obligations remain valuable after opportunity cost and downside
-        are counted.</p>
+        insurance policy, and control system. When a service saturates,
+        test which obligations remain valuable after opportunity cost
+        and downside are counted.</p>
         <section id="decision-question-3" class="level4">
         <h4>Decision Question</h4>
         <p>Should the asset owner contract part of the battery’s
@@ -18540,6 +18610,12 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <tr>
         <td>Lender-counted share of fixed floor</td>
         <td style="text-align: right;">100% scenario assumption</td>
+        </tr>
+        <tr>
+        <td>Insurance cycle limit</td>
+        <td style="text-align: right;">scenario assumes no binding limit
+        beyond the modeled cycle budget; verify policy terms before
+        using the stack</td>
         </tr>
         </tbody>
         </table>
@@ -18685,8 +18761,8 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         capacity, arbitrage, or response to a new market product. The
         term sheet should therefore state the priority order for reserve
         obligations, customer shape delivery, merchant arbitrage,
-        degradation limits, minimum state of charge, and emergency
-        override.</p>
+        degradation limits, insurance-cycle limits, minimum state of
+        charge, and emergency override.</p>
         <p>The commercial team should price shaped PPA flexibility at
         least at its opportunity cost, not at the accounting cost of the
         battery. If the customer cannot pay the opportunity cost, the
@@ -18713,6 +18789,11 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <p>Use last year’s reserve revenue, an arbitrage forecast, and a
         shaped-PPA premium as three additive upside lines, then haircut
         the total for prudence.</p>
+        <p>The same failure appears when the stack ignores policy
+        constraints. If the insurance contract allows fewer cycles,
+        different duty cycles, or fewer operating modes than the
+        optimizer assumes, part of the stack is unavailable unless the
+        owner changes coverage or changes operation.</p>
         <p>That still double-counts flexibility. The same MW, MWh, state
         of charge, control rights, cycle budget, and grid connection
         must serve every product. Revenue stacking is constrained
@@ -20821,6 +20902,14 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         operating costs, debt service, reserves, and other senior
         claims.
         </dd>
+        <dt id="glossary-equivalent-full-cycle" data-term="Equivalent full cycle" data-definition="One full charge-discharge equivalent measured by throughput relative to usable energy capacity; partial cycles can add up to equivalent full cycles depending on the convention used.">
+        Equivalent full cycle
+        </dt>
+        <dd>
+        One full charge-discharge equivalent measured by throughput
+        relative to usable energy capacity; partial cycles can add up to
+        equivalent full cycles depending on the convention used.
+        </dd>
         <dt id="glossary-etrm" data-term="ETRM" data-definition="Energy trading and risk management system used to record, value, monitor, and control trades, positions, limits, settlement, and reporting.">
         ETRM
         </dt>
@@ -21042,6 +21131,25 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         </dt>
         <dd>
         Resistance of rotating mass to sudden frequency change.
+        </dd>
+        <dt id="glossary-insurance-cycle-cap" data-term="Insurance cycle cap" data-definition="Insurance-policy limit on annual or lifetime cycling, throughput, depth of discharge, or duty cycle. It can bind even when the physical model and OEM warranty would allow more operation.">
+        Insurance cycle cap
+        </dt>
+        <dd>
+        Insurance-policy limit on annual or lifetime cycling,
+        throughput, depth of discharge, or duty cycle. It can bind even
+        when the physical model and OEM warranty would allow more
+        operation.
+        </dd>
+        <dt id="glossary-insurance-operating-covenant" data-term="Insurance operating covenant" data-definition="Condition in an insurance policy or endorsement that limits how an asset may be operated while keeping coverage, pricing, or claim eligibility intact. For BESS this may include cycle, throughput, duty-cycle, safety, monitoring, or approved-use restrictions.">
+        Insurance operating covenant
+        </dt>
+        <dd>
+        Condition in an insurance policy or endorsement that limits how
+        an asset may be operated while keeping coverage, pricing, or
+        claim eligibility intact. For BESS this may include cycle,
+        throughput, duty-cycle, safety, monitoring, or approved-use
+        restrictions.
         </dd>
         <dt id="glossary-intraday-market" data-term="Intraday market" data-definition="Market after day-ahead clearing where participants adjust positions closer to delivery.">
         Intraday market
