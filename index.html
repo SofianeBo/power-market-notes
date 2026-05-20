@@ -711,14 +711,17 @@
       margin-top: clamp(1.4rem, 3vw, 2.1rem);
     }
 
-    .methodology-note {
+    .methodology-note,
+    .home-feedback-note,
+    .home-author {
       max-width: 56rem;
-      margin: clamp(2.4rem, 5vw, 3.8rem) 0 0;
+      margin: clamp(2.1rem, 4.6vw, 3.4rem) 0 0;
       padding-top: clamp(1.2rem, 3vw, 1.8rem);
       border-top: 1px solid var(--line);
     }
 
-    .methodology-note h2 {
+    .methodology-note h2,
+    .home-feedback-note h2 {
       margin: 0 0 0.65rem;
       padding: 0;
       border: 0;
@@ -726,12 +729,63 @@
       line-height: 1.25;
     }
 
-    .methodology-note p {
+    .methodology-note p,
+    .home-feedback-note p,
+    .home-author p {
       max-width: 52rem;
       margin: 0;
       color: var(--muted);
       font-size: 0.98rem;
       line-height: 1.62;
+    }
+
+    .home-author {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding-bottom: 0.7rem;
+    }
+
+    .home-author p {
+      color: #31423f;
+      font-weight: 720;
+    }
+
+    .home-contact {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .home-contact a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.1rem;
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      padding: 0.35rem 0.58rem;
+      color: var(--accent-dark);
+      background: rgba(255, 255, 255, 0.68);
+      font-size: 0.86rem;
+      font-weight: 840;
+      text-decoration: none;
+    }
+
+    .home-contact a:hover,
+    .home-contact a:focus {
+      background: var(--accent-soft);
+      outline: none;
+    }
+
+    .contact-icon-linkedin {
+      width: 2.1rem;
+      padding: 0;
+      font-weight: 900;
+      letter-spacing: 0;
     }
 
     .lecture-end {
@@ -1555,7 +1609,7 @@
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.24.3
+        v0.24.4
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -1564,15 +1618,15 @@
         </blockquote>
         <section id="how-to-read-this" class="level2">
         <h2>How To Read This</h2>
-        <p>These notes are for technically trained readers building
-        working judgment in power markets, especially around renewable
-        portfolios. The path starts with the constraints that make
-        electricity hard to commercialize: balance, network limits,
-        timing, responsibility, settlement, and risk allocation. It then
-        turns those constraints into recurring decisions: where to
-        build, how to structure a PPA, how much storage duration to buy,
-        what a dispatch model is allowed to assume, how to govern
-        partners, and which market claims deserve capital.</p>
+        <p>These notes are for building working judgment in power
+        markets, especially around renewable portfolios. The path starts
+        with the constraints that make electricity hard to
+        commercialize: balance, network limits, timing, responsibility,
+        settlement, and risk allocation. It then turns those constraints
+        into recurring decisions: where to build, how to structure a
+        PPA, how much storage duration to buy, what a dispatch model is
+        allowed to assume, how to govern partners, and which market
+        claims deserve capital.</p>
         <section id="how-to-read" class="level3">
         <h3>How To Read</h3>
         <ul>
@@ -22509,7 +22563,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         p.className = "home-lede";
         p.textContent = casebook
           ? "The Casebook is where concepts become decisions. Each case gives enough facts to build a professional artifact, then asks for the recommendation, the binding constraint, and the assumption that would change the answer."
-          : "These notes are for technically trained readers building working judgment in power markets, especially around renewable portfolios. The path starts with the constraints that make electricity hard to commercialize: balance, network limits, timing, responsibility, settlement, and risk allocation. It then turns those constraints into recurring decisions: where to build, how to structure a PPA, how much storage duration to buy, what a dispatch model is allowed to assume, how to govern partners, and which market claims deserve capital.";
+          : "These notes are for building working judgment in power markets, especially around renewable portfolios. The path starts with the constraints that make electricity hard to commercialize: balance, network limits, timing, responsibility, settlement, and risk allocation. It then turns those constraints into recurring decisions: where to build, how to structure a PPA, how much storage duration to buy, what a dispatch model is allowed to assume, how to govern partners, and which market claims deserve capital.";
         copy.append(h1, versionLine, p);
         hero.append(copy);
 
@@ -22609,6 +22663,36 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         methodologyText.textContent = "The methodology behind these notes is the same one I have used to build university-level lectures: start from first principles, organize around core questions, and build intuition through anchor orders of magnitude and scaling relationships. In this project, AI accelerated parts of the editorial workflow, including drafting, restructuring, presentation, source cross-checking, and self-consistency review.";
         methodology.append(methodologyTitle, methodologyText);
 
+        const feedback = document.createElement("section");
+        feedback.className = "home-feedback-note";
+        const feedbackTitle = document.createElement("h2");
+        feedbackTitle.textContent = "Feedback";
+        const feedbackText = document.createElement("p");
+        feedbackText.textContent = casebook
+          ? "Feedback and practitioner input are welcome. When reading a case, select the relevant passage and press Send feedback so the note arrives with its location. The aim is to keep the material practical, useful, and reliable."
+          : "Feedback and practitioner input are welcome. When reading a lecture, select the relevant passage and press Send feedback so the note arrives with its location. The aim is to keep the material practical, useful, and reliable.";
+        feedback.append(feedbackTitle, feedbackText);
+
+        const author = document.createElement("footer");
+        author.className = "home-author";
+        const authorText = document.createElement("p");
+        authorText.textContent = "Sofiane Boucenna, 2026";
+        const contact = document.createElement("div");
+        contact.className = "home-contact";
+        const linkedin = document.createElement("a");
+        linkedin.href = "https://www.linkedin.com/in/sofianeboucenna/";
+        linkedin.target = "_blank";
+        linkedin.rel = "noopener noreferrer";
+        linkedin.className = "contact-icon-linkedin";
+        linkedin.setAttribute("aria-label", "LinkedIn profile");
+        linkedin.textContent = "in";
+        const email = document.createElement("a");
+        email.href = "mailto:sofiane.boucenna@proton.me";
+        email.setAttribute("aria-label", "Email Sofiane Boucenna");
+        email.textContent = "Email";
+        contact.append(linkedin, email);
+        author.append(authorText, contact);
+
         const route = document.createElement("section");
         route.className = "reading-route";
         const routeHeading = document.createElement("div");
@@ -22641,8 +22725,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         }
         route.append(routeHeading, routeList);
 
-        if (casebook) home.append(hero, route, arcHeading, arc);
-        else home.append(hero, route, arcHeading, arc, methodology);
+        if (casebook) home.append(hero, route, arcHeading, arc, feedback, author);
+        else home.append(hero, route, arcHeading, arc, methodology, feedback, author);
         const firstSection = root.querySelector(":scope > section.level2");
         root.insertBefore(home, firstSection || root.firstChild);
       }
