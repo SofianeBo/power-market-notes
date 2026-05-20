@@ -1362,7 +1362,7 @@
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.22.1
+        v0.22.2
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -22471,6 +22471,16 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           railNext.textContent = next ? "Next" : "Course map";
         }
 
+        function scrollToReaderTarget(element) {
+          const target = element || document.getElementById("home") || root;
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - 12);
+              window.scrollTo({ top, left: 0, behavior: "auto" });
+            });
+          });
+        }
+
         function route() {
           let id = window.location.hash.slice(1);
           if (!id || id === root.id || id === "how-to-read-this") id = "home";
@@ -22510,9 +22520,19 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
 
           if (target?.matches("details.reader-section")) target.open = true;
           target?.closest("details.reader-section")?.setAttribute("open", "");
-          if (id !== "home" && target && target !== currentChapter?.section && !currentChapter) {
-            setTimeout(() => target.scrollIntoView({ block: "start" }), 0);
+          let scrollTarget = document.getElementById("home");
+          if (currentChapter) {
+            scrollTarget = currentChapter.section;
+            if (target && target !== currentChapter.section && currentChapter.section.contains(target)) {
+              scrollTarget = target;
+            }
+          } else if (utility) {
+            scrollTarget = utility;
+            if (target && utility.contains(target)) {
+              scrollTarget = target;
+            }
           }
+          scrollToReaderTarget(scrollTarget);
         }
 
         window.addEventListener("hashchange", route);
