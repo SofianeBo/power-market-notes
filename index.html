@@ -1600,7 +1600,7 @@
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.25.2
+        v0.25.3
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -23170,16 +23170,6 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           if (changed) persist();
           return changed;
         };
-        article.addEventListener("dblclick", (event) => {
-          if (event.target.closest("a, button, summary")) return;
-          const block = event.target.closest(".reader-block");
-          if (!block) return;
-          const id = block.dataset.readerBlock;
-          block.classList.toggle("user-highlight");
-          if (block.classList.contains("user-highlight")) saved.add(id);
-          else saved.delete(id);
-          persist();
-        });
         return { blocks, highlightIds };
       }
 
