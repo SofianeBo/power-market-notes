@@ -1248,8 +1248,8 @@
         <li><a href="#volume-1" id="toc-volume-1">Volume I: The
         Physical, Institutional, And Market Machine</a>
         <ul>
-        <li><a href="#v1-l01" id="toc-v1-l01">Chapter 1. The MWh That
-        Must Arrive On Time</a></li>
+        <li><a href="#v1-l01" id="toc-v1-l01">Chapter 1. The
+        Megawatt-Hour That Must Arrive On Time</a></li>
         <li><a href="#v1-l02" id="toc-v1-l02">Chapter 2. The Grid As A
         Real-Time Balancing Machine</a></li>
         <li><a href="#v1-l03" id="toc-v1-l03">Chapter 3. Load, Shape,
@@ -1336,8 +1336,8 @@
         And 24/7 Clean Energy</a></li>
         <li><a href="#v3-l08" id="toc-v3-l08">Chapter 8. Grid-Forming
         Inverters And New System Services</a></li>
-        <li><a href="#v3-l09" id="toc-v3-l09">Chapter 9. AI And ML In
-        Energy Management</a></li>
+        <li><a href="#v3-l09" id="toc-v3-l09">Chapter 9. Artificial
+        Intelligence And Machine Learning In Energy Management</a></li>
         <li><a href="#v3-l10" id="toc-v3-l10">Chapter 10. Build, Buy, Or
         Outsource The Trading Layer?</a></li>
         <li><a href="#v3-l11" id="toc-v3-l11">Chapter 11. The
@@ -1353,15 +1353,16 @@
         Decision Memos And Models</a>
         <ul>
         <li><a href="#case-01" id="toc-case-01">Case 1. Shaped
-        Solar+BESS PPA Quote</a></li>
+        Solar-Storage Power Purchase Agreement Quote</a></li>
         <li><a href="#case-02" id="toc-case-02">Case 2. The 1h, 2h, Or
         4h Battery Decision</a></li>
         <li><a href="#case-03" id="toc-case-03">Case 3. Grid-Constrained
         Site Screen</a></li>
         <li><a href="#case-04" id="toc-case-04">Case 4. BESS Revenue
         Stack Under Saturation</a></li>
-        <li><a href="#case-05" id="toc-case-05">Case 5. BRP/BSP
-        Performance Audit</a></li>
+        <li><a href="#case-05" id="toc-case-05">Case 5.
+        Balance-Responsibility And Balancing-Service Performance
+        Audit</a></li>
         <li><a href="#case-06" id="toc-case-06">Case 6. Data-Centre 24/7
         Product Screen</a></li>
         <li><a href="#case-07" id="toc-case-07">Case 7. Year-One
@@ -1379,7 +1380,7 @@
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.22.7
+        v0.22.8
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -1448,19 +1449,19 @@
         <h2>Volume I: The Physical, Institutional, And Market
         Machine</h2>
         <section id="v1-l01" class="level3">
-        <h3>Chapter 1. The MWh That Must Arrive On Time</h3>
+        <h3>Chapter 1. The Megawatt-Hour That Must Arrive On Time</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-1">[1]</a>
         <a href="#ref-2">[2]</a> <a href="#ref-3">[3]</a></sup>
         </p>
         <p>A customer asks for electricity, but the grid cannot hand
-        over a yearly pile of MWh. A factory needs power in this hour. A
-        city has an evening peak. A wire can carry only so much at a
-        moment. The first move in power markets is therefore
-        dimensional: separate the amount of energy from the rate at
-        which it arrives. Once those are separate, familiar words like
-        generation, load, capacity, average, and peak become less
-        slippery. A MWh is a real amount of energy, but it is only
+        over a yearly pile of megawatt-hours (MWh). A factory needs
+        power in this hour. A city has an evening peak. A wire can carry
+        only so much at a moment. The first move in power markets is
+        therefore dimensional: separate the amount of energy from the
+        rate at which it arrives. Once those are separate, familiar
+        words like generation, load, capacity, average, and peak become
+        less slippery. A MWh is a real amount of energy, but it is only
         useful when its timing, place, and reliability match the need it
         is supposed to serve.</p>
         <section id="opening-puzzle" class="level4">
@@ -1471,7 +1472,7 @@
         connection point, and under what obligation?</p>
         <p>One megawatt-hour could mean:</p>
         <ul>
-        <li>1 MW delivered steadily for 1 hour.</li>
+        <li>1 megawatt (MW) delivered steadily for 1 hour.</li>
         <li>0.25 MW delivered for 4 hours.</li>
         <li>4 MW delivered for 15 minutes.</li>
         <li>Energy delivered in the wrong place, at the wrong hour, when
@@ -1503,10 +1504,13 @@
         <section id="definitions" class="level4">
         <h4>Definitions</h4>
         <p>Power: the rate at which energy is produced, consumed,
-        transferred, charged, or discharged. Typical units are W, kW,
-        MW, and GW.</p>
+        transferred, charged, or discharged. Typical units are watt (W),
+        kilowatt (kW), megawatt (MW), and gigawatt (GW).</p>
         <p>Energy: the accumulated quantity over time. Typical units are
-        Wh, kWh, MWh, GWh, and TWh.</p>
+        watt-hour (Wh), kilowatt-hour (kWh), megawatt-hour (MWh),
+        gigawatt-hour (GWh), and terawatt-hour (TWh).</p>
+        <p>Megawatt-hour (MWh): one megawatt delivered or consumed for
+        one hour. It is an energy unit.</p>
         <p>Generation: electrical energy produced by a generator over a
         period, or power output at a moment. The unit tells you which
         meaning is intended.</p>
@@ -1525,7 +1529,7 @@
         <h4>Numerical Intuition</h4>
         <p>These are unit anchors:</p>
         <pre class="text"><code>1 MWh = 1 MW x 1 hour
-1 GW-year = 1 GW x 8,760 hours = 8.76 TWh
+1 gigawatt-year (GW-year) = 1 GW x 8,760 hours = 8.76 terawatt-hours (TWh)
 1 TWh/year = 1,000,000 MWh / 8,760 h ~= 114 MW average</code></pre>
         <p>The number <code>8,760</code> is the number of hours in a
         non-leap year:</p>
@@ -1585,11 +1589,12 @@
         </section>
         <section id="in-practice" class="level4">
         <h4>In Practice</h4>
-        <p>For an IPP, this unit distinction changes how a product is
-        priced and promised.</p>
-        <p>When someone proposes a solar PPA, ask both “How many MWh per
-        year?” and “What hourly shape are we selling, and who carries
-        the mismatch between production and customer demand?”</p>
+        <p>For an independent power producer (IPP), this unit
+        distinction changes how a product is priced and promised.</p>
+        <p>When someone proposes a solar power purchase agreement (PPA),
+        ask both “How many MWh per year?” and “What hourly shape are we
+        selling, and who carries the mismatch between production and
+        customer demand?”</p>
         <p>The 2026-05-16 Svenska kraftnat electricity-statistics source
         says Swedish production and consumption statistics are based on
         measured hourly values reported to eSett. That is a useful
@@ -1676,13 +1681,17 @@
         <p>System balance: the physical condition in which supply and
         demand, including imports/exports and losses depending on
         boundary, are close enough for secure operation.</p>
-        <p>Frequency: in an AC grid, the system electrical frequency. In
-        the Nordic and broader European context the nominal frequency is
-        50 Hz, but it does not use that as a control-band claim.</p>
+        <p>Frequency: in an alternating-current (AC) grid, the system
+        electrical frequency. In the Nordic and broader European context
+        the nominal frequency is 50 hertz (Hz), but it does not use that
+        as a control-band claim.</p>
         <p>Imbalance: the difference between allocated physical volumes
         and final traded or scheduled volumes for a balance responsible
         party over an imbalance settlement period, using the eSett
         terminology developed further in Lecture 5.</p>
+        <p>Balance responsible party (BRP): party financially
+        responsible for imbalances for a delivery point or
+        portfolio.</p>
         <p>TSO: transmission system operator. In the EU balancing
         guideline, TSOs are responsible for organizing balancing
         activities and maintaining system balance within their
@@ -1691,6 +1700,8 @@
         balancing service under product rules, usually measured in MW.
         The asset may be paid for readiness even before energy is
         activated.</p>
+        <p>Balancing service provider (BSP): party qualified to provide
+        balancing services to the transmission system operator.</p>
         <p>Balancing energy: energy delivered or absorbed after
         activation for balancing, usually measured in MWh and provided
         by balancing service providers in the eSett terminology.</p>
@@ -1710,9 +1721,9 @@ If it lasts 1 hour: 5 MW x 1 h = 5 MWh</code></pre>
         because the error lasts for less time.</p>
         <section id="worked-estimate-1" class="level5">
         <h5>Worked Estimate</h5>
-        <p>Suppose an IPP has 500 MW of weather-dependent generation in
-        a bidding zone. The forecast misses by 1% during a cloudy
-        hour.</p>
+        <p>Suppose an independent power producer (IPP) has 500 MW of
+        weather-dependent generation in a bidding zone. The forecast
+        misses by 1% during a cloudy hour.</p>
         <p>The missing or excess power is about 5 MW. If the imbalance
         price exposure were hypothetically <code>EUR 100/MWh</code> for
         that hour, the one-hour financial exposure would be:</p>
@@ -1950,7 +1961,8 @@ Hour 4: -10 MWh</code></pre>
         </section>
         <section id="in-practice-2" class="level4">
         <h4>In Practice</h4>
-        <p>For a solar-plus-BESS PPA, the product question is:</p>
+        <p>For a solar-plus-battery energy storage system (BESS) power
+        purchase agreement (PPA), the product question is:</p>
         <p>Are we selling as-produced solar, a shaped profile, a flat
         block, or a customer-matched product?</p>
         <p>Each answer changes the model:</p>
@@ -2197,8 +2209,8 @@ grid cost = EUR 5/MWh</code></pre>
         <h4>Current Debates Or Caveats</h4>
         <p>Tariff and connection claims are date-specific. The Swedish
         national-grid tariff details above come from a 2026-05-16
-        Svenska kraftnat source. DSO-level tariff treatment remains a
-        source gap for project-specific work.</p>
+        Svenska kraftnat source. Distribution-grid tariff treatment
+        remains a source gap for project-specific work.</p>
         <p>It does not compare Nordic countries. ACER warns through its
         definitions and methodology discussion that network charges
         include many different components, and country terms are not
@@ -2235,9 +2247,10 @@ grid cost = EUR 5/MWh</code></pre>
         land somewhere.</p>
         <section id="opening-puzzle-4" class="level4">
         <h4>Opening Puzzle</h4>
-        <p>Power markets look like alphabet soup: TSO, DSO, BRP, BSP,
-        NEMO, RE.</p>
-        <p>The trick is not to memorize the acronyms.</p>
+        <p>Power markets are full of role names: transmission system
+        operator (TSO), distribution system operator (DSO), balance
+        responsible party (BRP), balancing service provider (BSP), and
+        nominated electricity market operator (NEMO).</p>
         <p>Ask one question:</p>
         <p>What obligation does this actor carry?</p>
         <p>Every important role exists because someone must be
@@ -3567,8 +3580,8 @@ reactive MVAr obligation or headroom</code></pre>
         <tr>
         <td>Can the asset provide services while fulfilling the PPA or
         dispatch plan?</td>
-        <td>Control-rights matrix, qualification rules, SoC and
-        availability constraints.</td>
+        <td>Control-rights matrix, qualification rules, state-of-charge
+        and availability constraints.</td>
         </tr>
         <tr>
         <td>Is the service paid, mandatory, or only useful for
@@ -3801,7 +3814,7 @@ reactive MVAr obligation or headroom</code></pre>
         <tr>
         <td>Battery</td>
         <td>Stored electricity</td>
-        <td>High within SoC limits</td>
+        <td>High within state-of-charge limits</td>
         <td>market operation, not fuel weather</td>
         <td>MWh, MW, efficiency, degradation, warranty</td>
         <td>Sells time-shifting and fast flexibility, not net energy
@@ -4143,7 +4156,7 @@ reactive MVAr obligation or headroom</code></pre>
         <p>Three numbers are the skeleton:</p>
         <pre class="text"><code>MW: how fast the battery can charge or discharge
 MWh: how much energy it can store
-RTE: how much energy survives the round trip</code></pre>
+round-trip efficiency (RTE): how much energy survives the round trip</code></pre>
         <p>Then come the operating constraints: state of charge, usable
         depth of discharge, degradation, warranty, availability, grid
         limits, and market rules.</p>
@@ -4151,16 +4164,18 @@ RTE: how much energy survives the round trip</code></pre>
         <section id="definitions-12" class="level4">
         <h4>Definitions</h4>
         <ul>
-        <li>BESS: battery energy storage system.</li>
+        <li>Battery energy storage system (BESS): a battery system,
+        power conversion equipment, controls, and supporting
+        infrastructure used to store and return electrical energy.</li>
         <li>Power rating: maximum charge or discharge rate, in MW.</li>
         <li>Energy capacity: amount of stored energy, in MWh. Nameplate
         and usable capacity may differ.</li>
         <li>Battery duration: energy capacity divided by power rating,
         in hours.</li>
-        <li>State of charge: stored energy at a moment, expressed in MWh
-        or percent of usable capacity.</li>
-        <li>Round-trip efficiency: energy discharged divided by energy
-        charged over a cycle.</li>
+        <li>State of charge (SoC): stored energy at a moment, expressed
+        in MWh or percent of usable capacity.</li>
+        <li>Round-trip efficiency (RTE): energy discharged divided by
+        energy charged over a cycle.</li>
         <li>Depth of discharge: fraction of stored energy that is used
         in a discharge.</li>
         <li>Cycle life: number of charge/discharge cycles before evident
@@ -4384,7 +4399,8 @@ What local constraint or customer need makes the site valuable?</code></pre>
         <li>Area price: bidding-area price reflecting local supply,
         demand, and available transmission capacity.</li>
         <li>Interconnector: transmission link between areas or
-        countries, AC or HVDC.</li>
+        countries, using alternating current (AC) or high-voltage direct
+        current (HVDC).</li>
         <li>BRP: balance responsible party; financially responsible for
         imbalances under its responsibility.</li>
         <li>BSP: balancing service provider; qualified to provide
@@ -4956,11 +4972,12 @@ and data available at the time, what should a feasible operator have done?</code
         panels can deliver, and the headline price can look reasonable,
         yet the deal can still disappoint once weather, timing, grid
         costs, balancing exposure, debt service, and the merchant tail
-        pass through the model. For a solar-plus-BESS IPP, the model has
-        to show how physical performance turns into cash that can pay
-        costs, support debt, and leave value for equity. It is the
-        meeting point for MWh, realized prices, contracts, grid
-        constraints, and financing promises.</p>
+        pass through the model. For an independent power producer (IPP)
+        developing solar plus battery storage, the model has to show how
+        physical performance turns into cash that can pay costs, support
+        debt, and leave value for equity. It is the meeting point for
+        MWh, realized prices, contracts, grid constraints, and financing
+        promises.</p>
         <section id="opening-puzzle-15" class="level4">
         <h4>Opening Puzzle</h4>
         <p>A solar plant can be technically excellent and financially
@@ -4975,8 +4992,9 @@ and data available at the time, what should a feasible operator have done?</code
         </ul>
         <p>The first machine is measured in MW, MWh, availability,
         losses, and degradation. The second is measured in revenue,
-        opex, debt service, tax, NPV, IRR, and DSCR. A project model is
-        the gearbox between them.</p>
+        opex, debt service, tax, net present value (NPV), internal rate
+        of return (IRR), and debt service coverage ratio (DSCR). A
+        project model is the gearbox between them.</p>
         </section>
         <section id="first-principles-model-15" class="level4">
         <h4>First-Principles Model</h4>
@@ -4998,9 +5016,10 @@ operating_cash_before_debt =
  - land_and_insurance
  - taxes_or_fees</code></pre>
         <p>The asset does not care whether a euro comes from a PPA,
-        merchant sale, GO/certificate settlement, or battery service.
-        The lender and equity investor care a great deal, because the
-        uncertainty and control rights differ.</p>
+        merchant sale, guarantee of origin (GO) or certificate
+        settlement, or battery service. The lender and equity investor
+        care a great deal, because the uncertainty and control rights
+        differ.</p>
         </section>
         <section id="definitions-15" class="level4">
         <h4>Definitions</h4>
@@ -5017,8 +5036,8 @@ operating_cash_before_debt =
         <p>EBITDA is earnings before interest, taxes, depreciation, and
         amortization. In project-model language, it is often a rough
         operating-profit layer before financing and tax details.</p>
-        <p>NPV is the discounted value of future cash flows minus the
-        initial investment:</p>
+        <p>Net present value (NPV) is the discounted value of future
+        cash flows minus the initial investment:</p>
         <pre class="text"><code>NPV = sum_t(FCF_t / (1 + r)^t) - initial_capex</code></pre>
         <p>Units:</p>
         <ul>
@@ -5026,9 +5045,10 @@ operating_cash_before_debt =
         <li><code>r</code>: discount rate per period</li>
         <li><code>NPV</code>: EUR</li>
         </ul>
-        <p>IRR is the discount rate that makes NPV equal zero. It is the
-        rate implied by the modeled cash-flow path.</p>
-        <p>DSCR is:</p>
+        <p>Internal rate of return (IRR) is the discount rate that makes
+        NPV equal zero. It is the rate implied by the modeled cash-flow
+        path.</p>
+        <p>Debt service coverage ratio (DSCR) is:</p>
         <pre class="text"><code>DSCR_t = cash_available_for_debt_service_t / scheduled_debt_service_t</code></pre>
         <p>Units:</p>
         <ul>
@@ -5052,8 +5072,8 @@ operating_cash_before_debt =
         <p>Equity is ownership capital. Equity receives what remains
         after operating costs, debt service, reserves, and other senior
         claims. It is riskier, so it usually requires more upside.</p>
-        <p>WACC, or weighted average cost of capital, combines the cost
-        of equity and debt after weighting by their share in the capital
+        <p>Weighted average cost of capital (WACC) combines the cost of
+        equity and debt after weighting by their share in the capital
         structure. It is not a universal number; it changes with market
         rates, contract quality, project risk, tax, country, and
         lender/investor appetite.</p>
@@ -5103,9 +5123,9 @@ operating_cash_before_debt =
         degradation, clipping, losses, and curtailment decide MWh.</li>
         <li>Market realization: the timing and location of MWh decide
         capture price alongside average price.</li>
-        <li>Contract conversion: PPA, hedge, CfD-like settlement, floor,
-        cap, or merchant exposure decide which cash flows are stabilized
-        and which remain open.</li>
+        <li>Contract conversion: PPA, hedge, contract-for-difference
+        (CfD)-like settlement, floor, cap, or merchant exposure decide
+        which cash flows are stabilized and which remain open.</li>
         <li>Grid conversion: connection cost, tariffs, subscribed
         capacity, loss charges, excess charges, and curtailment rights
         convert location into cost and operational constraints.</li>
@@ -11423,14 +11443,14 @@ The marginal portfolio risk is materially different.</code></pre>
         <a href="#ref-42">[42]</a></sup>
         </p>
         <p>A renewable IPP can spend its first analytics budget many
-        ways: a pricing model, a data platform, an ETRM, a forecast
-        vendor, a partner scorecard, a risk pack, a quant hire, or a
-        battery optimizer. Each choice sounds sensible in isolation. The
-        constraint is that year-one budget, headcount, data rights, and
-        management attention are scarce. The roadmap has to choose which
-        decisions receive analytical capability now, which are bought,
-        and which are deliberately left rough until the evidence
-        improves.</p>
+        ways: a pricing model, a data platform, an energy trading and
+        risk management (ETRM) system, a forecast vendor, a partner
+        scorecard, a risk pack, a quant hire, or a battery optimizer.
+        Each choice sounds sensible in isolation. The constraint is that
+        year-one budget, headcount, data rights, and management
+        attention are scarce. The roadmap has to choose which decisions
+        receive analytical capability now, which are bought, and which
+        are deliberately left rough until the evidence improves.</p>
         <section id="opening-puzzle-30" class="level4">
         <h4>Opening Puzzle</h4>
         <p>Management approves a constrained year-one build:</p>
@@ -12084,6 +12104,8 @@ The marginal portfolio risk is materially different.</code></pre>
         comparable cases.”</p>
         <p><strong>Expected shortfall</strong> measures the average loss
         beyond the VaR threshold.</p>
+        <p><strong>Mark-to-market (MtM)</strong> is the current modeled
+        value of a position using current market inputs or curves.</p>
         <p><strong>Stress testing</strong> asks what happens under a
         deliberately severe scenario, even if the scenario is rare or
         outside recent history.</p>
@@ -12338,8 +12360,8 @@ expected shortfall = average loss when losses exceed that threshold</code></pre>
         <ul>
         <li>Forward sale: 36,000 MWh.</li>
         <li>Price moves against mark-to-market by 25 EUR/MWh.</li>
-        <li>Collateral rule requires 80 percent of negative MtM after a
-        threshold.</li>
+        <li>Collateral rule requires 80 percent of negative
+        mark-to-market (MtM) after a threshold.</li>
         <li>Ignore netting and threshold for the simplified
         calculation.</li>
         </ul>
@@ -14470,11 +14492,12 @@ and who pays when the evidence or delivery does not match the promise?</code></p
         congested hours.</p>
         <p>ENTSO-E’s 2026 data-centre report gives a second set of dated
         system-scale anchors. It maps data-centre flexibility resources
-        to products: UPS batteries are most suitable for very fast
-        response and primary reserve, while cooling flexibility, thermal
-        storage, on-site generation, and workload shifting fit different
-        durations and control constraints. The same report cites a 2030
-        European short-duration/ramping flexibility need of roughly
+        to products: uninterruptible power supply (UPS) batteries are
+        most suitable for very fast response and primary reserve, while
+        cooling flexibility, thermal storage, on-site generation, and
+        workload shifting fit different durations and control
+        constraints. The same report cites a 2030 European
+        short-duration/ramping flexibility need of roughly
         <code>15-30 GW</code>, and a five-market estimate of
         <code>16.9 GW</code> technical data-centre flexibility
         potential, with up to <code>3.8 GW</code> realistically
@@ -14731,10 +14754,10 @@ firming_at_risk = 13,000 MWh x 150 EUR/MWh
         <li>decision: build, partner, defer, narrow, or avoid</li>
         </ul>
         <p>Practitioner commentary is useful for identifying 2026
-        debates around hyperscaler load, AI-driven flexibility, grid
-        constraints, and 24/7 claims. Product claims still need sourced
-        physics, current official rules, standards, and contract
-        evidence.</p>
+        debates around hyperscaler load, artificial-intelligence-driven
+        flexibility, grid constraints, and 24/7 claims. Product claims
+        still need sourced physics, current official rules, standards,
+        and contract evidence.</p>
         </section>
         <section id="misconceptions-32" class="level4">
         <h4>Misconceptions</h4>
@@ -14772,7 +14795,8 @@ firming_at_risk = 13,000 MWh x 150 EUR/MWh
         <li>source of new public scrutiny around clean-energy
         claims</li>
         </ul>
-        <p>Detailed Scope 2, RE100, AIB/EECS, GO, and
+        <p>Detailed Scope 2, RE100, Association of Issuing Bodies (AIB)
+        and European Energy Certificate System (EECS), GO, and
         granular-certificate compliance treatment remains outside this
         chapter. For dated product work, use the applicable primary
         standards and certificate rules. The commercial rule is
@@ -15205,7 +15229,8 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         </section>
         </section>
         <section id="v3-l09" class="level3">
-        <h3>Chapter 9. AI And ML In Energy Management</h3>
+        <h3>Chapter 9. Artificial Intelligence And Machine Learning In
+        Energy Management</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-36">[36]</a>
         <a href="#ref-38">[38]</a> <a href="#ref-50">[50]</a></sup>
@@ -15215,11 +15240,12 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         battery action, but the contract may give that control right to
         someone else. A partner report shows a gap, but the benchmark
         may be using information no one had at the time. For a renewable
-        IPP, AI/ML is a decision system before it is a technology
-        category. Its value depends on which decision changes, who owns
-        that decision, how much value survives timing and constraints,
-        and how much loss a wrong recommendation can create before
-        anyone catches it.</p>
+        IPP, artificial intelligence and machine learning (AI/ML) belong
+        inside a decision system before they are a technology category.
+        Their value depends on which decision changes, who owns that
+        decision, how much value survives timing and constraints, and
+        how much loss a wrong recommendation can create before anyone
+        catches it.</p>
         <section id="opening-puzzle-40" class="level4">
         <h4>Opening Puzzle</h4>
         <p>A vendor shows a strong-looking result: the solar forecast is
@@ -17382,7 +17408,8 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <section id="casebook" class="level2">
         <h2>Casebook: Applied Decision Memos And Models</h2>
         <section id="case-01" class="level3">
-        <h3>Case 1. Shaped Solar+BESS PPA Quote</h3>
+        <h3>Case 1. Shaped Solar-Storage Power Purchase Agreement
+        Quote</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-6">[6]</a>
         <a href="#ref-29">[29]</a> <a href="#ref-30">[30]</a>
@@ -17397,8 +17424,10 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         quote stack and a decision memo.</p>
         <section id="decision-question" class="level4">
         <h4>Decision Question</h4>
-        <p>Should a renewable IPP offer a shaped solar-plus-BESS PPA, a
-        simpler as-produced PPA, or no-bid?</p>
+        <p>Should a renewable independent power producer (IPP) offer a
+        shaped solar-plus-battery energy storage system (BESS) power
+        purchase agreement (PPA), a simpler as-produced PPA, or
+        no-bid?</p>
         </section>
         <section id="situation" class="level4">
         <h4>Situation</h4>
@@ -17416,6 +17445,10 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <p>These are scenario numbers for the case, not market
         quotes.</p>
         <table>
+        <colgroup>
+        <col style="width: 42%" />
+        <col style="width: 57%" />
+        </colgroup>
         <thead>
         <tr>
         <th>Item</th>
@@ -17429,8 +17462,8 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         </tr>
         <tr>
         <td>Product requested</td>
-        <td style="text-align: right;">100 GWh/year flat profile, about
-        11.4 MW average</td>
+        <td style="text-align: right;">100 gigawatt-hours (GWh)/year
+        flat profile, about 11.4 megawatts (MW) average</td>
         </tr>
         <tr>
         <td>Solar project output</td>
@@ -17438,7 +17471,8 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         </tr>
         <tr>
         <td>Co-located BESS</td>
-        <td style="text-align: right;">25 MW / 50 MWh</td>
+        <td style="text-align: right;">25 MW / 50 megawatt-hours
+        (MWh)</td>
         </tr>
         <tr>
         <td>Battery round-trip efficiency</td>
@@ -17556,7 +17590,8 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         </tr>
         <tr>
         <td>Imbalance</td>
-        <td>BRP-managed, with agreed data and performance reporting</td>
+        <td>balance responsible party (BRP)-managed, with agreed data
+        and performance reporting</td>
         <td>connects contract economics to operational evidence</td>
         </tr>
         <tr>
@@ -18361,9 +18396,9 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <p>The undiscounted value delayed by choosing Site A over a
         near-term 2028 site is roughly:</p>
         <pre class="text"><code>2 years x 4.03 million EUR/year = 8.06 million EUR of gross margin timing exposure</code></pre>
-        <p>Use this as a screen, rather than a project NPV, to prevent a
-        small annual yield advantage from hiding a large timing and
-        optionality penalty.</p>
+        <p>Use this as a screen, rather than a project net present value
+        (NPV), to prevent a small annual yield advantage from hiding a
+        large timing and optionality penalty.</p>
         </section>
         <section id="decision-memo-2" class="level4">
         <h4>Decision Memo</h4>
@@ -18700,7 +18735,8 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         </section>
         </section>
         <section id="case-05" class="level3">
-        <h3>Case 5. BRP/BSP Performance Audit</h3>
+        <h3>Case 5. Balance-Responsibility And Balancing-Service
+        Performance Audit</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-3">[3]</a>
         <a href="#ref-4">[4]</a> <a href="#ref-12">[12]</a>
@@ -18722,11 +18758,12 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         </section>
         <section id="situation-4" class="level4">
         <h4>Situation</h4>
-        <p>A renewable IPP outsources balancing responsibility and
-        reserve-market execution. The partner sends monthly revenue
-        reports. The asset owner wants to know whether the partner
-        created value, leaked value, or operated within realistic
-        constraints before opening a commercial renegotiation.</p>
+        <p>A renewable IPP outsources balance responsible party (BRP)
+        and balancing service provider (BSP) execution work. The partner
+        sends monthly revenue reports. The asset owner wants to know
+        whether the partner created value, leaked value, or operated
+        within realistic constraints before opening a commercial
+        renegotiation.</p>
         <p>The partner contract allows performance review, but the
         current data annex is weak. Forecast files, bid files, schedule
         revisions, optimizer recommendations, manual overrides, meter
@@ -19327,8 +19364,9 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         </tr>
         <tr>
         <td>Buyer flexibility</td>
-        <td>whether UPS, cooling, workload shifting, or on-site
-        generation can be used and who controls it</td>
+        <td>whether uninterruptible power supply (UPS), cooling,
+        workload shifting, or on-site generation can be used and who
+        controls it</td>
         <td>load flexibility is assumed in the model but unavailable in
         operation</td>
         </tr>
@@ -19492,12 +19530,12 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <a href="#ref-36">[36]</a> <a href="#ref-6">[6]</a>
         <a href="#ref-33">[33]</a></sup>
         </p>
-        <p>An IPP becomes an energy manager when it decides which
-        revenue and risk decisions it must own, which execution
-        activities it can outsource, what raw data it has rights to
-        inspect, and which controls stop a model from becoming an
-        unmanaged production process. This case forces the year-one
-        resource allocation.</p>
+        <p>An independent power producer (IPP) becomes an energy manager
+        when it decides which revenue and risk decisions it must own,
+        which execution activities it can outsource, what raw data it
+        has rights to inspect, and which controls stop a model from
+        becoming an unmanaged production process. This case forces the
+        year-one resource allocation.</p>
         <section id="decision-question-6" class="level4">
         <h4>Decision Question</h4>
         <p>Given limited budget, headcount, partner data gaps, and
@@ -19511,7 +19549,8 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         projects entering commercial design. Trading execution and
         balancing are mostly outsourced. Partner reporting is useful but
         incomplete. Management wants a credible year-one operating model
-        without approving a large desk or full ETRM implementation.</p>
+        without approving a large desk or full energy trading and risk
+        management (ETRM) implementation.</p>
         <p>The operating model must support four decisions:</p>
         <ul>
         <li>shaped PPA pricing</li>
@@ -19537,7 +19576,8 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         </tr>
         <tr>
         <td>Development pipeline under commercial review</td>
-        <td style="text-align: right;"><code>1.8 GW</code></td>
+        <td
+        style="text-align: right;"><code>1.8 gigawatts (GW)</code></td>
         </tr>
         <tr>
         <td>First BESS projects</td>
@@ -19954,8 +19994,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         </tr>
         <tr>
         <td>BESS and dispatch</td>
-        <td>revenue stack, SoC constraints, degradation, reserve/PPA
-        conflicts</td>
+        <td>revenue stack, state-of-charge constraints, degradation,
+        reserve/PPA conflicts</td>
         <td>double-counted MW/MWh or cycle budget</td>
         </tr>
         <tr>
@@ -20137,7 +20177,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         <li><a href="#v2-l15">Shadow Trading And Partner
         Scorecards</a></li>
         <li><a href="#v2-l16">Analytical Capability Roadmap</a></li>
-        <li><a href="#v3-l09">AI And ML In Energy Management</a></li>
+        <li><a href="#v3-l09">Artificial Intelligence And Machine
+        Learning In Energy Management</a></li>
         <li><a href="#v3-l10">Build, Buy, Outsource Trading
         Layer</a></li>
         <li><a href="#v3-l11">Next-Generation IPP Operating

@@ -1237,15 +1237,16 @@
         <li><a href="#casebook" id="toc-casebook">Applied Cases</a>
         <ul>
         <li><a href="#case-01" id="toc-case-01">Case 1. Shaped
-        Solar+BESS PPA Quote</a></li>
+        Solar-Storage Power Purchase Agreement Quote</a></li>
         <li><a href="#case-02" id="toc-case-02">Case 2. The 1h, 2h, Or
         4h Battery Decision</a></li>
         <li><a href="#case-03" id="toc-case-03">Case 3. Grid-Constrained
         Site Screen</a></li>
         <li><a href="#case-04" id="toc-case-04">Case 4. BESS Revenue
         Stack Under Saturation</a></li>
-        <li><a href="#case-05" id="toc-case-05">Case 5. BRP/BSP
-        Performance Audit</a></li>
+        <li><a href="#case-05" id="toc-case-05">Case 5.
+        Balance-Responsibility And Balancing-Service Performance
+        Audit</a></li>
         <li><a href="#case-06" id="toc-case-06">Case 6. Data-Centre 24/7
         Product Screen</a></li>
         <li><a href="#case-07" id="toc-case-07">Case 7. Year-One
@@ -1263,7 +1264,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.22.7
+        v0.22.8
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -1279,7 +1280,8 @@
         <section id="casebook" class="level2">
         <h2>Applied Cases</h2>
         <section id="case-01" class="level3">
-        <h3>Case 1. Shaped Solar+BESS PPA Quote</h3>
+        <h3>Case 1. Shaped Solar-Storage Power Purchase Agreement
+        Quote</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-1">[1]</a>
         <a href="#ref-2">[2]</a> <a href="#ref-3">[3]</a>
@@ -1294,8 +1296,10 @@
         quote stack and a decision memo.</p>
         <section id="decision-question" class="level4">
         <h4>Decision Question</h4>
-        <p>Should a renewable IPP offer a shaped solar-plus-BESS PPA, a
-        simpler as-produced PPA, or no-bid?</p>
+        <p>Should a renewable independent power producer (IPP) offer a
+        shaped solar-plus-battery energy storage system (BESS) power
+        purchase agreement (PPA), a simpler as-produced PPA, or
+        no-bid?</p>
         </section>
         <section id="situation" class="level4">
         <h4>Situation</h4>
@@ -1313,6 +1317,10 @@
         <p>These are scenario numbers for the case, not market
         quotes.</p>
         <table>
+        <colgroup>
+        <col style="width: 42%" />
+        <col style="width: 57%" />
+        </colgroup>
         <thead>
         <tr>
         <th>Item</th>
@@ -1326,8 +1334,8 @@
         </tr>
         <tr>
         <td>Product requested</td>
-        <td style="text-align: right;">100 GWh/year flat profile, about
-        11.4 MW average</td>
+        <td style="text-align: right;">100 gigawatt-hours (GWh)/year
+        flat profile, about 11.4 megawatts (MW) average</td>
         </tr>
         <tr>
         <td>Solar project output</td>
@@ -1335,7 +1343,8 @@
         </tr>
         <tr>
         <td>Co-located BESS</td>
-        <td style="text-align: right;">25 MW / 50 MWh</td>
+        <td style="text-align: right;">25 MW / 50 megawatt-hours
+        (MWh)</td>
         </tr>
         <tr>
         <td>Battery round-trip efficiency</td>
@@ -1453,7 +1462,8 @@
         </tr>
         <tr>
         <td>Imbalance</td>
-        <td>BRP-managed, with agreed data and performance reporting</td>
+        <td>balance responsible party (BRP)-managed, with agreed data
+        and performance reporting</td>
         <td>connects contract economics to operational evidence</td>
         </tr>
         <tr>
@@ -2271,9 +2281,9 @@
         <p>The undiscounted value delayed by choosing Site A over a
         near-term 2028 site is roughly:</p>
         <pre class="text"><code>2 years x 4.03 million EUR/year = 8.06 million EUR of gross margin timing exposure</code></pre>
-        <p>Use this as a screen, rather than a project NPV, to prevent a
-        small annual yield advantage from hiding a large timing and
-        optionality penalty.</p>
+        <p>Use this as a screen, rather than a project net present value
+        (NPV), to prevent a small annual yield advantage from hiding a
+        large timing and optionality penalty.</p>
         </section>
         <section id="decision-memo-2" class="level4">
         <h4>Decision Memo</h4>
@@ -2621,7 +2631,8 @@
         </section>
         </section>
         <section id="case-05" class="level3">
-        <h3>Case 5. BRP/BSP Performance Audit</h3>
+        <h3>Case 5. Balance-Responsibility And Balancing-Service
+        Performance Audit</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-23">[23]</a>
         <a href="#ref-18">[18]</a> <a href="#ref-24">[24]</a>
@@ -2643,11 +2654,12 @@
         </section>
         <section id="situation-4" class="level4">
         <h4>Situation</h4>
-        <p>A renewable IPP outsources balancing responsibility and
-        reserve-market execution. The partner sends monthly revenue
-        reports. The asset owner wants to know whether the partner
-        created value, leaked value, or operated within realistic
-        constraints before opening a commercial renegotiation.</p>
+        <p>A renewable IPP outsources balance responsible party (BRP)
+        and balancing service provider (BSP) execution work. The partner
+        sends monthly revenue reports. The asset owner wants to know
+        whether the partner created value, leaked value, or operated
+        within realistic constraints before opening a commercial
+        renegotiation.</p>
         <p>The partner contract allows performance review, but the
         current data annex is weak. Forecast files, bid files, schedule
         revisions, optimizer recommendations, manual overrides, meter
@@ -3254,8 +3266,9 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         </tr>
         <tr>
         <td>Buyer flexibility</td>
-        <td>whether UPS, cooling, workload shifting, or on-site
-        generation can be used and who controls it</td>
+        <td>whether uninterruptible power supply (UPS), cooling,
+        workload shifting, or on-site generation can be used and who
+        controls it</td>
         <td>load flexibility is assumed in the model but unavailable in
         operation</td>
         </tr>
@@ -3427,12 +3440,12 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <a href="#ref-26">[26]</a> <a href="#ref-1">[1]</a>
         <a href="#ref-5">[5]</a></sup>
         </p>
-        <p>An IPP becomes an energy manager when it decides which
-        revenue and risk decisions it must own, which execution
-        activities it can outsource, what raw data it has rights to
-        inspect, and which controls stop a model from becoming an
-        unmanaged production process. This case forces the year-one
-        resource allocation.</p>
+        <p>An independent power producer (IPP) becomes an energy manager
+        when it decides which revenue and risk decisions it must own,
+        which execution activities it can outsource, what raw data it
+        has rights to inspect, and which controls stop a model from
+        becoming an unmanaged production process. This case forces the
+        year-one resource allocation.</p>
         <section id="decision-question-6" class="level4">
         <h4>Decision Question</h4>
         <p>Given limited budget, headcount, partner data gaps, and
@@ -3446,7 +3459,8 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         projects entering commercial design. Trading execution and
         balancing are mostly outsourced. Partner reporting is useful but
         incomplete. Management wants a credible year-one operating model
-        without approving a large desk or full ETRM implementation.</p>
+        without approving a large desk or full energy trading and risk
+        management (ETRM) implementation.</p>
         <p>The operating model must support four decisions:</p>
         <ul>
         <li>shaped PPA pricing</li>
@@ -3472,7 +3486,8 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         </tr>
         <tr>
         <td>Development pipeline under commercial review</td>
-        <td style="text-align: right;"><code>1.8 GW</code></td>
+        <td
+        style="text-align: right;"><code>1.8 gigawatts (GW)</code></td>
         </tr>
         <tr>
         <td>First BESS projects</td>
@@ -3889,8 +3904,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         </tr>
         <tr>
         <td>BESS and dispatch</td>
-        <td>revenue stack, SoC constraints, degradation, reserve/PPA
-        conflicts</td>
+        <td>revenue stack, state-of-charge constraints, degradation,
+        reserve/PPA conflicts</td>
         <td>double-counted MW/MWh or cycle budget</td>
         </tr>
         <tr>
@@ -4074,8 +4089,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         And Partner Scorecards</a></li>
         <li><a href="power-markets-course.html#v2-l16">Analytical
         Capability Roadmap</a></li>
-        <li><a href="power-markets-course.html#v3-l09">AI And ML In
-        Energy Management</a></li>
+        <li><a href="power-markets-course.html#v3-l09">Artificial
+        Intelligence And Machine Learning In Energy Management</a></li>
         <li><a href="power-markets-course.html#v3-l10">Build, Buy,
         Outsource Trading Layer</a></li>
         <li><a href="power-markets-course.html#v3-l11">Next-Generation
