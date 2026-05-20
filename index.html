@@ -1555,7 +1555,7 @@
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.24.2
+        v0.24.3
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -1653,10 +1653,9 @@
         <li>Energy delivered in the wrong place, at the wrong hour, when
         nobody can use it.</li>
         </ul>
-        <p>The unit <code>MWh</code> gives the energy total. The market
-        still needs timing, location, and reliability.</p>
-        <p>That is the first power-market instinct: electricity is
-        energy plus time, location, and reliability.</p>
+        <p>The unit <code>MWh</code> gives the energy total. A market
+        product also needs the delivery interval, location, and
+        performance obligation.</p>
         </section>
         <section id="first-principles-model" class="level4">
         <h4>First-Principles Model</h4>
@@ -1664,13 +1663,11 @@
         model eventually uses.</p>
         <p>Energy is accumulated over an interval. Power is the rate of
         transfer during that interval.</p>
-        <p>For electricity:</p>
+        <p>In the units used here:</p>
         <pre class="text"><code>energy = power x time</code></pre>
         <p>If power is measured in MW and time in hours, energy is
         measured in MWh:</p>
         <pre class="text"><code>1 MW x 1 hour = 1 MWh</code></pre>
-        <p>This unit identity is the small hinge on which the whole
-        course turns.</p>
         <p>A project with high annual energy may still fail a commercial
         obligation if its hourly power arrives at the wrong times. A
         buyer does not live in an annual spreadsheet. A factory, a city,
@@ -1706,9 +1703,6 @@
         <pre class="text"><code>1 MWh = 1 MW x 1 hour
 1 gigawatt-year (GW-year) = 1 GW x 8,760 hours = 8.76 terawatt-hours (TWh)
 1 TWh/year = 1,000,000 MWh / 8,760 h ~= 114 MW average</code></pre>
-        <p>The number <code>8,760</code> is the number of hours in a
-        non-leap year:</p>
-        <pre class="text"><code>365 days x 24 hours/day = 8,760 hours</code></pre>
         <p>These conversions are useful because electricity
         conversations constantly move between annual energy and hourly
         power.</p>
