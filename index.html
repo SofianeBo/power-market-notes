@@ -902,6 +902,164 @@
       display: none;
     }
 
+    .feedback-chip {
+      position: fixed;
+      z-index: 40;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      min-height: 2.25rem;
+      padding: 0 0.75rem;
+      border: 1px solid var(--accent-soft);
+      border-radius: 999px;
+      background: #ffffff;
+      color: var(--accent-dark);
+      box-shadow: 0 14px 34px rgba(16, 31, 39, 0.16);
+      font: 800 0.78rem/1 var(--font-sans);
+      cursor: pointer;
+    }
+
+    .feedback-chip[hidden] {
+      display: none;
+    }
+
+    .feedback-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: grid;
+      place-items: center;
+      padding: 1.25rem;
+      background: rgba(18, 31, 37, 0.28);
+      backdrop-filter: blur(6px);
+    }
+
+    .feedback-modal-backdrop[hidden] {
+      display: none;
+    }
+
+    .feedback-modal {
+      width: min(42rem, 100%);
+      max-height: min(42rem, calc(100vh - 2.5rem));
+      overflow: auto;
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      background: #ffffff;
+      color: #172026;
+      box-shadow: 0 28px 80px rgba(16, 31, 39, 0.28);
+      padding: 1.3rem;
+    }
+
+    .feedback-modal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .feedback-modal h2 {
+      margin: 0;
+      font-size: 1.45rem;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .feedback-close {
+      width: 2.1rem;
+      height: 2.1rem;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: #ffffff;
+      color: var(--muted);
+      font: 900 1rem/1 var(--font-sans);
+      cursor: pointer;
+    }
+
+    .feedback-context {
+      margin: 0 0 0.85rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .feedback-selected {
+      margin: 0 0 0.9rem;
+      max-height: 11rem;
+      overflow: auto;
+      padding: 0.8rem 0.9rem;
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      background: var(--wash);
+      color: #1b2429;
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    .feedback-label {
+      display: grid;
+      gap: 0.4rem;
+      color: #172026;
+      font-weight: 850;
+    }
+
+    .feedback-label textarea {
+      min-height: 8.5rem;
+      resize: vertical;
+      padding: 0.75rem 0.85rem;
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      background: #ffffff;
+      color: #172026;
+      font: 500 1rem/1.5 var(--font-sans);
+    }
+
+    .feedback-label textarea:focus {
+      outline: 3px solid rgba(31, 127, 115, 0.18);
+      border-color: var(--accent-soft);
+    }
+
+    .feedback-note,
+    .feedback-error {
+      margin: 0.65rem 0 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.45;
+    }
+
+    .feedback-error {
+      color: #8a3b1c;
+      font-weight: 800;
+    }
+
+    .feedback-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.65rem;
+      margin-top: 1.05rem;
+    }
+
+    .feedback-actions button {
+      min-height: 2.6rem;
+      border-radius: 8px;
+      padding: 0 0.95rem;
+      font: 850 0.9rem/1 var(--font-sans);
+      cursor: pointer;
+    }
+
+    .feedback-secondary {
+      border: 1px solid var(--line-strong);
+      background: #ffffff;
+      color: #26333a;
+    }
+
+    .feedback-primary {
+      border: 1px solid var(--accent-dark);
+      background: var(--accent-dark);
+      color: #ffffff;
+    }
+
     .reader-block {
       transition: background 140ms ease, box-shadow 140ms ease;
     }
@@ -1124,6 +1282,8 @@
       .sidebar,
       .skip-link,
       .term-popover,
+      .feedback-chip,
+      .feedback-modal-backdrop,
       .reading-rail,
       .reader-home,
       .chapter-pager {
@@ -1380,7 +1540,7 @@
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.22.10
+        v0.23.0
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -22077,6 +22237,27 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
     </aside>
   </div>
   <div class="term-popover" id="term-popover" role="tooltip" hidden></div>
+  <button class="feedback-chip" id="feedback-chip" type="button" hidden>Send feedback</button>
+  <div class="feedback-modal-backdrop" id="feedback-modal" hidden>
+    <div class="feedback-modal" role="dialog" aria-modal="true" aria-labelledby="feedback-title">
+      <div class="feedback-modal-header">
+        <h2 id="feedback-title">Send feedback</h2>
+        <button class="feedback-close" id="feedback-close" type="button" aria-label="Close feedback">x</button>
+      </div>
+      <p class="feedback-context" id="feedback-context"></p>
+      <blockquote class="feedback-selected" id="feedback-selected"></blockquote>
+      <label class="feedback-label" for="feedback-comment">
+        Your note
+        <textarea id="feedback-comment" autocomplete="off" spellcheck="true"></textarea>
+      </label>
+      <p class="feedback-note">This opens a prefilled GitHub issue that you can review before submitting.</p>
+      <p class="feedback-error" id="feedback-error" hidden>Please add a short note.</p>
+      <div class="feedback-actions">
+        <button class="feedback-secondary" id="feedback-cancel" type="button">Cancel</button>
+        <button class="feedback-primary" id="feedback-submit" type="button">Open GitHub issue</button>
+      </div>
+    </div>
+  </div>
   <script>
     (function () {
       const article = document.querySelector(".course-shell");
@@ -22867,6 +23048,196 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         });
       }
 
+      function setupFeedback(chapters) {
+        const chip = document.getElementById("feedback-chip");
+        const modal = document.getElementById("feedback-modal");
+        const closeButton = document.getElementById("feedback-close");
+        const cancelButton = document.getElementById("feedback-cancel");
+        const submitButton = document.getElementById("feedback-submit");
+        const contextEl = document.getElementById("feedback-context");
+        const selectedEl = document.getElementById("feedback-selected");
+        const commentEl = document.getElementById("feedback-comment");
+        const errorEl = document.getElementById("feedback-error");
+        const issueUrl = "https://github.com/SofianeBo/power-market-notes/issues/new";
+        if (!chip || !modal || !submitButton || !commentEl) return;
+
+        const chapterById = new Map(chapters.map((chapter) => [chapter.id, chapter]));
+        let activePayload = null;
+
+        const truncate = function (text, limit) {
+          const clean = (text || "").replace(/\s+/g, " ").trim();
+          if (clean.length <= limit) return clean;
+          return clean.slice(0, limit - 1).trimEnd() + "...";
+        };
+
+        const markdownQuote = function (text) {
+          return (text || "").split(/\n+/).map((line) => "> " + line.trim()).join("\n");
+        };
+
+        const elementFromNode = function (node) {
+          if (!node) return null;
+          return node.nodeType === Node.ELEMENT_NODE ? node : node.parentElement;
+        };
+
+        const currentSelectionPayload = function () {
+          const selection = window.getSelection();
+          if (!selection || selection.rangeCount === 0 || selection.isCollapsed) return null;
+          const text = selection.toString().trim();
+          if (text.length < 4) return null;
+          const range = selection.getRangeAt(0);
+          const startElement = elementFromNode(range.startContainer);
+          const endElement = elementFromNode(range.endContainer);
+          if (!startElement || !endElement) return null;
+          if (!article.contains(startElement) || !article.contains(endElement)) return null;
+          if (startElement.closest("textarea, input, select, button, nav, .sidebar, .reading-rail, .reader-home, .bibliography, .glossary-list")) return null;
+          if (endElement.closest("textarea, input, select, button, nav, .sidebar, .reading-rail, .reader-home, .bibliography, .glossary-list")) return null;
+
+          const rects = Array.from(range.getClientRects()).filter((rect) => rect.width > 0 && rect.height > 0);
+          const rect = rects[0] || range.getBoundingClientRect();
+          if (!rect || rect.width === 0 || rect.height === 0) return null;
+
+          let chapterSection = startElement.closest("section.level3");
+          if (!chapterSection) chapterSection = endElement.closest("section.level3");
+          const chapter = chapterSection ? chapterById.get(chapterSection.id) : null;
+          const chapterTitle = chapter ? chapter.fullTitle : textOf(chapterSection?.querySelector(":scope > h3"));
+          const sectionCard = startElement.closest("details.reader-section");
+          const sectionTitle = sectionCard
+            ? textOf(sectionCard.querySelector("summary .section-title"))
+            : textOf(startElement.closest("section.level4")?.querySelector(":scope > h4"));
+          const block = startElement.closest("p, li, td, th, blockquote, pre") || startElement.closest("details.reader-section, section.level4, section.level3");
+          const blockText = truncate(block ? block.textContent : "", 1200);
+          const selected = truncate(text, 1600);
+          const index = blockText.toLowerCase().indexOf(selected.toLowerCase());
+          const prefix = index >= 0 ? truncate(blockText.slice(Math.max(0, index - 220), index), 260) : "";
+          const suffix = index >= 0 ? truncate(blockText.slice(index + selected.length, index + selected.length + 220), 260) : "";
+          const version = (document.querySelector(".course-version")?.textContent || "unknown version").trim();
+          const product = rootTitle();
+
+          return {
+            rect: rect,
+            version: version,
+            product: product,
+            url: window.location.href,
+            chapter: chapterTitle || "Current page",
+            section: sectionTitle || "",
+            selected: selected,
+            prefix: prefix,
+            suffix: suffix
+          };
+        };
+
+        const hideChip = function () {
+          chip.hidden = true;
+        };
+
+        const showChipForSelection = function () {
+          if (!modal.hidden) return;
+          const payload = currentSelectionPayload();
+          if (!payload) {
+            activePayload = null;
+            hideChip();
+            return;
+          }
+          activePayload = payload;
+          chip.hidden = false;
+          const chipWidth = chip.offsetWidth || 130;
+          const top = Math.max(76, payload.rect.top - 44);
+          const left = Math.min(window.innerWidth - chipWidth - 12, Math.max(12, payload.rect.left));
+          chip.style.top = top + "px";
+          chip.style.left = left + "px";
+        };
+
+        const openModal = function () {
+          const payload = activePayload || currentSelectionPayload();
+          if (!payload) return;
+          activePayload = payload;
+          contextEl.textContent = [payload.product, payload.chapter, payload.section, payload.version].filter(Boolean).join(" / ");
+          selectedEl.textContent = payload.selected;
+          commentEl.value = "";
+          if (errorEl) errorEl.hidden = true;
+          modal.hidden = false;
+          hideChip();
+          window.setTimeout(() => commentEl.focus(), 0);
+        };
+
+        const closeModal = function () {
+          modal.hidden = true;
+          if (errorEl) errorEl.hidden = true;
+        };
+
+        const submitFeedback = function () {
+          if (!activePayload) return;
+          const comment = commentEl.value.trim();
+          if (comment.length < 2) {
+            if (errorEl) errorEl.hidden = false;
+            commentEl.focus();
+            return;
+          }
+          const title = truncate("Feedback: " + activePayload.chapter, 96);
+          const bodyLines = [
+            "## Comment",
+            comment,
+            "",
+            "## Location",
+            "- Version: " + activePayload.version,
+            "- Product: " + activePayload.product,
+            "- URL: " + activePayload.url,
+            "- Chapter: " + activePayload.chapter,
+          ];
+          if (activePayload.section) bodyLines.push("- Section: " + activePayload.section);
+          bodyLines.push(
+            "",
+            "## Selected text",
+            markdownQuote(activePayload.selected),
+            "",
+            "## Nearby context",
+            activePayload.prefix ? "- Before: " + activePayload.prefix : "- Before:",
+            activePayload.suffix ? "- After: " + activePayload.suffix : "- After:"
+          );
+          const body = bodyLines.join("\n");
+          const params = new URLSearchParams({
+            title: title,
+            body: body,
+            labels: "public-feedback,needs-triage"
+          });
+          const target = issueUrl + "?" + params.toString();
+          const opened = window.open(target, "_blank", "noopener,noreferrer");
+          if (!opened) window.location.href = target;
+          closeModal();
+        };
+
+        document.addEventListener("selectionchange", () => {
+          window.setTimeout(showChipForSelection, 0);
+        });
+        document.addEventListener("mouseup", showChipForSelection);
+        document.addEventListener("keyup", (event) => {
+          if (event.key === "Escape") {
+            hideChip();
+            return;
+          }
+          showChipForSelection();
+        });
+        window.addEventListener("scroll", hideChip, { passive: true });
+        window.addEventListener("resize", hideChip);
+        window.addEventListener("hashchange", () => {
+          hideChip();
+          closeModal();
+        });
+        chip.addEventListener("click", (event) => {
+          event.preventDefault();
+          openModal();
+        });
+        closeButton?.addEventListener("click", closeModal);
+        cancelButton?.addEventListener("click", closeModal);
+        submitButton.addEventListener("click", submitFeedback);
+        modal.addEventListener("click", (event) => {
+          if (event.target === modal) closeModal();
+        });
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && !modal.hidden) closeModal();
+        });
+      }
+
       function setupPrint() {
         const button = document.getElementById("print-pdf");
         let printState = [];
@@ -22899,6 +23270,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
       annotateGlossaryTerms();
       setupTooltips();
       setupHighlights();
+      setupFeedback(chapters);
       setupPrint();
       setupRoute(chapters, tocApi, store);
     })();
