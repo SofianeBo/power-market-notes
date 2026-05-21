@@ -1819,7 +1819,7 @@
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.27.0
+        v0.28.0
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -1893,19 +1893,19 @@
         References: <sup><a href="#ref-1">[1]</a>
         <a href="#ref-2">[2]</a> <a href="#ref-3">[3]</a></sup>
         </p>
-        <p>A customer asks for electricity, but the grid cannot hand
-        over a yearly pile of megawatt-hours (MWh). A factory needs
-        power in this hour. A city has an evening peak. A wire can carry
-        only so much at a moment. The first move in power markets is
-        therefore dimensional: separate the amount of energy from the
-        rate at which it arrives. Once those are separate, familiar
-        words like generation, load, capacity, average, and peak become
-        less slippery. A MWh is a real amount of energy, but it is only
-        useful when its timing, place, and reliability match the need it
-        is supposed to serve.</p>
+        <p>A customer buys electricity, but delivery happens at a rate,
+        in a place, and at a time. A factory needs power in this hour. A
+        city has an evening peak. A wire can carry only so much at a
+        moment. The first move in power markets is therefore
+        dimensional: separate the amount of energy from the rate at
+        which it arrives. Once those are separate, familiar words like
+        generation, load, capacity, average, and peak become less
+        slippery. A megawatt-hour (MWh) is a real amount of energy, but
+        it is useful only when its timing, place, and reliability match
+        the need it is supposed to serve.</p>
         <section id="opening-puzzle" class="level4">
         <h4>Opening Puzzle</h4>
-        <p>Suppose someone says: “We generated 1 MWh.”</p>
+        <p>A generator reports: “We generated 1 MWh.”</p>
         <p>Before using that sentence in a power-market decision, ask
         for the missing coordinates: over what interval, at which
         connection point, and under what obligation?</p>
@@ -2105,7 +2105,7 @@
         <pre class="text"><code>net imbalance = actual generation + imports - actual consumption - exports</code></pre>
         <p>For one portfolio, a settlement version is:</p>
         <pre class="text"><code>portfolio imbalance = actual delivery or consumption - scheduled position</code></pre>
-        <p>Those are not the same concept. The first is physical system
+        <p>They answer different questions. The first is physical system
         balance. The second is financial responsibility for a market
         participant’s deviation from its position.</p>
         <p>The market exists partly because the physical machine needs
@@ -2534,7 +2534,8 @@ Hour 4: -10 MWh</code></pre>
         <pre class="text"><code>annual grid cost = EUR 1,000,000/year
 annual delivery = 200,000 MWh/year
 grid cost = EUR 5/MWh</code></pre>
-        <p>This is illustrative. It is not a country tariff claim.</p>
+        <p>This illustrative number is a scenario value; country tariff
+        claims need current official sources.</p>
         <section id="worked-estimate-3" class="level5">
         <h5>Worked Estimate</h5>
         <p>Suppose a project subscribes for 100 MW of grid capacity and
@@ -3691,9 +3692,8 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <p>Battery doing energy arbitrage: it buys or charges in
         low-price hours and sells or discharges in high-price hours.</p>
         <p>Battery doing both: possible only if market rules and
-        physical constraints allow it. “Revenue stacking” is not free
-        stacking; it is constrained portfolio optimization inside one
-        asset.</p>
+        physical constraints allow it. “Revenue stacking” means
+        constrained portfolio optimization inside one asset.</p>
         </section>
         <section id="in-practice-8" class="level4">
         <h4>In Practice</h4>
@@ -3732,10 +3732,10 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         are market-specific. It does not teach saturation as universal
         fact.</p>
         <p>European balancing platforms such as PICASSO and MARI are
-        important, but platform status and KPIs are dated claims. The
-        PICASSO KPI report used here covers 2025 operational results in
-        its source; any platform statement should state the report date
-        and scope.</p>
+        important, but platform status and key performance indicators
+        (KPIs) are dated claims. The PICASSO KPI report used here covers
+        2025 operational results in its source; any platform statement
+        should state the report date and scope.</p>
         </section>
         <section id="recap-8" class="level4">
         <h4>Recap</h4>
@@ -4116,7 +4116,7 @@ reactive MVAr obligation or headroom</code></pre>
         <p>A solar plant can promise cheap energy when there is
         sunlight, but it cannot promise a flat midnight delivery by
         itself. A battery can promise fast movement across time, but
-        only within its MWh tank and efficiency losses. A hydro
+        only within its stored energy and efficiency losses. A hydro
         reservoir can often promise controllability, but only inside
         water, environmental, and reservoir constraints. Demand response
         can reduce demand, but only if the customer process allows
@@ -4750,8 +4750,8 @@ Gross spread value = 5,200 EUR</code></pre>
         <p>Cycle-life and degradation are central to investment
         decisions, but it does not lock a universal LFP cycle-life
         number. Any later analysis using cycle-life as a hard input
-        should extract OEM, NREL/ATB, or technical reference
-        support.</p>
+        should extract original equipment manufacturer (OEM), NREL/ATB,
+        or technical reference support.</p>
         </section>
         <section id="recap-12" class="level4">
         <h4>Recap</h4>
@@ -5382,12 +5382,11 @@ and data available at the time, what should a feasible operator have done?</code
         <h4>Recap</h4>
         <p>One missing MWh can be followed through the whole system:
         forecast, trade, schedule, repair, operate, meter, settle, and
-        review. The missing MWh is not physically hidden; it is a
-        difference between a position and measured reality. Markets make
-        that difference governable by assigning responsibility, pricing
-        corrections, and creating evidence. Once the reader can draw
-        that chain, the separate pieces of Volume I become one
-        machine.</p>
+        review. The missing MWh is a difference between a position and
+        measured reality. Markets make that difference governable by
+        assigning responsibility, pricing corrections, and creating
+        evidence. Once the reader can draw that chain, the separate
+        pieces of Volume I become one machine.</p>
         <div class="lecture-end">
 
         </div>
@@ -5510,9 +5509,9 @@ operating_cash_before_debt =
         claims. It is riskier, so it usually requires more upside.</p>
         <p>Weighted average cost of capital (WACC) combines the cost of
         equity and debt after weighting by their share in the capital
-        structure. It is not a universal number; it changes with market
-        rates, contract quality, project risk, tax, country, and
-        lender/investor appetite.</p>
+        structure. The number changes with market rates, contract
+        quality, project risk, tax, country, and lender/investor
+        appetite.</p>
         <p>Levelized cost of energy (LCOE) is a discounted cost-per-MWh
         metric. It is useful for cost comparison, but it does not by
         itself price shape, capture, credit, imbalance, certificates,
@@ -6314,8 +6313,8 @@ solar_BESS = 6.53 - 0.08 - 0.70 - 0.45 - 1.25 - 0.35 - 4.25 = -0.55</code></pre>
         </tbody>
         </table>
         <p>The shaped product is less exposed to merchant capture, but
-        it is more exposed to replacement cost. It is not automatically
-        safer.</p>
+        it is more exposed to replacement cost. It is safer only when
+        the contract premium pays for that exposure.</p>
         <p>The second sensitivity is residual firming cost.</p>
         <pre class="text"><code>shaped_cash_flow = 1.20m EUR/year before residual_firming_cost</code></pre>
         <p>If residual firming rises from <code>1.05m</code> to
@@ -7414,8 +7413,8 @@ shape_cost = 337,500 + 600,000 + 100,000
 
 shape_cost_per_MWh = 1,037,500 / 100,000
                    = 10.38 EUR/MWh</code></pre>
-        <p>This is still a illustrative screen, but it is better than a
-        plug. It shows which hours create the price. If the stress
+        <p>This is still an illustrative screen, but it is stronger than
+        a plug. It shows which hours create the price. If the stress
         bucket is wrong, the quote changes; if the battery cannot
         legally or economically serve the stress bucket, the product
         boundary changes.</p>
@@ -8787,8 +8786,8 @@ extra energy block scale = 200,000 x 175 = USD 35,000,000</code></pre>
         </tr>
         <tr>
         <td>Warranty envelope</td>
-        <td>SoC, C-rate, temperature, throughput, data, or repair terms
-        reduce feasible operation</td>
+        <td>SoC, charge/discharge rate (C-rate), temperature,
+        throughput, data, or repair terms reduce feasible operation</td>
         </tr>
         <tr>
         <td>Grid import limits</td>
@@ -11338,7 +11337,7 @@ Here is what remains merchant, operational, or partner-execution risk.</code></p
         <p>The solar project may still be better. It may have lower
         capex, a stronger PPA, better grid terms, or higher expected
         value. But the investment memo must now say:</p>
-        <pre class="text"><code>The standalone NPV is not the whole decision.
+        <pre class="text"><code>The standalone NPV is only one part of the decision.
 The marginal portfolio risk is materially different.</code></pre>
         <p>This is the bridge from project development to portfolio
         strategy.</p>
@@ -11356,8 +11355,8 @@ The marginal portfolio risk is materially different.</code></pre>
         <thead>
         <tr>
         <th>Test</th>
-        <th>Bad answer</th>
-        <th>Better answer</th>
+        <th>Weak answer</th>
+        <th>Useful answer</th>
         </tr>
         </thead>
         <tbody>
@@ -14570,12 +14569,12 @@ control-right and partner-governance cost = 0.80 EUR/MWh x 87,600 = 70,080 EUR/y
         <pre class="text"><code>What can the storage asset actually do, given MW, MWh, state of charge, grid import/export limits, efficiency, degradation, and availability?</code></pre>
         <p>The third is the money curve:</p>
         <pre class="text"><code>Who pays for each extra hour of capability, and what revenue or avoided cost disappears when the battery is committed to that use?</code></pre>
-        <p>Only after those three curves are visible does the familiar
-        identity matter:</p>
-        <pre class="text"><code>energy = power x time</code></pre>
-        <p>That identity tells us the size of the insurance policy. The
-        value test comes from the scarcity-duration distribution, the
-        revenue or avoided cost, and the alternatives.</p>
+        <p>Only after those three curves are visible should the model
+        size the extra energy block:</p>
+        <pre class="text"><code>incremental_energy_MWh = incremental_power_MW x scarcity_duration_h</code></pre>
+        <p>That calculation sizes the insurance policy. The value test
+        comes from the scarcity-duration distribution, the revenue or
+        avoided cost, and the alternatives.</p>
         </section>
         <section id="definitions-32" class="level4">
         <h4>Definitions</h4>
@@ -14633,8 +14632,8 @@ required margin = 1,750,000 USD/year / 3,500 MWh/year
         costs falling from <code>290 USD/kWh</code> in <code>2022</code>
         to <code>175 USD/kWh</code> in <code>2030</code>. Use these as
         global scenario anchors; a site quote still needs
-        project-specific EPC, grid, warranty, insurance, and contracting
-        terms.</p>
+        project-specific engineering, procurement, and construction
+        (EPC), grid, warranty, insurance, and contracting terms.</p>
         <section id="the-extra-two-hours-1" class="level5">
         <h5>The Extra Two Hours</h5>
         <p>Take the second and third hours of a battery seriously as a
@@ -14987,7 +14986,7 @@ and who pays when the evidence or delivery does not match the promise?</code></p
         treatment is not settled here.</p>
         <p>Evidence standard, in this chapter, means the commercial
         evidence a product must specify before anyone prices or markets
-        the claim. It is not legal advice and it does not replace the
+        the claim. Legal or compliance treatment still comes from the
         relevant standard.</p>
         <table>
         <colgroup>
@@ -15867,9 +15866,8 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         after reducing for timing, tradable volume, liquidity,
         constraints, control rights, and adoption.</p>
         <p>Model-risk charge is a governance allowance for losses or
-        control burden introduced by relying on a model. It is not an
-        accounting number; it includes the risk the model adds to the
-        decision.</p>
+        control burden introduced by relying on a model. It includes the
+        risk the model adds to the decision.</p>
         <p>Model value at risk is the value exposed to a wrong
         model-driven action: affected MW, duration, adverse price error,
         and frequency of bad events.</p>
@@ -15879,8 +15877,9 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         accepting, rejecting, or overriding a recommendation.</p>
         <p>Backtest means a historical replay using only information
         available before each decision time. A perfect-foresight
-        simulation is useful as an upper bound; it is not an operational
-        backtest.</p>
+        simulation is useful as an upper bound; an operational backtest
+        must use the information that was available before the
+        decision.</p>
         <p>Value-weighted error is forecast error weighted by the
         economic consequence of being wrong in that interval.</p>
         </section>
@@ -15957,10 +15956,10 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
   x observability is high
   x vendor lock-in risk is high
   &gt; cost and governance burden</code></pre>
-        <p>This is a decision rule, not a procurement rule. Some models
-        belong inside the firm. Some belong with a specialist. Some
-        should be bought but independently benchmarked. Some should not
-        be built at all.</p>
+        <p>Use this as a decision rule rather than a procurement rule.
+        Some models belong inside the firm. Some belong with a
+        specialist. Some should be bought but independently benchmarked.
+        Some should stay out of scope.</p>
         </section>
         <section id="mechanism-27" class="level4">
         <h4>Mechanism</h4>
@@ -15986,9 +15985,9 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         commitments. Optimization that ignores the asset is an
         incomplete calculation.</p>
         <p>Fifth, automate only where the loss from delay is larger than
-        the model-risk charge. Automation is not maturity by itself.
-        Sometimes the right design is a decision-support model with a
-        human owner and a narrow mandate.</p>
+        the model-risk charge. Sometimes the right design is a
+        decision-support model with a human owner and a narrow
+        mandate.</p>
         </section>
         <section id="example-16" class="level4">
         <h4>Example</h4>
@@ -16031,8 +16030,8 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         model, forecast diagnostics by horizon, imbalance attribution,
         feasible dispatch benchmarks, partner scorecards, model drift
         alerts, and a small inventory of governed models.</p>
-        <p>That is how advanced analytics becomes a commercial
-        capability instead of a slide.</p>
+        <p>That is when advanced analytics becomes part of the
+        commercial operating system.</p>
         </section>
         <section id="misconceptions-34" class="level4">
         <h4>Misconceptions</h4>
