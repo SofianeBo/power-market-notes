@@ -757,6 +757,8 @@
       display: inline-flex;
       align-items: center;
       min-height: 2.25rem;
+      flex: 0 0 auto;
+      max-width: 100%;
       border: 1px solid var(--line-strong);
       border-radius: 8px;
       color: var(--accent-dark);
@@ -771,6 +773,17 @@
     .arc-link:focus {
       background: var(--accent-soft);
       outline: none;
+    }
+
+    .arc-link-secondary {
+      color: var(--muted);
+      border-color: var(--line);
+      background: color-mix(in srgb, var(--surface) 74%, transparent);
+    }
+
+    .arc-link-secondary:hover,
+    .arc-link-secondary:focus {
+      color: var(--accent-dark);
     }
 
     .capability-grid {
@@ -1498,6 +1511,10 @@
         border-bottom: 1px solid var(--line);
       }
 
+      body.reader-view-home .sidebar {
+        display: none;
+      }
+
       main {
         padding: 1rem 0.75rem 3rem;
       }
@@ -1543,6 +1560,18 @@
 
       .glossary-list dt {
         border-bottom: 0;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .arc-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .arc-link {
+        justify-content: center;
+        width: 100%;
       }
     }
 
@@ -1705,7 +1734,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.30.1
+        v0.31.3
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -6518,6 +6547,11 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         return publicAssetPath("pdf/power-markets-" + kind + "-" + version + ".pdf");
       }
 
+      function deckPdfPath(kind, versionText) {
+        const version = (versionText.match(/v[\d.]+/) || [""])[0];
+        return publicAssetPath("slides/power-markets-" + kind + "-qa-overview-" + version + ".pdf");
+      }
+
       function normalizeTitle(text) {
         const match = text.match(/^(?:Chapter|Case)\s+(\d+)\.\s*(.+)$/i);
         if (!match) return { number: "", title: text, full: text };
@@ -6611,7 +6645,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
               "Find the binding constraint and the first assumption that changes the answer.",
               "Leave with a reusable artifact, not a paragraph of opinion."
             ],
-            action: "Start Case 1"
+            action: "Start Case 1",
+            deck: "casebook"
           };
         }
         if (/^Volume I\b/.test(volumeTitle)) {
@@ -6624,7 +6659,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
               "Translate MW, MWh, voltage, congestion, curtailment, and settlement into economic pressure.",
               "Build enough physical intuition to distrust market explanations that ignore the grid."
             ],
-            action: "Open Volume I"
+            action: "Open Volume I",
+            deck: "volume-i"
           };
         }
         if (/^Volume II\b/.test(volumeTitle)) {
@@ -6637,7 +6673,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
               "Ask what a model is allowed to know, what it is optimizing, and which constraints are binding.",
               "Move from concept-level market knowledge to investment and operating decisions."
             ],
-            action: "Open Volume II"
+            action: "Open Volume II",
+            deck: "volume-ii"
           };
         }
         if (/^Volume III\b/.test(volumeTitle)) {
@@ -6650,7 +6687,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
               "Frame strategic choices as evidence packs, option values, constraints, and assumption flips.",
               "Read current debates without mistaking a fashionable claim for a portfolio strategy."
             ],
-            action: "Open Volume III"
+            action: "Open Volume III",
+            deck: "volume-iii"
           };
         }
         if (volumeTitle.includes("Casebook") || volumeTitle.includes("Applied Cases")) {
@@ -6663,7 +6701,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
               "Name the binding constraint, retained risk, and assumption that would change the decision.",
               "Practice the transition from knowing concepts to using them."
             ],
-            action: "Open Casebook"
+            action: "Open Casebook",
+            deck: "casebook"
           };
         }
         return {
@@ -6797,6 +6836,14 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           action.href = group.chapters[0] ? "#" + group.chapters[0].id : "#" + group.id;
           action.textContent = part.action;
           actionRow.appendChild(action);
+          if (part.deck) {
+            const deckAction = document.createElement("a");
+            deckAction.className = "arc-link arc-link-secondary";
+            deckAction.href = deckPdfPath(part.deck, version);
+            deckAction.download = "";
+            deckAction.textContent = "Q&A Overview PDF";
+            actionRow.appendChild(deckAction);
+          }
           body.append(title, summary, points, actionRow);
           step.append(label, body);
           arc.appendChild(step);
