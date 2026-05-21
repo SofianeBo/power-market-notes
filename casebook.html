@@ -818,7 +818,6 @@
     }
 
     .methodology-note,
-    .home-feedback-note,
     .home-author {
       max-width: 56rem;
       margin: clamp(2.1rem, 4.6vw, 3.4rem) 0 0;
@@ -826,8 +825,7 @@
       border-top: 1px solid var(--line);
     }
 
-    .methodology-note h2,
-    .home-feedback-note h2 {
+    .methodology-note h2 {
       margin: 0 0 0.65rem;
       padding: 0;
       border: 0;
@@ -836,13 +834,16 @@
     }
 
     .methodology-note p,
-    .home-feedback-note p,
     .home-author p {
       max-width: 52rem;
       margin: 0;
       color: var(--muted);
       font-size: 0.98rem;
       line-height: 1.62;
+    }
+
+    .methodology-feedback strong {
+      color: var(--ink);
     }
 
     .home-author {
@@ -1734,7 +1735,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.31.7
+        v0.31.8
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -6890,8 +6891,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         methodologyTitle.textContent = "Methodology";
         const methodologyTexts = [
           "These notes were built with a learning method designed for entering technical domains quickly: gather strong primary sources, identify the core guiding questions, work back to first principles, and build intuition through orders of magnitude, scaling relationships, and worked decision frames.",
-          "The workflow was accelerated by a custom AI research and knowledge-management system I built for semantic retrieval, source organization, and the editorial loop.",
-          "The material will keep improving through versioned revisions as I learn more and receive comments and feedback from experts."
+          "The workflow was accelerated by a custom AI research and knowledge-management system I built for semantic retrieval, source organization, and the editorial loop."
         ];
         methodology.append(methodologyTitle);
         methodologyTexts.forEach((text) => {
@@ -6899,16 +6899,17 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           paragraph.textContent = text;
           methodology.appendChild(paragraph);
         });
-
-        const feedback = document.createElement("section");
-        feedback.className = "home-feedback-note";
-        const feedbackTitle = document.createElement("h2");
-        feedbackTitle.textContent = "Feedback";
-        const feedbackText = document.createElement("p");
-        feedbackText.textContent = casebook
-          ? "Feedback and practitioner input are welcome. When reading a case, select the relevant passage to highlight it locally or send feedback with its location. Right-click a highlight to remove it. The aim is to keep the material practical, useful, and reliable."
-          : "Feedback and practitioner input are welcome. When reading a lecture, select the relevant passage to highlight it locally or send feedback with its location. Right-click a highlight to remove it. The aim is to keep the material practical, useful, and reliable.";
-        feedback.append(feedbackTitle, feedbackText);
+        const feedbackLine = document.createElement("p");
+        feedbackLine.className = "methodology-feedback";
+        const feedbackLabel = document.createElement("strong");
+        feedbackLabel.textContent = "Feedback:";
+        const feedbackCopy = document.createTextNode(
+          casebook
+            ? " Feedback is very welcome. When reading a case, select a relevant passage and click 'Send feedback' to send me your input on the spot."
+            : " Feedback is very welcome. When reading a chapter, select a relevant passage and click 'Send feedback' to send me your input on the spot."
+        );
+        feedbackLine.append(feedbackLabel, feedbackCopy);
+        methodology.appendChild(feedbackLine);
 
         const author = document.createElement("footer");
         author.className = "home-author";
@@ -6939,8 +6940,9 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         const routeIntro = document.createElement("p");
         routeIntro.textContent = casebook
           ? "Pick a case when the corresponding lecture idea feels familiar enough to use. If the answer feels hand-wavy, return to the linked lectures and rebuild the artifact."
-          : "Use the Q&A Overview PDFs before each part to get a quick overview and a sense of the questions we are tackling, then return to them after reading to check what stuck and test your knowledge. Keep the Glossary nearby for acronyms, market roles, products, and contract terms. Use the Casebook when a concept feels familiar enough to apply.";
-        routeHeading.append(routeTitle, routeIntro);
+          : "";
+        routeHeading.append(routeTitle);
+        if (routeIntro.textContent) routeHeading.appendChild(routeIntro);
         const routeList = document.createElement("ol");
         routeList.className = "route-list";
         const routeItems = casebook
@@ -6950,10 +6952,13 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
               "Compare your recommendation to the assumption flip."
             ]
           : [
-              "Use Volume I to build a working map of the physical and institutional machine.",
-              "Use Volume II to practice translating that map into commercial and analytical questions.",
-              "Use Volume III to get oriented in strategic debates and claims that change with market conditions.",
-              "Use the Casebook to test the concepts against bounded decision cases."
+              "Start each part with its Q&A Overview PDF to see the main questions and the shape of the argument.",
+              "Use Volume I to build a working map of the physical and institutional machine: energy, capacity, timing, networks, roles, balancing, and prices.",
+              "Use Volume II to translate that map into commercial and analytical work: PPAs, storage, dispatch, tariffs, forecasting, valuation, contracts, and portfolio control.",
+              "Use Volume III to get oriented in strategic debates and claims that depend on market conditions: congestion, cannibalization, storage duration, AI and data-centre load, adequacy, and market design.",
+              "Keep the Glossary nearby for acronyms, market roles, products, and contract terms.",
+              "Use the Casebook when a concept feels familiar enough to apply, then compare your answer with the worked decision frame.",
+              "Return to the Q&A Overview PDF after finishing a part to check what stuck and what still feels unclear."
             ];
         for (const item of routeItems) {
           const li = document.createElement("li");
@@ -6962,8 +6967,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         }
         route.append(routeHeading, routeList);
 
-        if (casebook) home.append(hero, route, arcHeading, arc, feedback, author);
-        else home.append(hero, methodology, route, arcHeading, arc, feedback, author);
+        if (casebook) home.append(hero, methodology, route, arcHeading, arc, author);
+        else home.append(hero, methodology, route, arcHeading, arc, author);
         const firstSection = root.querySelector(":scope > section.level2");
         root.insertBefore(home, firstSection || root.firstChild);
       }
