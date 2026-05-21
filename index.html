@@ -1697,7 +1697,6 @@
     <aside class="sidebar" aria-label="Reader navigation">
       <div class="sidebar-brand">
         <strong>Power Markets Notes</strong>
-        <span>Applied cases, numerical anchors, and decision-focused models for power-market work.</span>
       </div>
       <div class="reader-tools" aria-label="Reader tools">
         <label class="tool-label" for="toc-filter">
@@ -1722,8 +1721,8 @@
         <li><a href="#course-structure" id="toc-course-structure">Course
         Structure</a></li>
         </ul></li>
-        <li><a href="#volume-1" id="toc-volume-1">Volume I: Physical
-        System, Institutions, And Market Time</a>
+        <li><a href="#volume-1" id="toc-volume-1">Volume I: Power System
+        Fundamentals And Market Institutions</a>
         <ul>
         <li><a href="#v1-l01" id="toc-v1-l01">Chapter 1. Energy, Power,
         And Delivery Timing</a></li>
@@ -1757,7 +1756,7 @@
         System Map</a></li>
         </ul></li>
         <li><a href="#volume-2" id="toc-volume-2">Volume II: Commercial
-        Analysis And Asset Decisions</a>
+        Analysis, Contracts, And Asset Decisions</a>
         <ul>
         <li><a href="#v2-l01" id="toc-v2-l01">Chapter 1. Asset Revenue
         And Cash Flow</a></li>
@@ -1795,7 +1794,7 @@
         Credit, Liquidity, And Controls</a></li>
         </ul></li>
         <li><a href="#volume-3" id="toc-volume-3">Volume III: Market
-        Design, Strategy, And Portfolio Evolution</a>
+        Design, Portfolio Strategy, And Operating Models</a>
         <ul>
         <li><a href="#v3-l01" id="toc-v3-l01">Chapter 1. BESS Revenue
         Saturation</a></li>
@@ -1857,7 +1856,7 @@
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.32.2
+        v0.32.3
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -1867,14 +1866,16 @@
         <section id="how-to-use-these-notes" class="level2">
         <h2>How To Use These Notes</h2>
         <p>These notes are for building working judgment in power
-        markets, especially around renewable portfolios. The path starts
-        with the constraints that make electricity hard to
-        commercialize: balance, network limits, timing, responsibility,
-        settlement, and risk allocation. It then turns those constraints
-        into recurring decisions: where to build, how to structure a
-        PPA, how much storage duration to buy, what a dispatch model is
-        allowed to assume, how to govern partners, and which market
-        claims deserve capital.</p>
+        markets, especially around renewable portfolios. They are
+        written for analysts, quants, modelers, and technically trained
+        professionals joining energy companies without much prior
+        power-market experience. The path starts with the constraints
+        that make electricity hard to commercialize: balance, network
+        limits, timing, responsibility, settlement, and risk allocation.
+        It then turns those constraints into recurring decisions: where
+        to build, how to structure a PPA, how much storage duration to
+        buy, what a dispatch model is allowed to assume, how to govern
+        partners, and which market claims deserve capital.</p>
         <section id="methodology" class="level3">
         <h3>Methodology</h3>
         <p>These notes were built with a learning method designed for
@@ -1884,9 +1885,9 @@
         scaling relationships, and worked decision frames.</p>
         <p>The workflow was accelerated by a custom AI research and
         knowledge-management system I built for semantic retrieval,
-        source organization, and the editorial loop.</p>
-        <p><strong>Feedback:</strong> Feedback is very welcome. When
-        reading a chapter, select a relevant passage and click
+        source organization, drafting, and the editorial loops.</p>
+        <p><strong>Feedback</strong> is very welcome. When reading a
+        chapter, select a relevant passage and click
         <code>Send feedback</code> to send me your input on the
         spot.</p>
         </section>
@@ -1937,8 +1938,8 @@
         </section>
         </section>
         <section id="volume-1" class="level2">
-        <h2>Volume I: Physical System, Institutions, And Market
-        Time</h2>
+        <h2>Volume I: Power System Fundamentals And Market
+        Institutions</h2>
         <section id="v1-l01" class="level3">
         <h3>Chapter 1. Energy, Power, And Delivery Timing</h3>
         <p class="lecture-refs">
@@ -5447,7 +5448,8 @@ and data available at the time, what should a feasible operator have done?</code
         </section>
         </section>
         <section id="volume-2" class="level2">
-        <h2>Volume II: Commercial Analysis And Asset Decisions</h2>
+        <h2>Volume II: Commercial Analysis, Contracts, And Asset
+        Decisions</h2>
         <section id="v2-l01" class="level3">
         <h3>Chapter 1. Asset Revenue And Cash Flow</h3>
         <p class="lecture-refs">
@@ -13137,8 +13139,8 @@ collateral need = 900,000 x 80%
         </section>
         </section>
         <section id="volume-3" class="level2">
-        <h2>Volume III: Market Design, Strategy, And Portfolio
-        Evolution</h2>
+        <h2>Volume III: Market Design, Portfolio Strategy, And Operating
+        Models</h2>
         <section id="v3-l01" class="level3">
         <h3>Chapter 1. BESS Revenue Saturation</h3>
         <p class="lecture-refs">
@@ -22968,7 +22970,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         if (/^Volume I\b/.test(volumeTitle)) {
           return {
             label: "Volume I",
-            title: "Physical System, Institutions, And Market Time",
+            title: "Power System Fundamentals And Market Institutions",
             summary: "Electricity must balance moment by moment through a constrained network. The first volume builds the system from balance, frequency, wires, actors, time sequence, and the first economics of solar and storage.",
             points: [
               "Understand why TSOs, BRPs, BSPs, bidding zones, balancing, and ancillary services exist.",
@@ -22982,7 +22984,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         if (/^Volume II\b/.test(volumeTitle)) {
           return {
             label: "Volume II",
-            title: "Commercial Analysis And Asset Decisions",
+            title: "Commercial Analysis, Contracts, And Asset Decisions",
             summary: "The second volume turns the system map into commercial work: site screens, tariffs, PPAs, BESS sizing, dispatch, forecasting, valuation, risk, and portfolio controls.",
             points: [
               "Decompose a PPA or battery case into price, shape, imbalance, grid, credit, optionality, and control rights.",
@@ -22996,7 +22998,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         if (/^Volume III\b/.test(volumeTitle)) {
           return {
             label: "Volume III",
-            title: "Market Design, Strategy, And Portfolio Evolution",
+            title: "Market Design, Portfolio Strategy, And Operating Models",
             summary: "The third volume is for decisions under uncertainty: congestion, cannibalization, duration choice, data-centre flexibility, AI, adequacy, market power, and changing rules.",
             points: [
               "Separate dated market color from durable mechanisms.",
@@ -23079,7 +23081,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         p.className = "home-lede";
         p.textContent = casebook
           ? "The Casebook turns the lectures into bounded commercial tasks. Each case asks for a concrete artifact: a quote stack, duration screen, site screen, partner scorecard, product memo, or operating-model choice."
-          : "These notes are for building working judgment in power markets, especially around renewable portfolios. The path starts with the constraints that make electricity hard to commercialize: balance, network limits, timing, responsibility, settlement, and risk allocation. It then turns those constraints into recurring decisions: where to build, how to structure a PPA, how much storage duration to buy, what a dispatch model is allowed to assume, how to govern partners, and which market claims deserve capital.";
+          : "These notes are for building working judgment in power markets, especially around renewable portfolios. They are written for analysts, quants, modelers, and technically trained professionals joining energy companies without much prior power-market experience. The path starts with the constraints that make electricity hard to commercialize: balance, network limits, timing, responsibility, settlement, and risk allocation. It then turns those constraints into recurring decisions: where to build, how to structure a PPA, how much storage duration to buy, what a dispatch model is allowed to assume, how to govern partners, and which market claims deserve capital.";
         const heroActions = document.createElement("div");
         heroActions.className = "arc-actions home-actions";
         const mainPdf = document.createElement("a");
@@ -23206,7 +23208,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         methodologyTitle.textContent = "Methodology";
         const methodologyTexts = [
           "These notes were built with a learning method designed for entering technical domains quickly: gather strong primary sources, identify the core guiding questions, work back to first principles, and build intuition through orders of magnitude, scaling relationships, and worked decision frames.",
-          "The workflow was accelerated by a custom AI research and knowledge-management system I built for semantic retrieval, source organization, and the editorial loop."
+          "The workflow was accelerated by a custom AI research and knowledge-management system I built for semantic retrieval, source organization, drafting, and the editorial loops."
         ];
         methodology.append(methodologyTitle);
         methodologyTexts.forEach((text) => {
@@ -23217,11 +23219,11 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         const feedbackLine = document.createElement("p");
         feedbackLine.className = "methodology-feedback";
         const feedbackLabel = document.createElement("strong");
-        feedbackLabel.textContent = "Feedback:";
+        feedbackLabel.textContent = "Feedback";
         const feedbackCopy = document.createTextNode(
           casebook
-            ? " Feedback is very welcome. When reading a case, select a relevant passage and click 'Send feedback' to send me your input on the spot."
-            : " Feedback is very welcome. When reading a chapter, select a relevant passage and click 'Send feedback' to send me your input on the spot."
+            ? " is very welcome. When reading a case, select a relevant passage and click 'Send feedback' to send me your input on the spot."
+            : " is very welcome. When reading a chapter, select a relevant passage and click 'Send feedback' to send me your input on the spot."
         );
         feedbackLine.append(feedbackLabel, feedbackCopy);
         methodology.appendChild(feedbackLine);

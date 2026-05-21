@@ -1697,7 +1697,6 @@
     <aside class="sidebar" aria-label="Reader navigation">
       <div class="sidebar-brand">
         <strong>Power Markets Notes</strong>
-        <span>Applied cases, numerical anchors, and decision-focused models for power-market work.</span>
       </div>
       <div class="reader-tools" aria-label="Reader tools">
         <label class="tool-label" for="toc-filter">
@@ -1740,7 +1739,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.32.2
+        v0.32.3
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -6658,7 +6657,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         if (/^Volume I\b/.test(volumeTitle)) {
           return {
             label: "Volume I",
-            title: "Physical System, Institutions, And Market Time",
+            title: "Power System Fundamentals And Market Institutions",
             summary: "Electricity must balance moment by moment through a constrained network. The first volume builds the system from balance, frequency, wires, actors, time sequence, and the first economics of solar and storage.",
             points: [
               "Understand why TSOs, BRPs, BSPs, bidding zones, balancing, and ancillary services exist.",
@@ -6672,7 +6671,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         if (/^Volume II\b/.test(volumeTitle)) {
           return {
             label: "Volume II",
-            title: "Commercial Analysis And Asset Decisions",
+            title: "Commercial Analysis, Contracts, And Asset Decisions",
             summary: "The second volume turns the system map into commercial work: site screens, tariffs, PPAs, BESS sizing, dispatch, forecasting, valuation, risk, and portfolio controls.",
             points: [
               "Decompose a PPA or battery case into price, shape, imbalance, grid, credit, optionality, and control rights.",
@@ -6686,7 +6685,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         if (/^Volume III\b/.test(volumeTitle)) {
           return {
             label: "Volume III",
-            title: "Market Design, Strategy, And Portfolio Evolution",
+            title: "Market Design, Portfolio Strategy, And Operating Models",
             summary: "The third volume is for decisions under uncertainty: congestion, cannibalization, duration choice, data-centre flexibility, AI, adequacy, market power, and changing rules.",
             points: [
               "Separate dated market color from durable mechanisms.",
@@ -6769,7 +6768,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         p.className = "home-lede";
         p.textContent = casebook
           ? "The Casebook turns the lectures into bounded commercial tasks. Each case asks for a concrete artifact: a quote stack, duration screen, site screen, partner scorecard, product memo, or operating-model choice."
-          : "These notes are for building working judgment in power markets, especially around renewable portfolios. The path starts with the constraints that make electricity hard to commercialize: balance, network limits, timing, responsibility, settlement, and risk allocation. It then turns those constraints into recurring decisions: where to build, how to structure a PPA, how much storage duration to buy, what a dispatch model is allowed to assume, how to govern partners, and which market claims deserve capital.";
+          : "These notes are for building working judgment in power markets, especially around renewable portfolios. They are written for analysts, quants, modelers, and technically trained professionals joining energy companies without much prior power-market experience. The path starts with the constraints that make electricity hard to commercialize: balance, network limits, timing, responsibility, settlement, and risk allocation. It then turns those constraints into recurring decisions: where to build, how to structure a PPA, how much storage duration to buy, what a dispatch model is allowed to assume, how to govern partners, and which market claims deserve capital.";
         const heroActions = document.createElement("div");
         heroActions.className = "arc-actions home-actions";
         const mainPdf = document.createElement("a");
@@ -6896,7 +6895,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         methodologyTitle.textContent = "Methodology";
         const methodologyTexts = [
           "These notes were built with a learning method designed for entering technical domains quickly: gather strong primary sources, identify the core guiding questions, work back to first principles, and build intuition through orders of magnitude, scaling relationships, and worked decision frames.",
-          "The workflow was accelerated by a custom AI research and knowledge-management system I built for semantic retrieval, source organization, and the editorial loop."
+          "The workflow was accelerated by a custom AI research and knowledge-management system I built for semantic retrieval, source organization, drafting, and the editorial loops."
         ];
         methodology.append(methodologyTitle);
         methodologyTexts.forEach((text) => {
@@ -6907,11 +6906,11 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         const feedbackLine = document.createElement("p");
         feedbackLine.className = "methodology-feedback";
         const feedbackLabel = document.createElement("strong");
-        feedbackLabel.textContent = "Feedback:";
+        feedbackLabel.textContent = "Feedback";
         const feedbackCopy = document.createTextNode(
           casebook
-            ? " Feedback is very welcome. When reading a case, select a relevant passage and click 'Send feedback' to send me your input on the spot."
-            : " Feedback is very welcome. When reading a chapter, select a relevant passage and click 'Send feedback' to send me your input on the spot."
+            ? " is very welcome. When reading a case, select a relevant passage and click 'Send feedback' to send me your input on the spot."
+            : " is very welcome. When reading a chapter, select a relevant passage and click 'Send feedback' to send me your input on the spot."
         );
         feedbackLine.append(feedbackLabel, feedbackCopy);
         methodology.appendChild(feedbackLine);
