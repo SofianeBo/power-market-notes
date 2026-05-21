@@ -1407,6 +1407,11 @@
       color: #30393d;
     }
 
+    :root[data-theme="dark"] .bibliography,
+    :root[data-theme="dark"] .bibliography li {
+      color: var(--muted);
+    }
+
     .reading-rail {
       display: none;
       position: sticky;
@@ -1735,7 +1740,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.32.1
+        v0.32.2
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -7352,7 +7357,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         const legacyStoragePrefix = "power-course-highlights-";
         const menu = document.getElementById("highlight-menu");
         const removeButton = document.getElementById("highlight-remove");
-        const excludedSelector = "script, style, textarea, input, select, button, nav, .sidebar, .reading-rail, .reader-home, .bibliography, .glossary-list, .lecture-refs, .chapter-pager, .feedback-modal-backdrop, .selection-toolbar, .highlight-menu, .term-popover";
+        const excludedSelector = "script, style, textarea, input, select, button, nav, .sidebar, .reading-rail, .lecture-refs, .chapter-pager, .feedback-modal-backdrop, .selection-toolbar, .highlight-menu, .term-popover";
         let saved = [];
         let activeHighlightId = "";
 
@@ -7375,8 +7380,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           const startElement = elementFromNode(range.startContainer);
           const endElement = elementFromNode(range.endContainer);
           if (!startElement || !endElement) return null;
-          const startScope = startElement.closest("section.level3") || article;
-          const endScope = endElement.closest("section.level3") || article;
+          const startScope = startElement.closest("section.level3, section.reader-home, #glossary, #references") || article;
+          const endScope = endElement.closest("section.level3, section.reader-home, #glossary, #references") || article;
           if (startScope !== endScope) return null;
           return startScope;
         };
@@ -7753,8 +7758,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           const endElement = elementFromNode(range.endContainer);
           if (!startElement || !endElement) return null;
           if (!article.contains(startElement) || !article.contains(endElement)) return null;
-          if (startElement.closest("textarea, input, select, button, nav, .sidebar, .reading-rail, .reader-home, .bibliography, .glossary-list")) return null;
-          if (endElement.closest("textarea, input, select, button, nav, .sidebar, .reading-rail, .reader-home, .bibliography, .glossary-list")) return null;
+          if (startElement.closest("textarea, input, select, button, nav, .sidebar, .reading-rail")) return null;
+          if (endElement.closest("textarea, input, select, button, nav, .sidebar, .reading-rail")) return null;
 
           const rects = Array.from(range.getClientRects()).filter((rect) => rect.width > 0 && rect.height > 0);
           const rect = rects[0] || range.getBoundingClientRect();
@@ -7763,11 +7768,18 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           let chapterSection = startElement.closest("section.level3");
           if (!chapterSection) chapterSection = endElement.closest("section.level3");
           const chapter = chapterSection ? chapterById.get(chapterSection.id) : null;
-          const chapterTitle = chapter ? chapter.fullTitle : textOf(chapterSection?.querySelector(":scope > h3"));
+          const utilitySection = !chapterSection
+            ? startElement.closest("section.reader-home, #glossary, #references") || endElement.closest("section.reader-home, #glossary, #references")
+            : null;
+          const utilityHeading = utilitySection?.id === "home"
+            ? "Landing page"
+            : textOf(utilitySection?.querySelector(":scope > h2")) || textOf(utilitySection?.querySelector(":scope > h1"));
+          const chapterTitle = chapter ? chapter.fullTitle : textOf(chapterSection?.querySelector(":scope > h3")) || utilityHeading;
           const sectionCard = startElement.closest("details.reader-section");
-          const sectionTitle = sectionCard
+          let sectionTitle = sectionCard
             ? textOf(sectionCard.querySelector("summary .section-title"))
             : textOf(startElement.closest("section.level4")?.querySelector(":scope > h4"));
+          if (!sectionTitle && utilitySection && utilitySection.id !== "home") sectionTitle = utilityHeading;
           const block = startElement.closest("p, li, td, th, blockquote, pre") || startElement.closest("details.reader-section, section.level4, section.level3");
           const blockText = truncate(block ? block.textContent : "", 1200);
           const selected = truncate(text, 1600);
