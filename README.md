@@ -4,5 +4,5 @@ Published reader artifacts.
 
 - [Course HTML](index.html)
 - [Casebook HTML](casebook.html)
-- [Course PDF](pdf/power-markets-course-v0.25.7.pdf)
-- [Casebook PDF](pdf/power-markets-casebook-v0.25.7.pdf)
+- [Course PDF](pdf/power-markets-course-v0.26.0.pdf)
+- [Casebook PDF](pdf/power-markets-casebook-v0.26.0.pdf)

@@ -1703,7 +1703,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.25.7
+        v0.26.0
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -1920,6 +1920,13 @@
         <td>stops the same flexibility being promised elsewhere</td>
         </tr>
         <tr>
+        <td>Data and audit rights</td>
+        <td>hourly meter data, certificate evidence, residual
+        procurement records, dispatch logs, and settlement files are
+        deliverable</td>
+        <td>makes the product testable after delivery</td>
+        </tr>
+        <tr>
         <td>Credit and collateral</td>
         <td>buyer credit support and seller exposure limit stated in the
         term sheet</td>
@@ -2028,10 +2035,10 @@
         boundary, the product turns into a short volatility position
         hidden inside a PPA.</p>
         <p>The investment-committee test is whether the price, cap,
-        credit terms, evidence package, and dispatch rights describe the
-        same product. If the buyer wants the seller to carry unlimited
-        residual firming, the quote must move up or the product must
-        narrow.</p>
+        credit terms, evidence package, data rights, and dispatch rights
+        describe the same product. If the buyer wants the seller to
+        carry unlimited residual firming, the quote must move up or the
+        product must narrow.</p>
         <p>The as-produced fallback should remain on the table at 45
         EUR/MWh. It is less valuable to the buyer, but it avoids making
         a fixed-price promise that the asset cannot physically support
@@ -2043,8 +2050,8 @@
         rises from 20 MWh/h to 35 MWh/h.</p>
         <pre class="text"><code>35 MWh/h x 250 h/year x 120 EUR/MWh = 1,050,000 EUR/year</code></pre>
         <p>At that point the seller either needs a much higher fixed
-        price, a portfolio hedge, a third-party firming partner, or a
-        no-bid decision.</p>
+        price, a portfolio hedge, a third-party firming partner, a
+        softer shape, or a no-bid decision.</p>
         </section>
         <section id="failure-mode-to-avoid" class="level4">
         <h4>Failure Mode To Avoid</h4>
@@ -2390,7 +2397,7 @@
         transformer headroom, inverter/control compatibility, and
         permitting language. That keeps the project from paying today
         for duration that is not yet supported by the evidence.</p>
-        <p>The commercial team should ask for four pieces of evidence
+        <p>The commercial team should ask for five pieces of evidence
         before revisiting 4 hours:</p>
         <ul>
         <li>a contract that pays for longer sustained delivery</li>
@@ -2401,6 +2408,9 @@
         <li>warranty, insurance, and augmentation terms showing that the
         value can be captured without consuming battery life or coverage
         headroom faster than priced</li>
+        <li>dispatch-control rights showing that PPA, reserve, merchant,
+        and emergency uses do not all rely on the same state of
+        charge</li>
         </ul>
         </section>
         <section id="assumption-flip-1" class="level4">
@@ -2417,8 +2427,9 @@
         different coverage, changes the operating plan, or prices the
         lost optionality.</p>
         <p>That clears the 700,000 EUR/year hurdle. The case for 4 hours
-        is therefore not philosophical. It depends on the frequency and
-        value of longer scarcity windows.</p>
+        depends on the frequency and value of longer scarcity windows,
+        and on whether the operating plan remains compatible with
+        warranty, insurance, tariff, and control-right constraints.</p>
         </section>
         <section id="failure-mode-to-avoid-1" class="level4">
         <h4>Failure Mode To Avoid</h4>
@@ -2755,9 +2766,9 @@
         <p>The first diligence request should be the grid-rights
         evidence pack: firm connection date, export capacity, import
         capacity, curtailment rules, capacity-tariff exposure,
-        producer-payment geography, limited-access terms, and whether
-        BESS operation is allowed under the same connection agreement or
-        needs a separate approval.</p>
+        producer-payment geography, limited-access terms, metering
+        boundary, and whether BESS operation is allowed under the same
+        connection agreement or needs a separate approval.</p>
         <p>Site A should remain in development if the connection timing
         improves or if a buyer values the location enough to pay for the
         grid uncertainty. Site C is not a priority unless its low
@@ -2776,8 +2787,8 @@
         <section id="failure-mode-to-avoid-2" class="level4">
         <h4>Failure Mode To Avoid</h4>
         <p>Rank the sites by base-case P50 generation value, then treat
-        connection timing, import rights, curtailment, and tariff
-        exposure as diligence items.</p>
+        connection timing, import rights, curtailment, metering
+        boundary, and tariff exposure as diligence items.</p>
         <p>That decision puts the grid outside the economics even though
         the grid determines when the MWh is deliverable, what the
         battery can do, and which commercial products remain
@@ -2944,7 +2955,9 @@
         <td>Floor or revenue-share contract</td>
         <td>floor, toll, revenue swap, or minimum guaranteed
         payment</td>
-        <td>some upside and dispatch discretion are transferred</td>
+        <td>some upside and dispatch discretion are transferred;
+        availability, reporting, termination, and exclusivity terms
+        matter</td>
         <td>project needs financeability or downside protection</td>
         </tr>
         <tr>
@@ -3042,7 +3055,8 @@
         term sheet should therefore state the priority order for reserve
         obligations, customer shape delivery, merchant arbitrage,
         degradation limits, insurance-cycle limits, minimum state of
-        charge, and emergency override.</p>
+        charge, availability reporting, termination triggers, and
+        emergency override.</p>
         <p>The commercial team should price shaped PPA flexibility at
         least at its opportunity cost, not at the accounting cost of the
         battery. If the customer cannot pay the opportunity cost, the
@@ -3074,10 +3088,10 @@
         different duty cycles, or fewer operating modes than the
         optimizer assumes, part of the stack is unavailable unless the
         owner changes coverage or changes operation.</p>
-        <p>That still double-counts flexibility. The same MW, MWh, state
-        of charge, control rights, cycle budget, and grid connection
-        must serve every product. Revenue stacking is constrained
-        co-optimization, not spreadsheet addition.</p>
+        <p>Both versions double-count flexibility. The same MW, MWh,
+        state of charge, control rights, cycle budget, and grid
+        connection must serve every product. Revenue stacking is
+        constrained co-optimization, not spreadsheet addition.</p>
         </section>
         <section id="links-back-to-the-lectures-3" class="level4">
         <h4>Links Back To The Lectures</h4>
@@ -3111,11 +3125,12 @@
         </p>
         <p>A trading or optimization partner can execute the market
         interface, but the asset owner still needs evidence before it
-        changes fees, mandates, incentives, or partners. The hard part
+        changes fees, mandates, incentives, or partners. The main work
         is attribution. A monthly revenue gap may come from market
         conditions, missing data, asset constraints, forecast error,
-        risk limits, or dispatch choices. Partner action is justified
-        only after the evidence separates those causes.</p>
+        risk limits, credit limits, settlement corrections, or dispatch
+        choices. Partner action is justified only after the evidence
+        separates those causes.</p>
         <section id="decision-question-4" class="level4">
         <h4>Decision Question</h4>
         <p>Should the asset owner change partner terms now, require
@@ -3273,6 +3288,12 @@
         <td>revenue result may move</td>
         </tr>
         <tr>
+        <td>Collateral and credit-limit evidence</td>
+        <td>partial</td>
+        <td>cannot tell whether otherwise feasible trades were
+        blocked</td>
+        </tr>
+        <tr>
         <td>Contract rights and risk limits</td>
         <td>complete</td>
         <td>feasible benchmark boundary is known</td>
@@ -3424,6 +3445,12 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         counterparty notices</td>
         <td>revenue result versus liquidity constraint</td>
         </tr>
+        <tr>
+        <td>Service-level agreement (SLA) and escalation trail</td>
+        <td>dated exceptions, response times, remediation owners, and
+        repeated defects</td>
+        <td>one-off error versus governable pattern</td>
+        </tr>
         </tbody>
         </table>
         <p>This mirrors the logic in Nordic settlement governance:
@@ -3514,8 +3541,8 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <li>require timestamped delivery and exception reporting</li>
         <li>freeze the feasible-benchmark method before seeing next
         month’s results</li>
-        <li>review whether owner-approved risk limits are too
-        conservative for volatile periods</li>
+        <li>review whether owner-approved risk limits or credit limits
+        are too conservative for volatile periods</li>
         <li>retest residual bidding/dispatch gaps only where evidence is
         complete</li>
         </ul>
@@ -3742,13 +3769,20 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <td>load flexibility is assumed in the model but unavailable in
         operation</td>
         </tr>
+        <tr>
+        <td>Reliability boundary</td>
+        <td>priority between buyer uptime, backup policy, grid services,
+        and seller firming obligations</td>
+        <td>a flexibility resource is counted in the product when the
+        buyer will not release it</td>
+        </tr>
         </tbody>
         </table>
         <p>For a data-centre buyer, flexibility resources can be
         valuable, but reliability constraints come first. Do not count
         buyer-side flexibility as seller supply unless the buyer grants
-        defined availability, control, telemetry, and settlement
-        rights.</p>
+        defined availability, control, telemetry, settlement rights, and
+        an uptime-compatible operating policy.</p>
         </section>
         <section id="numerical-intuition-5" class="level4">
         <h4>Numerical Intuition</h4>
@@ -3795,9 +3829,9 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <h4>Decision Memo</h4>
         <p>Recommendation: offer a partnered hourly-matching product
         only if the contract defines the evidence standard, residual
-        firming boundary, settlement method, and fallback procurement
-        rule. Otherwise offer a narrower shaped product and leave the
-        buyer with the residual claim.</p>
+        firming boundary, settlement method, fallback procurement rule,
+        and buyer-flexibility rights. Otherwise offer a narrower shaped
+        product and leave the buyer with the residual claim.</p>
         <p>The seller should not promise a broad 24/7 clean-energy claim
         without the applicable accounting and certificate framework in
         the contract. The commercial product can still be valuable if it
@@ -4042,6 +4076,12 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <td>contract language exists, operational map missing</td>
         <td>dispatch priority conflicts are hard to prove</td>
         </tr>
+        <tr>
+        <td>Credit, collateral, and liquidity evidence</td>
+        <td>fragmented</td>
+        <td>cannot tell whether feasible actions were blocked by limits
+        or cash timing</td>
+        </tr>
         </tbody>
         </table>
         <p>Value pools:</p>
@@ -4258,6 +4298,12 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         </tr>
         <tr>
         <td>1</td>
+        <td>credit, collateral, and liquidity evidence map</td>
+        <td>shows whether trading constraints are economic, operational,
+        or treasury-driven</td>
+        </tr>
+        <tr>
+        <td>1</td>
         <td>model register and assumption owner map</td>
         <td>prevents uncontrolled spreadsheets</td>
         </tr>
@@ -4400,6 +4446,12 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         exceptions</td>
         <td>unapproved model used in decision</td>
         </tr>
+        <tr>
+        <td>Partner governance</td>
+        <td>missing files, late explanations, service-level agreement
+        (SLA) breaches, unresolved incident owners</td>
+        <td>repeated defect without remediation owner</td>
+        </tr>
         </tbody>
         </table>
         <p>The pack is a control only if management uses it to approve,
@@ -4529,6 +4581,12 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         <li>partners continue to execute, but their raw evidence
         obligations become explicit</li>
         </ul>
+        <p>The first-year system should be deliberately small but
+        auditable. Every model that affects a quote, dispatch view,
+        partner scorecard, or investment recommendation needs an owner,
+        version, source-data list, change log, and decision record. That
+        is the minimum control layer before a larger trading platform or
+        internal desk is worth considering.</p>
         </section>
         <section id="assumption-flip-6" class="level4">
         <h4>Assumption Flip</h4>
