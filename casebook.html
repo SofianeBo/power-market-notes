@@ -1703,7 +1703,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.26.1
+        v0.27.0
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -2097,7 +2097,7 @@
         References: <sup><a href="#ref-7">[7]</a>
         <a href="#ref-8">[8]</a> <a href="#ref-9">[9]</a>
         <a href="#ref-10">[10]</a> <a href="#ref-11">[11]</a>
-        <a href="#ref-5">[5]</a></sup>
+        <a href="#ref-12">[12]</a> <a href="#ref-5">[5]</a></sup>
         </p>
         <p>Battery duration is an investment claim: the next MWh of
         energy capacity must earn more than it costs after efficiency,
@@ -2274,10 +2274,12 @@
         </tr>
         <tr>
         <td>Cycle, warranty, and insurance budget</td>
-        <td>modeled throughput is consistent with degradation allowance,
-        warranty terms, and insurance policy</td>
-        <td>optimizer earns value by consuming life or coverage headroom
-        not priced in the case</td>
+        <td>modeled throughput, average state of charge, C-rate or
+        charge/discharge rate, temperature envelope, data-retention
+        obligation, degradation allowance, warranty terms, and insurance
+        policy are mutually compatible</td>
+        <td>optimizer earns value by consuming life, evidence, or
+        coverage headroom not priced in the case</td>
         </tr>
         <tr>
         <td>Grid import and export rights</td>
@@ -2309,6 +2311,13 @@
         </tr>
         </tbody>
         </table>
+        <p>DNV’s storage-warranty review makes the second gate concrete.
+        A capacity warranty may care about usage/cycling degradation,
+        calendar degradation, temperature, average state of charge,
+        C-rate, data storage, and repair response. The case therefore
+        treats “cycles/year” as a commercial shorthand. Before live use,
+        replace it with the warranty-compatible operating envelope and
+        the actual insurance-policy limits.</p>
         </section>
         <section id="tasks-1" class="level4">
         <h4>Tasks</h4>
@@ -2408,8 +2417,11 @@
         <li>warranty, insurance, and augmentation terms showing that the
         value can be captured without consuming battery life or coverage
         headroom faster than priced</li>
-        <li>dispatch-control rights showing that PPA, reserve, merchant,
-        and emergency uses do not all rely on the same state of
+        <li>battery management system data-access and storage
+        arrangements strong enough to support warranty, availability,
+        and safety disputes</li>
+        <li>dispatch-control rights showing how PPA, reserve, merchant,
+        and emergency uses are prioritized against the same state of
         charge</li>
         </ul>
         </section>
@@ -2466,9 +2478,9 @@
         <h3>Case 3. Grid-Constrained Site Screen</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-11">[11]</a>
-        <a href="#ref-12">[12]</a> <a href="#ref-13">[13]</a>
-        <a href="#ref-14">[14]</a> <a href="#ref-15">[15]</a>
-        <a href="#ref-16">[16]</a> <a href="#ref-17">[17]</a></sup>
+        <a href="#ref-13">[13]</a> <a href="#ref-14">[14]</a>
+        <a href="#ref-15">[15]</a> <a href="#ref-16">[16]</a>
+        <a href="#ref-17">[17]</a> <a href="#ref-18">[18]</a></sup>
         </p>
         <p>Solar development often begins with land and irradiation.
         Project value often ends with grid access, tariffs, congestion,
@@ -2820,11 +2832,12 @@
         <section id="case-04" class="level3">
         <h3>Case 4. BESS Revenue Stack Under Saturation</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-18">[18]</a>
-        <a href="#ref-19">[19]</a> <a href="#ref-20">[20]</a>
-        <a href="#ref-21">[21]</a> <a href="#ref-7">[7]</a>
-        <a href="#ref-9">[9]</a> <a href="#ref-5">[5]</a>
-        <a href="#ref-22">[22]</a></sup>
+        References: <sup><a href="#ref-19">[19]</a>
+        <a href="#ref-20">[20]</a> <a href="#ref-21">[21]</a>
+        <a href="#ref-22">[22]</a> <a href="#ref-7">[7]</a>
+        <a href="#ref-9">[9]</a> <a href="#ref-12">[12]</a>
+        <a href="#ref-23">[23]</a> <a href="#ref-5">[5]</a>
+        <a href="#ref-24">[24]</a></sup>
         </p>
         <p>A battery revenue stack is a set of coupled obligations on
         the same MW, MWh, state of charge, grid rights, cycle budget,
@@ -2846,6 +2859,13 @@
         asks whether part of the battery should be reserved for shaped
         PPA delivery.</p>
         <p>The project cannot sell the same flexibility three times.</p>
+        <p>The optimizer cannot make that conflict disappear. DNV’s
+        hybrid-storage optimizer material is useful here because it
+        frames dispatch as a constrained problem over market products,
+        loss trees, interconnection limits, cycling and throughput
+        requirements, warranty strategies, and capacity maintenance. A
+        revenue stack is credible only if the same constraint set
+        governs every product in the stack.</p>
         </section>
         <section id="scenario-data-3" class="level4">
         <h4>Scenario Data</h4>
@@ -3046,9 +3066,9 @@
         <h4>Decision Memo</h4>
         <p>Recommendation: contract a portion of the asset under a
         floor-like structure and keep a meaningful residual slice
-        merchant. Do not allocate battery capacity to the shaped PPA
-        unless the PPA premium rises or the PPA materially improves
-        project financeability.</p>
+        merchant. Allocate battery capacity to the shaped PPA only if
+        the PPA premium rises or the PPA materially improves project
+        financeability.</p>
         <p>The binding constraint is control-right allocation. Every MW
         reserved for a customer profile is a MW unavailable for reserve
         capacity, arbitrage, or response to a new market product. The
@@ -3057,11 +3077,17 @@
         degradation limits, insurance-cycle limits, minimum state of
         charge, availability reporting, termination triggers, and
         emergency override.</p>
+        <p>It should also state the evidence layer: battery management
+        system data access, data retention, performance-test method,
+        availability calculation, response/repair clock, and who may
+        override dispatch during safety, grid, or warranty events.
+        Without that evidence layer, the floor provider, optimizer,
+        customer, insurer, and owner can each believe they own the same
+        operating headroom.</p>
         <p>The commercial team should price shaped PPA flexibility at
-        least at its opportunity cost, not at the accounting cost of the
-        battery. If the customer cannot pay the opportunity cost, the
-        better product is a narrower shaped PPA plus a separate floor or
-        optimizer agreement for the battery.</p>
+        its opportunity cost. If the customer cannot pay the opportunity
+        cost, the better product is a narrower shaped PPA plus a
+        separate floor or optimizer agreement for the battery.</p>
         <p>The decision pack should show two values side by side:
         expected value and financeable downside value. A route that
         maximizes expected merchant upside may still be the wrong first
@@ -3089,9 +3115,10 @@
         optimizer assumes, part of the stack is unavailable unless the
         owner changes coverage or changes operation.</p>
         <p>Both versions double-count flexibility. The same MW, MWh,
-        state of charge, control rights, cycle budget, and grid
-        connection must serve every product. Revenue stacking is
-        constrained co-optimization, not spreadsheet addition.</p>
+        state of charge, control rights, cycle budget, warranty
+        envelope, data evidence, and grid connection must serve every
+        product. Revenue stacking is constrained co-optimization; simple
+        spreadsheet addition double-counts the asset.</p>
         </section>
         <section id="links-back-to-the-lectures-3" class="level4">
         <h4>Links Back To The Lectures</h4>
@@ -3118,10 +3145,10 @@
         <h3>Case 5. Balance-Responsibility And Balancing-Service
         Performance Audit</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-23">[23]</a>
-        <a href="#ref-18">[18]</a> <a href="#ref-24">[24]</a>
-        <a href="#ref-25">[25]</a> <a href="#ref-26">[26]</a>
-        <a href="#ref-27">[27]</a></sup>
+        References: <sup><a href="#ref-25">[25]</a>
+        <a href="#ref-19">[19]</a> <a href="#ref-26">[26]</a>
+        <a href="#ref-27">[27]</a> <a href="#ref-28">[28]</a>
+        <a href="#ref-29">[29]</a></sup>
         </p>
         <p>A trading or optimization partner can execute the market
         interface, but the asset owner still needs evidence before it
@@ -3606,7 +3633,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <h3>Case 6. Data-Centre 24/7 Product Screen</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-1">[1]</a>
-        <a href="#ref-4">[4]</a> <a href="#ref-28">[28]</a>
+        <a href="#ref-4">[4]</a> <a href="#ref-30">[30]</a>
         <a href="#ref-5">[5]</a> <a href="#ref-2">[2]</a></sup>
         </p>
         <p>Large electricity buyers increasingly care about both when
@@ -3940,8 +3967,8 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <h3>Case 7. Year-One Energy-Management Operating Model</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-6">[6]</a>
-        <a href="#ref-27">[27]</a> <a href="#ref-29">[29]</a>
-        <a href="#ref-26">[26]</a> <a href="#ref-1">[1]</a>
+        <a href="#ref-29">[29]</a> <a href="#ref-31">[31]</a>
+        <a href="#ref-28">[28]</a> <a href="#ref-1">[1]</a>
         <a href="#ref-5">[5]</a></sup>
         </p>
         <p>An independent power producer (IPP) becomes an energy manager
@@ -4819,6 +4846,13 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Balance Service Provider: entity providing balancing services to
         the TSO.
         </dd>
+        <dt id="glossary-c-rate" data-term="C-rate" data-definition="Charge or discharge rate relative to battery energy capacity; 1C roughly means full usable charge or discharge in one hour.">
+        C-rate
+        </dt>
+        <dd>
+        Charge or discharge rate relative to battery energy capacity; 1C
+        roughly means full usable charge or discharge in one hour.
+        </dd>
         <dt id="glossary-calculation-period" data-term="Calculation period" data-definition="Time period over which a reference price or settlement amount is calculated.">
         Calculation period
         </dt>
@@ -4882,6 +4916,14 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         <dd>
         Market or regulatory mechanism that pays for capacity,
         availability, or reliability contribution in addition to energy.
+        </dd>
+        <dt id="glossary-capacity-warranty" data-term="Capacity warranty" data-definition="Warranty or performance guarantee specifying retained usable battery capacity over time, usually conditional on operating conditions and measurement method.">
+        Capacity warranty
+        </dt>
+        <dd>
+        Warranty or performance guarantee specifying retained usable
+        battery capacity over time, usually conditional on operating
+        conditions and measurement method.
         </dd>
         <dt id="glossary-capture-price" data-term="Capture price" data-definition="Generation-weighted average market price received by an asset or technology.">
         Capture price
@@ -5602,6 +5644,14 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Probability that available resources cannot meet load in a
         specified period.
         </dd>
+        <dt id="glossary-loss-tree" data-term="Loss tree" data-definition="Engineering model that tracks energy losses through a renewable, storage, or hybrid system so dispatch and valuation use deliverable energy rather than ideal nameplate energy.">
+        Loss tree
+        </dt>
+        <dd>
+        Engineering model that tracks energy losses through a renewable,
+        storage, or hybrid system so dispatch and valuation use
+        deliverable energy rather than ideal nameplate energy.
+        </dd>
         <dt id="glossary-margin-call" data-term="Margin call" data-definition="Demand to post additional collateral after exposure or collateral requirements change.">
         Margin call
         </dt>
@@ -5697,6 +5747,15 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Concern that market revenues may be insufficient to finance
         needed capacity because scarcity or investment signals are
         muted, risky, capped, or incomplete.
+        </dd>
+        <dt id="glossary-mixed-integer-linear-programming" data-term="Mixed-integer linear programming" data-definition="Optimization method where some variables are continuous and others are integer or binary, useful when dispatch choices include on/off, mutually exclusive, or commitment-style decisions.">
+        Mixed-integer linear programming
+        </dt>
+        <dd>
+        Optimization method where some variables are continuous and
+        others are integer or binary, useful when dispatch choices
+        include on/off, mutually exclusive, or commitment-style
+        decisions.
         </dd>
         <dt id="glossary-model-inventory" data-term="Model inventory" data-definition="Register of models, owners, purposes, inputs, outputs, limits, validation status, and retirement criteria.">
         Model inventory
@@ -5817,12 +5876,13 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         <dd>
         Maximum load over a defined period and geography.
         </dd>
-        <dt id="glossary-perfect-foresight-dispatch" data-term="Perfect foresight dispatch" data-definition="Dispatch optimized with actual future information; useful as an upper bound, not a fair operational benchmark.">
+        <dt id="glossary-perfect-foresight-dispatch" data-term="Perfect foresight dispatch" data-definition="Dispatch optimized with actual future information; useful as an upper bound for operational benchmarks built from tradable information available at decision time.">
         Perfect foresight dispatch
         </dt>
         <dd>
         Dispatch optimized with actual future information; useful as an
-        upper bound, not a fair operational benchmark.
+        upper bound for operational benchmarks built from tradable
+        information available at decision time.
         </dd>
         <dt id="glossary-physical-withholding" data-term="Physical withholding" data-definition="Making capacity unavailable even though it could physically produce.">
         Physical withholding
@@ -6209,6 +6269,15 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Forecast or model error weighted by the economic consequence of
         being wrong in that interval or scenario.
         </dd>
+        <dt id="glossary-virtual-battery" data-term="Virtual battery" data-definition="Controllable demand or process flexibility that can absorb, defer, or release electricity demand over time in a way that mimics some storage services without storing electricity electrochemically.">
+        Virtual battery
+        </dt>
+        <dd>
+        Controllable demand or process flexibility that can absorb,
+        defer, or release electricity demand over time in a way that
+        mimics some storage services without storing electricity
+        electrochemically.
+        </dd>
         <dt id="glossary-voltage" data-term="Voltage" data-definition="Electrical potential difference; grid voltage must remain within operational limits.">
         Voltage
         </dt>
@@ -6282,67 +6351,73 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         ACER, Electricity Network Tariff Practices in Europe 2025.
         </li>
         <li id="ref-12">
+        DNV, Energy Storage Capacity Warranties: Beyond the Fine Print.
+        </li>
+        <li id="ref-13">
         Svenska kraftnat, Principles and guidelines for connecting to
         the national grids.
         </li>
-        <li id="ref-13">
+        <li id="ref-14">
         Svenska kraftnat, Network Development Plan 2026-2035.
         </li>
-        <li id="ref-14">
+        <li id="ref-15">
         Energinet, tariff design and tariff catalogue materials.
         </li>
-        <li id="ref-15">
+        <li id="ref-16">
         Fingrid, main grid service pricing.
         </li>
-        <li id="ref-16">
+        <li id="ref-17">
         Fingrid, Main Grid Development Plan 2026-2035.
         </li>
-        <li id="ref-17">
+        <li id="ref-18">
         Tom Brown and Philipp Glaum, Energy Economics Lecture 9: The
         Electricity Grid.
         </li>
-        <li id="ref-18">
+        <li id="ref-19">
         European Commission, Regulation (EU) 2017/2195 establishing a
         guideline on electricity balancing.
         </li>
-        <li id="ref-19">
+        <li id="ref-20">
         Svenska kraftnat, information on ancillary services.
         </li>
-        <li id="ref-20">
+        <li id="ref-21">
         Energinet, Ancillary services to be delivered in Denmark: tender
         conditions.
         </li>
-        <li id="ref-21">
+        <li id="ref-22">
         ENTSO-E, PICASSO KPI Report 2025.
         </li>
-        <li id="ref-22">
+        <li id="ref-23">
+        DNV, Hybrid Energy Resource Optimizer.
+        </li>
+        <li id="ref-24">
         Julien Jomaux, The Big Beautiful Batteries; Long-term BESS
         Revenues: My Personal Take; The Revenue Illusion in Battery
         Storage.
         </li>
-        <li id="ref-23">
+        <li id="ref-25">
         eSett, Nordic Imbalance Settlement Handbook v5.3.
         </li>
-        <li id="ref-24">
+        <li id="ref-26">
         Svenska kraftnat, Introduction of the BSP and BRP actor roles.
         </li>
-        <li id="ref-25">
+        <li id="ref-27">
         Fingrid, Nordic Balancing Model materials on MARI, PICASSO, and
         Nordic balancing changes.
         </li>
-        <li id="ref-26">
+        <li id="ref-28">
         Priyanka Shinde, Efficient Trading in the Short-term Electricity
         Markets for Integration of Renewable Energy Sources.
         </li>
-        <li id="ref-27">
+        <li id="ref-29">
         Professional Risk Managers’ International Association, The
         Professional Risk Managers’ Guide to the Energy Market.
         </li>
-        <li id="ref-28">
+        <li id="ref-30">
         ENTSO-E, Data centres and the power system: expected trends,
         challenges, and opportunities.
         </li>
-        <li id="ref-29">
+        <li id="ref-31">
         Iris Marie Mack, Energy Trading and Risk Management.
         </li>
         </ol>

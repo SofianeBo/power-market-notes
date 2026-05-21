@@ -1819,7 +1819,7 @@
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.26.1
+        v0.27.0
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -8561,7 +8561,8 @@ unpriced_option_value</code></pre>
         <p class="lecture-refs">
         References: <sup><a href="#ref-11">[11]</a>
         <a href="#ref-32">[32]</a> <a href="#ref-34">[34]</a>
-        <a href="#ref-35">[35]</a> <a href="#ref-33">[33]</a></sup>
+        <a href="#ref-35">[35]</a> <a href="#ref-36">[36]</a>
+        <a href="#ref-33">[33]</a></sup>
         </p>
         <p>A developer is comparing two designs for the same battery:
         <code>100 MW / 200 MWh</code> and <code>100 MW / 400 MWh</code>.
@@ -8614,6 +8615,7 @@ duration_h = usable_energy_MWh / discharge_power_MW</code></pre>
         <pre class="text"><code>useful_cycles_per_year =
   min(physical_opportunity_cycles,
       warranty_compatible_cycles,
+      thermal_and_data_compatible_cycles,
       insurance_permitted_cycles,
       grid_and_product_eligible_cycles)</code></pre>
         <p>The extra duration clears the hurdle only if:</p>
@@ -8656,10 +8658,9 @@ annualized_extra_capex
         individual projects can vary widely, from over
         <code>USD 500/kWh</code> to below <code>USD 200/kWh</code>,
         depending on site, technology, and regulation.</p>
-        <p>So do not treat <code>USD 175/kWh</code> as a project
-        quote.</p>
-        <p>Use it as a weight in your hand. It tells you that extra
-        duration is not a rounding error.</p>
+        <p>Use <code>USD 175/kWh</code> as a scale anchor rather than a
+        project quote. It tells you that extra duration is a capital
+        decision large enough to deserve its own evidence.</p>
         </section>
         <section id="numerical-intuition-23" class="level4">
         <h4>Numerical Intuition</h4>
@@ -8747,8 +8748,9 @@ extra energy block scale = 200,000 x 175 = USD 35,000,000</code></pre>
         average storage fleet duration rises from around two hours in
         the IEA report baseline to <code>2.7 h</code> in 2030 and
         <code>3.4 h</code> by 2050 in STEPS.</p>
-        <p>That is a system-level direction, not a site-level
-        command.</p>
+        <p>Use that as system-level direction. The site-level answer
+        still depends on the local product, connection, tariff,
+        degradation, warranty, and portfolio need.</p>
         </section>
         <section id="what-makes-duration-wasteful" class="level4">
         <h4>What Makes Duration Wasteful?</h4>
@@ -8782,6 +8784,11 @@ extra energy block scale = 200,000 x 175 = USD 35,000,000</code></pre>
         <tr>
         <td>High degradation</td>
         <td>Useful cycles become expensive</td>
+        </tr>
+        <tr>
+        <td>Warranty envelope</td>
+        <td>SoC, C-rate, temperature, throughput, data, or repair terms
+        reduce feasible operation</td>
         </tr>
         <tr>
         <td>Grid import limits</td>
@@ -9012,8 +9019,8 @@ extra energy block scale = 200,000 x 175 = USD 35,000,000</code></pre>
         properly.</p>
         <p>The same screen works for <code>1h</code>, <code>2h</code>,
         and <code>4h</code> when each block is valued at the margin. The
-        next table is an illustrative scenario screen, not a market
-        benchmark.</p>
+        next table is an illustrative scenario screen for
+        sensitivity.</p>
         <table>
         <colgroup>
         <col style="width: 11%" />
@@ -9080,8 +9087,8 @@ extra energy block scale = 200,000 x 175 = USD 35,000,000</code></pre>
         <li>product: PPA shape, reserve sustain requirement, arbitrage
         horizon, capacity-credit method</li>
         <li>economics: incremental capex, fixed O&amp;M, degradation,
-        insurance-policy constraints, augmentation, fees, taxes if
-        relevant</li>
+        warranty envelope, insurance-policy constraints, augmentation,
+        fees, taxes if relevant</li>
         <li>uncertainty: spread compression, rule changes, forecast
         error, counterparty/control rights</li>
         <li>sensitivity: the assumption-flip test that changes the
@@ -9117,8 +9124,8 @@ Both fail if Y is true.</code></pre>
         <p class="lecture-refs">
         References: <sup><a href="#ref-17">[17]</a>
         <a href="#ref-11">[11]</a> <a href="#ref-22">[22]</a>
-        <a href="#ref-36">[36]</a> <a href="#ref-34">[34]</a>
-        <a href="#ref-32">[32]</a></sup>
+        <a href="#ref-37">[37]</a> <a href="#ref-34">[34]</a>
+        <a href="#ref-32">[32]</a> <a href="#ref-38">[38]</a></sup>
         </p>
         <p>An analyst receives a battery schedule: charge at noon,
         discharge in the evening, hold some capacity for reserve, finish
@@ -9186,8 +9193,8 @@ E_min, E_max = usable energy bounds, MWh</code></pre>
         constraint has a shadow price of <code>60 EUR/MWh</code> in that
         interval.</p>
         <p>Perfect-foresight dispatch: optimization using actual future
-        prices. Useful as an upper bound, not as a fair operational
-        benchmark.</p>
+        prices. Useful as an upper bound; operational benchmarks should
+        use information that was tradable at the decision time.</p>
         <p>Forecast-based dispatch: optimization using information
         available at the time. Necessary for fair partner and model
         benchmarking.</p>
@@ -9305,11 +9312,11 @@ terminal shortfall from 50 MWh discharge = 50 MWh - 40 MWh = 10 MWh</code></pre>
         stored-energy value under the information available at dispatch
         time.</p>
         <p>If the actual 22:00 price later clears at
-        <code>140 EUR/MWh</code>, that can improve future forecasts, but
-        it is not a fair benchmark for the 18:00 schedule unless that
-        information was tradable then. This is why a dispatch model
-        evaluates one battery across obligations and time instead of
-        ranking markets or hours one by one.</p>
+        <code>140 EUR/MWh</code>, that can improve future forecasts. For
+        judging the 18:00 schedule, use only information that was
+        tradable at 18:00. This is why a dispatch model evaluates one
+        battery across obligations and time instead of ranking markets
+        or hours one by one.</p>
         </section>
         <section id="shadow-prices-and-binding-constraints"
         class="level4">
@@ -9358,9 +9365,9 @@ terminal shortfall from 50 MWh discharge = 50 MWh - 40 MWh = 10 MWh</code></pre>
         contract or market-purchase hedge rather than a bigger
         battery.</p>
         </section>
-        <section id="perfect-foresight-is-not-a-benchmark"
+        <section id="perfect-foresight-as-an-upper-bound"
         class="level4">
-        <h4>Perfect Foresight Is Not A Benchmark</h4>
+        <h4>Perfect Foresight As An Upper Bound</h4>
         <p>A perfect-foresight optimization can be useful. It gives an
         upper bound:</p>
         <pre class="text"><code>what could have been earned if we knew the future and had perfect execution?</code></pre>
@@ -9376,18 +9383,33 @@ terminal shortfall from 50 MWh discharge = 50 MWh - 40 MWh = 10 MWh</code></pre>
         <li>realistic bid sizes and liquidity</li>
         <li>ex-ante risk limits</li>
         </ul>
+        <p>The same boundary appears in practitioner storage tools. DNV
+        describes a hybrid-storage optimizer that calculates dispatch on
+        a <code>24-hour</code> lookahead at <code>15-minute</code>
+        intervals, uses mixed-integer linear programming (MILP), embeds
+        technical loss trees, and includes interconnection limits,
+        battery cycling, throughput requirements, warranty, and
+        capacity-maintenance strategies. It then adjusts ideal
+        perfect-foresight revenue toward operational reality. Use it
+        here as model-scope evidence. Making a universal
+        industry-standard claim would need broader sources.</p>
         <p>Shinde’s work on short-term electricity trading is useful
         here. Multistage stochastic models can beat deterministic
         equivalents in some settings, but the result depends on
         transaction costs, liquidity, transmission capacity, imbalance
-        prices, scenario design, and computation time. More complexity
-        is not automatically more value.</p>
+        prices, scenario design, and computation time. Complexity has
+        value only when it changes a feasible decision enough to pay for
+        itself.</p>
         </section>
         <section id="a-minimal-dispatch-stack" class="level4">
         <h4>A Minimal Dispatch Stack</h4>
         <p>A practical first dispatch model for a BESS project can be
         built in layers.</p>
         <table>
+        <colgroup>
+        <col style="width: 50%" />
+        <col style="width: 50%" />
+        </colgroup>
         <thead>
         <tr>
         <th>Layer</th>
@@ -9400,8 +9422,13 @@ terminal shortfall from 50 MWh discharge = 50 MWh - 40 MWh = 10 MWh</code></pre>
         <td>MW, MWh, SoC, efficiency</td>
         </tr>
         <tr>
+        <td>Technical losses</td>
+        <td>renewable profile, storage loss tree, availability,
+        auxiliary load</td>
+        </tr>
+        <tr>
         <td>Economic</td>
-        <td>prices, fees, degradation</td>
+        <td>prices, fees, degradation, augmentation</td>
         </tr>
         <tr>
         <td>Contractual</td>
@@ -9409,7 +9436,8 @@ terminal shortfall from 50 MWh discharge = 50 MWh - 40 MWh = 10 MWh</code></pre>
         </tr>
         <tr>
         <td>Grid</td>
-        <td>import/export limits, curtailment, tariff trigger</td>
+        <td>import/export limits, interconnection limits, curtailment,
+        tariff trigger</td>
         </tr>
         <tr>
         <td>Uncertainty</td>
@@ -9467,9 +9495,10 @@ terminal shortfall from 50 MWh discharge = 50 MWh - 40 MWh = 10 MWh</code></pre>
         </tr>
         </tbody>
         </table>
-        <p>The order is a business decision, not a mathematical detail.
-        If the optimizer is allowed to treat all revenues as freely
-        interchangeable, it may sell the same flexibility twice.</p>
+        <p>The order is a business decision with mathematical
+        consequences. If the optimizer is allowed to treat all revenues
+        as freely interchangeable, it may sell the same flexibility
+        twice.</p>
         </section>
         <section id="in-practice-21" class="level4">
         <h4>In Practice</h4>
@@ -9477,9 +9506,9 @@ terminal shortfall from 50 MWh discharge = 50 MWh - 40 MWh = 10 MWh</code></pre>
         <ol type="1">
         <li>Is the objective aligned with the business decision?</li>
         </ol>
-        <p>For investment, expected revenue is not enough; downside and
-        bankability matter. For operations, real-time feasibility
-        matters. For oversight, fairness of the benchmark matters.</p>
+        <p>For investment, expected revenue sits beside downside and
+        bankability. For operations, real-time feasibility matters. For
+        oversight, fairness of the benchmark matters.</p>
         <ol start="2" type="1">
         <li>Are all binding constraints visible?</li>
         </ol>
@@ -9496,8 +9525,8 @@ terminal shortfall from 50 MWh discharge = 50 MWh - 40 MWh = 10 MWh</code></pre>
         <li>Is the model using the information it would have had at the
         time?</li>
         </ol>
-        <p>Hindsight is useful for learning. It is not fair as a
-        performance score.</p>
+        <p>Hindsight is useful for learning. A performance score needs
+        the information available at decision time.</p>
         <ol start="5" type="1">
         <li>Does the ending SoC make economic sense?</li>
         </ol>
@@ -9525,8 +9554,8 @@ terminal shortfall from 50 MWh discharge = 50 MWh - 40 MWh = 10 MWh</code></pre>
         <p class="lecture-refs">
         References: <sup><a href="#ref-3">[3]</a>
         <a href="#ref-4">[4]</a> <a href="#ref-15">[15]</a>
-        <a href="#ref-36">[36]</a> <a href="#ref-37">[37]</a>
-        <a href="#ref-38">[38]</a></sup>
+        <a href="#ref-37">[37]</a> <a href="#ref-39">[39]</a>
+        <a href="#ref-40">[40]</a></sup>
         </p>
         <p>A forecasting vendor promises lower solar error. A partner
         says its own forecast is good enough. The trading team wants a
@@ -10006,7 +10035,8 @@ rebalance_value =
         <p class="lecture-refs">
         References: <sup><a href="#ref-32">[32]</a>
         <a href="#ref-34">[34]</a> <a href="#ref-35">[35]</a>
-        <a href="#ref-39">[39]</a> <a href="#ref-40">[40]</a></sup>
+        <a href="#ref-41">[41]</a> <a href="#ref-36">[36]</a>
+        <a href="#ref-42">[42]</a></sup>
         </p>
         <p>A dispatch case shows a clean trade: buy low, sell higher,
         cycle the battery, book the spread. But each MWh moved through
@@ -10074,6 +10104,13 @@ opportunity cost, and operating limits?</code></pre>
         measured in MWh.</p>
         <p>Depth of discharge: how much of the battery’s usable energy
         window is discharged in a cycle.</p>
+        <p>C-rate: charge or discharge power relative to energy
+        capacity. A <code>1C</code> discharge empties the battery’s
+        usable energy in about one hour; <code>0.5C</code> in about two
+        hours; <code>0.25C</code> in about four hours.</p>
+        <p>Capacity warranty: promise about retained usable capacity
+        over time, usually conditional on how the battery is operated
+        and measured.</p>
         <p>Warranty envelope: the operating conditions under which
         promised performance, remedies, or availability commitments
         remain valid.</p>
@@ -10096,13 +10133,13 @@ opportunity cost, and operating limits?</code></pre>
         on depth of discharge, discharge/charge rate, and environmental
         conditions. Michaelides describes structural change, electrode
         deformation, dendrite and filament formation, self-discharge,
-        and thermal limits as real physical mechanisms, not accounting
-        conventions.</p>
+        and thermal limits as physical mechanisms with accounting
+        consequences.</p>
         <p>The practical lesson:</p>
         <pre class="text"><code>the same MWh can have different wear cost depending on how, when, and where it is cycled</code></pre>
-        <p>A shallow cycle inside a comfortable operating window is not
-        the same as a deep, high-power cycle in poor thermal
-        conditions.</p>
+        <p>A shallow cycle inside a comfortable operating window has a
+        different wear profile from a deep, high-power cycle in poor
+        thermal conditions.</p>
         </section>
         <section id="numerical-intuition-25" class="level4">
         <h4>Numerical Intuition</h4>
@@ -10149,7 +10186,13 @@ degradation_cost = 16 EUR/MWh discharged</code></pre>
         <section id="the-warranty-is-a-control-surface" class="level4">
         <h4>The Warranty Is A Control Surface</h4>
         <p>A warranty shapes the dispatch problem.</p>
-        <p>It may constrain or price:</p>
+        <p>DNV’s storage-warranty review is useful because it turns
+        warranty language into model variables. It stresses that storage
+        warranties vary across projects and that degradation depends on
+        use, rest time, state of charge, temperature, cycling, and other
+        operating metrics. A warranty can therefore change feasible
+        dispatch before any legal remedy is discussed.</p>
+        <p>Common dimensions to read into the model include:</p>
         <table>
         <colgroup>
         <col style="width: 50%" />
@@ -10157,54 +10200,61 @@ degradation_cost = 16 EUR/MWh discharged</code></pre>
         </colgroup>
         <thead>
         <tr>
-        <th>Warranty, insurance, or performance dimension</th>
+        <th>Warranty or performance dimension</th>
         <th>Dispatch implication</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-        <td>Annual throughput</td>
-        <td>Too many cycles this year may consume future value</td>
+        <td>Usage or cycling degradation</td>
+        <td>Annual cycles or discharged MWh may consume the capacity
+        curve faster</td>
         </tr>
         <tr>
-        <td>Insurance cycle cap</td>
-        <td>The insurer may restrict annual or lifetime cycling, duty
-        cycles, or approved operating modes</td>
+        <td>Calendar degradation</td>
+        <td>Underuse still consumes time-based capacity headroom</td>
         </tr>
         <tr>
-        <td>Depth of discharge</td>
-        <td>Deep cycles can be more expensive than shallow cycles</td>
+        <td>Warranty term</td>
+        <td>Project life beyond the term needs augmentation,
+        replacement, or residual-value treatment</td>
         </tr>
         <tr>
-        <td>State-of-charge window</td>
-        <td>The battery may need to avoid high or low SoC regions</td>
+        <td>Temperature</td>
+        <td>Thermal-management limits can bind operation and
+        auxiliary-power needs</td>
         </tr>
         <tr>
-        <td>C-rate or power level</td>
-        <td>Fast charge/discharge can increase losses or wear</td>
+        <td>Average SoC</td>
+        <td>A high average SoC can make a revenue-maximizing strategy
+        warranty-incompatible</td>
         </tr>
         <tr>
-        <td>Temperature range</td>
-        <td>Thermal conditions can bind operation or availability</td>
+        <td>C-rate</td>
+        <td>Fast charge/discharge can void or weaken remedies, or
+        accelerate degradation</td>
         </tr>
         <tr>
-        <td>Capacity-retention guarantee</td>
-        <td>Aggressive dispatch may pull forward augmentation</td>
+        <td>Data storage</td>
+        <td>Battery management system data becomes evidence in warranty
+        or safety disputes</td>
         </tr>
         <tr>
-        <td>Availability guarantee</td>
-        <td>Outages and maintenance windows have revenue
-        consequences</td>
-        </tr>
-        <tr>
-        <td>Approved revenue modes</td>
-        <td>Some services may be excluded or require OEM approval</td>
+        <td>Response and repair time</td>
+        <td>Remedy delays can turn a technical claim into lost revenue
+        or availability</td>
         </tr>
         </tbody>
         </table>
         <p>Actual warranty and insurance language is project-specific.
         The modeling conclusion is general:</p>
         <pre class="text"><code>dispatch consumes contractual and insurability headroom as well as physical life</code></pre>
+        <p>DNV also describes more flexible warranty structures where
+        operational metrics feed formulas rather than fixed tables. That
+        is commercially important: the owner may be allowed to cycle
+        harder during a high-value event, but the model must show the
+        degradation, warranty, augmentation, and future-value
+        consequence of doing so.</p>
         <p>Illustrative throughput check:</p>
         <ul>
         <li>battery: <code>30 MW / 60 MWh</code></li>
@@ -10283,8 +10333,10 @@ degradation_cost = 16 EUR/MWh discharged</code></pre>
         <pre class="text"><code>degradation_cost_t = f(throughput_t, depth_t, power_t, temperature_t, soc_t)</code></pre>
         <p>In many commercial models this function is simplified. That
         is acceptable if the simplification is explicit and
-        stress-tested. It is not acceptable if the model quietly assumes
-        cycling is free.</p>
+        stress-tested. The model fails if it quietly assumes cycling is
+        free, or if it optimizes revenue under a dispatch pattern that
+        the warranty, data-retention process, thermal-management system,
+        or repair-time commitment cannot support.</p>
         </section>
         <section id="calendar-aging-changes-the-wait-decision"
         class="level4">
@@ -10366,9 +10418,8 @@ insurance policy, availability plan, or augmentation budget can support</code></
         <section id="recap-26" class="level4">
         <h4>Recap</h4>
         <p>Battery dispatch should be priced as the use of a finite
-        asset, not as free movement between two market prices. The
-        operative metric is degradation-adjusted spread: discharge
-        revenue minus charging energy adjusted for round-trip
+        asset. The operative metric is degradation-adjusted spread:
+        discharge revenue minus charging energy adjusted for round-trip
         efficiency, degradation cost, fees, tariffs, opportunity cost,
         and any warranty, insurance, availability, or augmentation
         consequences. That turns the opening trade into a different
@@ -11502,7 +11553,7 @@ The marginal portfolio risk is materially different.</code></pre>
         <p class="lecture-refs">
         References: <sup><a href="#ref-3">[3]</a>
         <a href="#ref-4">[4]</a> <a href="#ref-12">[12]</a>
-        <a href="#ref-20">[20]</a> <a href="#ref-36">[36]</a></sup>
+        <a href="#ref-20">[20]</a> <a href="#ref-37">[37]</a></sup>
         </p>
         <p>A quarterly report shows the trading partner earned less than
         the benchmark used in the plan. Sales needs an explanation,
@@ -11934,9 +11985,9 @@ The marginal portfolio risk is materially different.</code></pre>
         <p class="lecture-refs">
         References: <sup><a href="#ref-3">[3]</a>
         <a href="#ref-20">[20]</a> <a href="#ref-25">[25]</a>
-        <a href="#ref-41">[41]</a> <a href="#ref-36">[36]</a>
+        <a href="#ref-43">[43]</a> <a href="#ref-37">[37]</a>
         <a href="#ref-6">[6]</a> <a href="#ref-33">[33]</a>
-        <a href="#ref-42">[42]</a></sup>
+        <a href="#ref-44">[44]</a></sup>
         </p>
         <p>A renewable IPP can spend its first analytics budget many
         ways: a pricing model, a data platform, an energy trading and
@@ -12548,7 +12599,7 @@ The marginal portfolio risk is materially different.</code></pre>
         <h3>Chapter 17. Trading Risk, Credit, Liquidity, And
         Controls</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-41">[41]</a>
+        References: <sup><a href="#ref-43">[43]</a>
         <a href="#ref-25">[25]</a></sup>
         </p>
         <p>A portfolio manager opens the morning meeting by saying that
@@ -13332,7 +13383,7 @@ collateral need = 900,000 x 80%
         References: <sup><a href="#ref-13">[13]</a>
         <a href="#ref-14">[14]</a> <a href="#ref-4">[4]</a>
         <a href="#ref-19">[19]</a> <a href="#ref-20">[20]</a>
-        <a href="#ref-37">[37]</a></sup>
+        <a href="#ref-39">[39]</a></sup>
         </p>
         <p>A quarter-hour price is only useful if the portfolio can do
         something with it. A solar forecast moves after the day-ahead
@@ -13604,7 +13655,7 @@ collateral need = 900,000 x 80%
         <p class="lecture-refs">
         References: <sup><a href="#ref-7">[7]</a>
         <a href="#ref-8">[8]</a> <a href="#ref-21">[21]</a>
-        <a href="#ref-11">[11]</a> <a href="#ref-43">[43]</a></sup>
+        <a href="#ref-11">[11]</a> <a href="#ref-45">[45]</a></sup>
         </p>
         <p>A site with grid rights is more than a parcel of land and a
         resource study. It is an option on scarce network capacity: the
@@ -13874,9 +13925,9 @@ local-flexibility value = qualified flexible MW x expected net payment x bankabi
         <p class="lecture-refs">
         References: <sup><a href="#ref-7">[7]</a>
         <a href="#ref-4">[4]</a> <a href="#ref-11">[11]</a>
-        <a href="#ref-44">[44]</a> <a href="#ref-22">[22]</a>
-        <a href="#ref-43">[43]</a> <a href="#ref-45">[45]</a>
-        <a href="#ref-46">[46]</a></sup>
+        <a href="#ref-46">[46]</a> <a href="#ref-22">[22]</a>
+        <a href="#ref-45">[45]</a> <a href="#ref-47">[47]</a>
+        <a href="#ref-48">[48]</a></sup>
         </p>
         <p>A transmission constraint does not disappear because a market
         design hides it. It can show up as an area-price spread, a nodal
@@ -14473,9 +14524,10 @@ control-right and partner-governance cost = 0.80 EUR/MWh x 87,600 = 70,080 EUR/y
         <h3>Chapter 6. Long-Duration Versus Short-Duration Storage</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-32">[32]</a>
-        <a href="#ref-5">[5]</a> <a href="#ref-38">[38]</a>
-        <a href="#ref-35">[35]</a> <a href="#ref-39">[39]</a>
-        <a href="#ref-11">[11]</a> <a href="#ref-15">[15]</a></sup>
+        <a href="#ref-5">[5]</a> <a href="#ref-40">[40]</a>
+        <a href="#ref-35">[35]</a> <a href="#ref-41">[41]</a>
+        <a href="#ref-11">[11]</a> <a href="#ref-15">[15]</a>
+        <a href="#ref-49">[49]</a></sup>
         </p>
         <p>A project memo compares two battery sizes, one grid
         connection, one possible evening customer product, and a trading
@@ -14493,8 +14545,8 @@ control-right and partner-governance cost = 0.80 EUR/MWh x 87,600 = 70,080 EUR/y
         <ul>
         <li>Build a <code>50 MW / 100 MWh</code> battery.</li>
         <li>Build a <code>50 MW / 200 MWh</code> battery.</li>
-        <li>Do not build the extra duration; buy flexibility, change the
-        PPA shape, or wait.</li>
+        <li>Skip the extra duration; buy flexibility, change the PPA
+        shape, or wait.</li>
         </ul>
         <p>The site has good solar, a constrained grid connection, a
         possible evening product for a customer, and a trader who says
@@ -14521,8 +14573,9 @@ control-right and partner-governance cost = 0.80 EUR/MWh x 87,600 = 70,080 EUR/y
         <p>Only after those three curves are visible does the familiar
         identity matter:</p>
         <pre class="text"><code>energy = power x time</code></pre>
-        <p>That identity tells us the size of the insurance policy. It
-        does not tell us whether the insurance is worth buying.</p>
+        <p>That identity tells us the size of the insurance policy. The
+        value test comes from the scarcity-duration distribution, the
+        revenue or avoided cost, and the alternatives.</p>
         </section>
         <section id="definitions-32" class="level4">
         <h4>Definitions</h4>
@@ -14530,11 +14583,12 @@ control-right and partner-governance cost = 0.80 EUR/MWh x 87,600 = 70,080 EUR/y
         services, intraday shifting, reserves, congestion windows,
         imbalance control, or daily shape problems. A
         <code>2-hour</code> battery and a <code>4-hour</code> battery
-        are common illustrative examples, not universal categories.</p>
+        are common illustrative examples; real categories depend on
+        product and system context.</p>
         <p>Long-duration energy storage: storage intended to cover
         scarcity periods longer than ordinary intraday shifting. The
-        threshold is not universal. The economically relevant threshold
-        is the duration at which the next MWh changes a decision.</p>
+        economically relevant threshold is the duration at which the
+        next MWh changes a decision.</p>
         <p>Scarcity-duration distribution: a table or curve showing how
         long the valuable shortages or obligations last.</p>
         <p>Value-duration curve: the marginal value of adding each extra
@@ -14577,8 +14631,10 @@ required margin = 1,750,000 USD/year / 3,500 MWh/year
         <code>3.4 hours</code> by <code>2050</code>. For four-hour
         utility-scale battery storage, it projects average total upfront
         costs falling from <code>290 USD/kWh</code> in <code>2022</code>
-        to <code>175 USD/kWh</code> in <code>2030</code>. These are
-        global scenario anchors, not a site quote.</p>
+        to <code>175 USD/kWh</code> in <code>2030</code>. Use these as
+        global scenario anchors; a site quote still needs
+        project-specific EPC, grid, warranty, insurance, and contracting
+        terms.</p>
         <section id="the-extra-two-hours-1" class="level5">
         <h5>The Extra Two Hours</h5>
         <p>Take the second and third hours of a battery seriously as a
@@ -14596,8 +14652,9 @@ required margin = 1,750,000 USD/year / 3,500 MWh/year
         <p>If the annual carrying charge is simplified to
         <code>10%</code>:</p>
         <pre class="text"><code>annual hurdle = 17,500,000 USD x 10% = 1,750,000 USD/year</code></pre>
-        <p>Use this as a sanity screen, not as an EPC estimate or a
-        marginal energy-block quote.</p>
+        <p>Use this as a sanity screen. An EPC estimate or marginal
+        energy-block quote needs project design, supplier terms, site
+        conditions, taxes, and financing.</p>
         <p>Now the decision becomes practical:</p>
         <ul>
         <li>If the extra two hours can earn <code>50 USD/MWh</code> net
@@ -14779,6 +14836,18 @@ required margin = 1,750,000 USD/year / 3,500 MWh/year
         storage-specific tariff treatment can change the economics of
         the same physical battery. A storage project is also a
         grid-rights instrument.</p>
+        <p>The storage substitute can be something other than a battery.
+        A DNV/Nyrstar Netherlands case study describes an industrial
+        “virtual battery” at a zinc electrolysis site: roughly
+        <code>70 MW</code> of adjustable load over
+        <code>3-4 days</code>, created by using process buffers rather
+        than electrochemical storage. The same paper estimates direct
+        economic benefit at <code>190,000 EUR/MW/year</code> in its
+        Netherlands case context. Use those numbers only inside that
+        case context; the portable lesson is the decision logic. For
+        multi-day scarcity, compare longer battery duration with demand
+        flexibility, process buffers, grid-service contracts, and
+        connection agreements.</p>
         <p>For multi-day or seasonal scarcity, the hurdle changes again.
         The IEA report says batteries are poorly suited to balancing
         over weeks or seasons. Jenny Chase makes the same economic point
@@ -14810,15 +14879,16 @@ required margin = 1,750,000 USD/year / 3,500 MWh/year
         <h4>Current Debates And Caveats</h4>
         <p>Battery duration is moving. The IEA scenario material points
         toward a larger share of four-to-eight-hour battery systems as
-        solar shares grow, while also warning that batteries are not the
-        natural solution for weekly or seasonal balancing.</p>
-        <p>Technologies for longer duration may include pumped hydro,
-        compressed air, flow batteries, iron-air batteries, thermal
-        storage, hydrogen, flexible demand, interconnection, and firm
-        low-emission generation. No one of these is automatically the
-        answer. Each has a different maturity, siting problem,
-        efficiency, capex structure, permitting risk, response time, and
-        bankability profile.</p>
+        solar shares grow, while weekly or seasonal balancing usually
+        points beyond batteries alone.</p>
+        <p>Technologies and substitutes for longer duration may include
+        pumped hydro, compressed air, flow batteries, iron-air
+        batteries, thermal storage, hydrogen, flexible industrial
+        demand, process buffers, interconnection, and firm low-emission
+        generation. No one of these is automatically the answer. Each
+        has a different maturity, siting problem, efficiency, capex
+        structure, permitting risk, response time, control-right
+        problem, and bankability profile.</p>
         <p>The practical debate for an IPP is:</p>
         <pre class="text"><code>Which scarcity durations are we paid to cover, and is ownership the best way to cover them?</code></pre>
         </section>
@@ -14842,7 +14912,7 @@ required margin = 1,750,000 USD/year / 3,500 MWh/year
         <h3>Chapter 7. Data Centers And 24/7 Clean Energy</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-6">[6]</a>
-        <a href="#ref-31">[31]</a> <a href="#ref-47">[47]</a></sup>
+        <a href="#ref-31">[31]</a> <a href="#ref-50">[50]</a></sup>
         </p>
         <p>A data-center buyer can make a clean-power offer look simple:
         large load, long horizon, serious credit, visible climate claim.
@@ -15322,8 +15392,8 @@ firming_at_risk = 13,000 MWh x 150 EUR/MWh
         <p class="lecture-refs">
         References: <sup><a href="#ref-21">[21]</a>
         <a href="#ref-22">[22]</a> <a href="#ref-18">[18]</a>
-        <a href="#ref-11">[11]</a> <a href="#ref-48">[48]</a>
-        <a href="#ref-49">[49]</a></sup>
+        <a href="#ref-11">[11]</a> <a href="#ref-51">[51]</a>
+        <a href="#ref-52">[52]</a></sup>
         </p>
         <p>A project team can price the battery, the transformer, the
         grid connection, and the expected energy-market stack. Then an
@@ -15723,8 +15793,8 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <h3>Chapter 9. Artificial Intelligence And Machine Learning In
         Energy Management</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-36">[36]</a>
-        <a href="#ref-38">[38]</a> <a href="#ref-50">[50]</a></sup>
+        References: <sup><a href="#ref-37">[37]</a>
+        <a href="#ref-40">[40]</a> <a href="#ref-53">[53]</a></sup>
         </p>
         <p>A forecast arrives before the day-ahead gate closes, or after
         the trader has already acted. A dispatch recommendation names a
@@ -16002,7 +16072,7 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <h3>Chapter 10. Build, Buy, Or Outsource The Trading Layer?</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-3">[3]</a>
-        <a href="#ref-12">[12]</a> <a href="#ref-36">[36]</a></sup>
+        <a href="#ref-12">[12]</a> <a href="#ref-37">[37]</a></sup>
         </p>
         <p>The contract is signed, the partner has the market systems,
         and nominations, balancing, and dispatch can now move through
@@ -16396,8 +16466,8 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <section id="v3-l11" class="level3">
         <h3>Chapter 11. The Next-Generation IPP Operating Model</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-42">[42]</a>
-        <a href="#ref-25">[25]</a> <a href="#ref-50">[50]</a></sup>
+        References: <sup><a href="#ref-44">[44]</a>
+        <a href="#ref-25">[25]</a> <a href="#ref-53">[53]</a></sup>
         </p>
         <p>An active renewable IPP has more recurring choices than a
         simple asset owner: quote a shaped PPA, size a battery, decide
@@ -16738,8 +16808,8 @@ and with what feedback after delivery?</code></pre>
         References: <sup><a href="#ref-13">[13]</a>
         <a href="#ref-3">[3]</a> <a href="#ref-4">[4]</a>
         <a href="#ref-6">[6]</a> <a href="#ref-11">[11]</a>
-        <a href="#ref-32">[32]</a> <a href="#ref-42">[42]</a>
-        <a href="#ref-36">[36]</a> <a href="#ref-50">[50]</a></sup>
+        <a href="#ref-32">[32]</a> <a href="#ref-44">[44]</a>
+        <a href="#ref-37">[37]</a> <a href="#ref-53">[53]</a></sup>
         </p>
         <p>A customer asks for clean power in a shape the solar site
         does not naturally produce. The battery concept looks useful,
@@ -17193,7 +17263,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         Markets</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-22">[22]</a>
-        <a href="#ref-44">[44]</a> <a href="#ref-38">[38]</a>
+        <a href="#ref-46">[46]</a> <a href="#ref-40">[40]</a>
         <a href="#ref-32">[32]</a></sup>
         </p>
         <p>A renewable IPP is offered three ways to respond to scarcity:
@@ -17554,8 +17624,8 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <section id="v3-l14" class="level3">
         <h3>Chapter 14. Market Power And Scarcity Pricing</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-44">[44]</a>
-        <a href="#ref-22">[22]</a> <a href="#ref-45">[45]</a></sup>
+        References: <sup><a href="#ref-46">[46]</a>
+        <a href="#ref-22">[22]</a> <a href="#ref-47">[47]</a></sup>
         </p>
         <p>A high-price hour needs an evidence pack. The system may have
         been genuinely short of energy, capacity, ramping, reserves, or
@@ -17906,7 +17976,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         References: <sup><a href="#ref-6">[6]</a>
         <a href="#ref-29">[29]</a> <a href="#ref-30">[30]</a>
         <a href="#ref-31">[31]</a> <a href="#ref-33">[33]</a>
-        <a href="#ref-42">[42]</a></sup>
+        <a href="#ref-44">[44]</a></sup>
         </p>
         <p>A buyer asking for “solar plus storage” is usually asking for
         several things at once: price certainty, evidence of clean
@@ -18267,9 +18337,9 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <h3>Case 2. The 1h, 2h, Or 4h Battery Decision</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-35">[35]</a>
-        <a href="#ref-39">[39]</a> <a href="#ref-5">[5]</a>
+        <a href="#ref-41">[41]</a> <a href="#ref-5">[5]</a>
         <a href="#ref-32">[32]</a> <a href="#ref-11">[11]</a>
-        <a href="#ref-33">[33]</a></sup>
+        <a href="#ref-36">[36]</a> <a href="#ref-33">[33]</a></sup>
         </p>
         <p>Battery duration is an investment claim: the next MWh of
         energy capacity must earn more than it costs after efficiency,
@@ -18446,10 +18516,12 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         </tr>
         <tr>
         <td>Cycle, warranty, and insurance budget</td>
-        <td>modeled throughput is consistent with degradation allowance,
-        warranty terms, and insurance policy</td>
-        <td>optimizer earns value by consuming life or coverage headroom
-        not priced in the case</td>
+        <td>modeled throughput, average state of charge, C-rate or
+        charge/discharge rate, temperature envelope, data-retention
+        obligation, degradation allowance, warranty terms, and insurance
+        policy are mutually compatible</td>
+        <td>optimizer earns value by consuming life, evidence, or
+        coverage headroom not priced in the case</td>
         </tr>
         <tr>
         <td>Grid import and export rights</td>
@@ -18481,6 +18553,13 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         </tr>
         </tbody>
         </table>
+        <p>DNV’s storage-warranty review makes the second gate concrete.
+        A capacity warranty may care about usage/cycling degradation,
+        calendar degradation, temperature, average state of charge,
+        C-rate, data storage, and repair response. The case therefore
+        treats “cycles/year” as a commercial shorthand. Before live use,
+        replace it with the warranty-compatible operating envelope and
+        the actual insurance-policy limits.</p>
         </section>
         <section id="tasks-1" class="level4">
         <h4>Tasks</h4>
@@ -18580,8 +18659,11 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <li>warranty, insurance, and augmentation terms showing that the
         value can be captured without consuming battery life or coverage
         headroom faster than priced</li>
-        <li>dispatch-control rights showing that PPA, reserve, merchant,
-        and emergency uses do not all rely on the same state of
+        <li>battery management system data-access and storage
+        arrangements strong enough to support warranty, availability,
+        and safety disputes</li>
+        <li>dispatch-control rights showing how PPA, reserve, merchant,
+        and emergency uses are prioritized against the same state of
         charge</li>
         </ul>
         </section>
@@ -18636,7 +18718,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         References: <sup><a href="#ref-11">[11]</a>
         <a href="#ref-9">[9]</a> <a href="#ref-10">[10]</a>
         <a href="#ref-26">[26]</a> <a href="#ref-27">[27]</a>
-        <a href="#ref-21">[21]</a> <a href="#ref-43">[43]</a></sup>
+        <a href="#ref-21">[21]</a> <a href="#ref-45">[45]</a></sup>
         </p>
         <p>Solar development often begins with land and irradiation.
         Project value often ends with grid access, tariffs, congestion,
@@ -18985,8 +19067,9 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         References: <sup><a href="#ref-4">[4]</a>
         <a href="#ref-17">[17]</a> <a href="#ref-18">[18]</a>
         <a href="#ref-19">[19]</a> <a href="#ref-35">[35]</a>
-        <a href="#ref-5">[5]</a> <a href="#ref-33">[33]</a>
-        <a href="#ref-40">[40]</a></sup>
+        <a href="#ref-5">[5]</a> <a href="#ref-36">[36]</a>
+        <a href="#ref-38">[38]</a> <a href="#ref-33">[33]</a>
+        <a href="#ref-42">[42]</a></sup>
         </p>
         <p>A battery revenue stack is a set of coupled obligations on
         the same MW, MWh, state of charge, grid rights, cycle budget,
@@ -19008,6 +19091,13 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         asks whether part of the battery should be reserved for shaped
         PPA delivery.</p>
         <p>The project cannot sell the same flexibility three times.</p>
+        <p>The optimizer cannot make that conflict disappear. DNV’s
+        hybrid-storage optimizer material is useful here because it
+        frames dispatch as a constrained problem over market products,
+        loss trees, interconnection limits, cycling and throughput
+        requirements, warranty strategies, and capacity maintenance. A
+        revenue stack is credible only if the same constraint set
+        governs every product in the stack.</p>
         </section>
         <section id="scenario-data-3" class="level4">
         <h4>Scenario Data</h4>
@@ -19208,9 +19298,9 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <h4>Decision Memo</h4>
         <p>Recommendation: contract a portion of the asset under a
         floor-like structure and keep a meaningful residual slice
-        merchant. Do not allocate battery capacity to the shaped PPA
-        unless the PPA premium rises or the PPA materially improves
-        project financeability.</p>
+        merchant. Allocate battery capacity to the shaped PPA only if
+        the PPA premium rises or the PPA materially improves project
+        financeability.</p>
         <p>The binding constraint is control-right allocation. Every MW
         reserved for a customer profile is a MW unavailable for reserve
         capacity, arbitrage, or response to a new market product. The
@@ -19219,11 +19309,17 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         degradation limits, insurance-cycle limits, minimum state of
         charge, availability reporting, termination triggers, and
         emergency override.</p>
+        <p>It should also state the evidence layer: battery management
+        system data access, data retention, performance-test method,
+        availability calculation, response/repair clock, and who may
+        override dispatch during safety, grid, or warranty events.
+        Without that evidence layer, the floor provider, optimizer,
+        customer, insurer, and owner can each believe they own the same
+        operating headroom.</p>
         <p>The commercial team should price shaped PPA flexibility at
-        least at its opportunity cost, not at the accounting cost of the
-        battery. If the customer cannot pay the opportunity cost, the
-        better product is a narrower shaped PPA plus a separate floor or
-        optimizer agreement for the battery.</p>
+        its opportunity cost. If the customer cannot pay the opportunity
+        cost, the better product is a narrower shaped PPA plus a
+        separate floor or optimizer agreement for the battery.</p>
         <p>The decision pack should show two values side by side:
         expected value and financeable downside value. A route that
         maximizes expected merchant upside may still be the wrong first
@@ -19251,9 +19347,10 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         optimizer assumes, part of the stack is unavailable unless the
         owner changes coverage or changes operation.</p>
         <p>Both versions double-count flexibility. The same MW, MWh,
-        state of charge, control rights, cycle budget, and grid
-        connection must serve every product. Revenue stacking is
-        constrained co-optimization, not spreadsheet addition.</p>
+        state of charge, control rights, cycle budget, warranty
+        envelope, data evidence, and grid connection must serve every
+        product. Revenue stacking is constrained co-optimization; simple
+        spreadsheet addition double-counts the asset.</p>
         </section>
         <section id="links-back-to-the-lectures-3" class="level4">
         <h4>Links Back To The Lectures</h4>
@@ -19277,8 +19374,8 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <p class="lecture-refs">
         References: <sup><a href="#ref-3">[3]</a>
         <a href="#ref-4">[4]</a> <a href="#ref-12">[12]</a>
-        <a href="#ref-20">[20]</a> <a href="#ref-36">[36]</a>
-        <a href="#ref-41">[41]</a></sup>
+        <a href="#ref-20">[20]</a> <a href="#ref-37">[37]</a>
+        <a href="#ref-43">[43]</a></sup>
         </p>
         <p>A trading or optimization partner can execute the market
         interface, but the asset owner still needs evidence before it
@@ -19757,7 +19854,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <h3>Case 6. Data-Centre 24/7 Product Screen</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-6">[6]</a>
-        <a href="#ref-31">[31]</a> <a href="#ref-47">[47]</a>
+        <a href="#ref-31">[31]</a> <a href="#ref-50">[50]</a>
         <a href="#ref-33">[33]</a> <a href="#ref-29">[29]</a></sup>
         </p>
         <p>Large electricity buyers increasingly care about both when
@@ -20082,9 +20179,9 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <section id="case-07" class="level3">
         <h3>Case 7. Year-One Energy-Management Operating Model</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-42">[42]</a>
-        <a href="#ref-41">[41]</a> <a href="#ref-25">[25]</a>
-        <a href="#ref-36">[36]</a> <a href="#ref-6">[6]</a>
+        References: <sup><a href="#ref-44">[44]</a>
+        <a href="#ref-43">[43]</a> <a href="#ref-25">[25]</a>
+        <a href="#ref-37">[37]</a> <a href="#ref-6">[6]</a>
         <a href="#ref-33">[33]</a></sup>
         </p>
         <p>An independent power producer (IPP) becomes an energy manager
@@ -20960,6 +21057,13 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Balance Service Provider: entity providing balancing services to
         the TSO.
         </dd>
+        <dt id="glossary-c-rate" data-term="C-rate" data-definition="Charge or discharge rate relative to battery energy capacity; 1C roughly means full usable charge or discharge in one hour.">
+        C-rate
+        </dt>
+        <dd>
+        Charge or discharge rate relative to battery energy capacity; 1C
+        roughly means full usable charge or discharge in one hour.
+        </dd>
         <dt id="glossary-calculation-period" data-term="Calculation period" data-definition="Time period over which a reference price or settlement amount is calculated.">
         Calculation period
         </dt>
@@ -21023,6 +21127,14 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         <dd>
         Market or regulatory mechanism that pays for capacity,
         availability, or reliability contribution in addition to energy.
+        </dd>
+        <dt id="glossary-capacity-warranty" data-term="Capacity warranty" data-definition="Warranty or performance guarantee specifying retained usable battery capacity over time, usually conditional on operating conditions and measurement method.">
+        Capacity warranty
+        </dt>
+        <dd>
+        Warranty or performance guarantee specifying retained usable
+        battery capacity over time, usually conditional on operating
+        conditions and measurement method.
         </dd>
         <dt id="glossary-capture-price" data-term="Capture price" data-definition="Generation-weighted average market price received by an asset or technology.">
         Capture price
@@ -21743,6 +21855,14 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Probability that available resources cannot meet load in a
         specified period.
         </dd>
+        <dt id="glossary-loss-tree" data-term="Loss tree" data-definition="Engineering model that tracks energy losses through a renewable, storage, or hybrid system so dispatch and valuation use deliverable energy rather than ideal nameplate energy.">
+        Loss tree
+        </dt>
+        <dd>
+        Engineering model that tracks energy losses through a renewable,
+        storage, or hybrid system so dispatch and valuation use
+        deliverable energy rather than ideal nameplate energy.
+        </dd>
         <dt id="glossary-margin-call" data-term="Margin call" data-definition="Demand to post additional collateral after exposure or collateral requirements change.">
         Margin call
         </dt>
@@ -21838,6 +21958,15 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Concern that market revenues may be insufficient to finance
         needed capacity because scarcity or investment signals are
         muted, risky, capped, or incomplete.
+        </dd>
+        <dt id="glossary-mixed-integer-linear-programming" data-term="Mixed-integer linear programming" data-definition="Optimization method where some variables are continuous and others are integer or binary, useful when dispatch choices include on/off, mutually exclusive, or commitment-style decisions.">
+        Mixed-integer linear programming
+        </dt>
+        <dd>
+        Optimization method where some variables are continuous and
+        others are integer or binary, useful when dispatch choices
+        include on/off, mutually exclusive, or commitment-style
+        decisions.
         </dd>
         <dt id="glossary-model-inventory" data-term="Model inventory" data-definition="Register of models, owners, purposes, inputs, outputs, limits, validation status, and retirement criteria.">
         Model inventory
@@ -21958,12 +22087,13 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         <dd>
         Maximum load over a defined period and geography.
         </dd>
-        <dt id="glossary-perfect-foresight-dispatch" data-term="Perfect foresight dispatch" data-definition="Dispatch optimized with actual future information; useful as an upper bound, not a fair operational benchmark.">
+        <dt id="glossary-perfect-foresight-dispatch" data-term="Perfect foresight dispatch" data-definition="Dispatch optimized with actual future information; useful as an upper bound for operational benchmarks built from tradable information available at decision time.">
         Perfect foresight dispatch
         </dt>
         <dd>
         Dispatch optimized with actual future information; useful as an
-        upper bound, not a fair operational benchmark.
+        upper bound for operational benchmarks built from tradable
+        information available at decision time.
         </dd>
         <dt id="glossary-physical-withholding" data-term="Physical withholding" data-definition="Making capacity unavailable even though it could physically produce.">
         Physical withholding
@@ -22350,6 +22480,15 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Forecast or model error weighted by the economic consequence of
         being wrong in that interval or scenario.
         </dd>
+        <dt id="glossary-virtual-battery" data-term="Virtual battery" data-definition="Controllable demand or process flexibility that can absorb, defer, or release electricity demand over time in a way that mimics some storage services without storing electricity electrochemically.">
+        Virtual battery
+        </dt>
+        <dd>
+        Controllable demand or process flexibility that can absorb,
+        defer, or release electricity demand over time in a way that
+        mimics some storage services without storing electricity
+        electrochemically.
+        </dd>
         <dt id="glossary-voltage" data-term="Voltage" data-definition="Electrical potential difference; grid voltage must remain within operational limits.">
         Voltage
         </dt>
@@ -22504,59 +22643,69 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Transitions.
         </li>
         <li id="ref-36">
+        DNV, Energy Storage Capacity Warranties: Beyond the Fine Print.
+        </li>
+        <li id="ref-37">
         Priyanka Shinde, Efficient Trading in the Short-term Electricity
         Markets for Integration of Renewable Energy Sources.
         </li>
-        <li id="ref-37">
+        <li id="ref-38">
+        DNV, Hybrid Energy Resource Optimizer.
+        </li>
+        <li id="ref-39">
         Alexandre Danthine, Unlocking Continuous Intraday Liquidity.
         </li>
-        <li id="ref-38">
+        <li id="ref-40">
         Godfrey Boyle, Renewable Electricity and the Grid: The Challenge
         of Variability.
         </li>
-        <li id="ref-39">
+        <li id="ref-41">
         NREL, Annual Technology Baseline: The 2024 Electricity Update.
         </li>
-        <li id="ref-40">
+        <li id="ref-42">
         Julien Jomaux, The Big Beautiful Batteries; Long-term BESS
         Revenues: My Personal Take; The Revenue Illusion in Battery
         Storage.
         </li>
-        <li id="ref-41">
+        <li id="ref-43">
         Professional Risk Managers’ International Association, The
         Professional Risk Managers’ Guide to the Energy Market.
         </li>
-        <li id="ref-42">
+        <li id="ref-44">
         Pexapark, The Next-Gen IPP Playbook.
         </li>
-        <li id="ref-43">
+        <li id="ref-45">
         Tom Brown and Philipp Glaum, Energy Economics Lecture 9: The
         Electricity Grid.
         </li>
-        <li id="ref-44">
+        <li id="ref-46">
         Anna Creti and Fulvio Fontini, Economics of Electricity Markets,
         Competition and Rules.
         </li>
-        <li id="ref-45">
+        <li id="ref-47">
         Ekaterina Moiseeva and Matin Bagherpour, Theory and Mathematics
         of Market Power in Electricity Markets.
         </li>
-        <li id="ref-46">
+        <li id="ref-48">
         Bertrand Cornelusse, How the European Day-Ahead Electricity
         Market Works lecture materials.
         </li>
-        <li id="ref-47">
+        <li id="ref-49">
+        DNV and Nyrstar, Unlocking Industrial Flexibility: The Virtual
+        Battery.
+        </li>
+        <li id="ref-50">
         ENTSO-E, Data centres and the power system: expected trends,
         challenges, and opportunities.
         </li>
-        <li id="ref-48">
+        <li id="ref-51">
         Damien Ernst, Energy Markets and Regulation lecture materials.
         </li>
-        <li id="ref-49">
+        <li id="ref-52">
         Alexandre Danthine and Chaspierre, analysis on renewables,
         batteries, and system services.
         </li>
-        <li id="ref-50">
+        <li id="ref-53">
         PRMIA, The Professional Risk Managers’ Guide to the Energy
         Market.
         </li>
