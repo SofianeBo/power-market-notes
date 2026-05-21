@@ -1705,11 +1705,12 @@
         id="toc-power-markets-course">Power Markets: Technical
         Onboarding Notes</a>
         <ul>
-        <li><a href="#how-to-read-this" id="toc-how-to-read-this">How To
-        Read This</a>
+        <li><a href="#how-to-use-these-notes"
+        id="toc-how-to-use-these-notes">How To Use These Notes</a>
         <ul>
-        <li><a href="#how-to-read" id="toc-how-to-read">How To
-        Read</a></li>
+        <li><a href="#how-to-use-these-notes-1"
+        id="toc-how-to-use-these-notes-1">How To Use These
+        Notes</a></li>
         <li><a href="#course-structure" id="toc-course-structure">Course
         Structure</a></li>
         <li><a href="#methodology"
@@ -1850,15 +1851,15 @@
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.31.3
+        v0.31.4
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
         physical constraints, market institutions, contracts, numerical
         intuition, and applied decision cases.</p>
         </blockquote>
-        <section id="how-to-read-this" class="level2">
-        <h2>How To Read This</h2>
+        <section id="how-to-use-these-notes" class="level2">
+        <h2>How To Use These Notes</h2>
         <p>These notes are for building working judgment in power
         markets, especially around renewable portfolios. The path starts
         with the constraints that make electricity hard to
@@ -1868,20 +1869,14 @@
         PPA, how much storage duration to buy, what a dispatch model is
         allowed to assume, how to govern partners, and which market
         claims deserve capital.</p>
-        <section id="how-to-read" class="level3">
-        <h3>How To Read</h3>
-        <ul>
-        <li>Read Volume I in order if the domain is new; it builds a
-        working map of the physical and institutional machine.</li>
-        <li>Use Volume II to practice translating that map into
-        commercial and analytical questions: PPAs, tariffs, storage,
-        dispatch, risk, and portfolio controls.</li>
-        <li>Use Volume III to get oriented in strategy, market design,
-        current debates, and claims that depend on changing
-        evidence.</li>
-        <li>Use the Casebook to test the concepts against bounded
-        decision cases.</li>
-        </ul>
+        <section id="how-to-use-these-notes-1" class="level3">
+        <h3>How To Use These Notes</h3>
+        <p>Use the Q&amp;A Overview PDFs before each part to get a quick
+        overview and a sense of the questions we are tackling, then
+        return to them after reading to check what stuck and test your
+        knowledge. Keep the Glossary nearby for acronyms, market roles,
+        products, and contract terms. Use the Casebook when a concept
+        feels familiar enough to apply.</p>
         </section>
         <section id="course-structure" class="level3">
         <h3>Course Structure</h3>
@@ -23231,11 +23226,11 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         const routeHeading = document.createElement("div");
         routeHeading.className = "home-section-heading";
         const routeTitle = document.createElement("h2");
-        routeTitle.textContent = "How To Read";
+        routeTitle.textContent = casebook ? "How To Use The Casebook" : "How To Use These Notes";
         const routeIntro = document.createElement("p");
         routeIntro.textContent = casebook
           ? "Pick a case when the corresponding lecture idea feels familiar enough to use. If the answer feels hand-wavy, return to the linked lectures and rebuild the artifact."
-          : "Read the first volume in order if the domain is new. After that, move by problem: site economics, PPAs, storage, dispatch, risk, market design, or strategic uncertainty.";
+          : "Use the Q&A Overview PDFs before each part to get a quick overview and a sense of the questions we are tackling, then return to them after reading to check what stuck and test your knowledge. Keep the Glossary nearby for acronyms, market roles, products, and contract terms. Use the Casebook when a concept feels familiar enough to apply.";
         routeHeading.append(routeTitle, routeIntro);
         const routeList = document.createElement("ol");
         routeList.className = "route-list";
@@ -23280,7 +23275,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
             link.remove();
             continue;
           }
-          if (id === "how-to-read-this") {
+          if (id === "how-to-read-this" || id === "how-to-use-these-notes") {
             li.classList.add("toc-hidden");
             continue;
           }
