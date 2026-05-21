@@ -1852,7 +1852,7 @@
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.32.0
+        v0.32.1
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -1887,7 +1887,7 @@
         </section>
         <section id="how-to-use-these-notes-1" class="level3">
         <h3>How To Use These Notes</h3>
-        <ol type="1">
+        <ul>
         <li>Start each part with its Q&amp;A Overview PDF to see the
         main questions and the shape of the argument.</li>
         <li>Use Volume I to build a working map of the physical and
@@ -1907,7 +1907,7 @@
         frame.</li>
         <li>Return to the Q&amp;A Overview PDF after finishing a part to
         check what stuck and what still feels unclear.</li>
-        </ol>
+        </ul>
         </section>
         <section id="course-structure" class="level3">
         <h3>Course Structure</h3>
@@ -23253,7 +23253,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           : "";
         routeHeading.append(routeTitle);
         if (routeIntro.textContent) routeHeading.appendChild(routeIntro);
-        const routeList = document.createElement("ol");
+        const routeList = document.createElement("ul");
         routeList.className = "route-list";
         const routeItems = casebook
           ? [
