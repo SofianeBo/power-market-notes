@@ -1703,7 +1703,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.26.0
+        v0.26.1
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -7209,8 +7209,9 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
       }
 
       function setupHighlights() {
-        const version = (document.querySelector(".course-version")?.textContent || "course").trim().replace(/\s+/g, "-");
-        const storageKey = "power-course-highlights-" + version;
+        const productKey = isCasebookProduct() ? "casebook" : "course";
+        const storageKey = "power-course-highlights-" + productKey;
+        const legacyStoragePrefix = "power-course-highlights-";
         const menu = document.getElementById("highlight-menu");
         const removeButton = document.getElementById("highlight-remove");
         const excludedSelector = "script, style, textarea, input, select, button, nav, .sidebar, .reading-rail, .reader-home, .bibliography, .glossary-list, .lecture-refs, .chapter-pager, .feedback-modal-backdrop, .selection-toolbar, .highlight-menu, .term-popover";
@@ -7252,6 +7253,43 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           return null;
         };
 
+        const scopeText = function (scope) {
+          return textNodesIn(scope).map((node) => node.nodeValue).join("");
+        };
+
+        const normalizedText = function (value) {
+          return String(value || "").replace(/\s+/g, " ").trim();
+        };
+
+        const normalizedWithMap = function (value) {
+          let text = "";
+          const map = [];
+          let inSpace = false;
+          const raw = String(value || "");
+          for (let i = 0; i < raw.length; i += 1) {
+            const char = raw[i];
+            if (/\s/.test(char)) {
+              if (!inSpace) {
+                text += " ";
+                map.push(i);
+                inSpace = true;
+              }
+            } else {
+              text += char;
+              map.push(i);
+              inSpace = false;
+            }
+          }
+          return { text: text, map: map };
+        };
+
+        const contextAround = function (fullText, start, end) {
+          return {
+            prefix: fullText.slice(Math.max(0, start - 90), start),
+            suffix: fullText.slice(end, Math.min(fullText.length, end + 90))
+          };
+        };
+
         const highlightIntersectsRange = function (range) {
           for (const highlight of article.querySelectorAll(".user-highlight")) {
             try {
@@ -7274,7 +7312,9 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
             scopeId: scopeId,
             start: start,
             end: end,
-            text: String(item.text || "")
+            text: String(item.text || ""),
+            prefix: String(item.prefix || ""),
+            suffix: String(item.suffix || "")
           };
         };
 
@@ -7283,6 +7323,42 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
             localStorage.setItem(storageKey, JSON.stringify(saved));
           } catch (_error) {
           }
+        };
+
+        const readHighlightItems = function (key) {
+          try {
+            return JSON.parse(localStorage.getItem(key) || "[]").map(normalizeItem).filter(Boolean);
+          } catch (_error) {
+            return [];
+          }
+        };
+
+        const loadSavedHighlights = function () {
+          const keys = [storageKey];
+          try {
+            for (let i = 0; i < localStorage.length; i += 1) {
+              const key = localStorage.key(i);
+              if (!key || key === storageKey) continue;
+              if (!key.startsWith(legacyStoragePrefix)) continue;
+              if (!/^power-course-highlights-v[\d.]+$/.test(key)) continue;
+              keys.push(key);
+            }
+          } catch (_error) {
+          }
+
+          const merged = [];
+          const seen = new Set();
+          for (const key of keys) {
+            const isStableKey = key === storageKey;
+            for (const item of readHighlightItems(key)) {
+              if (!isStableKey && item.scopeId !== "course" && !document.getElementById(item.scopeId)) continue;
+              const fingerprint = item.id || [item.scopeId, item.start, item.end, normalizedText(item.text)].join("|");
+              if (seen.has(fingerprint)) continue;
+              seen.add(fingerprint);
+              merged.push(item);
+            }
+          }
+          return merged;
         };
 
         const unwrapHighlight = function (span) {
@@ -7319,41 +7395,92 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           range.surroundContents(span);
         };
 
+        const findByExactText = function (fullText, item) {
+          const needle = String(item.text || "");
+          if (!needle) return null;
+          const starts = [];
+          let index = fullText.indexOf(needle);
+          while (index !== -1) {
+            starts.push(index);
+            index = fullText.indexOf(needle, index + Math.max(1, needle.length));
+          }
+          if (!starts.length) return null;
+          let best = starts[0];
+          let bestScore = -Infinity;
+          for (const start of starts) {
+            const end = start + needle.length;
+            const before = fullText.slice(Math.max(0, start - item.prefix.length), start);
+            const after = fullText.slice(end, end + item.suffix.length);
+            let score = -Math.abs(start - item.start) / 1000;
+            if (item.prefix && before === item.prefix) score += 10;
+            if (item.suffix && after === item.suffix) score += 10;
+            if (score > bestScore) {
+              bestScore = score;
+              best = start;
+            }
+          }
+          return { start: best, end: best + needle.length };
+        };
+
+        const findByNormalizedText = function (fullText, item) {
+          const needle = normalizedText(item.text);
+          if (!needle) return null;
+          const haystack = normalizedWithMap(fullText);
+          const normalizedStart = haystack.text.indexOf(needle);
+          if (normalizedStart === -1) return null;
+          const normalizedEnd = normalizedStart + needle.length - 1;
+          const start = haystack.map[normalizedStart];
+          const end = haystack.map[normalizedEnd] + 1;
+          if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start) return null;
+          return { start: start, end: end };
+        };
+
+        const resolveItemRange = function (scope, item) {
+          const fullText = scopeText(scope);
+          if (
+            item.start >= 0 &&
+            item.end <= fullText.length &&
+            normalizedText(fullText.slice(item.start, item.end)) === normalizedText(item.text)
+          ) {
+            return { start: item.start, end: item.end };
+          }
+          return findByExactText(fullText, item) || findByNormalizedText(fullText, item);
+        };
+
         const applyHighlight = function (item) {
           const scope = item.scopeId === "course" ? article : document.getElementById(item.scopeId);
           if (!scope) return false;
+          const resolved = resolveItemRange(scope, item);
+          if (!resolved) return false;
+          item.start = resolved.start;
+          item.end = resolved.end;
+          const context = contextAround(scopeText(scope), resolved.start, resolved.end);
+          item.prefix = item.prefix || context.prefix;
+          item.suffix = item.suffix || context.suffix;
           let position = 0;
           let applied = false;
           const nodes = textNodesIn(scope);
           for (const node of nodes) {
             const nodeStart = position;
             const nodeEnd = position + node.nodeValue.length;
-            const start = Math.max(0, item.start - nodeStart);
-            const end = Math.min(node.nodeValue.length, item.end - nodeStart);
+            const start = Math.max(0, resolved.start - nodeStart);
+            const end = Math.min(node.nodeValue.length, resolved.end - nodeStart);
             if (start < end) {
               wrapTextPortion(node, start, end, item.id);
               applied = true;
             }
             position = nodeEnd;
-            if (position >= item.end) break;
+            if (position >= resolved.end) break;
           }
           return applied;
         };
 
-        try {
-          saved = JSON.parse(localStorage.getItem(storageKey) || "[]").map(normalizeItem).filter(Boolean);
-        } catch (_error) {
-          saved = [];
-        }
+        saved = loadSavedHighlights();
 
-        const restored = [];
         for (const item of saved) {
-          if (applyHighlight(item)) restored.push(item);
+          applyHighlight(item);
         }
-        if (restored.length !== saved.length) {
-          saved = restored;
-          persist();
-        }
+        persist();
 
         const rangeFromSelection = function (range, selectedText) {
           if (!range || range.collapsed || highlightIntersectsRange(range)) return null;
@@ -7362,12 +7489,16 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           const start = boundaryOffset(scope, range.startContainer, range.startOffset);
           const end = boundaryOffset(scope, range.endContainer, range.endOffset);
           if (start === null || end === null || end <= start) return null;
+          const fullText = scopeText(scope);
+          const context = contextAround(fullText, start, end);
           return {
             id: "h-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 8),
             scopeId: scope.id || "course",
             start: start,
             end: end,
-            text: selectedText || range.toString()
+            text: selectedText || range.toString(),
+            prefix: context.prefix,
+            suffix: context.suffix
           };
         };
 
