@@ -1851,7 +1851,7 @@
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.31.5
+        v0.31.6
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -23132,7 +23132,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
             const deckAction = document.createElement("a");
             deckAction.className = "arc-link arc-link-secondary";
             deckAction.href = deckPdfPath(part.deck, version);
-            deckAction.download = "";
+            deckAction.target = "_blank";
+            deckAction.rel = "noopener noreferrer";
             deckAction.textContent = "Q&A Overview PDF";
             actionRow.appendChild(deckAction);
           }

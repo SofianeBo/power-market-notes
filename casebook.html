@@ -1734,7 +1734,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.31.5
+        v0.31.6
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -6840,7 +6840,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
             const deckAction = document.createElement("a");
             deckAction.className = "arc-link arc-link-secondary";
             deckAction.href = deckPdfPath(part.deck, version);
-            deckAction.download = "";
+            deckAction.target = "_blank";
+            deckAction.rel = "noopener noreferrer";
             deckAction.textContent = "Q&A Overview PDF";
             actionRow.appendChild(deckAction);
           }
