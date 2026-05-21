@@ -1734,7 +1734,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.31.4
+        v0.31.5
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -6962,7 +6962,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         route.append(routeHeading, routeList);
 
         if (casebook) home.append(hero, route, arcHeading, arc, feedback, author);
-        else home.append(hero, route, arcHeading, arc, methodology, feedback, author);
+        else home.append(hero, methodology, route, arcHeading, arc, feedback, author);
         const firstSection = root.querySelector(":scope > section.level2");
         root.insertBefore(home, firstSection || root.firstChild);
       }

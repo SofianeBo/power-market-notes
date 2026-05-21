@@ -1708,13 +1708,13 @@
         <li><a href="#how-to-use-these-notes"
         id="toc-how-to-use-these-notes">How To Use These Notes</a>
         <ul>
+        <li><a href="#methodology"
+        id="toc-methodology">Methodology</a></li>
         <li><a href="#how-to-use-these-notes-1"
         id="toc-how-to-use-these-notes-1">How To Use These
         Notes</a></li>
         <li><a href="#course-structure" id="toc-course-structure">Course
         Structure</a></li>
-        <li><a href="#methodology"
-        id="toc-methodology">Methodology</a></li>
         </ul></li>
         <li><a href="#volume-1" id="toc-volume-1">Volume I: The
         Physical, Institutional, And Market Machine</a>
@@ -1851,7 +1851,7 @@
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.31.4
+        v0.31.5
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -1869,6 +1869,25 @@
         PPA, how much storage duration to buy, what a dispatch model is
         allowed to assume, how to govern partners, and which market
         claims deserve capital.</p>
+        <section id="methodology" class="level3">
+        <h3>Methodology</h3>
+        <p>These notes were built with a learning method designed for
+        entering technical domains quickly: gather strong primary
+        sources, identify the core guiding questions, work back to first
+        principles, and build intuition through orders of magnitude,
+        scaling relationships, and worked decision frames.</p>
+        <p>The workflow was accelerated by a custom AI research and
+        knowledge-management system I built for source ingestion,
+        knowledge-corpus management, semantic retrieval, source trails,
+        drafting, restructuring, consistency checks, and
+        hallucination-resistant QA. The AI system speeds up the
+        editorial loop; the standard remains source discipline,
+        numerical clarity, and explanations that are useful in
+        practice.</p>
+        <p>The material will keep improving through versioned revisions
+        as I learn more and receive comments and feedback from
+        experts.</p>
+        </section>
         <section id="how-to-use-these-notes-1" class="level3">
         <h3>How To Use These Notes</h3>
         <p>Use the Q&amp;A Overview PDFs before each part to get a quick
@@ -1898,25 +1917,6 @@
         <li>The Glossary and References are the study and credibility
         layers: one for terms, one for the source trail.</li>
         </ul>
-        </section>
-        <section id="methodology" class="level3">
-        <h3>Methodology</h3>
-        <p>These notes were built with a learning method designed for
-        entering technical domains quickly: gather strong primary
-        sources, identify the core guiding questions, work back to first
-        principles, and build intuition through orders of magnitude,
-        scaling relationships, and worked decision frames.</p>
-        <p>The workflow was accelerated by a custom AI research and
-        knowledge-management system I built for source ingestion,
-        knowledge-corpus management, semantic retrieval, source trails,
-        drafting, restructuring, consistency checks, and
-        hallucination-resistant QA. The AI system speeds up the
-        editorial loop; the standard remains source discipline,
-        numerical clarity, and explanations that are useful in
-        practice.</p>
-        <p>The material will keep improving through versioned revisions
-        as I learn more and receive comments and feedback from
-        experts.</p>
         </section>
         </section>
         <section id="volume-1" class="level2">
@@ -23254,7 +23254,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         route.append(routeHeading, routeList);
 
         if (casebook) home.append(hero, route, arcHeading, arc, feedback, author);
-        else home.append(hero, route, arcHeading, arc, methodology, feedback, author);
+        else home.append(hero, methodology, route, arcHeading, arc, feedback, author);
         const firstSection = root.querySelector(":scope > section.level2");
         root.insertBefore(home, firstSection || root.firstChild);
       }
