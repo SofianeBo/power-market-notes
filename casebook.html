@@ -1077,6 +1077,37 @@
       display: none;
     }
 
+    .highlight-menu {
+      position: fixed;
+      z-index: 45;
+      padding: 0.28rem;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: #ffffff;
+      box-shadow: 0 14px 34px rgba(16, 31, 39, 0.16);
+    }
+
+    .highlight-menu button {
+      min-height: 2.05rem;
+      border: 0;
+      border-radius: 999px;
+      padding: 0 0.68rem;
+      background: transparent;
+      color: var(--accent-dark);
+      font: 800 0.78rem/1 var(--font-sans);
+      cursor: pointer;
+    }
+
+    .highlight-menu button:hover,
+    .highlight-menu button:focus {
+      background: var(--accent-soft);
+      outline: none;
+    }
+
+    .highlight-menu[hidden] {
+      display: none;
+    }
+
     .feedback-modal-backdrop {
       position: fixed;
       inset: 0;
@@ -1236,11 +1267,13 @@
       background: #fff1a8;
       box-shadow: 0 0 0 4px #fff1a8;
       border-radius: 6px;
+      cursor: context-menu;
     }
 
     :root[data-theme="dark"] .reader-section,
     :root[data-theme="dark"] .term-popover,
     :root[data-theme="dark"] .selection-toolbar,
+    :root[data-theme="dark"] .highlight-menu,
     :root[data-theme="dark"] .feedback-modal,
     :root[data-theme="dark"] .feedback-close,
     :root[data-theme="dark"] .feedback-secondary,
@@ -1651,7 +1684,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.25.5
+        v0.25.6
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -6256,6 +6289,9 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
     <button id="selection-highlight" type="button">Highlight</button>
     <button id="feedback-chip" type="button">Send feedback</button>
   </div>
+  <div class="highlight-menu" id="highlight-menu" hidden>
+    <button id="highlight-remove" type="button">Remove highlight</button>
+  </div>
   <div class="feedback-modal-backdrop" id="feedback-modal" hidden>
     <div class="feedback-modal" role="dialog" aria-modal="true" aria-labelledby="feedback-title">
       <div class="feedback-modal-header">
@@ -6660,8 +6696,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         feedbackTitle.textContent = "Feedback";
         const feedbackText = document.createElement("p");
         feedbackText.textContent = casebook
-          ? "Feedback and practitioner input are welcome. When reading a case, select the relevant passage to highlight it locally or send feedback with its location. The aim is to keep the material practical, useful, and reliable."
-          : "Feedback and practitioner input are welcome. When reading a lecture, select the relevant passage to highlight it locally or send feedback with its location. The aim is to keep the material practical, useful, and reliable.";
+          ? "Feedback and practitioner input are welcome. When reading a case, select the relevant passage to highlight it locally or send feedback with its location. Right-click a highlight to remove it. The aim is to keep the material practical, useful, and reliable."
+          : "Feedback and practitioner input are welcome. When reading a lecture, select the relevant passage to highlight it locally or send feedback with its location. Right-click a highlight to remove it. The aim is to keep the material practical, useful, and reliable.";
         feedback.append(feedbackTitle, feedbackText);
 
         const author = document.createElement("footer");
@@ -7090,43 +7126,226 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         });
       }
 
+      function elementFromNode(node) {
+        if (!node) return null;
+        return node.nodeType === Node.ELEMENT_NODE ? node : node.parentElement;
+      }
+
       function setupHighlights() {
         const version = (document.querySelector(".course-version")?.textContent || "course").trim().replace(/\s+/g, "-");
         const storageKey = "power-course-highlights-" + version;
-        const blocks = Array.from(article.querySelectorAll("p, li, pre, td, th"))
-          .filter((block) => !block.closest(".bibliography, .glossary-list, .lecture-refs, .reader-home, .chapter-pager"));
-        blocks.forEach((block, index) => {
-          block.classList.add("reader-block");
-          block.dataset.readerBlock = String(index);
-        });
-        let saved = new Set();
-        try {
-          saved = new Set(JSON.parse(localStorage.getItem(storageKey) || "[]"));
-        } catch (_error) {
-          saved = new Set();
-        }
+        const menu = document.getElementById("highlight-menu");
+        const removeButton = document.getElementById("highlight-remove");
+        const excludedSelector = "script, style, textarea, input, select, button, nav, .sidebar, .reading-rail, .reader-home, .bibliography, .glossary-list, .lecture-refs, .chapter-pager, .feedback-modal-backdrop, .selection-toolbar, .highlight-menu, .term-popover";
+        let saved = [];
+        let activeHighlightId = "";
+
+        const isTextNodeAllowed = function (node) {
+          return Boolean(node && node.nodeType === Node.TEXT_NODE && node.nodeValue && node.parentElement && !node.parentElement.closest(excludedSelector));
+        };
+
+        const textNodesIn = function (scope) {
+          const nodes = [];
+          const walker = document.createTreeWalker(scope, NodeFilter.SHOW_TEXT, {
+            acceptNode(node) {
+              return isTextNodeAllowed(node) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+            }
+          });
+          while (walker.nextNode()) nodes.push(walker.currentNode);
+          return nodes;
+        };
+
+        const scopeForRange = function (range) {
+          const startElement = elementFromNode(range.startContainer);
+          const endElement = elementFromNode(range.endContainer);
+          if (!startElement || !endElement) return null;
+          const startScope = startElement.closest("section.level3") || article;
+          const endScope = endElement.closest("section.level3") || article;
+          if (startScope !== endScope) return null;
+          return startScope;
+        };
+
+        const boundaryOffset = function (scope, container, offset) {
+          if (!container || container.nodeType !== Node.TEXT_NODE || !isTextNodeAllowed(container)) return null;
+          let position = 0;
+          for (const node of textNodesIn(scope)) {
+            if (node === container) return position + offset;
+            position += node.nodeValue.length;
+          }
+          return null;
+        };
+
+        const highlightIntersectsRange = function (range) {
+          for (const highlight of article.querySelectorAll(".user-highlight")) {
+            try {
+              if (range.intersectsNode(highlight)) return true;
+            } catch (_error) {
+            }
+          }
+          return false;
+        };
+
+        const normalizeItem = function (item) {
+          if (!item || typeof item !== "object") return null;
+          const scopeId = String(item.scopeId || "");
+          const start = Number(item.start);
+          const end = Number(item.end);
+          const id = String(item.id || "");
+          if (!scopeId || !id || !Number.isFinite(start) || !Number.isFinite(end) || end <= start) return null;
+          return {
+            id: id,
+            scopeId: scopeId,
+            start: start,
+            end: end,
+            text: String(item.text || "")
+          };
+        };
+
         const persist = function () {
           try {
-            localStorage.setItem(storageKey, JSON.stringify(Array.from(saved)));
+            localStorage.setItem(storageKey, JSON.stringify(saved));
           } catch (_error) {
           }
         };
-        for (const block of blocks) {
-          if (saved.has(block.dataset.readerBlock)) block.classList.add("user-highlight");
-        }
-        const highlightIds = function (ids) {
-          let changed = false;
-          for (const id of ids || []) {
-            const block = blocks.find((item) => item.dataset.readerBlock === id);
-            if (!block || block.classList.contains("user-highlight")) continue;
-            block.classList.add("user-highlight");
-            saved.add(id);
-            changed = true;
-          }
-          if (changed) persist();
-          return changed;
+
+        const unwrapHighlight = function (span) {
+          const parent = span.parentNode;
+          if (!parent) return;
+          while (span.firstChild) parent.insertBefore(span.firstChild, span);
+          parent.removeChild(span);
+          parent.normalize();
         };
-        return { blocks, highlightIds };
+
+        const spansForId = function (id) {
+          return Array.from(article.querySelectorAll(".user-highlight")).filter((span) => span.dataset.highlightId === id);
+        };
+
+        const removeHighlight = function (id) {
+          if (!id) return false;
+          const spans = spansForId(id);
+          if (!spans.length) return false;
+          for (const span of spans) unwrapHighlight(span);
+          saved = saved.filter((item) => item.id !== id);
+          persist();
+          return true;
+        };
+
+        const wrapTextPortion = function (node, start, end, id) {
+          if (start >= end) return;
+          const range = document.createRange();
+          range.setStart(node, start);
+          range.setEnd(node, end);
+          const span = document.createElement("span");
+          span.className = "user-highlight";
+          span.dataset.highlightId = id;
+          span.title = "Right-click to remove highlight";
+          range.surroundContents(span);
+        };
+
+        const applyHighlight = function (item) {
+          const scope = item.scopeId === "course" ? article : document.getElementById(item.scopeId);
+          if (!scope) return false;
+          let position = 0;
+          let applied = false;
+          const nodes = textNodesIn(scope);
+          for (const node of nodes) {
+            const nodeStart = position;
+            const nodeEnd = position + node.nodeValue.length;
+            const start = Math.max(0, item.start - nodeStart);
+            const end = Math.min(node.nodeValue.length, item.end - nodeStart);
+            if (start < end) {
+              wrapTextPortion(node, start, end, item.id);
+              applied = true;
+            }
+            position = nodeEnd;
+            if (position >= item.end) break;
+          }
+          return applied;
+        };
+
+        try {
+          saved = JSON.parse(localStorage.getItem(storageKey) || "[]").map(normalizeItem).filter(Boolean);
+        } catch (_error) {
+          saved = [];
+        }
+
+        const restored = [];
+        for (const item of saved) {
+          if (applyHighlight(item)) restored.push(item);
+        }
+        if (restored.length !== saved.length) {
+          saved = restored;
+          persist();
+        }
+
+        const rangeFromSelection = function (range, selectedText) {
+          if (!range || range.collapsed || highlightIntersectsRange(range)) return null;
+          const scope = scopeForRange(range);
+          if (!scope) return null;
+          const start = boundaryOffset(scope, range.startContainer, range.startOffset);
+          const end = boundaryOffset(scope, range.endContainer, range.endOffset);
+          if (start === null || end === null || end <= start) return null;
+          return {
+            id: "h-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 8),
+            scopeId: scope.id || "course",
+            start: start,
+            end: end,
+            text: selectedText || range.toString()
+          };
+        };
+
+        const highlightRange = function (item) {
+          const normalized = normalizeItem(item);
+          if (!normalized) return false;
+          if (!applyHighlight(normalized)) return false;
+          saved.push(normalized);
+          persist();
+          return true;
+        };
+
+        const hideMenu = function () {
+          if (menu) menu.hidden = true;
+          activeHighlightId = "";
+        };
+
+        article.addEventListener("contextmenu", (event) => {
+          const highlight = event.target.closest(".user-highlight");
+          if (!highlight || !article.contains(highlight) || !menu) return;
+          event.preventDefault();
+          activeHighlightId = highlight.dataset.highlightId || "";
+          menu.hidden = false;
+          const width = menu.offsetWidth || 150;
+          const left = Math.min(window.innerWidth - width - 12, Math.max(12, event.clientX));
+          const top = Math.min(window.innerHeight - 52, Math.max(12, event.clientY));
+          menu.style.left = left + "px";
+          menu.style.top = top + "px";
+        });
+
+        removeButton?.addEventListener("click", (event) => {
+          event.preventDefault();
+          removeHighlight(activeHighlightId);
+          hideMenu();
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!menu || menu.hidden) return;
+          if (event.target.closest(".highlight-menu") || event.target.closest(".user-highlight")) return;
+          hideMenu();
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") hideMenu();
+        });
+
+        window.addEventListener("scroll", hideMenu, { passive: true });
+        window.addEventListener("resize", hideMenu);
+
+        return {
+          rangeFromSelection: rangeFromSelection,
+          highlightRange: highlightRange,
+          removeHighlight: removeHighlight,
+          hideMenu: hideMenu
+        };
       }
 
       function setupFeedback(chapters, highlightApi) {
@@ -7178,16 +7397,11 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           if (successEl) successEl.hidden = true;
         };
 
-        const elementFromNode = function (node) {
-          if (!node) return null;
-          return node.nodeType === Node.ELEMENT_NODE ? node : node.parentElement;
-        };
-
         const currentSelectionPayload = function () {
           const selection = window.getSelection();
           if (!selection || selection.rangeCount === 0 || selection.isCollapsed) return null;
           const text = selection.toString().trim();
-          if (text.length < 4) return null;
+          if (text.length < 1) return null;
           const range = selection.getRangeAt(0);
           const startElement = elementFromNode(range.startContainer);
           const endElement = elementFromNode(range.endContainer);
@@ -7216,18 +7430,9 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           const suffix = index >= 0 ? truncate(blockText.slice(index + selected.length, index + selected.length + 220), 260) : "";
           const version = (document.querySelector(".course-version")?.textContent || "unknown version").trim();
           const product = rootTitle();
-          const highlightIds = highlightApi && Array.isArray(highlightApi.blocks)
-            ? highlightApi.blocks
-                .filter((candidate) => {
-                  try {
-                    return range.intersectsNode(candidate);
-                  } catch (_error) {
-                    return false;
-                  }
-                })
-                .map((candidate) => candidate.dataset.readerBlock)
-                .filter(Boolean)
-            : [];
+          const highlightRange = highlightApi?.rangeFromSelection
+            ? highlightApi.rangeFromSelection(range, selected)
+            : null;
 
           return {
             rect: rect,
@@ -7239,7 +7444,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
             selected: selected,
             prefix: prefix,
             suffix: suffix,
-            highlightIds: highlightIds
+            highlightRange: highlightRange
           };
         };
 
@@ -7256,7 +7461,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
             return;
           }
           activePayload = payload;
-          if (highlightButton) highlightButton.disabled = !payload.highlightIds.length;
+          if (highlightButton) highlightButton.disabled = !payload.highlightRange;
           toolbar.hidden = false;
           const chipWidth = toolbar.offsetWidth || 220;
           const top = Math.max(76, payload.rect.top - 44);
@@ -7379,10 +7584,13 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           hideToolbar();
           closeModal();
         });
+        toolbar.addEventListener("mousedown", (event) => {
+          event.preventDefault();
+        });
         highlightButton?.addEventListener("click", (event) => {
           event.preventDefault();
-          if (!activePayload) return;
-          highlightApi?.highlightIds(activePayload.highlightIds || []);
+          if (!activePayload?.highlightRange) return;
+          highlightApi?.highlightRange(activePayload.highlightRange);
           window.getSelection()?.removeAllRanges();
           hideToolbar();
         });
