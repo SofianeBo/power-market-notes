@@ -1856,7 +1856,7 @@
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.33.0
+        v0.34.0
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -1949,13 +1949,13 @@
         <p>A customer buys electricity, but delivery happens at a rate,
         in a place, and at a time. A factory needs power in this hour. A
         city has an evening peak. A wire can carry only so much at a
-        moment. The first move in power markets is therefore
-        dimensional: separate the amount of energy from the rate at
-        which it arrives. Once those are separate, familiar words like
-        generation, load, capacity, average, and peak become less
-        slippery. A megawatt-hour (MWh) is a real amount of energy, but
-        it is useful only when its timing, place, and reliability match
-        the need it is supposed to serve.</p>
+        moment. Power-market reasoning therefore starts by separating
+        the amount of energy from the rate at which it arrives. Once
+        those are separate, familiar words like generation, load,
+        capacity, average, and peak become less slippery. A
+        megawatt-hour (MWh) is a real amount of energy, but it is useful
+        only when its timing, place, and reliability match the need it
+        is supposed to serve.</p>
         <section id="opening-puzzle" class="level4">
         <h4>Opening Puzzle</h4>
         <p>A generator reports: “We generated 1 MWh.”</p>
@@ -2025,15 +2025,15 @@
         power.</p>
         <section id="worked-estimate" class="level5">
         <h5>Worked Estimate</h5>
-        <p>Imagine a customer consumes <code>1 TWh/year</code>.</p>
+        <p>A customer consumes <code>1 TWh/year</code>.</p>
         <p>Average power is:</p>
         <pre class="text"><code>1,000,000 MWh/year / 8,760 hours/year ~= 114 MW</code></pre>
         <p>A flat 114 MW load would consume the same annual energy. The
         customer’s actual load can still move far above and below that
         average.</p>
-        <p>If the customer’s peak is 200 MW, a 114 MW average tells you
-        only part of the story. If a solar project produces much of its
-        energy at noon, annual matching does not guarantee hourly
+        <p>If the customer’s peak is 200 MW, a 114 MW average describes
+        only one dimension of the load. If a solar project produces much
+        of its energy at noon, annual matching does not guarantee hourly
         matching.</p>
         <p>The numerical lesson: annual MWh is a total; power-market
         risk lives in the shape of delivery.</p>
@@ -2049,7 +2049,7 @@
         operationally constrained. So the system cares about both annual
         energy and the rate at which energy is injected or withdrawn at
         each moment.</p>
-        <p>This is why a market participant may ask:</p>
+        <p>A market participant may therefore ask:</p>
         <ul>
         <li>How many MWh?</li>
         <li>In which hour?</li>
@@ -2084,10 +2084,9 @@
         customer demand?”</p>
         <p>The 2026-05-16 Svenska kraftnat electricity-statistics source
         says Swedish production and consumption statistics are based on
-        measured hourly values reported to eSett. That is a useful
-        institutional clue: the real machine is recorded hourly because
-        running and settling the system requires more than annual
-        totals.</p>
+        measured hourly values reported to eSett. The operational record
+        is hourly because running and settling the system requires more
+        than annual totals.</p>
         </section>
         <section id="misconceptions" class="level4">
         <h4>Misconceptions</h4>
@@ -2105,8 +2104,8 @@
         <section id="current-debates-or-caveats" class="level4">
         <h4>Current Debates Or Caveats</h4>
         <p>No current market-rule claim is needed here. The durable
-        lesson is dimensional: power is a rate, energy accumulates, and
-        annual totals can hide the operational problem.</p>
+        mechanism is dimensional: power is a rate, energy accumulates,
+        and annual totals can hide the operational problem.</p>
         </section>
         <section id="recap" class="level4">
         <h4>Recap</h4>
@@ -2133,9 +2132,8 @@
         Then the cloud arrives early. The spreadsheet still shows the
         plan, but the wire sees the shortfall immediately: fewer MW are
         entering the system than expected, and something else must move.
-        That is the first thing to understand about a grid. It is a
-        physical machine before it is a market, and its problem is
-        always happening now. Once plans can differ from actual
+        A grid is a physical system before it is a market, and balance
+        is a real-time requirement. Once plans can differ from actual
         delivery, the same gap also becomes a market and settlement
         problem: who adjusted, who remained short or long, and who
         carries the cost.</p>
@@ -2150,10 +2148,10 @@
         </section>
         <section id="first-principles-model-1" class="level4">
         <h4>First-Principles Model</h4>
-        <p>A power grid is a shared rotating and electronic machine. At
-        each moment, electrical supply and electrical demand must be
-        kept close enough to balance for the system to remain
-        secure.</p>
+        <p>A power grid is a shared physical system made of rotating and
+        electronic devices. At each moment, electrical supply and
+        electrical demand must be kept close enough to balance for the
+        system to remain secure.</p>
         <p>A simple accounting version is:</p>
         <pre class="text"><code>net imbalance = actual generation + imports - actual consumption - exports</code></pre>
         <p>For one portfolio, a settlement version is:</p>
@@ -2161,7 +2159,7 @@
         <p>They answer different questions. The first is physical system
         balance. The second is financial responsibility for a market
         participant’s deviation from its position.</p>
-        <p>The market exists partly because the physical machine needs
+        <p>The market exists partly because the physical system needs
         someone to be responsible when plans and reality differ.</p>
         </section>
         <section id="definitions-1" class="level4">
@@ -2216,8 +2214,8 @@ If it lasts 1 hour: 5 MW x 1 h = 5 MWh</code></pre>
         price exposure were hypothetically <code>EUR 100/MWh</code> for
         that hour, the one-hour financial exposure would be:</p>
         <pre class="text"><code>5 MWh x EUR 100/MWh = EUR 500</code></pre>
-        <p>That number is illustrative, not a market claim. The real
-        lesson is scaling:</p>
+        <p>That number is illustrative, not a market claim. The scaling
+        is:</p>
         <ul>
         <li>double the portfolio, double the MW error;</li>
         <li>double the time length of the error, double the MWh
@@ -2278,7 +2276,8 @@ If it lasts 1 hour: 5 MW x 1 h = 5 MWh</code></pre>
         <li>Was the residual error normal weather uncertainty, poor
         forecasting, slow trading, or misaligned incentives?</li>
         </ul>
-        <p>This is the seed of later BRP/BSP monitoring.</p>
+        <p>This becomes the starting point for later BRP/BSP
+        monitoring.</p>
         </section>
         <section id="misconceptions-1" class="level4">
         <h4>Misconceptions</h4>
@@ -2324,14 +2323,13 @@ If it lasts 1 hour: 5 MW x 1 h = 5 MWh</code></pre>
         References: <sup><a href="#ref-1">[1]</a>
         <a href="#ref-2">[2]</a> <a href="#ref-6">[6]</a></sup>
         </p>
-        <p>Look at a meter for one hour and it gives you a number. Look
-        at it for a year and it gives you a curve. That curve is the
-        object the power system has to serve: how much energy was used,
-        and when each MW was needed. Two customers can have the same
-        annual MWh and ask completely different things of wires,
-        generators, batteries, traders, and contracts. The first useful
-        move is to stop treating demand as one total and start asking
-        what shape it has on the clock.</p>
+        <p>One hour of metering gives a number; a year of metering gives
+        a curve. That curve is the object the power system has to serve:
+        how much energy was used, and when each MW was needed. Two
+        customers can have the same annual MWh and require different
+        wires, generators, batteries, trading actions, and contracts. A
+        useful first step is to treat demand as a time series rather
+        than a single total.</p>
         <section id="opening-puzzle-2" class="level4">
         <h4>Opening Puzzle</h4>
         <p>Two portfolios each consume <code>87,600 MWh/year</code>.</p>
@@ -2339,8 +2337,7 @@ If it lasts 1 hour: 5 MW x 1 h = 5 MWh</code></pre>
         <p>Portfolio B consumes 20 MW in some hours and nearly nothing
         in others.</p>
         <p>Annual energy is identical. The grid problem is not.</p>
-        <p>The system does not serve annual energy. It serves a
-        curve.</p>
+        <p>System operation is built around the load curve.</p>
         </section>
         <section id="first-principles-model-2" class="level4">
         <h4>First-Principles Model</h4>
@@ -2423,8 +2420,8 @@ capacity factor = 175,200 / 876,000 = 20%</code></pre>
         If solar output rises strongly at midday, residual load may fall
         at midday and rise again in the evening. That creates
         flexibility needs and can change price shape.</p>
-        <p>This is the bridge from physics to PPAs: a contract promises
-        both annual MWh quantity and ownership of the shape.</p>
+        <p>This connects physics to PPAs: a contract promises both
+        annual MWh quantity and ownership of the shape.</p>
         </section>
         <section id="example-2" class="level4">
         <h4>Example</h4>
@@ -2482,21 +2479,20 @@ Hour 4: -10 MWh</code></pre>
         <h4>Current Debates Or Caveats</h4>
         <p>Practitioner sources describe growing solar-driven duck-curve
         effects in parts of Europe, especially in solar-heavy hours. The
-        durable lesson is the direction of the mechanism; price levels,
-        capture-price figures, and country-year counts need their own
-        date, market area, and data definition.</p>
+        durable mechanism is the direction of the residual-load change;
+        price levels, capture-price figures, and country-year counts
+        need their own date, market area, and data definition.</p>
         </section>
         <section id="recap-2" class="level4">
         <h4>Recap</h4>
-        <p>Annual MWh tells you the size of the energy pile; load shape
-        tells you when the system must lift it. Once demand and
-        generation are drawn as time series, peak load becomes a
-        constraint, residual load becomes the curve other resources must
-        serve, and capacity factor becomes only a compression of a much
-        richer pattern. The same total energy can leave hourly surplus,
-        shortage, or a contract exposure for someone to absorb.
-        Power-market reasoning starts to work when the clock stays in
-        the model.</p>
+        <p>Annual MWh gives the energy total; load shape gives the
+        timing requirement. Once demand and generation are drawn as time
+        series, peak load becomes a constraint, residual load becomes
+        the curve other resources must serve, and capacity factor
+        becomes a compressed view of a richer pattern. The same total
+        energy can leave hourly surplus, shortage, or a contract
+        exposure for someone to absorb. Power-market reasoning improves
+        when the clock stays in the model.</p>
         <div class="lecture-end">
 
         </div>
@@ -2639,7 +2635,7 @@ grid cost = EUR 5/MWh</code></pre>
         </section>
         <section id="example-3" class="level4">
         <h4>Example</h4>
-        <p>Imagine two identical 100 MW solar projects.</p>
+        <p>Compare two identical 100 MW solar projects.</p>
         <p>Project North:</p>
         <ul>
         <li>high generation potential;</li>
@@ -2726,15 +2722,15 @@ grid cost = EUR 5/MWh</code></pre>
         References: <sup><a href="#ref-3">[3]</a>
         <a href="#ref-12">[12]</a></sup>
         </p>
-        <p>Picture a 100 MW asset that promised 100 MW for the hour and
+        <p>Consider a 100 MW asset that promised 100 MW for the hour and
         delivered 96 MW. The missing 4 MWh is small enough to fit in one
-        line of arithmetic, but it does not belong to one person.
+        line of arithmetic, but several obligations attach to it.
         Someone must keep the physical system balanced. Someone must
         report the meter data. Someone must compare the schedule with
-        reality. Someone must settle the money. Once you follow that
-        deviation through the machine, the acronyms stop being a
-        vocabulary test. Each actor exists because one obligation has to
-        land somewhere.</p>
+        reality. Someone must settle the money. Once the deviation is
+        traced through the market process, the acronyms become a map of
+        responsibilities. Each actor exists because one obligation has
+        to land somewhere.</p>
         <section id="opening-puzzle-4" class="level4">
         <h4>Opening Puzzle</h4>
         <p>Power markets are full of role names: transmission system
@@ -2758,8 +2754,8 @@ grid cost = EUR 5/MWh</code></pre>
         scheduled positions.</li>
         <li>Someone pays or receives money for the difference.</li>
         </ol>
-        <p>The cast of characters is the set of institutions needed to
-        make that chain work.</p>
+        <p>The market roles are the institutions needed to make that
+        chain work.</p>
         </section>
         <section id="definitions-4" class="level4">
         <h4>Definitions</h4>
@@ -2959,7 +2955,7 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <li>Who earned balancing-service revenue, if any?</li>
         <li>Who bore imbalance cost?</li>
         </ul>
-        <p>That is partner oversight in one paragraph.</p>
+        <p>Those questions form a first partner-oversight check.</p>
         </section>
         <section id="in-practice-4" class="level4">
         <h4>In Practice</h4>
@@ -2998,17 +2994,17 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         </section>
         <section id="recap-4" class="level4">
         <h4>Recap</h4>
-        <p>The cast of characters becomes intelligible when each acronym
-        is tied to an obligation. Start with one MWh, then ask what has
-        to happen physically, financially, legally, and in the data
-        trail. The TSO keeps the real-time system secure, the DSO
+        <p>Market participants become easier to understand when each
+        acronym is tied to an obligation. Start with one MWh, then ask
+        what has to happen physically, financially, legally, and in the
+        data trail. The TSO keeps the real-time system secure, the DSO
         handles distribution and metering interfaces, the BRP owns
         balance responsibility, the BSP provides balancing services, and
         the NEMO clears organized trades. Suppliers, aggregators,
         offtakers, and regulators sit around that chain with customer,
         portfolio, contract, or rule-setting duties. When a schedule and
-        actual delivery differ, the sharper question is “which
-        obligation did this actor carry?”</p>
+        actual delivery differ, ask which obligation each actor
+        carried.</p>
         <div class="lecture-end">
 
         </div>
@@ -3021,25 +3017,23 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <a href="#ref-14">[14]</a> <a href="#ref-3">[3]</a>
         <a href="#ref-4">[4]</a></sup>
         </p>
-        <p>A solar plant can look different at each hour of the market
-        day. Yesterday’s schedule says one thing, the latest forecast
-        says another, the control room sees the physical system, and the
-        meter later records what actually happened. None of these views
-        is useless, but none can carry the whole task alone. The market
-        has to let people make a plan before delivery, repair it as
-        information improves, keep the grid balanced in real time, and
-        settle the remaining difference afterward. That sequence is the
-        market clock.</p>
+        <p>A solar plant has several time-stamped descriptions during a
+        market day. Yesterday’s schedule says one thing, the latest
+        forecast says another, the control room sees the physical
+        system, and the meter later records what actually happened. The
+        market has to support a plan before delivery, updates as
+        information improves, real-time balancing, and post-delivery
+        settlement. That sequence is the market clock.</p>
         <section id="opening-puzzle-5" class="level4">
         <h4>Opening Puzzle</h4>
-        <p>Imagine a solar plant promises tomorrow’s output today. At
-        noon today, tomorrow’s weather forecast says 50 MW at 13:00. At
-        09:00 tomorrow, a cloud front moves. At 12:55, the plant is
-        really producing 38 MW. At 13:15, meters know what happened.</p>
+        <p>A solar plant promises tomorrow’s output today. At noon
+        today, tomorrow’s weather forecast says 50 MW at 13:00. At 09:00
+        tomorrow, a cloud front moves. At 12:55, the plant is producing
+        38 MW. At 13:15, meters record what happened.</p>
         <p>Which number should the market believe: the forecast, the
         latest trade, the physical flow, or the meter?</p>
-        <p>The answer is: all of them, but at different moments. Power
-        markets are not one price. They are a clock.</p>
+        <p>Each number belongs to a different point in the market
+        sequence.</p>
         </section>
         <section id="first-principles-model-5" class="level4">
         <h4>First-Principles Model</h4>
@@ -3049,8 +3043,7 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <li>It is scheduled financially before real time.</li>
         <li>Forecasts improve as real time approaches.</li>
         </ol>
-        <p>So the market does not ask for one perfect plan. It creates a
-        sequence:</p>
+        <p>The market therefore uses a sequence of corrections:</p>
         <ul>
         <li>Day-ahead: make the main plan.</li>
         <li>Intraday: repair the plan as information improves.</li>
@@ -3059,8 +3052,8 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <li>Imbalance settlement: allocate the financial consequence
         after meters and schedules are compared.</li>
         </ul>
-        <p>That is the central model. Each stage exists because the
-        previous stage is useful but imperfect.</p>
+        <p>Each stage exists because the previous stage is useful but
+        imperfect.</p>
         </section>
         <section id="definitions-5" class="level4">
         <h4>Definitions</h4>
@@ -3128,11 +3121,10 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         through SDAC and Euphemia while accounting for network
         constraints. It creates a shared baseline for tomorrow’s
         schedules and positions.</p>
-        <p>Intraday is the repair shop. Wind forecasts move, solar
-        forecasts move, demand forecasts move, outages happen, and
-        cross-border capacity can matter. EU Regulation 2017/2195
-        explicitly values the ability for market participants to balance
-        themselves as close as possible to real time.</p>
+        <p>Intraday trading updates positions as forecasts, outages,
+        demand, and cross-border capacity change. EU Regulation
+        2017/2195 explicitly values the ability for market participants
+        to balance themselves as close as possible to real time.</p>
         <p>Balancing is the control room layer. When delivery is close
         enough that normal trading cannot solve the residual mismatch,
         TSOs activate balancing energy and reserves.</p>
@@ -3167,10 +3159,10 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <li>What imbalance remained, and who economically bears it under
         the contract?</li>
         </ul>
-        <p>This is the skeleton of a shadow-trading benchmark. It should
-        not compare the partner to perfect hindsight. It should compare
-        actual decisions with feasible decisions using information and
-        control rights available at the time.</p>
+        <p>This forms the basis of a shadow-trading benchmark. It
+        compares actual decisions with feasible decisions using
+        information and control rights available at the time, rather
+        than perfect hindsight.</p>
         </section>
         <section id="misconceptions-5" class="level4">
         <h4>Misconceptions</h4>
@@ -3218,16 +3210,14 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         References: <sup><a href="#ref-13">[13]</a>
         <a href="#ref-15">[15]</a> <a href="#ref-16">[16]</a></sup>
         </p>
-        <p>Picture one sunny hour in one bidding zone. Solar plants are
+        <p>Consider one sunny hour in one bidding zone. Solar plants are
         producing, demand is finite, and the auction still has to choose
-        enough offers to cover the hour. The strange part is that the
-        solar plant’s own fuel cost does not decide what it earns.
-        Sometimes it is paid a price set by a more expensive plant at
-        the edge of the stack. Other times, so much similar low-cost
-        output arrives at once that the edge moves downward and the
-        sunny-hour price collapses. To understand that swing, you need
-        to stop asking what the average generator costs and ask which
-        unit is marginal.</p>
+        enough offers to cover the hour. The solar plant’s own fuel cost
+        does not by itself decide what it earns. It may be paid a price
+        set by a more expensive plant at the edge of the stack, or it
+        may earn a low price when similar low-cost output pushes the
+        marginal unit down. The relevant question is which unit is
+        marginal in that hour.</p>
         <section id="opening-puzzle-6" class="level4">
         <h4>Opening Puzzle</h4>
         <p>If a solar plant has almost zero fuel cost, why does it
@@ -3249,7 +3239,7 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         cost.</li>
         </ul>
         <p>The market accepts offers until 1,000 MWh is covered. In the
-        simplest merit-order story, the last accepted unit sets the
+        simplest merit-order model, the last accepted unit sets the
         clearing price for accepted MWh.</p>
         <p>This simplified model gives the first lever of intuition for
         European market design.</p>
@@ -3315,9 +3305,9 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <p>Case B: solar is abundant and the price in that sunny hour is
         5 EUR/MWh.</p>
         <pre class="text"><code>100 MWh x 5 EUR/MWh = 500 EUR</code></pre>
-        <p>The same plant, same sun, same 100 MWh, but 14 times less
-        revenue for that hour. That is why “cheap to produce” is not the
-        same as “high realized value.”</p>
+        <p>The same plant, sun, and 100 MWh produce 14 times less
+        revenue in that hour. Low variable cost and high realized value
+        are different quantities.</p>
         </section>
         </section>
         <section id="equations-1" class="level4">
@@ -3344,11 +3334,10 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         meet the same demand. That can push the marginal unit down the
         stack.</p>
         <p>Third, revenue is weighted by production timing. A solar
-        plant does not earn the average price over all hours. It earns
-        the price in the hours when it generates.</p>
-        <p>This is the bridge to cannibalization. When many solar plants
-        produce at the same time, their output can depress the price in
-        exactly the hours they depend on for revenue.</p>
+        plant earns the prices in the hours when it generates.</p>
+        <p>This mechanism leads to cannibalization. When many solar
+        plants produce at the same time, their output can depress the
+        prices in the hours that drive their revenue.</p>
         </section>
         <section id="examples-1" class="level4">
         <h4>Examples</h4>
@@ -3393,10 +3382,10 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <section id="current-debates-and-caveats-1" class="level4">
         <h4>Current Debates And Caveats</h4>
         <p>Practitioner sources discuss rising negative-price hours and
-        solar capture erosion in several European markets. The useful
-        lesson is the mechanism; counts and capture rates need dated
+        solar capture erosion in several European markets. The mechanism
+        is the transferable part; counts and capture rates need dated
         market data.</p>
-        <p>The durable lesson is narrower and stronger: correlated
+        <p>The durable mechanism is narrower and stronger: correlated
         low-variable-cost output can reduce the realized value of that
         same output.</p>
         </section>
@@ -3428,8 +3417,7 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         position carried that expectation into delivery, and the plant
         produced something else. The grid still has to balance in real
         time, and the settlement system still has to decide who was long
-        or short after the fact. That is the bridge from weather
-        uncertainty to money: a forecast error left in the final
+        or short after the fact. A forecast error left in the final
         position becomes an imbalance, and imbalance settlement gives it
         an owner and a price.</p>
         <section id="opening-puzzle-7" class="level4">
@@ -3492,8 +3480,8 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <p>If the effective cost relative to the alternative position is
         40 EUR/MWh:</p>
         <pre class="text"><code>5 MWh x 40 EUR/MWh = 200 EUR</code></pre>
-        <p>One hour is not frightening. But repeat a 5 MWh error across
-        200 difficult hours:</p>
+        <p>A single hour is small. Repeated across 200 difficult hours,
+        the same 5 MWh error becomes:</p>
         <pre class="text"><code>5 MWh/hour x 200 hours x 40 EUR/MWh = 40,000 EUR</code></pre>
         <p>The structural lesson: small forecast errors can matter when
         they are frequent, correlated with stressed prices, or allocated
@@ -3522,7 +3510,7 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <p>eSett’s Nordic material describes imbalance settlement as
         using trades, consumption, production, MGA imbalance, and
         imbalance adjustments. The exact algebra is handbook-specific,
-        but the beginner lesson is robust: the settlement operator
+        but the mechanism is robust: the settlement operator
         reconstructs who was long or short after the fact.</p>
         <p>EU Regulation 2017/2195 frames imbalance pricing around
         balancing energy and avoided activation. Imbalance settlement is
@@ -3559,15 +3547,16 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <li>Does the contract pass imbalance cost through, share it, cap
         it, or include it in a fee?</li>
         </ul>
-        <p>This is why “we outsourced balancing” is not the same as “we
-        outsourced economic risk.” The legal role, operational task, and
-        final commercial exposure can be split by contract.</p>
+        <p>Outsourcing balancing does not necessarily outsource economic
+        risk. The legal role, operational task, and final commercial
+        exposure can be split by contract.</p>
         </section>
         <section id="misconceptions-7" class="level4">
         <h4>Misconceptions</h4>
         <ul>
-        <li>“Forecast error is only a forecasting problem.” It is also a
-        market access, data, timing, and contract problem.</li>
+        <li>“Forecast error is only a forecasting problem.” Forecast
+        error can become a market access, data, timing, and contract
+        problem.</li>
         <li>“The BRP always eats the imbalance cost.” Not necessarily;
         contractual pass-through can put exposure back on the asset
         owner.</li>
@@ -3621,8 +3610,8 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         consumes.</p>
         <section id="opening-puzzle-8" class="level4">
         <h4>Opening Puzzle</h4>
-        <p>A battery is idle at 14:00. Is it doing nothing?</p>
-        <p>Maybe. Or maybe it is being paid to be ready.</p>
+        <p>A battery is idle at 14:00. It may still be earning reserve
+        revenue.</p>
         <p>Energy markets buy MWh. Reserve markets may buy the right to
         call on MW quickly when the grid needs help.</p>
         </section>
@@ -3641,8 +3630,8 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <li>manual or centrally activated restoration to replace fast
         reserves and manage larger or longer deviations.</li>
         </ul>
-        <p>These products are not all the same. They are different tools
-        for different time scales.</p>
+        <p>These products serve different time scales and system
+        needs.</p>
         </section>
         <section id="definitions-8" class="level4">
         <h4>Definitions</h4>
@@ -3831,10 +3820,10 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         interval.</p>
         <p>Can the grid still be in trouble?</p>
         <p>Yes. Active-power balance is necessary, but it is not the
-        whole AC machine. A node can have weak voltage support, a line
-        can violate an N-1 security check, a fault can be hard to
-        detect, or several inverter controls can interact badly even
-        while the scheduled MW add up.</p>
+        full AC system. A node can have weak voltage support, a line can
+        violate an N-1 security check, a fault can be hard to detect, or
+        several inverter controls can interact badly even while the
+        scheduled MW add up.</p>
         </section>
         <section id="first-principles-model-9" class="level4">
         <h4>First-Principles Model</h4>
@@ -3995,9 +3984,9 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         Practitioner material on short-circuit-ratio screening is useful
         for intuition, but detailed threshold claims belong in
         engineering studies, not in a general lecture.</p>
-        <p>Inverter-based resources are programmable. That is the
-        opportunity and the risk. A battery or solar inverter can be
-        very fast, but the value depends on control mode, qualification,
+        <p>Inverter-based resources are programmable, which creates both
+        opportunity and risk. A battery or solar inverter can be very
+        fast, but the value depends on control mode, qualification,
         grid-code obligations, measurement, and whether providing the
         service conflicts with energy, PPA, reserve, or warranty
         use.</p>
@@ -4149,20 +4138,20 @@ reactive MVAr obligation or headroom</code></pre>
         promise.</p>
         <section id="opening-puzzle-10" class="level4">
         <h4>Opening Puzzle</h4>
-        <p>Imagine six assets all advertised as “100 MW”: a gas turbine,
-        a hydro plant, a wind farm, a solar farm, a battery, and a
-        factory that can turn down load. Are they equivalent?</p>
+        <p>Six assets are advertised as “100 MW”: a gas turbine, a hydro
+        plant, a wind farm, a solar farm, a battery, and a factory that
+        can turn down load. Are they equivalent?</p>
         <p>Commercially, no. The label says how fast energy can flow at
         one instant. It does not say when the asset can produce, how
         long it can keep going, how quickly it can move, what it costs
         to move, or whether output depends on weather or stored
         fuel.</p>
-        <p>That is the first rule of asset modeling: a MW is a size
-        label, not a promise.</p>
+        <p>For asset modeling, a MW is a size label, not a promise.</p>
         </section>
         <section id="first-principles-model-10" class="level4">
         <h4>First-Principles Model</h4>
-        <p>An electricity asset is a promise-making machine.</p>
+        <p>An electricity asset is defined by the operating promise it
+        can support.</p>
         <p>The physical question is:</p>
         <pre class="text"><code>When can this asset inject, withdraw, or avoid power?</code></pre>
         <p>The commercial question is:</p>
@@ -4349,7 +4338,7 @@ reactive MVAr obligation or headroom</code></pre>
         few percent of consumption can be concentrated into the same
         hours and locations.</p>
         <p>For project modeling, start with:</p>
-        <pre class="text"><code>What physical promise can this asset make, and what market or contract punishes it when the promise fails?</code></pre>
+        <pre class="text"><code>What physical promise can this asset make, and what market or contract settles the cost when the promise fails?</code></pre>
         <p>For portfolio modeling, the second question is:</p>
         <pre class="text"><code>Does this asset add the same risk I already have, or does it add a different kind of optionality?</code></pre>
         </section>
@@ -4382,15 +4371,15 @@ reactive MVAr obligation or headroom</code></pre>
         </section>
         <section id="recap-10" class="level4">
         <h4>Recap</h4>
-        <p>A technology is a promise-making machine with limits. The
-        same 100 MW label can mean firm controllable production,
-        weather-shaped output, stored flexibility, or avoided demand.
-        The next questions are physical before they are financial: what
-        controls the energy flow, what is it correlated with, what runs
-        out first, and how quickly can it move? Only then does the
-        commercial question become clear: which promise can be sold
-        without being punished when delivery, weather, constraints, or
-        customer behavior arrive?</p>
+        <p>A technology is a set of operating limits around a commercial
+        promise. The same 100 MW label can mean firm controllable
+        production, weather-shaped output, stored flexibility, or
+        avoided demand. The next questions are physical before they are
+        financial: what controls the energy flow, what is it correlated
+        with, what runs out first, and how quickly can it move? Only
+        then does the commercial question become clear: which promise
+        can be sold without being punished when delivery, weather,
+        constraints, or customer behavior arrive?</p>
         <div class="lecture-end">
 
         </div>
@@ -4403,14 +4392,13 @@ reactive MVAr obligation or headroom</code></pre>
         References: <sup><a href="#ref-23">[23]</a>
         <a href="#ref-24">[24]</a> <a href="#ref-16">[16]</a></sup>
         </p>
-        <p>A solar plant does not sell into an average hour. It sells
-        when the sun is up, when clouds allow output, and when the
-        market is clearing whatever price those hours deserve. A yearly
-        average price can look comfortable while the plant’s own
-        production sits mostly in cheaper hours. That timing problem is
-        the doorway into capture price: the price curve weighted by the
-        plant’s generation. It also explains why adding more solar can
-        change the value of solar itself. When many plants produce
+        <p>A solar plant sells when the sun is up, when clouds allow
+        output, and when the market clears the price for those hours. A
+        yearly average price can look comfortable while the plant’s own
+        production sits mostly in cheaper hours. Capture price measures
+        that timing problem by weighting the price curve by the plant’s
+        generation. The same mechanism explains why adding more solar
+        can change the value of solar itself. When many plants produce
         together, they can push down the prices in the same hours they
         need to sell.</p>
         <section id="opening-puzzle-11" class="level4">
@@ -4496,8 +4484,8 @@ reactive MVAr obligation or headroom</code></pre>
         <pre class="text"><code>(1 x 20 + 0 x 100) / (1 + 0) = 20 EUR/MWh</code></pre>
         <p>Capture rate:</p>
         <pre class="text"><code>20 / 60 = 33%</code></pre>
-        <p>This is the whole lesson in miniature: the solar plant does
-        not earn the average hour. It earns its own hours.</p>
+        <p>The solar plant earns the prices in its own production hours,
+        not the simple average price.</p>
         </section>
         </section>
         <section id="equations-5" class="level4">
@@ -4526,8 +4514,8 @@ reactive MVAr obligation or headroom</code></pre>
         solar output becomes large in some hours, residual load falls.
         If demand, exports, storage, and flexible load cannot absorb the
         energy, the clearing price in those hours can fall.</p>
-        <p>That is cannibalization. The asset partly helps create the
-        prices it is exposed to.</p>
+        <p>This mechanism is cannibalization: the asset partly helps
+        create the prices it is exposed to.</p>
         <p>Curtailment is related but not identical:</p>
         <ul>
         <li>Economic curtailment: the plant is out of the money at the
@@ -4618,17 +4606,17 @@ reactive MVAr obligation or headroom</code></pre>
         <p class="lecture-refs">
         References: <sup><a href="#ref-5">[5]</a></sup>
         </p>
-        <p>Picture a control room watching prices fall at noon and rise
-        again in the evening. A battery can take energy from one hour
-        and return it in another. The first number people quote, MW,
-        only states the power limit. It does not say how long useful
-        discharge can last, how much energy survives the round trip, or
-        what must be held back for another obligation. The first test is
-        what kind of time-shifting asset the battery is, and what
-        constraints travel with every cycle.</p>
+        <p>A control room may see prices fall at noon and rise again in
+        the evening. A battery can take energy from one hour and return
+        it in another. The first number people quote, MW, only states
+        the power limit. It does not say how long useful discharge can
+        last, how much energy survives the round trip, or what must be
+        held back for another obligation. The first test is what kind of
+        time-shifting asset the battery is, and what constraints travel
+        with every cycle.</p>
         <section id="opening-puzzle-12" class="level4">
         <h4>Opening Puzzle</h4>
-        <p>Someone says, “We are building a 100 MW battery.”</p>
+        <p>A project description says, “100 MW battery.”</p>
         <p>The right response is: “For how long?”</p>
         <p>A 100 MW / 100 MWh battery, a 100 MW / 200 MWh battery, and a
         100 MW / 400 MWh battery can all discharge at the same maximum
@@ -4642,7 +4630,7 @@ reactive MVAr obligation or headroom</code></pre>
         chemically, and gives electrical energy back later. The useful
         function is changed timing, bounded by losses, degradation,
         control rights, and market rules.</p>
-        <p>Three numbers are the skeleton:</p>
+        <p>Three numbers define the basic state:</p>
         <pre class="text"><code>MW: how fast the battery can charge or discharge
 MWh: how much energy it can store
 round-trip efficiency (RTE): how much energy survives the round trip</code></pre>
@@ -4755,9 +4743,10 @@ Gross spread value = 5,200 EUR</code></pre>
         or the contract requires longer firming. Neither is
         intrinsically superior.</p>
         <p>If a solar farm produces excess at noon and a PPA promises
-        evening delivery, the battery is a bridge. But the bridge has
-        width and length. The MW is the width; the MWh is the length;
-        the RTE is the toll; degradation is the wear.</p>
+        evening delivery, the battery can shift part of the production
+        into the delivery window. MW defines the maximum shift rate, MWh
+        defines how much energy can be shifted, RTE defines the loss,
+        and degradation defines the operating cost.</p>
         </section>
         <section id="in-practice-12" class="level4">
         <h4>In Practice</h4>
@@ -4802,10 +4791,10 @@ Gross spread value = 5,200 EUR</code></pre>
         2023 and rapid 2023 power-sector deployment, but those facts do
         not determine a Swedish project’s economics.</p>
         <p>Cycle-life and degradation are central to investment
-        decisions, but it does not lock a universal LFP cycle-life
-        number. Any later analysis using cycle-life as a hard input
-        should extract original equipment manufacturer (OEM), NREL/ATB,
-        or technical reference support.</p>
+        decisions, but no universal LFP cycle-life number is used here.
+        Any later analysis using cycle-life as a hard input should
+        extract original equipment manufacturer (OEM), NREL/ATB, or
+        technical reference support.</p>
         </section>
         <section id="recap-12" class="level4">
         <h4>Recap</h4>
@@ -5205,7 +5194,7 @@ Project 2: Danish solar-plus-BESS, DK2, separate import treatment, customer-shap
         <li>current area-price, system-price, and hedge-basis data for
         the delivery period</li>
         </ul>
-        <p>The durable lesson is structural: Nordic integration creates
+        <p>The structural point is durable: Nordic integration creates
         common references, while local constraints decide project
         value.</p>
         </section>
@@ -5237,9 +5226,8 @@ Project 2: Danish solar-plus-BESS, DK2, separate import treatment, customer-shap
         what happened, and settlement assigns the difference to someone.
         The physical MWh and the financial obligation travel through
         different clocks. Following one forecast error through those
-        clocks is the cleanest way to see the whole machine: market,
-        grid, roles, data, balancing, settlement, and governance in one
-        chain.</p>
+        clocks shows the market, grid, roles, data, balancing,
+        settlement, and governance in one chain.</p>
         <section id="opening-puzzle-14" class="level4">
         <h4>Opening Puzzle</h4>
         <p>A solar farm forecasts <code>100 MWh</code> for an hour and
@@ -5250,15 +5238,15 @@ Project 2: Danish solar-plus-BESS, DK2, separate import treatment, customer-shap
         deviation from a position. Financially, it became an imbalance
         or a sourcing cost under the relevant rules and contracts.
         Operationally, the system still had to balance in real time.</p>
-        <p>That is the whole market machine in one hour.</p>
+        <p>That one hour contains the main market sequence.</p>
         </section>
         <section id="first-principles-model-14" class="level4">
         <h4>First-Principles Model</h4>
         <p>Electricity has two clocks.</p>
         <pre class="text"><code>physical clock: supply and demand must balance continuously
 market clock: forecast -&gt; trade -&gt; schedule -&gt; adjust -&gt; operate -&gt; meter -&gt; settle</code></pre>
-        <p>Markets do not remove the physical clock. They organize
-        responsibility for it under uncertainty.</p>
+        <p>Markets organize responsibility around the physical clock
+        under uncertainty.</p>
         <p>The basic identity is:</p>
         <pre class="text"><code>measured reality - scheduled or contracted position = deviation to explain</code></pre>
         <p>Sign conventions and settlement details vary by market rule.
@@ -5306,7 +5294,7 @@ Shortfall = 30 MWh</code></pre>
         <code>90 EUR/MWh</code>, the gross cost of the miss is:</p>
         <pre class="text"><code>30 MWh x 90 EUR/MWh = EUR 2,700</code></pre>
         <p>The net outcome depends on the actual market, contract, and
-        settlement rules. The scale lesson is enough for Volume I: a
+        settlement rules. The scale point is enough for Volume I: a
         forecast miss moves through trading, balancing, settlement, and
         partner performance.</p>
         </section>
@@ -5411,9 +5399,9 @@ Shortfall = 30 MWh</code></pre>
         condition, asset constraint, data problem, partner execution, or
         contract design.</li>
         </ol>
-        <p>This is why the same MWh can appear in several conversations.
-        The meteorologist sees forecast error. The trader sees a
-        position. The TSO sees system balance. The BRP sees imbalance
+        <p>The same MWh can appear in several conversations. The
+        meteorologist sees forecast error. The trader sees a position.
+        The TSO sees system balance. The BRP sees imbalance
         responsibility. The asset owner sees retained economics. The
         customer sees whether the PPA promise was kept. The risk
         function sees evidence.</p>
@@ -5447,8 +5435,8 @@ Shortfall = 30 MWh</code></pre>
         governance question is:</p>
         <pre class="text"><code>Given forecasts, prices, asset constraints, contract rights,
 and data available at the time, what should a feasible operator have done?</code></pre>
-        <p>That is the seed of shadow trading. The benchmark must use
-        information available at the time, not perfect hindsight. It
+        <p>That defines the basis for shadow trading. The benchmark must
+        use information available at the time, not perfect hindsight. It
         also needs the same constraints as the partner: market access,
         gate closures, SoC, grid limits, PPA obligations, reserve
         commitments, and risk limits.</p>
@@ -5469,7 +5457,7 @@ and data available at the time, what should a feasible operator have done?</code
         <p>“A BSP revenue is free upside.” Reserve commitments consume
         availability, state of charge, control rights, and sometimes
         energy headroom.</p>
-        <p>“Settlement is accounting after the real work.” Settlement is
+        <p>“Settlement is only back-office accounting.” Settlement is
         where physical deviations become money and governance
         evidence.</p>
         <p>“A forecast error is just a model-quality issue.” It becomes
@@ -5491,13 +5479,13 @@ and data available at the time, what should a feasible operator have done?</code
         </section>
         <section id="recap-14" class="level4">
         <h4>Recap</h4>
-        <p>One missing MWh can be followed through the whole system:
-        forecast, trade, schedule, repair, operate, meter, settle, and
-        review. The missing MWh is a difference between a position and
-        measured reality. Markets make that difference governable by
-        assigning responsibility, pricing corrections, and creating
-        evidence. Once the reader can draw that chain, the separate
-        pieces of Volume I become one machine.</p>
+        <p>One missing MWh can be followed through the system: forecast,
+        trade, schedule, repair, operate, meter, settle, and review. The
+        missing MWh is a difference between a position and measured
+        reality. Markets make that difference governable by assigning
+        responsibility, pricing corrections, and creating evidence. Once
+        the reader can draw that chain, the separate pieces of Volume I
+        become one operating sequence.</p>
         <div class="lecture-end">
 
         </div>
@@ -5520,28 +5508,26 @@ and data available at the time, what should a feasible operator have done?</code
         costs, balancing exposure, debt service, and the merchant tail
         pass through the model. For an independent power producer (IPP)
         developing solar plus battery storage, the model has to show how
-        physical performance turns into cash that can pay costs, support
-        debt, and leave value for equity. It is the meeting point for
-        MWh, realized prices, contracts, grid constraints, and financing
-        promises.</p>
+        physical performance becomes cash that can pay costs, support
+        debt, and leave value for equity. It connects MWh, realized
+        prices, contracts, grid constraints, and financing promises.</p>
         <section id="opening-puzzle-15" class="level4">
         <h4>Opening Puzzle</h4>
         <p>A solar plant can be technically excellent and financially
         mediocre.</p>
         <p>A site can produce electricity and still fail the financial
-        test. A power asset is two machines at once:</p>
+        test. A power asset has two linked descriptions:</p>
         <ul>
-        <li>a physical machine that turns weather and equipment into
-        MWh</li>
-        <li>a financial machine that turns uncertain future MWh into
-        cash available to debt and equity</li>
+        <li>physical performance: weather and equipment become MWh</li>
+        <li>financial performance: uncertain future MWh become cash
+        available to debt and equity</li>
         </ul>
-        <p>The first machine is measured in MW, MWh, availability,
-        losses, and degradation. The second is measured in revenue,
-        opex, debt service, tax, net present value (NPV), internal rate
-        of return (IRR), and debt service coverage ratio (DSCR). A
-        project model connects those two descriptions and shows where
-        value is created or lost.</p>
+        <p>The physical description is measured in MW, MWh,
+        availability, losses, and degradation. The financial description
+        is measured in revenue, opex, debt service, tax, net present
+        value (NPV), internal rate of return (IRR), and debt service
+        coverage ratio (DSCR). A project model connects those two
+        descriptions and shows where value is created or lost.</p>
         </section>
         <section id="first-principles-model-15" class="level4">
         <h4>First-Principles Model</h4>
@@ -5553,7 +5539,8 @@ and data available at the time, what should a feasible operator have done?</code
         <li><code>realized_price_h</code>: EUR/MWh</li>
         <li><code>cash_in_hour_h</code>: EUR</li>
         </ul>
-        <p>Then add the parts the market does not forgive:</p>
+        <p>Then add the costs and exposures that change collectible
+        cash:</p>
         <pre class="text"><code>project_revenue = contracted_revenue + merchant_revenue + certificate_revenue + service_revenue
 
 operating_cash_before_debt =
@@ -5562,11 +5549,10 @@ operating_cash_before_debt =
  - operating_costs
  - land_and_insurance
  - taxes_or_fees</code></pre>
-        <p>The asset does not care whether a euro comes from a PPA,
-        merchant sale, guarantee of origin (GO) or certificate
-        settlement, or battery service. The lender and equity investor
-        care a great deal, because the uncertainty and control rights
-        differ.</p>
+        <p>The physical asset produces MWh; finance cares which euros
+        come from a PPA, merchant sale, guarantee of origin (GO) or
+        certificate settlement, or battery service, because the
+        uncertainty and control rights differ.</p>
         </section>
         <section id="definitions-15" class="level4">
         <h4>Definitions</h4>
@@ -5661,14 +5647,14 @@ operating_cash_before_debt =
         <p>Now test sensitivity. A <code>5 EUR/MWh</code> difference in
         realized price is:</p>
         <pre class="text"><code>100,000 MWh/year x 5 EUR/MWh = EUR 500,000/year</code></pre>
-        <p>That is why capture price and shape are not footnotes. A
+        <p>Capture price and shape deserve explicit sensitivities. A
         small price-per-MWh error becomes a large annual cash-flow error
         when multiplied by project volume.</p>
         </section>
         </section>
         <section id="mechanism-14" class="level4">
         <h4>Mechanism</h4>
-        <p>The cash-flow machine has seven gates.</p>
+        <p>The cash-flow model has seven conversion layers.</p>
         <ol type="1">
         <li>Physical production: irradiance, wind, availability,
         degradation, clipping, losses, and curtailment decide MWh.</li>
@@ -5699,10 +5685,10 @@ operating_cash_before_debt =
         hours and realizes <code>45 EUR/MWh</code>.</p>
         <pre class="text"><code>annual revenue gap = 100,000 MWh/year x (55 - 45) EUR/MWh
  = EUR 1,000,000/year</code></pre>
-        <p>If the capex, opex, and debt service are similar, this is not
-        a small commercial difference. It can decide leverage, covenant
-        headroom, equity distributions, and whether a merchant tail is
-        an upside story or a risk story.</p>
+        <p>If the capex, opex, and debt service are similar, this is a
+        material commercial difference. It can decide leverage, covenant
+        headroom, equity distributions, and whether merchant exposure
+        adds useful upside or unacceptable risk.</p>
         </section>
         <section id="in-practice-15" class="level4">
         <h4>In Practice</h4>
@@ -5721,9 +5707,8 @@ operating_cash_before_debt =
         <li>lender value: what part of cash flow is contracted enough to
         support debt</li>
         </ul>
-        <p>An investment committee should not receive only an IRR. It
-        should receive the bridge from physical assumptions to
-        risk-bearing cash flows.</p>
+        <p>An investment committee should receive the link from physical
+        assumptions to risk-bearing cash flows alongside the IRR.</p>
         </section>
         <section id="misconceptions-15" class="level4">
         <h4>Misconceptions</h4>
@@ -5735,9 +5720,8 @@ operating_cash_before_debt =
         <p>Contracted revenue is not risk-free revenue. A contract can
         fix price while leaving volume, shape, balancing, curtailment,
         credit, or operational risk exposed.</p>
-        <p>Grid cost is not a line item to add at the end. It can change
-        the optimal size, connection design, BESS duration, curtailment
-        strategy, and PPA product.</p>
+        <p>Grid cost can change the optimal size, connection design,
+        BESS duration, curtailment strategy, and PPA product.</p>
         </section>
         <section id="caveats-current-debates" class="level4">
         <h4>Caveats / Current Debates</h4>
@@ -5774,15 +5758,14 @@ operating_cash_before_debt =
         <a href="#ref-9">[9]</a> <a href="#ref-27">[27]</a>
         <a href="#ref-28">[28]</a> <a href="#ref-11">[11]</a></sup>
         </p>
-        <p>A project can look clean in the revenue model and still lose
-        its shape at the grid gate. The connection offer fixes more than
-        a cable route: it decides how many MW the site can inject or
-        withdraw, which charges sit on capacity rather than energy, and
-        when access can be limited. For a solar, battery, or hybrid
-        project, those terms change the value of the same physical
-        asset. The commercial question is whether the site has bought
-        the right kind of grid access for the product it wants to
-        sell.</p>
+        <p>A project can clear the revenue model and still fail the
+        grid-access screen. The connection offer fixes more than a cable
+        route: it decides how many MW the site can inject or withdraw,
+        which charges sit on capacity rather than energy, and when
+        access can be limited. For a solar, battery, or hybrid project,
+        those terms change the value of the same physical asset. The
+        commercial question is whether the site has bought the right
+        kind of grid access for the product it wants to sell.</p>
         <section id="opening-puzzle-16" class="level4">
         <h4>Opening Puzzle</h4>
         <p>Two identical batteries can have different economics before
@@ -6102,9 +6085,9 @@ battery_capex_and_opex
         background infrastructure. The connection determines how much
         power can move, when that right can be constrained, and which
         costs attach to MW, MWh, losses, reactive power, or overruns.
-        That is why two identical batteries can diverge before their
-        first trade. A useful project model annualizes one-off costs,
-        separates capacity from usage charges, and prices curtailment or
+        Two identical batteries can diverge before their first trade. A
+        useful project model annualizes one-off costs, separates
+        capacity from usage charges, and prices curtailment or
         interruption as part of the dispatch problem.</p>
         <div class="lecture-end">
 
@@ -6151,7 +6134,7 @@ battery_capex_and_opex
         </section>
         <section id="first-principles-model-17" class="level4">
         <h4>First-Principles Model</h4>
-        <p>Start with the project cash-flow bridge:</p>
+        <p>Start with the project cash-flow stack:</p>
         <pre class="text"><code>project_cash_flow =
   contracted_revenue
   + merchant_revenue
@@ -6461,7 +6444,7 @@ extra visible value = 1.05 million EUR/year</code></pre>
         value separately:</p>
         <pre class="text"><code>project_value = contracted_period_value + merchant_tail_value</code></pre>
         <p>The merchant tail is usually a scenario range, not a single
-        heroic number.</p>
+        optimistic number.</p>
         </section>
         <section id="decision-frame" class="level4">
         <h4>Decision Frame</h4>
@@ -6543,10 +6526,10 @@ extra visible value = 1.05 million EUR/year</code></pre>
         payment, or delivery do not line up. The same plant can support
         very different contracts: all metered output, a fixed schedule,
         or a financial settlement against a reference price. Each
-        version puts a different party on the hook for quantity, shape,
-        balancing, credit, certificates, data, and fallback rules. A
-        usable PPA screen therefore starts with the mismatches before it
-        argues about the label.</p>
+        version assigns quantity, shape, balancing, credit,
+        certificates, data, and fallback exposure to different parties.
+        A usable PPA screen therefore starts with the mismatches before
+        it argues about the label.</p>
         <section id="opening-puzzle-18" class="level4">
         <h4>Opening Puzzle</h4>
         <p>A customer asks for a ten-year solar PPA. The commercial team
@@ -6648,7 +6631,7 @@ evidence promise</code></pre>
         <td>Quantity</td>
         <td>Is the buyer taking all output, part of output, or a fixed
         schedule?</td>
-        <td>Hidden shape and volume exposure.</td>
+        <td>Shape and volume exposure.</td>
         </tr>
         <tr>
         <td>Price</td>
@@ -6695,7 +6678,7 @@ evidence promise</code></pre>
         <tr>
         <td>Termination</td>
         <td>How is early exit valued?</td>
-        <td>Hidden mark-to-market exposure.</td>
+        <td>Mark-to-market exposure.</td>
         </tr>
         <tr>
         <td>Data/control</td>
@@ -6705,17 +6688,17 @@ evidence promise</code></pre>
         </tr>
         </tbody>
         </table>
-        <p>This is the economic heart of the PPA. The legal drafting
+        <p>This ledger defines the PPA economics. The legal drafting
         matters, but the business question is simpler: when the world
         differs from the spreadsheet, whose cash flow moves?</p>
         </section>
         <section id="mechanism-16" class="level4">
         <h4>Mechanism</h4>
         <p>The EFET/RE-Source template is useful because it makes the
-        hidden choices visible.</p>
+        allocation choices visible.</p>
         <p>First, settlement must be selected. Physical and financial
-        settlement are different machines. Physical settlement creates
-        operational interfaces. Financial settlement creates
+        settlement create different interfaces. Physical settlement
+        creates operational interfaces. Financial settlement creates
         reference-price and basis questions.</p>
         <p>Second, contract quantity must be selected. All metered
         output, an agreed part of output, and a fixed delivery schedule
@@ -6731,9 +6714,8 @@ evidence promise</code></pre>
         product.</p>
         <p>Fifth, fallback and termination mechanics must be selected.
         Long contracts need rules for market disruption, early
-        termination, and valuation. These are not legal ornaments. They
-        are ways of deciding who pays when the expected settlement
-        machine breaks.</p>
+        termination, and valuation. These terms allocate payment when
+        the expected settlement process fails.</p>
         </section>
         <section id="example-9" class="level4">
         <h4>Example</h4>
@@ -6746,8 +6728,8 @@ evidence promise</code></pre>
         <p>Contract B says the seller delivers 20 MW flat every hour.
         The seller now owns the shape problem. In non-solar hours it
         must buy, hedge, dispatch storage, use portfolio supply, or
-        financially settle. The asset did not change. The seller’s
-        obligation changed.</p>
+        financially settle. The physical plant is unchanged; the seller
+        has accepted a different delivery obligation.</p>
         <p>Contract C is a virtual PPA against a reference price. Now
         physical supply is separate. The buyer may get hedge value and
         certificates, but basis risk and accounting treatment matter.
@@ -6775,8 +6757,8 @@ evidence promise</code></pre>
         <tr>
         <td>Cap</td>
         <td>Seller covers firming up to a defined EUR or MWh limit.</td>
-        <td>Buyer wants a fixed product but seller refuses uncapped tail
-        exposure.</td>
+        <td>Buyer wants a fixed product but seller will not accept
+        uncapped tail exposure.</td>
         </tr>
         <tr>
         <td>Collar</td>
@@ -6811,9 +6793,8 @@ evidence promise</code></pre>
         </tr>
         </tbody>
         </table>
-        <p>These are not cosmetic legal terms. They decide whether a
-        shaped offer is a bounded product or an uncapped short position
-        in difficult hours.</p>
+        <p>These terms decide whether a shaped offer is a bounded
+        product or an uncapped short position in difficult hours.</p>
         </section>
         <section id="in-practice-17" class="level4">
         <h4>In Practice</h4>
@@ -7499,9 +7480,8 @@ P_t = market/reference price, EUR/MWh</code></pre>
         <p>If the buyer’s willingness-to-pay is 68 EUR/MWh, the buyer
         surplus is:</p>
         <pre class="text"><code>68 - 65 = 3 EUR/MWh</code></pre>
-        <p>That is thin. The offer may be worth making, but it is not
-        robust. A small miss in shape cost, grid charges, or credit
-        support can erase the deal.</p>
+        <p>That margin is thin. The offer may be worth making, but it is
+        sensitive to shape cost, grid charges, and credit support.</p>
         <p>The shape line should not be guessed. A first derivation
         comes from residual buckets.</p>
         <p>Illustrative shaped product:</p>
@@ -7565,9 +7545,8 @@ shape_cost_per_MWh = 1,037,500 / 100,000
         </tr>
         </tbody>
         </table>
-        <p>This is the useful part of the pricing memo. It does not
-        pretend to know the perfect price. It shows which assumption
-        controls the deal.</p>
+        <p>This sensitivity table shows which assumption controls the
+        deal.</p>
         </section>
         <section id="pricing-mechanism" class="level4">
         <h4>Pricing Mechanism</h4>
@@ -7578,7 +7557,7 @@ shape_cost_per_MWh = 1,037,500 / 100,000
         <pre class="text"><code>What does this product save or solve compared with the buyer&#39;s alternatives?</code></pre>
         <p>A product can be cheap to provide but valuable to the buyer.
         A product can be expensive to provide and still not valuable
-        enough to buy. The commercial art is finding products where the
+        enough to buy. The commercial task is to find products where the
         seller’s controllable cost is below the buyer’s
         willingness-to-pay.</p>
         <p>Use this screen:</p>
@@ -7678,12 +7657,12 @@ buyer surplus = buyer willingness-to-pay - offer price</code></pre>
         <p>“Customer value equals seller cost.” They are two sides of
         the negotiation, not the same number.</p>
         <p>“A risk margin fixes uncertainty.” A risk margin without
-        named risks is a hidden plug.</p>
+        named risks is an unexplained plug.</p>
         </section>
         <section id="recap-20" class="level4">
         <h4>Recap</h4>
-        <p>The quote stack is the commercial spine of the offer: start
-        with the asset’s raw energy value, add each cost of turning that
+        <p>The quote stack is the offer’s pricing structure: start with
+        the asset’s raw energy value, add each cost of turning that
         curve into the contracted profile, then test whether the
         resulting offer leaves both seller margin and buyer surplus. The
         same customer request can become as-produced solar, a shaped
@@ -7995,7 +7974,7 @@ risk allocation and governance</code></pre>
         basic contract discipline: corporate PPAs are negotiated
         instruments where quantity, price mechanism, certificate
         treatment, settlement, fallback, credit, and termination terms
-        must be explicit. That is why the proposal model must follow the
+        must be explicit. The proposal model must therefore follow the
         term sheet, not the other way around.</p>
         </section>
         </section>
@@ -8331,9 +8310,8 @@ net arbitrage value = 12,100 - 2,160 - 600 = 9,340 EUR</code></pre>
   - opportunity_cost
   - extra_degradation
   - grid_and_imbalance_costs</code></pre>
-        <p>This is the core of revenue stacking. The price of a product
-        is not enough. The product must beat the value of the best
-        feasible thing the battery gives up.</p>
+        <p>A product clears the stack only when its value exceeds the
+        best feasible use the battery gives up.</p>
         </section>
         <section id="revenue-lines-become-obligations" class="level4">
         <h4>Revenue Lines Become Obligations</h4>
@@ -8431,7 +8409,7 @@ net arbitrage value = 12,100 - 2,160 - 600 = 9,340 EUR</code></pre>
         </tr>
         <tr>
         <td>Repeated observable market revenue with liquid history</td>
-        <td>Useful, but haircut</td>
+        <td>Evidence value with haircut</td>
         </tr>
         <tr>
         <td>Optimizer forecast of merchant spreads</td>
@@ -8449,7 +8427,7 @@ net arbitrage value = 12,100 - 2,160 - 600 = 9,340 EUR</code></pre>
         second may have higher expected value and still support less
         debt if the revenue disappears under saturation, rule change, or
         competitor entry.</p>
-        <p>This is why a BESS investment case should separate:</p>
+        <p>A BESS investment case should separate:</p>
         <pre class="text"><code>underwritten_floor
 base_case_optimization
 merchant_upside
@@ -8563,9 +8541,9 @@ stress_case_value</code></pre>
         </tr>
         </tbody>
         </table>
-        <p>The percentages are scenario assumptions, not lender rules.
-        They teach the comparison: expected value, downside value, and
-        financeable value are different columns.</p>
+        <p>The percentages are scenario assumptions rather than lender
+        rules. They teach the comparison: expected value, downside
+        value, and financeable value are different columns.</p>
         </section>
         <section id="saturation-changes-the-opportunity-cost"
         class="level4">
@@ -8659,8 +8637,8 @@ unpriced_option_value</code></pre>
         asset. Once that opportunity cost is priced, the model should
         separate underwritten floor, repeatable market value, optimizer
         forecast, and option value. Extra spreadsheet rows create no
-        value unless the physical machine, contract, and investment case
-        can carry them together.</p>
+        value unless the asset, contract, and investment case can carry
+        them together.</p>
         <div class="lecture-end">
 
         </div>
@@ -8711,8 +8689,8 @@ duration_h = usable_energy_MWh / discharge_power_MW</code></pre>
         <pre class="text"><code>100 MW / 100 MWh = 1 h
 100 MW / 200 MWh = 2 h
 100 MW / 400 MWh = 4 h</code></pre>
-        <p>That identity is only the doorway. The decision is about the
-        next MWh.</p>
+        <p>That identity is only the unit check. The decision is about
+        the next MWh.</p>
         <p>The commercial question is:</p>
         <pre class="text"><code>Does the extra MWh earn more than it costs?</code></pre>
         <p>More explicitly:</p>
@@ -8852,7 +8830,7 @@ extra energy block scale = 200,000 x 175 = USD 35,000,000</code></pre>
         </tr>
         </tbody>
         </table>
-        <p>The IEA scenario story fits this intuition. As solar
+        <p>The IEA scenario logic fits this intuition. As solar
         penetration rises, the share of four-to-eight-hour battery
         systems rises relative to shorter systems, and the global
         average storage fleet duration rises from around two hours in
@@ -9120,9 +9098,9 @@ extra energy block scale = 200,000 x 175 = USD 35,000,000</code></pre>
         </table>
         <p>This sanity gate tells you where to spend modeling time
         before building a valuation model.</p>
-        <p>If the only story for the 4h design is “batteries are moving
-        to longer duration,” reject it.</p>
-        <p>If the story is “this contract has a persistent evening
+        <p>If the only rationale for the 4h design is “batteries are
+        moving to longer duration,” reject it.</p>
+        <p>If the rationale is “this contract has a persistent evening
         delivery obligation, this site has solar curtailment at noon,
         this grid connection allows charging, and the extra MWh survives
         degradation, insurance, and tariff costs,” then model it
@@ -9188,7 +9166,7 @@ extra energy block scale = 200,000 x 175 = USD 35,000,000</code></pre>
         </section>
         <section id="in-practice-20" class="level4">
         <h4>In Practice</h4>
-        <p>A serious duration memo should include:</p>
+        <p>A duration memo should include:</p>
         <ul>
         <li>asset: MW, MWh, usable energy, round-trip efficiency,
         availability assumptions</li>
@@ -9208,9 +9186,9 @@ extra energy block scale = 200,000 x 175 = USD 35,000,000</code></pre>
         <pre class="text"><code>2h is better under assumptions A, B, C.
 4h becomes better if X happens.
 Both fail if Y is true.</code></pre>
-        <p>That is more useful than quoting a global fleet-average
-        duration, because the project decision depends on the site,
-        contract, grid rights, and portfolio need.</p>
+        <p>Site-specific evidence is more useful than a global
+        fleet-average duration because the project decision depends on
+        the site, contract, grid rights, and portfolio need.</p>
         </section>
         <section id="recap-23" class="level4">
         <h4>Recap</h4>
@@ -9424,7 +9402,7 @@ terminal shortfall from 50 MWh discharge = 50 MWh - 40 MWh = 10 MWh</code></pre>
         <p>If the actual 22:00 price later clears at
         <code>140 EUR/MWh</code>, that can improve future forecasts. For
         judging the 18:00 schedule, use only information that was
-        tradable at 18:00. This is why a dispatch model evaluates one
+        tradable at 18:00. A dispatch model therefore evaluates one
         battery across obligations and time instead of ranking markets
         or hours one by one.</p>
         </section>
@@ -9954,7 +9932,7 @@ annualized_net_value = 14,000 x 12 = 168,000 EUR/year</code></pre>
         <td>Ignore / keep current process</td>
         <td>value-weighted error is small, no action window exists, or
         partner already bears and evidences the risk</td>
-        <td>hidden exposure if volumes or contracts grow</td>
+        <td>exposure can grow with volumes or contracts</td>
         </tr>
         <tr>
         <td>Buy forecast service</td>
@@ -10165,12 +10143,12 @@ rebalance_value =
         <p>Suppose electricity can be bought at <code>40 EUR/MWh</code>
         and sold at <code>70 EUR/MWh</code>.</p>
         <p>The spread is positive before losses and wear.</p>
-        <p>But the battery does not move energy for free. It loses
-        energy as heat. It uses some of its finite cycle life. It may
-        move closer to an augmentation date. It may also consume
-        warranty headroom, breach an insurance operating covenant, or
-        violate another operating envelope if the dispatch is too
-        aggressive.</p>
+        <p>The battery moves energy with losses and operating
+        consequences. It loses energy as heat. It uses some of its
+        finite cycle life. It may move closer to an augmentation date.
+        It may also consume warranty headroom, breach an insurance
+        operating covenant, or violate another operating envelope if the
+        dispatch is too aggressive.</p>
         <p>Ask:</p>
         <pre class="text"><code>Is the spread positive after losses, degradation, fees, tariffs,
 opportunity cost, and operating limits?</code></pre>
@@ -10254,8 +10232,8 @@ opportunity cost, and operating limits?</code></pre>
         </section>
         <section id="numerical-intuition-25" class="level4">
         <h4>Numerical Intuition</h4>
-        <section id="the-hidden-dispatch-threshold" class="level5">
-        <h5>The Hidden Dispatch Threshold</h5>
+        <section id="dispatch-threshold-for-cycling" class="level5">
+        <h5>Dispatch Threshold For Cycling</h5>
         <p>Suppose a battery analyst uses a simple degradation
         allowance.</p>
         <p>Illustrative assumptions:</p>
@@ -10287,7 +10265,7 @@ degradation_cost = 16 EUR/MWh discharged</code></pre>
         <pre class="text"><code>70 - 40 = 30 EUR/MWh</code></pre>
         <p>The degradation-adjusted margin is:</p>
         <pre class="text"><code>6.56 EUR/MWh</code></pre>
-        <p>That is a different decision.</p>
+        <p>Those economics support a different decision.</p>
         <p>If degradation cost is <code>30 EUR/MWh</code> instead of
         <code>16</code>, the break-even price becomes:</p>
         <pre class="text"><code>44.44 + 30 + 3 = 77.44 EUR/MWh</code></pre>
@@ -10361,9 +10339,9 @@ degradation_cost = 16 EUR/MWh discharged</code></pre>
         The modeling conclusion is general:</p>
         <pre class="text"><code>dispatch consumes contractual and insurability headroom as well as physical life</code></pre>
         <p>DNV also describes more flexible warranty structures where
-        operational metrics feed formulas rather than fixed tables. That
-        is commercially important: the owner may be allowed to cycle
-        harder during a high-value event, but the model must show the
+        operational metrics feed formulas rather than fixed tables. This
+        matters commercially: the owner may be allowed to cycle harder
+        during a high-value event, but the model must show the
         degradation, warranty, augmentation, and future-value
         consequence of doing so.</p>
         <p>Illustrative throughput check:</p>
@@ -10442,8 +10420,8 @@ degradation_cost = 16 EUR/MWh discharged</code></pre>
         or save the battery for later.</p>
         <p>The objective should therefore include:</p>
         <pre class="text"><code>degradation_cost_t = f(throughput_t, depth_t, power_t, temperature_t, soc_t)</code></pre>
-        <p>In many commercial models this function is simplified. That
-        is acceptable if the simplification is explicit and
+        <p>In many commercial models this function is simplified. The
+        simplification is acceptable if it is explicit and
         stress-tested. The model fails if it quietly assumes cycling is
         free, or if it optimizes revenue under a dispatch pattern that
         the warranty, data-retention process, thermal-management system,
@@ -10459,8 +10437,8 @@ degradation_cost = 16 EUR/MWh discharged</code></pre>
         <pre class="text"><code>cycle now and consume throughput
 or wait and consume time</code></pre>
         <p>This matters for low-spread environments. A battery that
-        never cycles is not necessarily preserving all value. It may be
-        losing calendar life while earning too little.</p>
+        never cycles may still lose calendar life while earning too
+        little.</p>
         <p>The practical decision is:</p>
         <pre class="text"><code>use the asset when compensated for energy losses, wear, risk, and alternatives</code></pre>
         </section>
@@ -10768,9 +10746,9 @@ insurance policy, availability plan, or augmentation budget can support</code></
         <thead>
         <tr>
         <th>Scenario</th>
-        <th>Physical story</th>
-        <th>Market story</th>
-        <th>Contract/grid story</th>
+        <th>Physical case</th>
+        <th>Market case</th>
+        <th>Contract/grid case</th>
         <th>What it tests</th>
         </tr>
         </thead>
@@ -10780,7 +10758,7 @@ insurance policy, availability plan, or augmentation budget can support</code></
         <td>Expected production and availability</td>
         <td>Central capture and BESS revenue</td>
         <td>Known tariff and PPA terms</td>
-        <td>Investment committee’s main story</td>
+        <td>Investment committee’s reference case</td>
         </tr>
         <tr>
         <td>Low-price / low-capture</td>
@@ -10927,7 +10905,8 @@ insurance policy, availability plan, or augmentation budget can support</code></
         <tr>
         <td>Debt service unchanged</td>
         <td style="text-align: right;">0</td>
-        <td>Financing does not automatically flex with the market</td>
+        <td>Financing usually remains fixed unless refinancing or
+        covenant terms change</td>
         </tr>
         <tr>
         <td>Equity cash-flow reduction</td>
@@ -10936,11 +10915,11 @@ insurance policy, availability plan, or augmentation budget can support</code></
         </tr>
         </tbody>
         </table>
-        <p>This is why lender and equity views differ. The lender asks
-        whether contracted and resilient cash flow covers debt under
-        stress. The equity sponsor asks whether the retained upside
-        justifies the residual risk after debt, grid, contract, and
-        merchant-tail exposure.</p>
+        <p>Lender and equity views differ. The lender asks whether
+        contracted and resilient cash flow covers debt under stress. The
+        equity sponsor asks whether the retained upside justifies the
+        residual risk after debt, grid, contract, and merchant-tail
+        exposure.</p>
         </section>
         <section id="the-financeability-lens" class="level4">
         <h4>The Financeability Lens</h4>
@@ -10975,7 +10954,7 @@ insurance policy, availability plan, or augmentation budget can support</code></
         <pre class="text"><code>What return do we get if this debt package is available?</code></pre>
         <p>A lender often starts from the other side:</p>
         <pre class="text"><code>How much debt can the project support under the cash-flow case we trust?</code></pre>
-        <p>The useful formula is:</p>
+        <p>Debt-service capacity follows:</p>
         <pre class="text"><code>maximum debt service = cash available for debt service / required DSCR</code></pre>
         <p>Units:</p>
         <ul>
@@ -11104,7 +11083,7 @@ Which value should be haircut or excluded until evidence improves?</code></pre>
         <li>It improves hedge fit by <code>EUR 100,000/year</code>.</li>
         <li>It adds fixed grid cost of
         <code>EUR 150,000/year</code>.</li>
-        <li>Ignore discounting for this bridge.</li>
+        <li>Ignore discounting for this illustration.</li>
         </ul>
         <p>Net annual portfolio effect:</p>
         <pre class="text"><code>200,000 + 100,000 - 150,000 = EUR 150,000/year</code></pre>
@@ -11199,27 +11178,26 @@ Here is what remains merchant, operational, or partner-execution risk.</code></p
         <p>The investment memo shows a clean project: attractive
         standalone economics, a familiar zone, a technology the team
         knows how to build, and a contract structure that can be
-        explained. Then someone asks what the company already owns in
-        the same hours, same price area, same grid bottleneck, or same
-        partner perimeter. The answer can change the decision. A new
-        asset does not arrive as an isolated cash flow. It arrives as
-        more exposure to some states of the world and less exposure to
-        others. Portfolio modeling is the work of seeing that marginal
-        change before the project looks safer than it is.</p>
+        explained. The portfolio question is what the company already
+        owns in the same hours, same price area, same grid bottleneck,
+        or same partner perimeter. A new asset is not an isolated cash
+        flow; it adds exposure to some market conditions and reduces
+        exposure to others. Portfolio modeling measures that marginal
+        change before the project is treated as safer than it is.</p>
         <section id="opening-puzzle-28" class="level4">
         <h4>Opening Puzzle</h4>
-        <p>Imagine a 100 MW solar project with a strong standalone NPV.
-        Should a company already holding 800 MW of same-zone solar be
-        happier to add it than a company with mostly wind, storage, and
-        offtake obligations in other zones?</p>
+        <p>A 100 MW solar project has a strong standalone NPV. Should a
+        company already holding 800 MW of same-zone solar be happier to
+        add it than a company with mostly wind, storage, and offtake
+        obligations in other zones?</p>
         <p>The project model estimates whether the asset makes money on
         its own. The portfolio model estimates what exposure the company
         buys more of. A single project can be attractive and still make
         the portfolio more fragile. It may increase concentration in
         sunny-hour prices, same-zone congestion, the same BRP’s forecast
         errors, the same PPA shape exposure, or the same grid-connection
-        bottleneck. Portfolio modeling is the discipline of seeing those
-        hidden duplicates.</p>
+        bottleneck. Portfolio modeling makes those duplicate exposures
+        explicit.</p>
         </section>
         <section id="first-principles-model-28" class="level4">
         <h4>First-Principles Model</h4>
@@ -11227,8 +11205,7 @@ Here is what remains merchant, operational, or partner-execution risk.</code></p
         <p>For each asset or contract, ask what cash flow moves when a
         state variable moves:</p>
         <pre class="text"><code>Portfolio cash flow = sum of asset cash flows + contract cash flows + hedge cash flows - costs</code></pre>
-        <p>The important state variables are not abstract. They are
-        things like:</p>
+        <p>The relevant state variables are concrete:</p>
         <ul>
         <li>area price in each bidding zone</li>
         <li>solar and wind output shape</li>
@@ -11240,16 +11217,16 @@ Here is what remains merchant, operational, or partner-execution risk.</code></p
         <li>BRP/BSP or optimizer behavior</li>
         </ul>
         <p>The portfolio question is: when a stress happens, do these
-        terms offset each other or pile up?</p>
-        <p>Same-zone solar often piles up. Solar assets produce in the
-        same hours, face similar capture-price pressure, and may share
-        congestion exposure. Wind plus solar may offset some shape
-        exposure if their production patterns differ. BESS may hedge
-        some price-shape exposure if the owner has dispatch rights, grid
-        rights, and a contract that lets the battery respond. A PPA may
-        hedge price but add shape risk. A hedge may reduce price risk
-        but introduce basis risk if the hedge reference does not match
-        the asset’s realized price.</p>
+        terms offset each other or concentrate?</p>
+        <p>Same-zone solar often concentrates exposure. Solar assets
+        produce in the same hours, face similar capture-price pressure,
+        and may share congestion exposure. Wind plus solar may offset
+        some shape exposure if their production patterns differ. BESS
+        may hedge some price-shape exposure if the owner has dispatch
+        rights, grid rights, and a contract that lets the battery
+        respond. A PPA may hedge price but add shape risk. A hedge may
+        reduce price risk but introduce basis risk if the hedge
+        reference does not match the asset’s realized price.</p>
         </section>
         <section id="definitions-24" class="level4">
         <h4>Definitions</h4>
@@ -11357,7 +11334,8 @@ Here is what remains merchant, operational, or partner-execution risk.</code></p
         <td>Geography</td>
         <td>Is the asset in a zone where the portfolio is already
         long?</td>
-        <td>Same-zone congestion and area-price risk can pile up.</td>
+        <td>Same-zone congestion and area-price risk can
+        concentrate.</td>
         </tr>
         <tr>
         <td>Technology</td>
@@ -11450,10 +11428,9 @@ Here is what remains merchant, operational, or partner-execution risk.</code></p
         <p>The solar project may still be better. It may have lower
         capex, a stronger PPA, better grid terms, or higher expected
         value. But the investment memo must now say:</p>
-        <pre class="text"><code>The standalone NPV is only one part of the decision.
+        <pre class="text"><code>The standalone NPV is one part of the decision.
 The marginal portfolio risk is materially different.</code></pre>
-        <p>This is the bridge from project development to portfolio
-        strategy.</p>
+        <p>This connects project development to portfolio strategy.</p>
         </section>
         <section id="hedge-quality-checklist" class="level4">
         <h4>Hedge-Quality Checklist</h4>
@@ -11618,9 +11595,8 @@ The marginal portfolio risk is materially different.</code></pre>
         <h4>Misconceptions</h4>
         <p>Diversification means lower co-movement in the states you
         care about.</p>
-        <p>A hedge is not free value. It usually trades upside,
-        liquidity, margining, complexity, or basis risk for reduced
-        downside.</p>
+        <p>A hedge usually trades upside, liquidity, margining,
+        complexity, or basis risk for reduced downside.</p>
         <p>Portfolio value is not the sum of project values. Project
         value ignores how the asset interacts with existing contracts,
         exposures, and control rights.</p>
@@ -11647,14 +11623,13 @@ The marginal portfolio risk is materially different.</code></pre>
         <section id="recap-28" class="level4">
         <h4>Recap</h4>
         <p>A portfolio model turns a project decision into an exposure
-        decision. The standalone NPV still matters, but it is no longer
-        the whole answer: the next asset may concentrate sunny-hour
-        price risk, same-zone congestion, shape obligations, hedge
-        basis, partner dependence, or dispatch constraints. The durable
-        test is marginal risk contribution. Ask which state of the world
-        already hurts the book, then check whether the new asset,
-        contract, hedge, or control right offsets that state or piles
-        more volume into it.</p>
+        decision. The standalone NPV still matters, but the next asset
+        may concentrate sunny-hour price risk, same-zone congestion,
+        shape obligations, hedge basis, partner dependence, or dispatch
+        constraints. The durable test is marginal risk contribution.
+        Identify which market condition already hurts the book, then
+        check whether the new asset, contract, hedge, or control right
+        offsets that condition or adds more volume to it.</p>
         <div class="lecture-end">
 
         </div>
@@ -11686,8 +11661,8 @@ The marginal portfolio risk is materially different.</code></pre>
         <p>The gap may reflect poor solar forecasts, low spreads,
         unexpected curtailment, conservative risk limits, missing meter
         data, poor market liquidity, contractual rules that prevented
-        useful dispatch, or partner execution. A bad realized result is
-        not automatically bad execution.</p>
+        useful dispatch, or partner execution. A bad realized result can
+        have causes other than execution.</p>
         <p>Governance needs a counterfactual that is feasible under the
         information and control rights available at the time.</p>
         <p>The benchmark must ask: with the information, constraints,
@@ -11758,7 +11733,7 @@ The marginal portfolio risk is materially different.</code></pre>
         </section>
         <section id="numerical-intuition-28" class="level4">
         <h4>Numerical Intuition</h4>
-        <p>The useful scorecard number is feasible leakage:</p>
+        <p>The scorecard number is feasible leakage:</p>
         <pre class="text"><code>feasible leakage = feasible benchmark value - actual realized value</code></pre>
         <p>This turns a governance conversation from opinion into a
         testable counterfactual. If the relevant exposed volume is 250
@@ -11777,7 +11752,7 @@ The marginal portfolio risk is materially different.</code></pre>
         incentive fee, tighter reporting, or partial internalization of
         analytics. Building a full trading desk would need a larger and
         more durable case. The model should inform the operating
-        decision, not automatically prescribe it.</p>
+        decision rather than prescribe it.</p>
         </section>
         </section>
         <section id="mechanism-building-a-shadow-trading-benchmark"
@@ -12267,9 +12242,9 @@ The marginal portfolio risk is materially different.</code></pre>
         </tr>
         </tbody>
         </table>
-        <p>The company cannot do all of this well in year one. The
-        roadmap should fund the capabilities that change decisions and
-        unlock later capabilities.</p>
+        <p>The company has limited year-one capacity. The roadmap should
+        fund the capabilities that change decisions and unlock later
+        capabilities.</p>
         </section>
         <section id="value-pools" class="level4">
         <h4>Value Pools</h4>
@@ -12511,7 +12486,7 @@ The marginal portfolio risk is materially different.</code></pre>
         </table>
         <p>The first versions may be spreadsheets or lightweight
         databases. They need owners, versioning, checks, and
-        reconciliation. Hidden production spreadsheets are a control
+        reconciliation. Unowned production spreadsheets are a control
         failure, even when their formulas are clever.</p>
         </section>
         <section id="build-buy-outsource-or-defer" class="level4">
@@ -12674,9 +12649,9 @@ The marginal portfolio risk is materially different.</code></pre>
         data rights, feasible benchmarks, and settlement checks.</p>
         <p>“A quant hire solves the engine.” One strong hire without
         data rights and decision ownership becomes a bottleneck.</p>
-        <p>“Every value pool deserves a model now.” Some value pools
-        should wait until data, controls, and decision frequency justify
-        the fixed cost.</p>
+        <p>“Every value pool needs a model now.” Some value pools should
+        wait until data, controls, and decision frequency justify the
+        fixed cost.</p>
         </section>
         <section id="current-debates-and-caveats-11" class="level4">
         <h4>Current Debates And Caveats</h4>
@@ -12736,8 +12711,9 @@ The marginal portfolio risk is materially different.</code></pre>
         losses worse in rare price patterns. A trading book can look
         profitable and still run out of cash if margin calls arrive
         before revenue does.</p>
-        <p>The first rule of trading risk is simple: risk does not
-        disappear. It changes form.</p>
+        <p>Trading risk changes form as contracts, hedges, dispatch
+        choices, collateral terms, and settlement processes move
+        exposure between parties and time periods.</p>
         </section>
         <section id="first-principles-model-31" class="level4">
         <h4>First-Principles Model</h4>
@@ -12826,8 +12802,8 @@ expected shortfall = average loss when losses exceed that threshold</code></pre>
         liquidity need, or all of them?</li>
         <li>Who can approve more risk when the market is moving?</li>
         </ul>
-        <p>That is the difference between “we have a hedge” and “we have
-        a controlled portfolio.”</p>
+        <p>That separates “we have a hedge” from “we have a controlled
+        portfolio.”</p>
         </section>
         </section>
         <section id="equations-7" class="level4">
@@ -12867,9 +12843,9 @@ expected shortfall = average loss when losses exceed that threshold</code></pre>
         </section>
         <section id="the-daily-risk-pack" class="level4">
         <h4>The Daily Risk Pack</h4>
-        <p>A renewable IPP does not need bank-style complexity on day
-        one. It does need a daily view that connects contracts, assets,
-        markets, partners, and cash.</p>
+        <p>A renewable IPP needs a daily view that connects contracts,
+        assets, markets, partners, and cash, without bank-style
+        complexity on day one.</p>
         <table>
         <colgroup>
         <col style="width: 33%" />
@@ -13101,7 +13077,7 @@ collateral need = 900,000 x 80%
         </section>
         <section id="example-11" class="level4">
         <h4>Example</h4>
-        <p>Imagine a solar-heavy portfolio with three exposures:</p>
+        <p>Consider a solar-heavy portfolio with three exposures:</p>
         <ul>
         <li>a fixed-price customer contract</li>
         <li>merchant production outside the contracted shape</li>
@@ -13189,8 +13165,8 @@ collateral need = 900,000 x 80%
         in time to act. A useful daily risk pack ties contracts, assets,
         counterparties, cash, limits, partner execution, and data
         quality into one decision view, so more active management
-        becomes a governed choice rather than a hidden cash or control
-        surprise.</p>
+        becomes a governed choice rather than an unobserved cash or
+        control surprise.</p>
         <div class="lecture-end">
 
         </div>
@@ -13211,45 +13187,44 @@ collateral need = 900,000 x 80%
         <p>A project model depends on one reserve product for most of
         the value. The battery can respond fast enough, the product has
         paid well, and the technical eligibility case is credible. A
-        strategy decision cannot stop at eligibility or last year’s
-        spread. It has to ask how large the product is, how many similar
-        assets can qualify, and what value remains when the easy
-        scarcity rent is competed away.</p>
-        <p>That is the saturation problem. A battery may still be
-        valuable after the first premium product compresses, but the
-        investment case has to migrate from a single attractive line
-        item toward a stack that can survive stress: arbitrage, intraday
-        optionality, co-location value, avoided curtailment, grid-tariff
-        value, contracted flexibility, or portfolio balancing. The
-        capital-allocation test is whether the asset still earns its
-        place when everyone can see the same opportunity.</p>
+        strategy decision has to go beyond eligibility and last year’s
+        spread: how large is the product, how many similar assets can
+        qualify, and what value remains when the easy scarcity rent is
+        competed away?</p>
+        <p>The saturation problem is the transition from a scarce
+        premium product to a more competitive revenue stack. A battery
+        may still be valuable after the first premium product
+        compresses, but the investment case has to migrate from a single
+        attractive line item toward a stack that can survive stress:
+        arbitrage, intraday optionality, co-location value, avoided
+        curtailment, grid-tariff value, contracted flexibility, or
+        portfolio balancing. The capital-allocation test is whether the
+        asset still earns its place when everyone can see the same
+        opportunity.</p>
         <section id="opening-puzzle-32" class="level4">
         <h4>Opening Puzzle</h4>
         <p>A battery developer shows you a revenue case where most of
         the money comes from one reserve product. The product has been
         lucrative recently. The asset is technically eligible. The
         optimizer says the battery can do it well.</p>
-        <p>The question is:</p>
-        <p>What happens if everyone builds the same asset to chase the
-        same small product?</p>
-        <p>That is the saturation question. It is a frontier question
-        because the answer is market-specific, product-specific, and
-        dated. It is also a first-principles question because the
-        mechanism is simple: a limited need meets a growing pool of
-        eligible capacity.</p>
+        <p>Ask what happens if everyone builds the same asset to chase
+        the same small product.</p>
+        <p>The saturation question is market-specific, product-specific,
+        and dated. The underlying mechanism is simple: a limited need
+        meets a growing pool of eligible capacity.</p>
         </section>
         <section id="first-principles-model-32" class="level4">
         <h4>First-Principles Model</h4>
-        <p>A reserve product is not an infinite market. The TSO has a
+        <p>A reserve product has a finite demand curve. The TSO has a
         reliability need: keep frequency close to the target, restore
         balance after deviations, or hold a backup service for larger
         disturbances. The product may pay for capacity availability,
         activation energy, or both.</p>
         <p>A battery is good at many of these tasks because it can move
-        quickly, reverse direction, and control power precisely. But if
-        the TSO needs, say, a finite amount of fast response, adding
-        more eligible batteries does not automatically make the system
-        need more of that exact response.</p>
+        quickly, reverse direction, and control power precisely. If the
+        TSO needs a finite amount of fast response, additional eligible
+        batteries add supply while demand for that exact response may
+        stay limited.</p>
         <p>The simple model is:</p>
         <pre class="text"><code>Scarcity rent = value of the product - cost/opportunity cost of the marginal eligible provider</code></pre>
         <p>As eligible capacity grows, the marginal provider can become
@@ -13286,7 +13261,7 @@ collateral need = 900,000 x 80%
         <h4>Numerical Intuition</h4>
         <ul>
         <li><code>coverage ratio = eligible flexible MW / product procurement MW</code>.
-        This is the first saturation screen.</li>
+        Use this as the first saturation screen.</li>
         <li><code>deliverable-energy ratio = usable MWh during activation window / required activation MWh</code>.
         This prevents MW-only saturation claims.</li>
         <li><code>2 h</code> and <code>4 h</code> duration examples are
@@ -13313,8 +13288,9 @@ collateral need = 900,000 x 80%
         scarcity-priced. If <code>Y / X</code> approaches or exceeds 1,
         the analyst should ask who the marginal provider is, whether
         bids are mutually exclusive across products, and whether the
-        product has hidden constraints such as duration, state of
-        charge, prequalification, telemetry, or activation risk.</p>
+        product has additional binding constraints such as duration,
+        state of charge, prequalification, telemetry, or activation
+        risk.</p>
         <p>This is enough to reject a naive case where last year’s
         reserve price is copied forward as if no one else can enter.</p>
         </section>
@@ -13329,9 +13305,9 @@ collateral need = 900,000 x 80%
         dispatched. Opportunity cost is what the battery gives up in
         another market: day-ahead arbitrage, intraday trading,
         co-located solar shaping, or another reserve product.</p>
-        <p>The important part is the minus sign. A reserve award can
-        look profitable before state-of-charge management, degradation,
-        exclusivity, and missed arbitrage are included.</p>
+        <p>The minus terms matter. A reserve award can look profitable
+        before state-of-charge management, degradation, exclusivity, and
+        missed arbitrage are included.</p>
         </section>
         <section id="mechanism-19" class="level4">
         <h4>Mechanism</h4>
@@ -13353,21 +13329,22 @@ collateral need = 900,000 x 80%
         <li>The battery increasingly needs energy arbitrage, intraday
         optionality, co-location value, avoided curtailment, grid-tariff
         value, or contracted flexibility.</li>
-        <li>The investment case becomes less about one premium product
-        and more about a feasible stack under stress.</li>
+        <li>The investment case needs a feasible stack under stress
+        rather than one premium product copied forward.</li>
         </ol>
-        <p>The durable claim is the mechanism. The dated debate is which
-        step a given country/product has reached in 2026.</p>
+        <p>The mechanism is durable. The dated debate is which step a
+        given country/product has reached in 2026.</p>
         </section>
         <section id="example-12" class="level4">
         <h4>Example</h4>
-        <p>Imagine a 50 MW / 100 MWh BESS that can either reserve 40 MW
-        for an automatic reserve product or use that headroom for
-        intraday and day-ahead spreads. If reserve capacity prices are
-        high and activation is low, reserving capacity may dominate. If
-        more assets enter and capacity prices fall, the battery must
+        <p>A 50 MW / 100 MWh BESS can either reserve 40 MW for an
+        automatic reserve product or use that headroom for intraday and
+        day-ahead spreads. If reserve capacity prices are high and
+        activation is low, reserving capacity may dominate. If more
+        assets enter and capacity prices fall, the battery must
         re-optimize.</p>
-        <p>The asset did not change. The scarce system need changed.</p>
+        <p>The asset capability stayed constant; the scarce system need
+        changed.</p>
         <p>A simple allocation screen makes the saturation point
         concrete.</p>
         <table>
@@ -13452,14 +13429,15 @@ collateral need = 900,000 x 80%
         one possible revenue layer. A product can be technically ideal
         for batteries and still become commercially crowded.</p>
         <p>“Saturation means batteries stop mattering.” Saturation moves
-        the value of flexibility toward the next scarce system need.</p>
+        the value of flexibility toward the next system need with
+        scarcity.</p>
         <p>“A recent high reserve price is bankable.” Only if supported
         by market size, entry assumptions, product rules, qualification
         risk, and a financeable view of future spreads.</p>
         </section>
         <section id="current-debates-and-caveats-13" class="level4">
         <h4>Current Debates And Caveats</h4>
-        <p>As of 2026-05-16, this chapter uses saturation as a
+        <p>As of 2026-05-16, saturation is used here as a
         product-by-product screen, not as a settled statement that
         Nordic BESS ancillary services are saturated across countries or
         products.</p>
@@ -13517,8 +13495,8 @@ collateral need = 900,000 x 80%
         The gate will close soon. The battery is partly committed to a
         reserve product. The trading partner’s risk limit may reject the
         trade.</p>
-        <p>The puzzle is:</p>
-        <pre class="text"><code>Which granular opportunities can the portfolio actually exercise?</code></pre>
+        <p>The decision question is which granular opportunities the
+        portfolio can actually exercise.</p>
         <p>The answer determines whether finer market products justify
         only better oversight, an outsourced 24/7 partner, or an
         internal trading and forecasting capability.</p>
@@ -13599,7 +13577,7 @@ collateral need = 900,000 x 80%
         applies to a larger exposed volume, deeper books, higher
         capture, or a product with tighter obligations, the build/buy
         answer can flip.</p>
-        <p>This is the strategic use of the 15-minute fact: shorter
+        <p>The strategic use of the 15-minute fact is that shorter
         intervals increase the number of possible decisions, while
         liquidity and execution decide the value of those decisions.</p>
         </section>
@@ -13786,8 +13764,8 @@ collateral need = 900,000 x 80%
         stronger export rights, but the queue may delay connection. One
         has conditional access and a possible local-flexibility route,
         but the rules are still being clarified.</p>
-        <p>The question is:</p>
-        <pre class="text"><code>Which site option should the IPP build, wait on, partner around, or drop?</code></pre>
+        <p>The decision is which site option the IPP should build, wait
+        on, partner around, or drop.</p>
         <p>The generation profile alone cannot answer it. The missing
         terms sit in the connection agreement, tariff class, import
         right, curtailment rule, and local flexibility market.</p>
@@ -13964,7 +13942,7 @@ local-flexibility value = qualified flexible MW x expected net payment x bankabi
         shaped PPA delivery when solar is unavailable. The same battery
         without import rights may still be useful, but its option set is
         narrower.</p>
-        <p>This is why the connection answer <code>yes</code>,
+        <p>The connection answer <code>yes</code>,
         <code>conditional</code>, <code>staged</code>, or
         <code>no import</code> can change the preferred site even when
         the solar-yield model is unchanged.</p>
@@ -13993,9 +13971,9 @@ local-flexibility value = qualified flexible MW x expected net payment x bankabi
         <p>“Congestion is always bad.” Congestion can destroy value, but
         it can also create locational spreads, storage value,
         demand-flexibility value, and strategic entry points.</p>
-        <p>“The spot price tells me project value.” Connection rights,
-        curtailment, tariffs, and dispatch constraints can dominate the
-        spot-price story.</p>
+        <p>“The spot price is enough for project value.” Connection
+        rights, curtailment, tariffs, and dispatch constraints can
+        dominate the valuation.</p>
         <p>“A battery fixes a constrained site.” A battery helps only
         when it has the grid rights, state of charge, duration, tariff
         treatment, and control rights needed for the constraint.</p>
@@ -14042,15 +14020,14 @@ local-flexibility value = qualified flexible MW x expected net payment x bankabi
         <a href="#ref-46">[46]</a> <a href="#ref-48">[48]</a>
         <a href="#ref-49">[49]</a></sup>
         </p>
-        <p>A transmission constraint does not disappear because a market
-        design hides it. It can show up as an area-price spread, a nodal
-        price difference, redispatch cost, curtailment, congestion rent,
-        network tariff, hedge-basis loss, or a contract clause. For an
-        IPP, zonal and nodal markets decide where locational risk enters
-        the cash-flow model. The decision screen is practical: where
-        does congestion settle, who carries it, which hedge follows it,
-        and whether the site or portfolio sees the signal early enough
-        to change the decision.</p>
+        <p>A transmission constraint can appear as an area-price spread,
+        a nodal price difference, redispatch cost, curtailment,
+        congestion rent, network tariff, hedge-basis loss, or a contract
+        clause. For an IPP, zonal and nodal markets decide where
+        locational risk enters the cash-flow model. The decision screen
+        is practical: where does congestion settle, who carries it,
+        which hedge follows it, and whether the site or portfolio sees
+        the signal early enough to change the decision.</p>
         <section id="opening-puzzle-35" class="level4">
         <h4>Opening Puzzle</h4>
         <p>Two solar projects produce the same extra MWh in the same
@@ -14068,7 +14045,7 @@ curtailment?
 congestion rent?
 hedge basis?
 contract settlement?</code></pre>
-        <p>The strategic mistake is to argue about zonal versus nodal in
+        <p>The decision error is to argue about zonal versus nodal in
         the abstract before locating the cash-flow exposure.</p>
         </section>
         <section id="first-principles-model-35" class="level4">
@@ -14128,9 +14105,9 @@ and how much is recovered or managed elsewhere?</code></pre>
         <code>30 EUR/MWh</code> area to a <code>100 EUR/MWh</code> area
         for one hour:</p>
         <pre class="text"><code>(100 - 30) EUR/MWh x 60 MWh = EUR 4,200/hour</code></pre>
-        <p>That value does not vanish if the market design hides it. It
-        moves to congestion rent, redispatch cost, curtailment, tariff
-        recovery, or basis risk.</p>
+        <p>That value appears through congestion rent, redispatch cost,
+        curtailment, tariff recovery, or basis risk, depending on the
+        market design.</p>
         <p>Now put the idea into a portfolio exposure.</p>
         <p>A project generates <code>200 GWh/year</code>. The project is
         hedged against a broad area or system price, but its cash flow
@@ -14140,9 +14117,9 @@ and how much is recovered or managed elsewhere?</code></pre>
         after contract and hedge coverage:</p>
         <pre class="text"><code>200,000 MWh/year x 40% x 15 EUR/MWh
 = EUR 1.2 million/year</code></pre>
-        <p>This is why a “market design” debate becomes an investment
-        question. The first-order exposure can be the part of the spread
-        that the hedge does not follow.</p>
+        <p>Market design becomes an investment question when the
+        first-order exposure is the part of the spread that the hedge
+        does not follow.</p>
         <section id="three-settlement-locations" class="level5">
         <h5>Three Settlement Locations</h5>
         <p>Take the same physical constraint and place it in three
@@ -14210,7 +14187,7 @@ and how much is recovered or managed elsewhere?</code></pre>
         can also come through connection charges, use-of-network
         charges, flexible connection terms, and storage-specific
         regimes.</p>
-        <p>The decision lesson is:</p>
+        <p>Decision rule:</p>
         <pre class="text"><code>find the constraint, then find the settlement channel</code></pre>
         </section>
         <section id="example-15" class="level4">
@@ -14319,9 +14296,9 @@ and how much is recovered or managed elsewhere?</code></pre>
         <p>By 2026, European zonal-versus-nodal debate is best treated
         as an active design question about congestion visibility,
         liquidity, redispatch cost, hedging, investment signals, and
-        distributional consequences. This chapter provides a mechanism
-        and risk screen; it does not recommend a specific Nordic or
-        European market design.</p>
+        distributional consequences. The mechanism and risk screen here
+        do not recommend a specific Nordic or European market
+        design.</p>
         <p>Reform status, redispatch cost allocation, and tariff
         treatment are date-specific. Pricing or policy claims need the
         relevant official rule set for the market and date being
@@ -14369,11 +14346,11 @@ and how much is recovered or managed elsewhere?</code></pre>
         <li>a data-center-style buyer wants hourly evidence and cleaner
         residual supply</li>
         </ul>
-        <p>The puzzle is:</p>
-        <pre class="text"><code>Which buyer path can be priced, delivered, evidenced, governed, and financed?</code></pre>
-        <p>A product name is cheap. The expensive part is residual
-        firming, data quality, control rights, credit, and
-        accountability after delivery.</p>
+        <p>The decision is which buyer path can be priced, delivered,
+        evidenced, governed, and financed.</p>
+        <p>A product name has little value until residual firming, data
+        quality, control rights, credit, and accountability after
+        delivery are priced.</p>
         </section>
         <section id="first-principles-model-36" class="level4">
         <h4>First-Principles Model</h4>
@@ -14579,9 +14556,9 @@ control-right and partner-governance cost = 0.80 EUR/MWh x 87,600 = 70,080 EUR/y
         meter and certificate data?</li>
         </ul>
         <p>If those answers clear the cost stack, the product may be
-        worth building. If they do not, the better offer may be a shaped
-        PPA, an indexed hedge, a portfolio-backed product with disclosed
-        residual exposure, or no bid.</p>
+        worth building. If they do not, use a shaped PPA, an indexed
+        hedge, a portfolio-backed product with disclosed residual
+        exposure, or no bid.</p>
         </section>
         <section id="in-practice-30" class="level4">
         <h4>In Practice</h4>
@@ -14720,7 +14697,7 @@ control-right and partner-governance cost = 0.80 EUR/MWh x 87,600 = 70,080 EUR/y
         </section>
         <section id="numerical-intuition-35" class="level4">
         <h4>Numerical Intuition</h4>
-        <p>The useful number is the marginal duration hurdle:</p>
+        <p>Start with the marginal duration hurdle:</p>
         <pre class="text"><code>required margin per MWh
   = annualized incremental duration cost
     / annual incremental discharged MWh from that extra duration</code></pre>
@@ -14815,8 +14792,8 @@ required margin = 1,750,000 USD/year / 3,500 MWh/year
         <p>If the stress event lasts <code>20 hours</code>, the same
         stored energy averages:</p>
         <pre class="text"><code>100 MWh / 20 h = 5 MW</code></pre>
-        <p>That is why nameplate MW alone is a bad adequacy story for
-        storage.</p>
+        <p>Storage adequacy therefore needs an energy-duration check
+        alongside nameplate MW.</p>
         </section>
         <section id="mechanism-23" class="level4">
         <h4>Mechanism</h4>
@@ -14854,7 +14831,7 @@ required margin = 1,750,000 USD/year / 3,500 MWh/year
         </section>
         <section id="example-site-x" class="level4">
         <h4>Example: Site X</h4>
-        <p>Imagine a solar site with:</p>
+        <p>Consider a solar site with:</p>
         <ul>
         <li><code>100 MW</code> solar export potential at noon</li>
         <li><code>80 MW</code> firm export capacity</li>
@@ -14959,7 +14936,7 @@ required margin = 1,750,000 USD/year / 3,500 MWh/year
         than electrochemical storage. The same paper estimates direct
         economic benefit at <code>190,000 EUR/MW/year</code> in its
         Netherlands case context. Use those numbers only inside that
-        case context; the portable lesson is the decision logic. For
+        case context; the portable mechanism is the decision logic. For
         multi-day scarcity, compare longer battery duration with demand
         flexibility, process buffers, grid-service contracts, and
         connection agreements.</p>
@@ -15030,15 +15007,15 @@ required margin = 1,750,000 USD/year / 3,500 MWh/year
         References: <sup><a href="#ref-6">[6]</a>
         <a href="#ref-32">[32]</a> <a href="#ref-51">[51]</a></sup>
         </p>
-        <p>A data-center buyer can make a clean-power offer look simple:
-        large load, long horizon, serious credit, visible climate claim.
-        The risk starts when the sales phrase covers more obligations
-        than the product defines. Annual renewable energy, hourly clean
-        matching, physical supply quality, price hedging, buyer
-        flexibility, and public evidence are different promises. If they
-        are bundled under broad 24/7 language, the IPP may inherit the
-        expensive hours, the grid constraint, the reporting burden, and
-        the missing control right all at once. The strategic work is to
+        <p>A data-center buyer can bring a large load, long horizon,
+        strong credit, and a visible climate claim. The risk starts when
+        the sales phrase covers more obligations than the product
+        defines. Annual renewable energy, hourly clean matching,
+        physical supply quality, price hedging, buyer flexibility, and
+        public evidence are different promises. If they are bundled
+        under broad 24/7 language, the IPP may inherit the expensive
+        hours, the grid constraint, the reporting burden, and the
+        missing control right all at once. The strategic work is to
         identify the stress-hour obligation before the term sheet
         assigns it.</p>
         <section id="opening-puzzle-38" class="level4">
@@ -15101,10 +15078,10 @@ and who pays when the evidence or delivery does not match the promise?</code></p
         <p>Granular certificate: a certificate concept tied to more
         detailed time and sometimes location attributes. Compliance
         treatment is not settled here.</p>
-        <p>Evidence standard, in this chapter, means the commercial
-        evidence a product must specify before anyone prices or markets
-        the claim. Legal or compliance treatment still comes from the
-        relevant standard.</p>
+        <p>Evidence standard, for product design here, means the
+        commercial evidence a product must specify before anyone prices
+        or markets the claim. Legal or compliance treatment still comes
+        from the relevant standard.</p>
         <table>
         <colgroup>
         <col style="width: 50%" />
@@ -15192,8 +15169,8 @@ and who pays when the evidence or delivery does not match the promise?</code></p
         <section id="stress-hour-residual-cost" class="level5">
         <h5>Stress-Hour Residual Cost</h5>
         <p>Suppose a buyer wants a clean product for a flat
-        <code>100 MW</code> load. Annual energy is not enough; calculate
-        the stress-hour residual.</p>
+        <code>100 MW</code> load. Pair annual energy with the
+        stress-hour residual.</p>
         <p>Illustrative assumptions:</p>
         <ul>
         <li>stress hours in the year: <code>200 h</code></li>
@@ -15240,9 +15217,9 @@ firming_at_risk = 13,000 MWh x 150 EUR/MWh
         <p>Hourly residual:</p>
         <pre class="text"><code>residual_MWh_h =
   max(0, load_MWh_h - deliverable_clean_MWh_h)</code></pre>
-        <p>Plain meaning: this is the amount the product still needs in
-        hour <code>h</code> after clean supply, storage, portfolio
-        netting, and eligible firming.</p>
+        <p>Plain meaning: the amount the product still needs in hour
+        <code>h</code> after clean supply, storage, portfolio netting,
+        and eligible firming.</p>
         <p>Product margin:</p>
         <pre class="text"><code>product_margin =
   customer_premium
@@ -15273,12 +15250,11 @@ firming_at_risk = 13,000 MWh x 150 EUR/MWh
   x participation_willingness
   x operational_availability
   x control_right_factor</code></pre>
-        <p>This is why the ENTSO-E difference between technical
-        potential and realistically available potential matters. A UPS
-        battery, cooling system, or workload scheduler is not a grid
-        product until someone can actually command, measure, qualify,
-        and compensate it without violating the data center’s primary
-        mission.</p>
+        <p>The ENTSO-E difference between technical potential and
+        realistically available potential matters because a UPS battery,
+        cooling system, or workload scheduler becomes a grid product
+        only when someone can command, measure, qualify, and compensate
+        it without violating the data center’s primary mission.</p>
         </section>
         <section id="mechanism-24" class="level4">
         <h4>Mechanism</h4>
@@ -15448,15 +15424,15 @@ firming_at_risk = 13,000 MWh x 150 EUR/MWh
         cooling systems, UPS behavior, and public procurement
         claims.</p>
         <p>“Annual clean energy is harmless if the buyer understands
-        it.” Maybe. But if the sales language implies hourly supply
-        quality, the seller has created a product-risk gap.</p>
+        it.” If the sales language implies hourly supply quality, the
+        seller has created a product-risk gap.</p>
         <p>“UPS batteries are automatically grid batteries.” They are
         uptime assets first. Grid use depends on duration, control,
         qualification, operator consent, tenant obligations, and the
         ability to preserve protection.</p>
-        <p>“A 24/7-style product is a certificate problem.” It is also a
-        stress-hour firming, grid, control-right, credit, and data
-        problem.</p>
+        <p>“A 24/7-style product is a certificate problem.” It also
+        involves stress-hour firming, grid, control-right, credit, and
+        data exposure.</p>
         <p>“Data-center flexibility reduces PPA risk for free.”
         Flexibility has an owner. If the owner will not let the IPP call
         it during the valuable hours, it is not part of the product.</p>
@@ -15480,10 +15456,10 @@ firming_at_risk = 13,000 MWh x 150 EUR/MWh
         <p>Detailed Scope 2, RE100, Association of Issuing Bodies (AIB),
         European Energy Certificate System (EECS), guarantee of origin
         (GO), and granular-certificate compliance treatment remains
-        outside this chapter. For dated product work, use the applicable
-        primary standards and certificate rules. The commercial rule is
-        narrower: do not sell a cleaner claim than the portfolio,
-        evidence, and control rights can support.</p>
+        outside this product-design screen. For dated product work, use
+        the applicable primary standards and certificate rules. The
+        commercial rule is narrower: do not sell a cleaner claim than
+        the portfolio, evidence, and control rights can support.</p>
         </section>
         <section id="recap-38" class="level4">
         <h4>Recap</h4>
@@ -15544,10 +15520,9 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <p>Historically, synchronous machines bundled several useful
         behaviors with energy production: rotating inertia,
         fault-current contribution, voltage/reactive-power support, and
-        familiar protection behavior. Inverter-based resources do not
-        automatically reproduce that bundle. Their behavior depends on
-        hardware, controls, settings, grid strength, testing, and
-        connection rules.</p>
+        familiar protection behavior. Inverter-based resources reproduce
+        those behaviors only when hardware, controls, settings, grid
+        strength, testing, and connection rules support them.</p>
         <p>The strategic model is:</p>
         <pre class="text"><code>system-service option value =
   connection value
@@ -15590,7 +15565,7 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         </section>
         <section id="numerical-intuition-37" class="level4">
         <h4>Numerical Intuition</h4>
-        <p>The useful number is the paid-or-required capability gap:</p>
+        <p>Start with the paid-or-required capability gap:</p>
         <pre class="text"><code>capability_gap =
   required_or_valuable_service_capability
   - qualified_available_capability</code></pre>
@@ -15612,7 +15587,7 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         reactive support becomes more effective than remote control,
         especially after contingencies. The transferable claim is that
         voltage support is locational. A service can be valuable at one
-        node and nearly useless elsewhere.</p>
+        node and low value elsewhere.</p>
         <p>Second, Energinet’s 2025 Danish ancillary-service tender
         conditions for DK1 and DK2 list stability properties such as
         short-circuit power, inertia, reactive reserves, and voltage
@@ -15708,8 +15683,8 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
   &gt;
   annualized capability cost
   + qualification and performance risk</code></pre>
-        <p>That is the commercial bridge from engineering to
-        strategy.</p>
+        <p>The commercial translation from engineering to strategy is
+        this qualification-adjusted value test.</p>
         </section>
         <section id="mechanism-25" class="level4">
         <h4>Mechanism</h4>
@@ -15762,8 +15737,8 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <td>Opportunity cost against existing stack.</td>
         </tr>
         <tr>
-        <td>Cannot be tested or measured?</td>
-        <td>Not yet bankable.</td>
+        <td>Lacks testing or measurement?</td>
+        <td>Keep it outside bankable revenue.</td>
         </tr>
         <tr>
         <td>Depends on future grid-code change?</td>
@@ -15936,20 +15911,21 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         if liquidity is thin, or if the battery is already committed,
         the forecast can be statistically better and commercially
         idle.</p>
-        <p>The commercial object is the governed decision change, not
-        the model category.</p>
+        <p>The commercial object is the governed decision change rather
+        than the model category.</p>
         </section>
         <section id="first-principles-model-40" class="level4">
         <h4>First-Principles Model</h4>
-        <p>An energy-management model is a chain:</p>
+        <p>An energy-management model is a sequence:</p>
         <pre class="text"><code>data -&gt; forecast -&gt; decision -&gt; market or asset action -&gt; feedback -&gt; risk control</code></pre>
         <p>Break one link and the economics shrink. Bad metering
         contaminates the model. A good forecast arriving late cannot
         affect a closed market. A dispatch recommendation without
-        control rights is a suggestion. A strategy that cannot be
-        backtested becomes a story. An automated action without limits
-        can turn model error into portfolio loss.</p>
-        <p>The word “AI” hides several different machines:</p>
+        control rights is a suggestion. A strategy without a
+        time-consistent backtest remains unsupported. An automated
+        action without limits can turn model error into portfolio
+        loss.</p>
+        <p>The word “AI” is used for several different tasks:</p>
         <ul>
         <li>a forecaster that maps weather and plant state into
         generation, load, price, imbalance, or congestion scenarios</li>
@@ -16043,11 +16019,10 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <p>This operating-control number tells you whether the model can
         be left to act alone, whether it needs a limit, whether it needs
         human approval, and how fast monitoring must catch drift.</p>
-        <p>This is why the governance question arrives early. If a model
-        can recommend actions but cannot explain the binding constraint,
-        cannot log overrides, and cannot show which data were known at
-        decision time, it may be unfit for commercial control even if
-        the test score looks good.</p>
+        <p>The governance question arrives early because a model that
+        cannot explain the binding constraint, log overrides, or show
+        which data were known at decision time may be unfit for
+        commercial control even if the test score looks good.</p>
         </section>
         <section id="equations-14" class="level4">
         <h4>Equations</h4>
@@ -16080,7 +16055,7 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <section id="mechanism-26" class="level4">
         <h4>Mechanism</h4>
         <p>The capability ladder usually climbs like this.</p>
-        <p>First, build the data spine. Asset availability, meter data,
+        <p>First, build the data layer. Asset availability, meter data,
         forecasts, market prices, nominations, dispatch instructions,
         imbalance outcomes, reserve commitments, contract obligations,
         and partner actions must be time-aligned. Without this, the
@@ -16142,11 +16117,11 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <li>Who owns the decision, the override, the benchmark, and the
         retirement rule?</li>
         </ul>
-        <p>The best first AI system may look unglamorous: a clean data
-        model, forecast diagnostics by horizon, imbalance attribution,
-        feasible dispatch benchmarks, partner scorecards, model drift
-        alerts, and a small inventory of governed models.</p>
-        <p>That is when advanced analytics becomes part of the
+        <p>The first high-value AI system may be a clean data model,
+        forecast diagnostics by horizon, imbalance attribution, feasible
+        dispatch benchmarks, partner scorecards, model drift alerts, and
+        a small inventory of governed models.</p>
+        <p>At that point, advanced analytics becomes part of the
         commercial operating system.</p>
         </section>
         <section id="misconceptions-34" class="level4">
@@ -16165,8 +16140,8 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         price error, constraint handling, partner action, or model
         design.</p>
         <p>“Automation is the final form.” The target is reliable
-        decision ownership under uncertainty. Sometimes that is
-        automated; sometimes it is deliberately manual.</p>
+        decision ownership under uncertainty. Implementation can be
+        automated or deliberately manual.</p>
         </section>
         <section id="recap-40" class="level4">
         <h4>Recap</h4>
@@ -16206,10 +16181,9 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         optimization.</p>
         <p>The IPP has outsourced execution tasks. It still owns the
         economics of bad forecasts, bad dispatch, wrong risk appetite,
-        weak contract design, or a partner incentive that is not aligned
-        with the asset owner. Those effects still land somewhere:
-        project value, PPA margin, imbalance cost, degradation, or
-        portfolio risk.</p>
+        weak contract design, or a partner incentive misaligned with the
+        asset owner. Those effects still land somewhere: project value,
+        PPA margin, imbalance cost, degradation, or portfolio risk.</p>
         <p>The decision is which capabilities must stay inside the
         company so outsourced execution remains observable,
         benchmarkable, and aligned with the owner’s risk appetite.</p>
@@ -16261,7 +16235,7 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         </section>
         <section id="numerical-intuition-39" class="level4">
         <h4>Numerical Intuition</h4>
-        <p>The useful number is the observability gap.</p>
+        <p>Start with the observability gap.</p>
         <p>At 15-minute granularity, one asset produces <code>96</code>
         delivery intervals per day. A 25-asset portfolio creates:</p>
         <pre class="text"><code>25 assets x 96 intervals/day = 2,400 asset-intervals/day</code></pre>
@@ -16288,15 +16262,14 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
  - people cost
  - systems cost
  - operational and compliance risk cost</code></pre>
-        <p>Imagine a portfolio where only <code>40%</code> of
-        economically relevant intervals are currently observable enough
-        to benchmark. A better data-rights and analytics setup raises
-        that to <code>80%</code>.</p>
+        <p>Suppose a portfolio has only <code>40%</code> of economically
+        relevant intervals observable enough to benchmark. A better
+        data-rights and analytics setup raises that to
+        <code>80%</code>.</p>
         <pre class="text"><code>benchmarkable exposure gain = 80% - 40% = 40 percentage points</code></pre>
-        <p>That does not create value by itself. It creates the ability
-        to separate market conditions, forecast error, asset
-        constraints, risk-limit choices, partner execution, and missing
-        data.</p>
+        <p>That gain in observability creates the ability to separate
+        market conditions, forecast error, asset constraints, risk-limit
+        choices, partner execution, and missing data.</p>
         <p>The structure matters more than the exact percentage:
         observability, controllability, and risk maturity determine
         whether to build, buy, or outsource.</p>
@@ -16482,7 +16455,7 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <li>data-rights contract language</li>
         </ul>
         <p>Once that exists, the firm can decide what to internalize
-        from evidence rather than status anxiety.</p>
+        from evidence rather than organizational fashion.</p>
         </section>
         <section id="example-18" class="level4">
         <h4>Example</h4>
@@ -16531,9 +16504,8 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         itself</li>
         </ul>
         <p>For a renewable IPP moving into solar-plus-storage and
-        structured PPAs, sophistication does not begin with a trading
-        floor. It begins with knowing which risks remain on the owner’s
-        balance sheet.</p>
+        structured PPAs, maturity starts with knowing which risks remain
+        on the owner’s balance sheet.</p>
         </section>
         <section id="misconceptions-35" class="level4">
         <h4>Misconceptions</h4>
@@ -16559,8 +16531,8 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         is made here about what is common in 2026 market practice.</p>
         <p>The durable claim is narrower: market access, execution,
         analytics, risk ownership, decision rights, and governance are
-        separate. Outsourcing one does not automatically outsource the
-        others.</p>
+        separate. Outsourcing one leaves the others to be governed
+        explicitly.</p>
         </section>
         <section id="recap-41" class="level4">
         <h4>Recap</h4>
@@ -16607,7 +16579,7 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <p>The answer should rank capabilities by value at stake,
         controllability, observability, cost, risk, and sequence. A
         trading desk may eventually be right. So may a small analytics
-        spine plus much tougher partner governance. The decision depends
+        layer plus much tougher partner governance. The decision depends
         on which constraints bind first.</p>
         </section>
         <section id="first-principles-model-42" class="level4">
@@ -16714,8 +16686,8 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <p>That pool is smaller than the PPA-pricing example, but it may
         be easier to observe and may improve contract renegotiation, fee
         design, and future internalization decisions.</p>
-        <p>The useful choice is which capability clears its own cost and
-        risk first while preparing the next one.</p>
+        <p>Choose the capability that clears its own cost and risk first
+        while preparing the next one.</p>
         </section>
         </section>
         <section id="equations-16" class="level4">
@@ -16829,7 +16801,7 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         checks, and model assumption changes. For each decision, name
         the owner, data source, model, approval limit, partner
         dependency, and feedback timing.</p>
-        <p>Second, build the analytical spine. Start with an
+        <p>Second, build the analytical layer. Start with an
         asset-and-contract table, production and price data, curve
         assumptions, residual-firming model, BESS dispatch constraints,
         partner data feed, and model inventory. The operating gain is
@@ -16928,35 +16900,37 @@ and with what feedback after delivery?</code></pre>
         <a href="#ref-38">[38]</a> <a href="#ref-54">[54]</a></sup>
         </p>
         <p>A customer asks for clean power in a shape the solar site
-        does not naturally produce. The battery concept looks useful,
-        the trading partner sounds confident, finance wants bankability,
-        and strategy wants to know whether the offer can become a
-        repeatable portfolio product. Each team can be locally right
-        while the recommendation is still wrong: the MWh may not cover
-        the promise, the contract may leave residual exposure with the
+        does not naturally produce. The battery concept can cover part
+        of the shape, the trading partner can execute part of the market
+        action, finance needs bankable cash flow, and strategy needs to
+        know whether the offer can become a repeatable portfolio
+        product. Each team may be correct within its own remit while the
+        combined recommendation fails: the MWh may not cover the
+        promise, the contract may leave residual exposure with the
         seller, the partner may lack auditable control, or the model may
-        hide the first binding constraint. The useful artifact is a
-        short memo that combines physics, market action, contract risk,
-        portfolio effect, and governance in one decision.</p>
+        miss the first binding constraint. The memo has to combine
+        physics, market action, contract risk, portfolio effect, and
+        governance in one decision.</p>
         <section id="opening-puzzle-43" class="level4">
         <h4>Opening Puzzle</h4>
         <p>A customer wants a shaped clean-power product. The
         development team has a solar site. The battery team has a 50 MW
         / 100 MWh concept. A trading partner says optimization will
         handle the market side. Finance wants to know whether the
-        product is bankable. Strategy wants to know whether this is the
-        template for a portfolio.</p>
+        product is bankable. Strategy wants to know whether the offer
+        can become a portfolio template.</p>
         <p>The decision memo has to say what decision must be made, what
         is physically possible, what is contractually promised, what
         market risk remains, who controls the actions, what the
         recommendation is, and which assumption would flip it. A phrase
-        such as “solar plus storage” is not enough unless the memo
-        translates it into coverage, residual exposure, rights,
+        such as “solar plus storage” becomes decision-ready only after
+        the memo translates it into coverage, residual exposure, rights,
         evidence, and limits.</p>
         </section>
         <section id="first-principles-model-43" class="level4">
         <h4>First-Principles Model</h4>
-        <p>Every serious power-market decision has seven layers:</p>
+        <p>Every power-market decision in this course has seven
+        layers:</p>
         <pre class="text"><code>physics
 -&gt; grid and connection
 -&gt; institutions and obligations
@@ -16974,8 +16948,9 @@ and with what feedback after delivery?</code></pre>
         owner.</p>
         <p>Markets fail when the plan assumes liquidity, products, gate
         timing, or settlement rules that do not exist.</p>
-        <p>Contracts fail when a clean-looking price hides shape,
-        volume, balancing, credit, or merchant-tail exposure.</p>
+        <p>Contracts fail when an apparently simple price leaves shape,
+        volume, balancing, credit, or merchant-tail exposure
+        unassigned.</p>
         <p>Assets and portfolios fail when a project model ignores
         correlation, cannibalization, optionality, degradation, or
         substitute flexibility.</p>
@@ -17001,7 +16976,7 @@ and with what feedback after delivery?</code></pre>
         <h4>The Capstone Case</h4>
         <p>Use a deliberately simple shaped-PPA case.</p>
         <p>The customer asks for 30 MW from 18:00 to 22:00 every day.
-        That is:</p>
+        The hourly obligation is:</p>
         <pre class="text"><code>promised shape = 30 MW x 4 h = 120 MWh/day</code></pre>
         <p>The project team proposes a battery with 100 MWh nameplate
         energy. Suppose the operating plan keeps 20 MWh unavailable for
@@ -17011,17 +16986,16 @@ and with what feedback after delivery?</code></pre>
         <p>Before market purchases, portfolio offsets, or contract
         flexibility, the daily residual exposure is:</p>
         <pre class="text"><code>residual exposure = 120 MWh - 80 MWh = 40 MWh/day</code></pre>
-        <p>The first conclusion is “the battery is too small.” That may
-        be true, but it is not yet the decision. The decision conclusion
-        is:</p>
+        <p>The first conclusion may be “the battery is too small.” The
+        decision conclusion is more specific:</p>
         <pre class="text"><code>The proposed asset does not physically cover the promised shape by itself.
 The product can still be viable only if residual exposure is priced, hedged,
 contractually transferred, or covered by portfolio/market actions under clear control rights.</code></pre>
-        <p>Now the real work begins.</p>
+        <p>The memo then prices or assigns the residual exposure.</p>
         </section>
         <section id="the-diagnostic-ratios" class="level4">
         <h4>The Diagnostic Ratios</h4>
-        <p>The useful numbers are diagnostic ratios:</p>
+        <p>Diagnostic ratios:</p>
         <pre class="text"><code>coverage ratio
   = feasible deliverable MWh / promised shape MWh
 
@@ -17161,8 +17135,8 @@ timing ratio
         </tr>
         </tbody>
         </table>
-        <p>The first binding constraint can be a missing right to act,
-        not only the largest visible EUR exposure.</p>
+        <p>A missing right to act can be the first binding constraint,
+        even when it is not the largest visible EUR exposure.</p>
         </section>
         <section id="evidence-request-list" class="level4">
         <h4>Evidence Request List</h4>
@@ -17187,8 +17161,8 @@ timing ratio
         <li>governance evidence: owner, limit, escalation, model
         version, and post-delivery attribution</li>
         </ul>
-        <p>This list is deliberately concrete. “More analysis” is not an
-        evidence request.</p>
+        <p>This list is concrete because an evidence request has to name
+        the missing data, rule, right, or assumption.</p>
         </section>
         <section id="retained-risk-table" class="level4">
         <h4>Retained-Risk Table</h4>
@@ -17253,8 +17227,7 @@ timing ratio
         </tr>
         </tbody>
         </table>
-        <p>The memo earns its length by making the recommendation
-        survivable.</p>
+        <p>The table makes the recommendation easier to test.</p>
         </section>
         <section id="assumption-flip-test-1" class="level4">
         <h4>Assumption-Flip Test</h4>
@@ -17270,13 +17243,13 @@ Control rights                      Better rights may make intraday or BESS acti
 Partner data and auditability       Better observability may make outsourced execution governable.
 Tariff or grid constraints          A binding import/export rule may destroy the apparent solution.
 Financing treatment                 Lenders may discount merchant or optimization-dependent revenue.</code></pre>
-        <p>The assumption-flip test is the antidote to overconfidence.
-        It tells management what to investigate next.</p>
+        <p>The assumption-flip test tells management what to investigate
+        next.</p>
         </section>
         <section id="equations-17" class="level4">
         <h4>Equations</h4>
-        <p>The basic equations are simple. The boundary conditions are
-        not.</p>
+        <p>The basic equations are simple; the boundary conditions carry
+        the decision.</p>
         <pre class="text"><code>promised shape MWh = contracted MW x delivery hours</code></pre>
         <pre class="text"><code>coverage ratio = feasible deliverable MWh / promised shape MWh</code></pre>
         <pre class="text"><code>residual exposure
@@ -17298,22 +17271,21 @@ Financing treatment                 Lenders may discount merchant or optimizatio
   - value(next best feasible alternative)
   - implementation cost
   - added risk</code></pre>
-        <p>None of these equations is hard to write. The skill is
-        specifying every term.</p>
+        <p>The calculation depends on specifying every term.</p>
         </section>
         <section id="mechanism-29" class="level4">
         <h4>Mechanism</h4>
-        <p>The course began with power and energy because the system
-        does not forgive dimensional mistakes. It then moved to markets
-        because energy is traded through time: day-ahead planning,
-        intraday repair, balancing correction, and imbalance settlement.
-        It moved to actors because obligations need owners. It moved to
-        contracts because risk is transferred through words as well as
-        wires. It moved to storage because flexibility has MW, MWh,
-        efficiency, degradation, and opportunity cost. It moved to
-        portfolios because one asset changes the value of another. It
-        moved to organization because models do not act by
-        themselves.</p>
+        <p>The course began with power and energy because dimensional
+        mistakes create wrong commercial promises. It then moved to
+        markets because energy is traded through time: day-ahead
+        planning, intraday repair, balancing correction, and imbalance
+        settlement. It moved to actors because obligations need owners.
+        It moved to contracts because risk is transferred through words
+        as well as wires. It moved to storage because flexibility has
+        MW, MWh, efficiency, degradation, and opportunity cost. It moved
+        to portfolios because one asset changes the value of another. It
+        moved to organization because models need owners, limits, data,
+        and decision rights.</p>
         <p>The capstone decision combines those layers in one
         recommendation.</p>
         <p>A shaped product promises delivery in time. A battery is an
@@ -17321,8 +17293,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         decision-right and evidence arrangements. A portfolio has a
         correlation structure. A model becomes useful when it becomes a
         governed action pathway.</p>
-        <p>The result is a compact decision method rather than a list of
-        topics.</p>
+        <p>The result is a compact decision method.</p>
         </section>
         <section id="in-practice-37" class="level4">
         <h4>In Practice</h4>
@@ -17342,12 +17313,12 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         </section>
         <section id="misconceptions-37" class="level4">
         <h4>Misconceptions</h4>
-        <p>“Expertise is knowing the answer.” Often it is knowing which
-        answer would be reckless before checking the binding
-        assumption.</p>
-        <p>“The battery solves shape.” It may help. It does not repeal
-        power, energy, efficiency, degradation, grid limits, market
-        timing, or contract risk.</p>
+        <p>“Expertise is knowing the answer.” In practice, expertise
+        often means knowing which assumption must be checked before the
+        answer is reliable.</p>
+        <p>“The battery solves shape.” It may help within its power,
+        energy, efficiency, degradation, grid, market-timing, and
+        contract limits.</p>
         <p>“The partner handles optimization.” The partner may execute.
         The asset owner still needs to understand retained exposure,
         benchmarks, data rights, and risk appetite.</p>
@@ -17365,10 +17336,10 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         it. In the shaped-product case, the memo has to show whether the
         promised shape is physically covered, where the residual
         exposure sits, who can act before the market window closes, and
-        what evidence will prove performance afterward. It is the
-        compression device: it names the decision, the binding
-        constraint, the retained risk, the owner, the next measurement,
-        and the assumption that would reverse the recommendation.</p>
+        what evidence will prove performance afterward. The memo names
+        the decision, the binding constraint, the retained risk, the
+        owner, the next measurement, and the assumption that would
+        reverse the recommendation.</p>
         <div class="lecture-end">
 
         </div>
@@ -17668,7 +17639,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         without owning an ill-matched asset.</p>
         <p>Avoid becomes stronger if revenue depends on rare uncapped
         price spikes, capacity rules are unstable, performance penalties
-        are large, or the buyer refuses to pay the firming premium.</p>
+        are large, or the buyer will not pay the firming premium.</p>
         </section>
         <section id="in-practice-38" class="level4">
         <h4>In Practice</h4>
@@ -17765,9 +17736,8 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <pre class="text"><code>residual demand facing supplier = 1,200 - 500 - 450 = 250 MW</code></pre>
         <p>At least <code>250 MW</code> of the supplier’s
         <code>300 MW</code> is needed. In that hour and area, the
-        supplier is pivotal. That does not prove abuse. It tells the
-        analyst what evidence must be gathered before interpreting the
-        price.</p>
+        supplier is pivotal. Pivotality by itself is evidence to
+        investigate, not evidence of abuse.</p>
         </section>
         <section id="first-principles-model-45" class="level4">
         <h4>First-Principles Model</h4>
@@ -17838,7 +17808,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <p>Then:</p>
         <pre class="text"><code>RSI = (1,250 - 300) / 1,200 = 0.79</code></pre>
         <p>In this illustrative hour, supply without the supplier covers
-        only <code>79%</code> of load. That is a pivotal-supplier
+        only <code>79%</code> of load. The result is a pivotal-supplier
         warning.</p>
         </section>
         <section id="portfolio-uplift" class="level5">
@@ -17854,7 +17824,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <p>Illustrative incentive before rules, penalties, reputation,
         uncertainty, and opportunity cost:</p>
         <pre class="text"><code>6,300 - 1,800 = EUR 4,500</code></pre>
-        <p>This is the economic reason market monitors care about
+        <p>This portfolio uplift is why market monitors care about
         portfolio ownership as well as the marginal unit.</p>
         </section>
         </section>
@@ -17948,11 +17918,11 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         obligation, or reliability risk. The same facts can also create
         an incentive to withhold. The evidence pack separates those
         explanations instead of letting price alone decide.</p>
-        <p>This is why broad concentration metrics are weak on their
-        own. HHI can describe ownership concentration, but electricity
-        market power is often local and interval-specific. Pivotality
-        and residual supply tests are closer to the operational
-        question: under the actual constraint, who was needed?</p>
+        <p>Broad concentration metrics are weak on their own. HHI can
+        describe ownership concentration, but electricity market power
+        is often local and interval-specific. Pivotality and residual
+        supply tests are closer to the operational question: under the
+        actual constraint, who was needed?</p>
         </section>
         <section id="example-21" class="level4">
         <h4>Example</h4>
@@ -18298,7 +18268,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <td>Credit and collateral</td>
         <td>buyer credit support and seller exposure limit stated in the
         term sheet</td>
-        <td>prevents tenor and collateral from being hidden in the
+        <td>prevents tenor and collateral from being buried in the
         energy price</td>
         </tr>
         </tbody>
@@ -18379,8 +18349,8 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         </tbody>
         </table>
         <p>At 65 EUR/MWh, the product sits below the buyer’s stated 68
-        EUR/MWh ceiling. That alone is not enough. The tail risk
-        matters.</p>
+        EUR/MWh ceiling. The tail risk still needs an explicit
+        boundary.</p>
         </section>
         <section id="numerical-intuition-43" class="level4">
         <h4>Numerical Intuition</h4>
@@ -18400,8 +18370,8 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         inside the quoted stack. The buyer should accept either a
         pass-through, cap, index, or renegotiation trigger for residual
         hard-hour firming beyond the agreed collar. Without that
-        boundary, the product turns into a short volatility position
-        hidden inside a PPA.</p>
+        boundary, the product embeds a short volatility position inside
+        the PPA.</p>
         <p>The investment-committee test is whether the price, cap,
         credit terms, evidence package, data rights, and dispatch rights
         describe the same product. If the buyer wants the seller to
@@ -18474,9 +18444,10 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         grid connection can export the solar plant, but adding storage
         requires choosing a battery duration before the PPA and
         optimizer contracts are finalized.</p>
-        <p>The commercial team wants a simple answer. The correct answer
-        is conditional: the first hour, second hour, and later hours do
-        not face the same scarcity distribution.</p>
+        <p>The commercial team wants a simple answer. The answer depends
+        on how scarcity, grid access, contract value, warranty limits,
+        and insurance limits change from the first hour to later
+        hours.</p>
         </section>
         <section id="scenario-data-1" class="level4">
         <h4>Scenario Data</h4>
@@ -18763,8 +18734,9 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         require the design team to preserve practical augmentation
         options where the cost is modest: space, cable routes,
         transformer headroom, inverter/control compatibility, and
-        permitting language. That keeps the project from paying today
-        for duration that is not yet supported by the evidence.</p>
+        permitting language. Preserving those options keeps the project
+        from paying today for duration that the evidence does not yet
+        support.</p>
         <p>The commercial team should ask for five pieces of evidence
         before revisiting 4 hours:</p>
         <ul>
@@ -18853,8 +18825,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <p>The development team has three candidate sites for a new
         solar-plus-storage project. All three can be developed, but only
         one can receive near-term investment resources.</p>
-        <p>The highest-yield site is not automatically the best site.
-        The decision must compare physical production with grid
+        <p>The highest-yield site must still be tested against grid
         economics and commercial optionality.</p>
         </section>
         <section id="scenario-data-2" class="level4">
@@ -19112,9 +19083,9 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <p>The top-line spread between sites is small after grid
         effects.</p>
         <pre class="text"><code>Site A gross margin - Site B gross margin = about 0.11 million EUR/year</code></pre>
-        <p>That is not enough to dominate a two-year connection delay,
-        weaker portfolio fit, conditional battery import rights, and
-        higher grid uncertainty.</p>
+        <p>That uplift is too small to dominate a two-year connection
+        delay, weaker portfolio fit, conditional battery import rights,
+        and higher grid uncertainty.</p>
         <p>The undiscounted value delayed by choosing Site A over a
         near-term 2028 site is roughly:</p>
         <pre class="text"><code>2 years x 4.03 million EUR/year = 8.06 million EUR of gross margin timing exposure</code></pre>
@@ -19211,13 +19182,13 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         asks whether part of the battery should be reserved for shaped
         PPA delivery.</p>
         <p>The project cannot sell the same flexibility three times.</p>
-        <p>The optimizer cannot make that conflict disappear. DNV’s
-        hybrid-storage optimizer material is useful here because it
-        frames dispatch as a constrained problem over market products,
-        loss trees, interconnection limits, cycling and throughput
-        requirements, warranty strategies, and capacity maintenance. A
-        revenue stack is credible only if the same constraint set
-        governs every product in the stack.</p>
+        <p>An optimizer can schedule within the conflict; it cannot
+        remove the conflict. DNV’s hybrid-storage optimizer material is
+        useful here because it frames dispatch as a constrained problem
+        over market products, loss trees, interconnection limits,
+        cycling and throughput requirements, warranty strategies, and
+        capacity maintenance. A revenue stack is credible only if the
+        same constraint set governs every product in the stack.</p>
         </section>
         <section id="scenario-data-3" class="level4">
         <h4>Scenario Data</h4>
@@ -19438,8 +19409,8 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         operating headroom.</p>
         <p>The commercial team should price shaped PPA flexibility at
         its opportunity cost. If the customer cannot pay the opportunity
-        cost, the better product is a narrower shaped PPA plus a
-        separate floor or optimizer agreement for the battery.</p>
+        cost, use a narrower shaped PPA plus a separate floor or
+        optimizer agreement for the battery.</p>
         <p>The decision pack should show two values side by side:
         expected value and financeable downside value. A route that
         maximizes expected merchant upside may still be the wrong first
@@ -19955,7 +19926,8 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <section id="links-back-to-the-lectures-4" class="level4">
         <h4>Links Back To The Lectures</h4>
         <ul>
-        <li><a href="#v1-l05">Cast Of Characters</a></li>
+        <li><a href="#v1-l05">Market Participants And
+        Responsibilities</a></li>
         <li><a href="#v1-l06">Market Clock</a></li>
         <li><a href="#v1-l08">Forecast Error And Imbalance</a></li>
         <li><a href="#v1-l09">Frequency And Reserves</a></li>
@@ -20173,7 +20145,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <tr>
         <td>Annual clean-energy coverage</td>
         <td style="text-align: right;">74%</td>
-        <td>Useful but not enough for timing exposure</td>
+        <td>Useful annual signal; timing exposure remains</td>
         </tr>
         <tr>
         <td>Hourly matching before firming</td>
@@ -20246,7 +20218,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         </tr>
         <tr>
         <td>No-bid on broad claim</td>
-        <td>seller refuses uncapped 24/7 language</td>
+        <td>seller rejects uncapped 24/7 language</td>
         <td>avoids mispriced obligation</td>
         <td>product boundary cannot be made auditable</td>
         </tr>
@@ -20945,8 +20917,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         auditable. Every model that affects a quote, dispatch view,
         partner scorecard, or investment recommendation needs an owner,
         version, source-data list, change log, and decision record. That
-        is the minimum control layer before a larger trading platform or
-        internal desk is worth considering.</p>
+        minimum control layer should be in place before a larger trading
+        platform or internal desk is considered.</p>
         </section>
         <section id="assumption-flip-6" class="level4">
         <h4>Assumption Flip</h4>
@@ -21890,11 +21862,11 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Market after day-ahead clearing where participants adjust
         positions closer to delivery.
         </dd>
-        <dt id="glossary-investment-case-waterfall" data-term="Investment-case waterfall" data-definition="Bridge from gross physical value to equity cash flow that shows capture, curtailment, contract, grid, BESS, opex, debt, and residual effects layer by layer.">
+        <dt id="glossary-investment-case-waterfall" data-term="Investment-case waterfall" data-definition="Path from gross physical value to equity cash flow that shows capture, curtailment, contract, grid, BESS, opex, debt, and residual effects layer by layer.">
         Investment-case waterfall
         </dt>
         <dd>
-        Bridge from gross physical value to equity cash flow that shows
+        Path from gross physical value to equity cash flow that shows
         capture, curtailment, contract, grid, BESS, opex, debt, and
         residual effects layer by layer.
         </dd>
@@ -22287,11 +22259,11 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Sequence that turns technical capability into commercial value:
         specify, test, qualify, control, measure, settle, and enforce.
         </dd>
-        <dt id="glossary-quote-stack" data-term="Quote stack" data-definition="Pricing bridge that decomposes an offered PPA price into raw energy, shape/firming, imbalance, grid/tariff, certificates, credit, tenor, optionality, and risk-margin components.">
+        <dt id="glossary-quote-stack" data-term="Quote stack" data-definition="Pricing structure that decomposes an offered PPA price into raw energy, shape/firming, imbalance, grid/tariff, certificates, credit, tenor, optionality, and risk-margin components.">
         Quote stack
         </dt>
         <dd>
-        Pricing bridge that decomposes an offered PPA price into raw
+        Pricing structure that decomposes an offered PPA price into raw
         energy, shape/firming, imbalance, grid/tariff, certificates,
         credit, tenor, optionality, and risk-margin components.
         </dd>
@@ -22397,12 +22369,11 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         <dd>
         Energy discharged divided by energy charged over a cycle.
         </dd>
-        <dt id="glossary-scarcity-duration" data-term="Scarcity duration" data-definition="Time length of the shortage or obligation a resource must bridge.">
+        <dt id="glossary-scarcity-duration" data-term="Scarcity duration" data-definition="Time length of the shortage or obligation a resource must cover.">
         Scarcity duration
         </dt>
         <dd>
-        Time length of the shortage or obligation a resource must
-        bridge.
+        Time length of the shortage or obligation a resource must cover.
         </dd>
         <dt id="glossary-scarcity-pricing" data-term="Scarcity pricing" data-definition="High pricing that reflects real scarcity of energy, capacity, flexibility, or network capability.">
         Scarcity pricing
@@ -23025,7 +22996,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
             points: [
               "Use the given facts before adding judgment.",
               "Find the binding constraint and the first assumption that changes the answer.",
-              "Leave with a reusable artifact, not a paragraph of opinion."
+              "Produce a reusable artifact that records the decision logic."
             ],
             action: "Start Case 1",
             deck: "casebook"

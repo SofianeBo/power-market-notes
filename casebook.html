@@ -1739,7 +1739,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.33.0
+        v0.34.0
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -1966,7 +1966,7 @@
         <td>Credit and collateral</td>
         <td>buyer credit support and seller exposure limit stated in the
         term sheet</td>
-        <td>prevents tenor and collateral from being hidden in the
+        <td>prevents tenor and collateral from being buried in the
         energy price</td>
         </tr>
         </tbody>
@@ -2047,8 +2047,8 @@
         </tbody>
         </table>
         <p>At 65 EUR/MWh, the product sits below the buyer’s stated 68
-        EUR/MWh ceiling. That alone is not enough. The tail risk
-        matters.</p>
+        EUR/MWh ceiling. The tail risk still needs an explicit
+        boundary.</p>
         </section>
         <section id="numerical-intuition" class="level4">
         <h4>Numerical Intuition</h4>
@@ -2068,8 +2068,8 @@
         inside the quoted stack. The buyer should accept either a
         pass-through, cap, index, or renegotiation trigger for residual
         hard-hour firming beyond the agreed collar. Without that
-        boundary, the product turns into a short volatility position
-        hidden inside a PPA.</p>
+        boundary, the product embeds a short volatility position inside
+        the PPA.</p>
         <p>The investment-committee test is whether the price, cap,
         credit terms, evidence package, data rights, and dispatch rights
         describe the same product. If the buyer wants the seller to
@@ -2151,9 +2151,10 @@
         grid connection can export the solar plant, but adding storage
         requires choosing a battery duration before the PPA and
         optimizer contracts are finalized.</p>
-        <p>The commercial team wants a simple answer. The correct answer
-        is conditional: the first hour, second hour, and later hours do
-        not face the same scarcity distribution.</p>
+        <p>The commercial team wants a simple answer. The answer depends
+        on how scarcity, grid access, contract value, warranty limits,
+        and insurance limits change from the first hour to later
+        hours.</p>
         </section>
         <section id="scenario-data-1" class="level4">
         <h4>Scenario Data</h4>
@@ -2440,8 +2441,9 @@
         require the design team to preserve practical augmentation
         options where the cost is modest: space, cable routes,
         transformer headroom, inverter/control compatibility, and
-        permitting language. That keeps the project from paying today
-        for duration that is not yet supported by the evidence.</p>
+        permitting language. Preserving those options keeps the project
+        from paying today for duration that the evidence does not yet
+        support.</p>
         <p>The commercial team should ask for five pieces of evidence
         before revisiting 4 hours:</p>
         <ul>
@@ -2534,8 +2536,7 @@
         <p>The development team has three candidate sites for a new
         solar-plus-storage project. All three can be developed, but only
         one can receive near-term investment resources.</p>
-        <p>The highest-yield site is not automatically the best site.
-        The decision must compare physical production with grid
+        <p>The highest-yield site must still be tested against grid
         economics and commercial optionality.</p>
         </section>
         <section id="scenario-data-2" class="level4">
@@ -2793,9 +2794,9 @@
         <p>The top-line spread between sites is small after grid
         effects.</p>
         <pre class="text"><code>Site A gross margin - Site B gross margin = about 0.11 million EUR/year</code></pre>
-        <p>That is not enough to dominate a two-year connection delay,
-        weaker portfolio fit, conditional battery import rights, and
-        higher grid uncertainty.</p>
+        <p>That uplift is too small to dominate a two-year connection
+        delay, weaker portfolio fit, conditional battery import rights,
+        and higher grid uncertainty.</p>
         <p>The undiscounted value delayed by choosing Site A over a
         near-term 2028 site is roughly:</p>
         <pre class="text"><code>2 years x 4.03 million EUR/year = 8.06 million EUR of gross margin timing exposure</code></pre>
@@ -2895,13 +2896,13 @@
         asks whether part of the battery should be reserved for shaped
         PPA delivery.</p>
         <p>The project cannot sell the same flexibility three times.</p>
-        <p>The optimizer cannot make that conflict disappear. DNV’s
-        hybrid-storage optimizer material is useful here because it
-        frames dispatch as a constrained problem over market products,
-        loss trees, interconnection limits, cycling and throughput
-        requirements, warranty strategies, and capacity maintenance. A
-        revenue stack is credible only if the same constraint set
-        governs every product in the stack.</p>
+        <p>An optimizer can schedule within the conflict; it cannot
+        remove the conflict. DNV’s hybrid-storage optimizer material is
+        useful here because it frames dispatch as a constrained problem
+        over market products, loss trees, interconnection limits,
+        cycling and throughput requirements, warranty strategies, and
+        capacity maintenance. A revenue stack is credible only if the
+        same constraint set governs every product in the stack.</p>
         </section>
         <section id="scenario-data-3" class="level4">
         <h4>Scenario Data</h4>
@@ -3122,8 +3123,8 @@
         operating headroom.</p>
         <p>The commercial team should price shaped PPA flexibility at
         its opportunity cost. If the customer cannot pay the opportunity
-        cost, the better product is a narrower shaped PPA plus a
-        separate floor or optimizer agreement for the battery.</p>
+        cost, use a narrower shaped PPA plus a separate floor or
+        optimizer agreement for the battery.</p>
         <p>The decision pack should show two values side by side:
         expected value and financeable downside value. A route that
         maximizes expected merchant upside may still be the wrong first
@@ -3645,8 +3646,8 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <section id="links-back-to-the-lectures-4" class="level4">
         <h4>Links Back To The Lectures</h4>
         <ul>
-        <li><a href="power-markets-course.html#v1-l05">Cast Of
-        Characters</a></li>
+        <li><a href="power-markets-course.html#v1-l05">Market
+        Participants And Responsibilities</a></li>
         <li><a href="power-markets-course.html#v1-l06">Market
         Clock</a></li>
         <li><a href="power-markets-course.html#v1-l08">Forecast Error
@@ -3868,7 +3869,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <tr>
         <td>Annual clean-energy coverage</td>
         <td style="text-align: right;">74%</td>
-        <td>Useful but not enough for timing exposure</td>
+        <td>Useful annual signal; timing exposure remains</td>
         </tr>
         <tr>
         <td>Hourly matching before firming</td>
@@ -3941,7 +3942,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         </tr>
         <tr>
         <td>No-bid on broad claim</td>
-        <td>seller refuses uncapped 24/7 language</td>
+        <td>seller rejects uncapped 24/7 language</td>
         <td>avoids mispriced obligation</td>
         <td>product boundary cannot be made auditable</td>
         </tr>
@@ -4648,8 +4649,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         auditable. Every model that affects a quote, dispatch view,
         partner scorecard, or investment recommendation needs an owner,
         version, source-data list, change log, and decision record. That
-        is the minimum control layer before a larger trading platform or
-        internal desk is worth considering.</p>
+        minimum control layer should be in place before a larger trading
+        platform or internal desk is considered.</p>
         </section>
         <section id="assumption-flip-6" class="level4">
         <h4>Assumption Flip</h4>
@@ -5595,11 +5596,11 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Market after day-ahead clearing where participants adjust
         positions closer to delivery.
         </dd>
-        <dt id="glossary-investment-case-waterfall" data-term="Investment-case waterfall" data-definition="Bridge from gross physical value to equity cash flow that shows capture, curtailment, contract, grid, BESS, opex, debt, and residual effects layer by layer.">
+        <dt id="glossary-investment-case-waterfall" data-term="Investment-case waterfall" data-definition="Path from gross physical value to equity cash flow that shows capture, curtailment, contract, grid, BESS, opex, debt, and residual effects layer by layer.">
         Investment-case waterfall
         </dt>
         <dd>
-        Bridge from gross physical value to equity cash flow that shows
+        Path from gross physical value to equity cash flow that shows
         capture, curtailment, contract, grid, BESS, opex, debt, and
         residual effects layer by layer.
         </dd>
@@ -5992,11 +5993,11 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Sequence that turns technical capability into commercial value:
         specify, test, qualify, control, measure, settle, and enforce.
         </dd>
-        <dt id="glossary-quote-stack" data-term="Quote stack" data-definition="Pricing bridge that decomposes an offered PPA price into raw energy, shape/firming, imbalance, grid/tariff, certificates, credit, tenor, optionality, and risk-margin components.">
+        <dt id="glossary-quote-stack" data-term="Quote stack" data-definition="Pricing structure that decomposes an offered PPA price into raw energy, shape/firming, imbalance, grid/tariff, certificates, credit, tenor, optionality, and risk-margin components.">
         Quote stack
         </dt>
         <dd>
-        Pricing bridge that decomposes an offered PPA price into raw
+        Pricing structure that decomposes an offered PPA price into raw
         energy, shape/firming, imbalance, grid/tariff, certificates,
         credit, tenor, optionality, and risk-margin components.
         </dd>
@@ -6102,12 +6103,11 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         <dd>
         Energy discharged divided by energy charged over a cycle.
         </dd>
-        <dt id="glossary-scarcity-duration" data-term="Scarcity duration" data-definition="Time length of the shortage or obligation a resource must bridge.">
+        <dt id="glossary-scarcity-duration" data-term="Scarcity duration" data-definition="Time length of the shortage or obligation a resource must cover.">
         Scarcity duration
         </dt>
         <dd>
-        Time length of the shortage or obligation a resource must
-        bridge.
+        Time length of the shortage or obligation a resource must cover.
         </dd>
         <dt id="glossary-scarcity-pricing" data-term="Scarcity pricing" data-definition="High pricing that reflects real scarcity of energy, capacity, flexibility, or network capability.">
         Scarcity pricing
@@ -6648,7 +6648,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
             points: [
               "Use the given facts before adding judgment.",
               "Find the binding constraint and the first assumption that changes the answer.",
-              "Leave with a reusable artifact, not a paragraph of opinion."
+              "Produce a reusable artifact that records the decision logic."
             ],
             action: "Start Case 1",
             deck: "casebook"
