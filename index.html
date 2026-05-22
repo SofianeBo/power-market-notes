@@ -1867,7 +1867,7 @@ Notes">
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.35.1
+        v0.36.0
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -1881,11 +1881,11 @@ Notes">
         written for analysts, business developers, quants, modelers, and
         other professionals entering power-market work without much
         prior domain experience. The volumes move from physical and
-        institutional basics, to commercial instruments and analytical
+        institutional basics, to commercial examples and analytical
         workflows, to current strategic questions. The aim is to make
-        the key terms, units, constraints, and recurring trade-offs
-        easier to recognize. The references provide the path for deeper
-        study and follow-up.</p>
+        key terms, units, constraints, and recurring trade-offs easier
+        to recognize. The references provide the path for deeper study
+        and follow-up.</p>
         <section id="methodology" class="level3">
         <h3>Methodology</h3>
         <p>These notes were built with a learning method designed for
@@ -1906,11 +1906,11 @@ Notes">
         <ul>
         <li>Start each part with its Q&amp;A Overview PDF to see the
         main questions and the shape of the argument.</li>
-        <li>Use Volume I to build a working map of the physical and
-        institutional system: energy, capacity, timing, networks, roles,
-        balancing, and prices.</li>
-        <li>Use Volume II to translate that map into commercial and
-        analytical work: PPAs, storage, dispatch, tariffs, forecasting,
+        <li>Use Volume I for the basic physical and institutional map:
+        energy, capacity, timing, networks, roles, balancing, and
+        prices.</li>
+        <li>Use Volume II to practice commercial and analytical
+        examples: PPAs, storage, dispatch, tariffs, forecasting,
         valuation, contracts, and portfolio control.</li>
         <li>Use Volume III to get oriented in strategic debates and
         claims that depend on market conditions: congestion,
@@ -1926,20 +1926,18 @@ Notes">
         <section id="course-structure" class="level3">
         <h3>Course Structure</h3>
         <ul>
-        <li>Volume I builds the base map: grid physics, market time,
-        balancing, institutions, solar, batteries, and the minimum
-        economics needed to see why the system behaves the way it
-        does.</li>
-        <li>Volume II turns the base map into commercial work: tariffs,
-        PPAs, BESS sizing, dispatch optimization, forecasting,
-        valuation, risk, contracts, and portfolio governance.</li>
-        <li>Volume III moves to strategic debates: congestion,
+        <li>Volume I covers the base map: grid physics, market time,
+        balancing, institutions, solar, batteries, and the first
+        economics needed to follow the rest.</li>
+        <li>Volume II works through commercial examples: tariffs, PPAs,
+        BESS sizing, dispatch optimization, forecasting, valuation,
+        risk, contracts, and portfolio governance.</li>
+        <li>Volume III surveys strategic debates: congestion,
         cannibalization, storage duration, AI and data centres,
         long-duration flexibility, adequacy, market design, and evidence
         standards.</li>
-        <li>The Casebook converts concepts into applied decision
-        artifacts: screens, memos, quote stacks, partner scorecards, and
-        assumption flips.</li>
+        <li>The Casebook gives applied exercises: screens, memos, quote
+        stacks, partner scorecards, and assumption flips.</li>
         <li>The Glossary and References are the study and credibility
         layers: one for terms, one for the source trail.</li>
         </ul>
@@ -2147,12 +2145,12 @@ Notes">
         carries the cost.</p>
         <section id="opening-puzzle-1" class="level4">
         <h4>Opening Puzzle</h4>
-        <p>Many forecasts are judged after the fact. A power-system
-        forecast is different because the error appears as a physical
-        imbalance during delivery.</p>
-        <p>If a solar portfolio produces 1% less than scheduled in the
-        delivery hour, the grid has to cover the missing MW immediately.
-        Imbalance settlement then assigns the financial consequence.</p>
+        <p>A <code>500 MW</code> solar portfolio is scheduled for the
+        delivery hour.</p>
+        <p>Cloud cover arrives sooner than forecast and the portfolio
+        produces <code>1%</code> less than scheduled.</p>
+        <p>What has to move in real time, and who carries the deviation
+        after the meter data arrives?</p>
         </section>
         <section id="first-principles-model-1" class="level4">
         <h4>First-Principles Model</h4>
@@ -2392,8 +2390,8 @@ If it lasts 1 hour: 5 MW x 1 h = 5 MWh</code></pre>
         in a non-leap year has:</p>
         <pre class="text"><code>capacity factor = 175,200 MWh / (100 MW x 8,760 h)
 capacity factor = 175,200 / 876,000 = 20%</code></pre>
-        <p>This is a calculation example, not a claim about any
-        particular technology.</p>
+        <p>This calculation is a unit example rather than a technology
+        benchmark.</p>
         <section id="worked-estimate-2" class="level5">
         <h5>Worked Estimate</h5>
         <p>Consider a buyer who wants a flat 10 MW every hour for one
@@ -2741,14 +2739,16 @@ grid cost = EUR 5/MWh</code></pre>
         to land somewhere.</p>
         <section id="opening-puzzle-4" class="level4">
         <h4>Opening Puzzle</h4>
-        <p>Power markets are full of role names: transmission system
-        operator (TSO), distribution system operator (DSO), balance
-        responsible party (BRP), balancing service provider (BSP), and
-        nominated electricity market operator (NEMO).</p>
-        <p>Ask one question:</p>
-        <p>What obligation does this actor carry?</p>
-        <p>Every important role exists because someone must be
-        responsible for a physical, financial, legal, or data task.</p>
+        <p>An asset sells <code>100 MW</code> for the hour and delivers
+        <code>96 MW</code>.</p>
+        <p>The physical deviation is easy to compute. The responsibility
+        chain is harder. The transmission system operator (TSO) sees a
+        balancing problem, the metering party reports the data, the
+        balance responsible party (BRP) carries the imbalance exposure,
+        a balancing service provider (BSP) may have delivered reserve,
+        and the commercial owner sees the cash effect.</p>
+        <p>Which actor owns each obligation created by the missing
+        <code>4 MWh</code>?</p>
         </section>
         <section id="first-principles-model-4" class="level4">
         <h4>First-Principles Model</h4>
@@ -3232,8 +3232,6 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <p>If a solar plant has almost zero fuel cost, why does it
         sometimes earn a high price? And if solar is cheap, why can
         adding more solar make solar owners poorer in sunny hours?</p>
-        <p>The price is usually set at the edge where supply just meets
-        demand.</p>
         </section>
         <section id="first-principles-model-6" class="level4">
         <h4>First-Principles Model</h4>
@@ -3435,8 +3433,10 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         sells 50 MWh, and produces 45 MWh. No turbine exploded. No
         trader made an obvious mistake. The sun was just weaker than
         expected.</p>
-        <p>Why can that innocent 5 MWh error become an invoice?</p>
-        <p>Because the power system has to close its books.</p>
+        <p>The system still received <code>5 MWh</code> less than the
+        market position said it would receive.</p>
+        <p>Who is short, who balances the system, and what price is
+        attached to that difference?</p>
         </section>
         <section id="first-principles-model-7" class="level4">
         <h4>First-Principles Model</h4>
@@ -3619,10 +3619,12 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         consumes.</p>
         <section id="opening-puzzle-8" class="level4">
         <h4>Opening Puzzle</h4>
-        <p>A battery is idle at 14:00. It may still be earning reserve
-        revenue.</p>
-        <p>Energy markets buy MWh. Reserve markets may buy the right to
-        call on MW quickly when the grid needs help.</p>
+        <p>A battery is idle at 14:00 and still earns revenue.</p>
+        <p>The asset did not deliver energy in that interval. It sold
+        availability: the right for the system operator to call on fast
+        MW if frequency moves.</p>
+        <p>What did the battery promise, and what energy headroom does
+        that promise consume?</p>
         </section>
         <section id="first-principles-model-8" class="level4">
         <h4>First-Principles Model</h4>
@@ -3830,11 +3832,6 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <p>Suppose total generation equals total load in every market
         interval.</p>
         <p>Can the grid still be in trouble?</p>
-        <p>Yes. Active-power balance is necessary, but it is not the
-        full AC system. A node can have weak voltage support, a line can
-        violate an N-1 security check, a fault can be hard to detect, or
-        several inverter controls can interact badly even while the
-        scheduled MW add up.</p>
         </section>
         <section id="first-principles-model-9" class="level4">
         <h4>First-Principles Model</h4>
@@ -4417,10 +4414,6 @@ reactive MVAr obligation or headroom</code></pre>
         <p>A solar plant sells all its power into a market whose average
         price is <code>60 EUR/MWh</code>. Does the plant earn
         <code>60 EUR/MWh</code>?</p>
-        <p>Only if it produces evenly across the hours, or if solar-hour
-        prices happen to equal the average. Solar does neither. It
-        produces in a pattern. The market pays in a pattern. Revenue is
-        where those two patterns overlap.</p>
         </section>
         <section id="first-principles-model-11" class="level4">
         <h4>First-Principles Model</h4>
@@ -4628,7 +4621,7 @@ reactive MVAr obligation or headroom</code></pre>
         <section id="opening-puzzle-12" class="level4">
         <h4>Opening Puzzle</h4>
         <p>A project description says, “100 MW battery.”</p>
-        <p>The right response is: “For how long?”</p>
+        <p>Which specification is missing?</p>
         <p>A 100 MW / 100 MWh battery, a 100 MW / 200 MWh battery, and a
         100 MW / 400 MWh battery can all discharge at the same maximum
         power. They cannot sustain that discharge for the same length of
@@ -5249,11 +5242,6 @@ Project 2: Danish solar-plus-BESS, DK2, separate import treatment, customer-shap
         sells <code>100 MWh</code> day-ahead.</p>
         <p>Clouds arrive. The plant produces <code>70 MWh</code>.</p>
         <p>Where did the missing <code>30 MWh</code> go?</p>
-        <p>Physically, it never existed. Institutionally, it became a
-        deviation from a position. Financially, it became an imbalance
-        or a sourcing cost under the relevant rules and contracts.
-        Operationally, the system still had to balance in real time.</p>
-        <p>That one hour contains the main market sequence.</p>
         </section>
         <section id="first-principles-model-14" class="level4">
         <h4>First-Principles Model</h4>
@@ -5528,21 +5516,14 @@ and data available at the time, what should a feasible operator have done?</code
         prices, contracts, grid constraints, and financing promises.</p>
         <section id="opening-puzzle-15" class="level4">
         <h4>Opening Puzzle</h4>
-        <p>A solar plant can be technically excellent and financially
-        mediocre.</p>
-        <p>A site can produce electricity and still fail the financial
-        test. A power asset has two linked descriptions:</p>
-        <ul>
-        <li>physical performance: weather and equipment become MWh</li>
-        <li>financial performance: uncertain future MWh become cash
-        available to debt and equity</li>
-        </ul>
-        <p>The physical description is measured in MW, MWh,
-        availability, losses, and degradation. The financial description
-        is measured in revenue, opex, debt service, tax, net present
-        value (NPV), internal rate of return (IRR), and debt service
-        coverage ratio (DSCR). A project model connects those two
-        descriptions and shows where value is created or lost.</p>
+        <p>Two solar sites each expect <code>100 GWh/year</code> of
+        output.</p>
+        <p>Site A has higher yield. Site B has lower yield, but better
+        realized prices, lower grid charges, stronger contract cover,
+        and a lender case that supports more debt.</p>
+        <p>The investment committee prefers Site B.</p>
+        <p>Which variables made the lower-energy site the stronger
+        financial asset?</p>
         </section>
         <section id="first-principles-model-15" class="level4">
         <h4>First-Principles Model</h4>
@@ -5783,21 +5764,15 @@ operating_cash_before_debt =
         kind of grid access for the product it wants to sell.</p>
         <section id="opening-puzzle-16" class="level4">
         <h4>Opening Puzzle</h4>
-        <p>Two identical batteries can have different economics before
-        either one trades a single MWh.</p>
-        <p>Why? Because the grid is a scarce access system. A connection
-        gives rights, obligations, and costs:</p>
-        <ul>
-        <li>how many MW you may inject</li>
-        <li>how many MW you may withdraw</li>
-        <li>when you may be curtailed or interrupted</li>
-        <li>what you pay once</li>
-        <li>what you pay every year</li>
-        <li>what you pay per MWh</li>
-        <li>what happens if you exceed what you subscribed to</li>
-        </ul>
-        <p>In a project model, grid access is a priced option on
-        location-specific power.</p>
+        <p>Two identical <code>50 MW / 100 MWh</code> batteries sit in
+        the same bidding zone.</p>
+        <p>Battery A can import and export <code>50 MW</code> on a firm
+        connection. Battery B can export <code>50 MW</code>, import only
+        <code>10 MW</code> from the grid, and faces a capacity charge on
+        subscribed import.</p>
+        <p>Before either asset trades a single MWh, their revenue stacks
+        and operating constraints differ.</p>
+        <p>Which line in the connection offer changed the value?</p>
         </section>
         <section id="first-principles-model-16" class="level4">
         <h4>First-Principles Model</h4>
@@ -6552,15 +6527,14 @@ extra visible value = 1.05 million EUR/year</code></pre>
         it argues about the label.</p>
         <section id="opening-puzzle-18" class="level4">
         <h4>Opening Puzzle</h4>
-        <p>A customer asks for a ten-year solar PPA. The commercial team
-        needs a price and product boundary. Finance needs to know which
-        revenue is contracted. Trading needs nominations and balancing
-        rules. Lenders need credit support and default treatment. Asset
-        management needs curtailment and outage treatment.</p>
-        <p>Each function needs a different part of the risk
-        allocation.</p>
-        <p>So the first PPA question is:</p>
-        <pre class="text"><code>Which risk moves to whom, and what cash flow follows when reality disagrees with the contract?</code></pre>
+        <p>A customer, lender, trader, and asset manager all approve the
+        phrase “ten-year solar PPA.”</p>
+        <p>The first negative-price hour, curtailment event, certificate
+        delay, or payment dispute reveals that each party assumed a
+        different obligation.</p>
+        <p>When generation, load, market price, certificates,
+        curtailment, payment, or delivery diverge from the plan, which
+        cash flow moves and who owns it?</p>
         </section>
         <section id="first-principles-model-18" class="level4">
         <h4>First-Principles Model</h4>
@@ -6620,11 +6594,11 @@ evidence promise</code></pre>
         <pre class="text"><code>100,000 MWh/year x 50 EUR/MWh x 10 years
 = 50,000,000 EUR</code></pre>
         <p>RE-Source’s July 2025 guide gives about 10 percent of total
-        contract value as a credit-support scale example. It is not a
-        pricing rule. Live credit support depends on replacement cost,
-        mark-to-market exposure, potential future exposure, tenor,
-        thresholds, collateral form, parent support, and counterparty
-        quality. In this illustrative case:</p>
+        contract value as a credit-support scale example. Live credit
+        support depends on replacement cost, mark-to-market exposure,
+        potential future exposure, tenor, thresholds, collateral form,
+        parent support, and counterparty quality. In this illustrative
+        case:</p>
         <pre class="text"><code>credit support scale = 50,000,000 EUR x 10%
                      = 5,000,000 EUR</code></pre>
         <p>A credit-support number at this scale changes the sales
@@ -7535,8 +7509,7 @@ P_t = market/reference price, EUR/MWh</code></pre>
         line unless the pricing method assigns a probability or risk
         margin to it:</p>
         <pre class="text"><code>stress_residual_cost = 5,000 x 120 = 600,000 EUR/year</code></pre>
-        <p>This is still an illustrative screen, but it is stronger than
-        a plug. It shows which hours create the price. Price the base
+        <p>The screen shows which hours create the price. Price the base
         expected shape cost separately from the tail: through
         probability weighting, a risk margin, a cap, a collar, a
         pass-through, or a reopener. If the stress bucket is wrong, the
@@ -9714,13 +9687,8 @@ terminal shortfall from 50 MWh discharge = 50 MWh - 40 MWh = 10 MWh</code></pre>
         </tr>
         </tbody>
         </table>
-        <p>Model A is more accurate in physical terms. Model B loses
-        less money in the hours that matter because its errors are
-        smaller during high-price, illiquid, or penalty-sensitive
-        periods.</p>
-        <p>The decision is whether to build, buy, or ignore a forecast
-        tool for day-ahead nomination, intraday trading, BESS dispatch,
-        and partner oversight.</p>
+        <p>Which forecast is more useful for day-ahead nomination,
+        intraday trading, BESS dispatch, and partner oversight?</p>
         </section>
         <section id="first-principles-model-25" class="level4">
         <h4>First-Principles Model</h4>
@@ -10177,19 +10145,15 @@ rebalance_value =
         insurance, or augmentation consequences it creates.</p>
         <section id="opening-puzzle-26" class="level4">
         <h4>Opening Puzzle</h4>
-        <p>A battery can make money while becoming less valuable.</p>
-        <p>Suppose electricity can be bought at <code>40 EUR/MWh</code>
-        and sold at <code>70 EUR/MWh</code>.</p>
-        <p>The spread is positive before losses and wear.</p>
-        <p>The battery moves energy with losses and operating
-        consequences. It loses energy as heat. It uses some of its
-        finite cycle life. It may move closer to an augmentation date.
-        It may also consume warranty headroom, breach an insurance
-        operating covenant, or violate another operating envelope if the
-        dispatch is too aggressive.</p>
-        <p>Ask:</p>
-        <pre class="text"><code>Is the spread positive after losses, degradation, fees, tariffs,
-opportunity cost, and operating limits?</code></pre>
+        <p>A battery optimizer selects one attractive cycle.</p>
+        <p>It charges when power costs <code>40 EUR/MWh</code> and
+        discharges when power sells for <code>70 EUR/MWh</code>. The
+        gross spread is positive.</p>
+        <p>The same cycle also creates losses, consumes cycle life,
+        moves the asset closer to augmentation, and may use warranty,
+        insurance, state-of-charge, or availability headroom needed for
+        another obligation.</p>
+        <p>Should the cycle run?</p>
         </section>
         <section id="first-principles-model-26" class="level4">
         <h4>First-Principles Model</h4>
@@ -10580,13 +10544,18 @@ insurance policy, availability plan, or augmentation budget can support</code></
         for the project to work.</p>
         <section id="opening-puzzle-27" class="level4">
         <h4>Opening Puzzle</h4>
-        <p>The base case is the starting sheet in the model.</p>
-        <p>It looks precise: one IRR, one NPV, one DSCR path, one
-        merchant-tail value. But the base case is only the model’s
-        central scenario. The investment question is:</p>
-        <pre class="text"><code>What has to be true for this project to work?</code></pre>
-        <p>The next question is:</p>
-        <pre class="text"><code>Which assumption can change the investment decision if it is wrong?</code></pre>
+        <p>An investment pack shows one base case:</p>
+        <ul>
+        <li>IRR: <code>8.4%</code></li>
+        <li>NPV: <code>+6 million EUR</code></li>
+        <li>DSCR: above the lender threshold</li>
+        <li>merchant tail: positive</li>
+        </ul>
+        <p>The sensitivity tab shows that a <code>3 EUR/MWh</code>
+        capture-price miss or a six-month grid delay can erase the
+        equity case.</p>
+        <p>Which assumption is the investment committee really
+        underwriting?</p>
         </section>
         <section id="first-principles-model-27" class="level4">
         <h4>First-Principles Model</h4>
@@ -13250,9 +13219,6 @@ collateral need = 900,000 x 80%
         optimizer says the battery can do it well.</p>
         <p>Ask what happens if everyone builds the same asset to chase
         the same small product.</p>
-        <p>The saturation question is market-specific, product-specific,
-        and dated. The underlying mechanism is simple: a limited need
-        meets a growing pool of eligible capacity.</p>
         </section>
         <section id="first-principles-model-32" class="level4">
         <h4>First-Principles Model</h4>
@@ -13479,14 +13445,13 @@ collateral need = 900,000 x 80%
         <section id="current-debates-and-caveats-13" class="level4">
         <h4>Current Debates And Caveats</h4>
         <p>As of 2026-05-16, saturation is used here as a
-        product-by-product screen, not as a settled statement that
-        Nordic BESS ancillary services are saturated across countries or
-        products.</p>
+        product-by-product screen. Country-wide or product-wide claims
+        about Nordic BESS ancillary-service saturation need current
+        market evidence.</p>
         <p>PICASSO 2025 material can anchor dated discussion of aFRR
-        platform operation, but not a battery-project revenue forecast.
-        Product-specific response times and rules remain
-        market/product/date-specific and should be taken from the
-        applicable official rule set for the decision date.</p>
+        platform operation. Battery-project revenue forecasting still
+        needs the applicable product rules, response times, settlement
+        design, and decision-date market evidence.</p>
         <p>The right dated formulation is: “Analysts in 2026 should test
         ancillary-service saturation product by product, because
         reserve-market size, qualification rules, activation patterns,
@@ -14690,11 +14655,6 @@ control-right and partner-governance cost = 0.80 EUR/MWh x 87,600 = 70,080 EUR/y
         <pre class="text"><code>Is 4 hours better than 2 hours?</code></pre>
         <p>The investment question is:</p>
         <pre class="text"><code>What scarcity problem are we buying insurance against, and is owning the next MWh of storage the cheapest way to cover it?</code></pre>
-        <p>Treat duration as a claim on capital, grid rights, state of
-        charge, warranty headroom, and opportunity cost. The right
-        answer may be “build 2 hours,” “build 4 hours,” “contract the
-        long tail,” “change the product,” “reserve connection capacity,”
-        or “wait until the evidence is better.”</p>
         </section>
         <section id="first-principles-model-37" class="level4">
         <h4>First-Principles Model</h4>
@@ -15115,8 +15075,8 @@ and who pays when the evidence or delivery does not match the promise?</code></p
         a defined grid, bidding zone, node, or certificate boundary. The
         boundary is rule-specific.</p>
         <p>24/7 clean energy: a procurement ambition to match
-        consumption with clean energy across all hours. Here it is a
-        product-design concept, not a compliance category.</p>
+        consumption with clean energy across all hours. In this chapter
+        it is treated as a product-design concept.</p>
         <p>Firming: using a portfolio, storage, flexible load,
         contracts, or market purchases to reduce mismatch between
         variable clean supply and the load obligation.</p>
@@ -15951,18 +15911,11 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <h4>Opening Puzzle</h4>
         <p>A vendor shows a strong-looking result: the solar forecast is
         12 percent better than the incumbent model.</p>
-        <p>What should a renewable IPP do with that statement?</p>
-        <p>The first check is whether the metric is true. The next check
-        is which decision changes. A better forecast may change a
-        day-ahead nomination, an intraday adjustment, a battery
-        state-of-charge target, a hedge, a partner challenge, a PPA
-        price, or nothing at all. If no one can act before the gate
-        closes, if the contract gives the control right to someone else,
-        if liquidity is thin, or if the battery is already committed,
-        the forecast can be statistically better and commercially
-        idle.</p>
-        <p>The commercial object is the governed decision change rather
-        than the model category.</p>
+        <p>The day-ahead trader receives the forecast after the gate has
+        closed, the battery is already committed to reserve, and the
+        partner contract does not give the IPP dispatch rights.</p>
+        <p>How much of the model improvement can become portfolio
+        value?</p>
         </section>
         <section id="first-principles-model-40" class="level4">
         <h4>First-Principles Model</h4>
@@ -17562,13 +17515,13 @@ Financing treatment                 Lenders may discount merchant or optimizatio
   + (200 MWh / 24 h) x 10%
   = 60 + 10 + 0.8
   = 70.8 MW</code></pre>
-        <p>This is a toy stress-coverage score, not effective
-        load-carrying capability (ELCC), loss-of-load expectation
-        (LOLE), or market accreditation. A financeable adequacy value
-        needs chronological stress events, state of charge at event
-        start, recharge assumptions, availability, correlated weather
-        and outages, deliverability, and the market’s actual derating
-        rule.</p>
+        <p>This toy stress-coverage score is only a teaching screen. A
+        financeable adequacy value needs chronological stress events,
+        state of charge at event start, recharge assumptions,
+        availability, correlated weather and outages, deliverability,
+        the market’s actual derating rule, and formal metrics such as
+        effective load-carrying capability (ELCC) or loss-of-load
+        expectation (LOLE) where relevant.</p>
         <p>For the 8-hour design:</p>
         <pre class="text"><code>8-hour storage weighted dependable MW
   = 100 x 60%
@@ -23080,7 +23033,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           return {
             label: "Casebook",
             title: "Applied Decision Practice",
-            summary: "The cases turn the lectures into work products: a screen, a memo, a scorecard, a product test, or an operating-model choice.",
+            summary: "The cases give bounded practice in screens, memos, scorecards, product tests, and operating-model choices.",
             points: [
               "Use the given facts before adding judgment.",
               "Find the binding constraint and the first assumption that changes the answer.",
@@ -23094,11 +23047,11 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           return {
             label: "Volume I",
             title: "Power System Fundamentals And Market Institutions",
-            summary: "Electricity must balance moment by moment through a constrained network. The first volume builds the system from balance, frequency, wires, actors, time sequence, and the first economics of solar and storage.",
+            summary: "Electricity must balance moment by moment through a constrained network. The first volume gives the basic map: balance, frequency, wires, actors, market sequence, and the first economics of solar and storage.",
             points: [
               "Understand why TSOs, BRPs, BSPs, bidding zones, balancing, and ancillary services exist.",
-              "Translate MW, MWh, voltage, congestion, curtailment, and settlement into economic pressure.",
-              "Build enough physical intuition to distrust market explanations that ignore the grid."
+              "Connect MW, MWh, voltage, congestion, curtailment, and settlement to economic pressure.",
+              "Read market explanations with the grid constraints visible."
             ],
             action: "Open Volume I",
             deck: "volume-i"
@@ -23108,11 +23061,11 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           return {
             label: "Volume II",
             title: "Commercial Analysis, Contracts, And Asset Decisions",
-            summary: "The second volume turns the system map into commercial work: site screens, tariffs, PPAs, BESS sizing, dispatch, forecasting, valuation, risk, and portfolio controls.",
+            summary: "The second volume works through commercial and analytical examples: site screens, tariffs, PPAs, BESS sizing, dispatch, forecasting, valuation, risk, and portfolio controls.",
             points: [
               "Decompose a PPA or battery case into price, shape, imbalance, grid, credit, optionality, and control rights.",
               "Ask what a model is allowed to know, what it is optimizing, and which constraints are binding.",
-              "Move from concept-level market knowledge to investment and operating decisions."
+              "Practice the questions that sit behind investment and operating decisions."
             ],
             action: "Open Volume II",
             deck: "volume-ii"
@@ -23122,11 +23075,11 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           return {
             label: "Volume III",
             title: "Market Design, Portfolio Strategy, And Operating Models",
-            summary: "The third volume is for decisions under uncertainty: congestion, cannibalization, duration choice, data-centre flexibility, AI, adequacy, market power, and changing rules.",
+            summary: "The third volume surveys strategic questions under uncertainty: congestion, cannibalization, duration choice, data-centre flexibility, AI, adequacy, market power, and changing rules.",
             points: [
               "Separate dated market color from durable mechanisms.",
-              "Frame strategic choices as evidence packs, option values, constraints, and assumption flips.",
-              "Read current debates without mistaking a fashionable claim for a portfolio strategy."
+              "Use evidence packs, option values, constraints, and assumption flips as reading tools.",
+              "Separate durable mechanisms from dated market claims."
             ],
             action: "Open Volume III",
             deck: "volume-iii"
@@ -23136,11 +23089,11 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           return {
             label: "Casebook",
             title: "Applied Decision Memos And Model Screens",
-            summary: "The Casebook is the practice layer. It asks for concrete artifacts: quote stacks, duration screens, grid-aware site screens, partner scorecards, customer-product screens, and operating-model roadmaps.",
+            summary: "The Casebook gives bounded exercises around quote stacks, duration screens, grid-aware site screens, partner scorecards, customer-product screens, and operating-model roadmaps.",
             points: [
               "Use the lectures to produce a recommendation.",
               "Name the binding constraint, retained risk, and assumption that would change the decision.",
-              "Practice the transition from knowing concepts to using them."
+              "Use the concepts in a constrained scenario before moving to project-specific diligence."
             ],
             action: "Open Casebook",
             deck: "casebook"
@@ -23203,8 +23156,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         const p = document.createElement("p");
         p.className = "home-lede";
         p.textContent = casebook
-          ? "The Casebook turns the lectures into bounded commercial tasks. Each case asks for a concrete artifact: a quote stack, duration screen, site screen, partner scorecard, product memo, or operating-model choice."
-          : "These notes are for a fast, practical ramp into power markets, especially around renewable portfolios. They are written for analysts, business developers, quants, modelers, and other professionals entering power-market work without much prior domain experience. The volumes move from physical and institutional basics, to commercial instruments and analytical workflows, to current strategic questions. The aim is to make the key terms, units, constraints, and recurring trade-offs easier to recognize. The references provide the path for deeper study and follow-up.";
+          ? "The Casebook gives bounded commercial exercises. Each case asks for a concrete artifact: a quote stack, duration screen, site screen, partner scorecard, product memo, or operating-model choice."
+          : "These notes are for a fast, practical ramp into power markets, especially around renewable portfolios. They are written for analysts, business developers, quants, modelers, and other professionals entering power-market work without much prior domain experience. The volumes move from physical and institutional basics, to commercial examples and analytical workflows, to current strategic questions. The aim is to make key terms, units, constraints, and recurring trade-offs easier to recognize. The references provide the path for deeper study and follow-up.";
         const heroActions = document.createElement("div");
         heroActions.className = "arc-actions home-actions";
         const mainPdf = document.createElement("a");
@@ -23235,7 +23188,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         const arcIntro = document.createElement("p");
         arcIntro.textContent = casebook
           ? "The cases move from commercial screens to operating-model choices. Each case is standalone, and together they test whether the concepts can produce usable work."
-          : "The sequence moves from foundations to commercial analysis to strategy, then into applied cases and reference material.";
+          : "The sequence moves from foundations to commercial examples to strategic questions, then into applied cases and reference material.";
         arcHeading.append(arcTitle, arcIntro);
 
         const arc = document.createElement("div");
@@ -23393,8 +23346,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
             ]
           : [
               "Start each part with its Q&A Overview PDF to see the main questions and the shape of the argument.",
-              "Use Volume I to build a working map of the physical and institutional system: energy, capacity, timing, networks, roles, balancing, and prices.",
-              "Use Volume II to translate that map into commercial and analytical work: PPAs, storage, dispatch, tariffs, forecasting, valuation, contracts, and portfolio control.",
+              "Use Volume I for the basic physical and institutional map: energy, capacity, timing, networks, roles, balancing, and prices.",
+              "Use Volume II to practice commercial and analytical examples: PPAs, storage, dispatch, tariffs, forecasting, valuation, contracts, and portfolio control.",
               "Use Volume III to get oriented in strategic debates and claims that depend on market conditions: congestion, cannibalization, storage duration, AI and data-centre load, adequacy, and market design.",
               "Use the Casebook when a concept feels familiar enough to apply, then compare your answer with the worked decision frame.",
               "Return to the Q&A Overview PDF after finishing a part to check what stuck and what still feels unclear."

@@ -1749,7 +1749,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.35.1
+        v0.36.0
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -6679,7 +6679,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           return {
             label: "Casebook",
             title: "Applied Decision Practice",
-            summary: "The cases turn the lectures into work products: a screen, a memo, a scorecard, a product test, or an operating-model choice.",
+            summary: "The cases give bounded practice in screens, memos, scorecards, product tests, and operating-model choices.",
             points: [
               "Use the given facts before adding judgment.",
               "Find the binding constraint and the first assumption that changes the answer.",
@@ -6693,11 +6693,11 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           return {
             label: "Volume I",
             title: "Power System Fundamentals And Market Institutions",
-            summary: "Electricity must balance moment by moment through a constrained network. The first volume builds the system from balance, frequency, wires, actors, time sequence, and the first economics of solar and storage.",
+            summary: "Electricity must balance moment by moment through a constrained network. The first volume gives the basic map: balance, frequency, wires, actors, market sequence, and the first economics of solar and storage.",
             points: [
               "Understand why TSOs, BRPs, BSPs, bidding zones, balancing, and ancillary services exist.",
-              "Translate MW, MWh, voltage, congestion, curtailment, and settlement into economic pressure.",
-              "Build enough physical intuition to distrust market explanations that ignore the grid."
+              "Connect MW, MWh, voltage, congestion, curtailment, and settlement to economic pressure.",
+              "Read market explanations with the grid constraints visible."
             ],
             action: "Open Volume I",
             deck: "volume-i"
@@ -6707,11 +6707,11 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           return {
             label: "Volume II",
             title: "Commercial Analysis, Contracts, And Asset Decisions",
-            summary: "The second volume turns the system map into commercial work: site screens, tariffs, PPAs, BESS sizing, dispatch, forecasting, valuation, risk, and portfolio controls.",
+            summary: "The second volume works through commercial and analytical examples: site screens, tariffs, PPAs, BESS sizing, dispatch, forecasting, valuation, risk, and portfolio controls.",
             points: [
               "Decompose a PPA or battery case into price, shape, imbalance, grid, credit, optionality, and control rights.",
               "Ask what a model is allowed to know, what it is optimizing, and which constraints are binding.",
-              "Move from concept-level market knowledge to investment and operating decisions."
+              "Practice the questions that sit behind investment and operating decisions."
             ],
             action: "Open Volume II",
             deck: "volume-ii"
@@ -6721,11 +6721,11 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           return {
             label: "Volume III",
             title: "Market Design, Portfolio Strategy, And Operating Models",
-            summary: "The third volume is for decisions under uncertainty: congestion, cannibalization, duration choice, data-centre flexibility, AI, adequacy, market power, and changing rules.",
+            summary: "The third volume surveys strategic questions under uncertainty: congestion, cannibalization, duration choice, data-centre flexibility, AI, adequacy, market power, and changing rules.",
             points: [
               "Separate dated market color from durable mechanisms.",
-              "Frame strategic choices as evidence packs, option values, constraints, and assumption flips.",
-              "Read current debates without mistaking a fashionable claim for a portfolio strategy."
+              "Use evidence packs, option values, constraints, and assumption flips as reading tools.",
+              "Separate durable mechanisms from dated market claims."
             ],
             action: "Open Volume III",
             deck: "volume-iii"
@@ -6735,11 +6735,11 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           return {
             label: "Casebook",
             title: "Applied Decision Memos And Model Screens",
-            summary: "The Casebook is the practice layer. It asks for concrete artifacts: quote stacks, duration screens, grid-aware site screens, partner scorecards, customer-product screens, and operating-model roadmaps.",
+            summary: "The Casebook gives bounded exercises around quote stacks, duration screens, grid-aware site screens, partner scorecards, customer-product screens, and operating-model roadmaps.",
             points: [
               "Use the lectures to produce a recommendation.",
               "Name the binding constraint, retained risk, and assumption that would change the decision.",
-              "Practice the transition from knowing concepts to using them."
+              "Use the concepts in a constrained scenario before moving to project-specific diligence."
             ],
             action: "Open Casebook",
             deck: "casebook"
@@ -6802,8 +6802,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         const p = document.createElement("p");
         p.className = "home-lede";
         p.textContent = casebook
-          ? "The Casebook turns the lectures into bounded commercial tasks. Each case asks for a concrete artifact: a quote stack, duration screen, site screen, partner scorecard, product memo, or operating-model choice."
-          : "These notes are for a fast, practical ramp into power markets, especially around renewable portfolios. They are written for analysts, business developers, quants, modelers, and other professionals entering power-market work without much prior domain experience. The volumes move from physical and institutional basics, to commercial instruments and analytical workflows, to current strategic questions. The aim is to make the key terms, units, constraints, and recurring trade-offs easier to recognize. The references provide the path for deeper study and follow-up.";
+          ? "The Casebook gives bounded commercial exercises. Each case asks for a concrete artifact: a quote stack, duration screen, site screen, partner scorecard, product memo, or operating-model choice."
+          : "These notes are for a fast, practical ramp into power markets, especially around renewable portfolios. They are written for analysts, business developers, quants, modelers, and other professionals entering power-market work without much prior domain experience. The volumes move from physical and institutional basics, to commercial examples and analytical workflows, to current strategic questions. The aim is to make key terms, units, constraints, and recurring trade-offs easier to recognize. The references provide the path for deeper study and follow-up.";
         const heroActions = document.createElement("div");
         heroActions.className = "arc-actions home-actions";
         const mainPdf = document.createElement("a");
@@ -6834,7 +6834,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         const arcIntro = document.createElement("p");
         arcIntro.textContent = casebook
           ? "The cases move from commercial screens to operating-model choices. Each case is standalone, and together they test whether the concepts can produce usable work."
-          : "The sequence moves from foundations to commercial analysis to strategy, then into applied cases and reference material.";
+          : "The sequence moves from foundations to commercial examples to strategic questions, then into applied cases and reference material.";
         arcHeading.append(arcTitle, arcIntro);
 
         const arc = document.createElement("div");
@@ -6992,8 +6992,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
             ]
           : [
               "Start each part with its Q&A Overview PDF to see the main questions and the shape of the argument.",
-              "Use Volume I to build a working map of the physical and institutional system: energy, capacity, timing, networks, roles, balancing, and prices.",
-              "Use Volume II to translate that map into commercial and analytical work: PPAs, storage, dispatch, tariffs, forecasting, valuation, contracts, and portfolio control.",
+              "Use Volume I for the basic physical and institutional map: energy, capacity, timing, networks, roles, balancing, and prices.",
+              "Use Volume II to practice commercial and analytical examples: PPAs, storage, dispatch, tariffs, forecasting, valuation, contracts, and portfolio control.",
               "Use Volume III to get oriented in strategic debates and claims that depend on market conditions: congestion, cannibalization, storage duration, AI and data-centre load, adequacy, and market design.",
               "Use the Casebook when a concept feels familiar enough to apply, then compare your answer with the worked decision frame.",
               "Return to the Q&A Overview PDF after finishing a part to check what stuck and what still feels unclear."
