@@ -1243,7 +1243,6 @@
       overflow: hidden;
     }
 
-    .feedback-note,
     .feedback-error,
     .feedback-success {
       margin: 0.65rem 0 0;
@@ -1357,7 +1356,6 @@
     :root[data-theme="dark"] .route-list,
     :root[data-theme="dark"] .route-list li,
     :root[data-theme="dark"] .feedback-context,
-    :root[data-theme="dark"] .feedback-note,
     :root[data-theme="dark"] .rail-label,
     :root[data-theme="dark"] .rail-nav a,
     :root[data-theme="dark"] .sidebar-brand span,
@@ -1749,7 +1747,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.36.4
+        v0.36.5
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -6534,7 +6532,6 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
       <label class="feedback-honeypot" for="feedback-website">Website
         <input id="feedback-website" type="text" autocomplete="off" tabindex="-1">
       </label>
-      <p class="feedback-note" id="feedback-note">This sends the selected passage and your note to the course feedback log. If the private endpoint is unavailable, the fallback opens a prefilled GitHub issue draft for your review.</p>
       <p class="feedback-error" id="feedback-error" hidden>Please add a short note.</p>
       <p class="feedback-success" id="feedback-success" hidden>Feedback sent. Thank you.</p>
       <div class="feedback-actions">
@@ -7750,7 +7747,6 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         const selectedEl = document.getElementById("feedback-selected");
         const commentEl = document.getElementById("feedback-comment");
         const websiteEl = document.getElementById("feedback-website");
-        const noteEl = document.getElementById("feedback-note");
         const errorEl = document.getElementById("feedback-error");
         const successEl = document.getElementById("feedback-success");
         const endpointMeta = document.querySelector('meta[name="feedback-endpoint"]');
@@ -7759,7 +7755,6 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         if (!toolbar || !chip || !modal || !submitButton || !commentEl) return;
         if (!feedbackEndpoint) {
           submitButton.textContent = "Open GitHub issue";
-          if (noteEl) noteEl.textContent = "This opens a prefilled GitHub issue that you can review before submitting.";
         }
 
         const chapterById = new Map(chapters.map((chapter) => [chapter.id, chapter]));
@@ -7956,7 +7951,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
             if (successEl) successEl.hidden = false;
             window.setTimeout(closeModal, 1200);
           } catch (_error) {
-            setError("Could not send feedback. Opening a GitHub issue draft instead.");
+            setError("Could not send directly. Opening a draft instead.");
             openIssueDraft(activePayload, comment);
           } finally {
             submitButton.disabled = false;
