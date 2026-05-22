@@ -3,6 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Technical onboarding notes and applied cases for learning power markets through grid constraints, market institutions, contracts, numerical intuition, and decision frames.">
+  <link rel="canonical" href="https://sofianebo.github.io/power-market-notes/">
+  <meta property="og:title" content="Power Markets: Technical Onboarding
+Notes">
+  <meta property="og:description" content="Power-market notes, applied cases, Q&A overviews, glossary, and references for renewable portfolio work.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sofianebo.github.io/power-market-notes/">
+  <meta name="twitter:card" content="summary">
   <meta name="feedback-endpoint" content="https://power-market-feedback.sofianebo-power-market.workers.dev/feedback">
   <title>Power Markets: Technical Onboarding Notes</title>
   <script>
@@ -37,6 +45,8 @@
       --green: #2f7d46;
       --code-bg: #eef4f3;
       --shadow: 0 22px 58px rgba(20, 39, 35, 0.09);
+      --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --wash: #f3f8f6;
       --rail: 16rem;
       --sidebar: 19.5rem;
       --measure: 78ch;
@@ -63,6 +73,7 @@
       --green: #8ed29b;
       --code-bg: #101a17;
       --shadow: 0 24px 64px rgba(0, 0, 0, 0.34);
+      --wash: #14231f;
     }
 
     * {
@@ -1404,12 +1415,12 @@
 
     .bibliography li {
       margin: 0.45rem 0;
-      color: #30393d;
+      color: var(--ink);
     }
 
     :root[data-theme="dark"] .bibliography,
     :root[data-theme="dark"] .bibliography li {
-      color: var(--muted);
+      color: var(--ink);
     }
 
     .reading-rail {
@@ -1856,7 +1867,7 @@
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.34.0
+        v0.35.0
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -2082,7 +2093,7 @@
         ask both “How many MWh per year?” and “What hourly shape are we
         selling, and who carries the mismatch between production and
         customer demand?”</p>
-        <p>The 2026-05-16 Svenska kraftnat electricity-statistics source
+        <p>The 2026-05-16 Svenska kraftnät electricity-statistics source
         says Swedish production and consumption statistics are based on
         measured hourly values reported to eSett. The operational record
         is hourly because running and settling the system requires more
@@ -2516,7 +2527,7 @@ Hour 4: -10 MWh</code></pre>
         <section id="opening-puzzle-3" class="level4">
         <h4>Opening Puzzle</h4>
         <p>A project model says a solar plant is profitable.</p>
-        <p>Then one question breaks the spreadsheet:</p>
+        <p>The next question determines whether the model is usable:</p>
         <p>Can it actually inject power where it wants to connect?</p>
         <p>If the answer is no, the project remains a land option with a
         production forecast.</p>
@@ -2614,20 +2625,20 @@ grid cost = EUR 5/MWh</code></pre>
         bind.</p>
         <p>Second, connection feasibility. A generator needs a
         connection point, technical design, and allocated capacity. In
-        Svenska kraftnat’s 2025 connection guidance for the Swedish
+        Svenska kraftnät’s 2025 connection guidance for the Swedish
         national grid, connection should be made at the lowest suitable
         voltage level, there must be a tangible need, and Svenska
-        kraftnat decides the connection point and technical design.</p>
-        <p>Third, tariff exposure. Svenska kraftnat’s 2026-05-16 tariff
+        kraftnät decides the connection point and technical design.</p>
+        <p>Third, tariff exposure. Svenska kraftnät’s 2026-05-16 tariff
         source says national-grid subscribers pay capacity fees, usage
         fees, and possible excess charges. The usage fee covers the cost
         of buying electricity losses in the network. The same source
         states that temporary subscriptions can be granted subject to
         available network capacity and may be suspended if Svenska
-        kraftnat assesses that they may lead to congestion.</p>
+        kraftnät assesses that they may lead to congestion.</p>
         <p>Fourth, curtailment or limited access. ACER defines flexible
         connection agreements as agreed conditions that can limit and
-        control injection or withdrawal. Svenska kraftnat’s network
+        control injection or withdrawal. Svenska kraftnät’s network
         development material discusses conditional connection agreements
         as a temporary measure to connect actors before network measures
         are in place, where the connecting party must accept
@@ -2695,7 +2706,7 @@ grid cost = EUR 5/MWh</code></pre>
         <h4>Current Debates Or Caveats</h4>
         <p>Tariff and connection claims are date-specific. The Swedish
         national-grid tariff details above come from a 2026-05-16
-        Svenska kraftnat source. Distribution-grid tariff treatment
+        Svenska kraftnät source. Distribution-grid tariff treatment
         remains a source gap for project-specific work.</p>
         <p>It does not compare Nordic countries. ACER warns through its
         definitions and methodology discussion that network charges
@@ -2800,11 +2811,11 @@ grid cost = EUR 5/MWh</code></pre>
         <section id="numerical-intuition-4" class="level4">
         <h4>Numerical Intuition</h4>
         <p>One dated institutional number is useful here:</p>
-        <p>The 2026-05-16 Svenska kraftnat source says that, as of May
+        <p>The 2026-05-16 Svenska kraftnät source says that, as of May
         1, 2024, the previous Swedish balance-responsible role was
         contractually split into BSP and BRP roles, with full
         independent BSP implementation expected by 2028 at the latest
-        based on conditions known to Svenska kraftnat in that
+        based on conditions known to Svenska kraftnät in that
         source.</p>
         <p>This Sweden-specific rule is dated and date-specific.</p>
         <section id="worked-estimate-4" class="level5">
@@ -2966,7 +2977,7 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         balancing services from qualified resources. One company may
         perform multiple roles, but the obligations are conceptually
         different.</p>
-        <p>In Sweden, the 2026-05-16 Svenska kraftnat source says BSP
+        <p>In Sweden, the 2026-05-16 Svenska kraftnät source says BSP
         and BRP roles were introduced contractually from May 1, 2024,
         while full independent BSP implementation remains a staged
         process expected by 2028 at the latest. That date anchors the
@@ -3079,13 +3090,14 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <li>1 MW delivered for 1 hour is 1 MWh. This identity matters
         because schedules are power over time, while settlement invoices
         energy volumes.</li>
-        <li>In the 2026-05-16 Nord Pool day-ahead source, Nord Pool
-        described roughly <code>500 TWh/year</code> traded across its
-        coverage area, more than <code>300</code> buyers and sellers,
-        and more than <code>2,000</code> daily orders.</li>
-        <li>The Nord Pool 15-minute MTU page described Nordic/European
-        rollout steps through 2024-2025, with European SDAC 15-minute
-        MTU go-live stated as <code>2025-09-30</code>.</li>
+        <li>Exact exchange volumes and participant counts change, so use
+        current Nord Pool annual or market pages when the counts matter.
+        The market-clock mechanism here does not depend on a fixed
+        number.</li>
+        <li>The Nord Pool 15-minute market time unit (MTU) source
+        described staged Nordic and European rollout steps through
+        2024-2025, with Single Day-Ahead Coupling (SDAC) 15-minute MTU
+        go-live stated as <code>2025-09-30</code>.</li>
         </ul>
         <section id="worked-estimate-5" class="level5">
         <h5>Worked Estimate</h5>
@@ -3617,10 +3629,11 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         </section>
         <section id="first-principles-model-8" class="level4">
         <h4>First-Principles Model</h4>
-        <p>Frequency is the grid’s speedometer. In a synchronous AC
-        system, frequency moves when generation and consumption do not
-        match. If load is greater than supply, frequency tends to fall.
-        If supply is greater than load, frequency tends to rise.</p>
+        <p>In a synchronous AC system, frequency is the common
+        electrical speed of the system. It moves when generation and
+        consumption do not match. If load is greater than supply,
+        frequency tends to fall. If supply is greater than load,
+        frequency tends to rise.</p>
         <p>The TSO therefore needs layers of response:</p>
         <ul>
         <li>very fast containment to stop the deviation getting
@@ -3694,8 +3707,8 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         but earns 400 EUR from reserve capacity and expected activation,
         the reserve choice costs 200 EUR before considering strategic or
         risk benefits.</p>
-        <p>The exact numbers are made up. The structure is the
-        lesson.</p>
+        <p>The exact numbers are illustrative. The structure is the
+        useful part.</p>
         </section>
         </section>
         <section id="equations-3" class="level4">
@@ -3712,8 +3725,9 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         </section>
         <section id="mechanism-8" class="level4">
         <h4>Mechanism</h4>
-        <p>FCR is like the first stabilizing reflex. It reacts quickly
-        to contain frequency movement.</p>
+        <p>FCR is the first containment layer for frequency deviations.
+        It reacts quickly to limit the movement before slower
+        restoration processes take over.</p>
         <p>aFRR is a controlled automatic correction. It helps restore
         the system after the first response.</p>
         <p>mFRR is slower and more deliberate. It relieves faster
@@ -4668,10 +4682,10 @@ round-trip efficiency (RTE): how much energy survives the round trip</code></pre
         <ul>
         <li><code>100 MW / 200 MWh = 2 hours</code> by definition.</li>
         <li><code>100 MW / 400 MWh = 4 hours</code> by definition.</li>
-        <li>Provisional BESS RTE anchor: <code>85-90%</code>, from
-        existing assumptions, illustrative and depends on the
-        technology, warranty, operating mode, and current technical
-        source.</li>
+        <li>For illustration, assume <code>85-90%</code> round-trip
+        efficiency. Project work should use the original equipment
+        manufacturer (OEM) warranty, test data, or a dated technical
+        benchmark.</li>
         <li>Technical storage reference example: one storage arbitrage
         example uses 80% RTE; another uses charge/discharge efficiencies
         separately. These are examples, not universal battery
@@ -4721,7 +4735,8 @@ Gross spread value = 5,200 EUR</code></pre>
         <li>It creates optionality: the owner can decide later which
         market or obligation is worth serving.</li>
         </ol>
-        <p>But every power has a shadow:</p>
+        <p>Each value source consumes a physical or contractual
+        constraint:</p>
         <ul>
         <li>MWh limits how long the battery can act.</li>
         <li>MW limits how fast it can act.</li>
@@ -4821,10 +4836,11 @@ Gross spread value = 5,200 EUR</code></pre>
         <a href="#ref-11">[11]</a> <a href="#ref-23">[23]</a></sup>
         </p>
         <p>The Nordic market is useful to study because it combines
-        regional integration with strong local differences. Nord Pool
-        gives a common market architecture, a Nordic system-price
-        reference, and bidding-area prices when transmission constraints
-        matter. eSett gives a common settlement layer for Denmark,
+        regional integration with strong local differences. Nord Pool is
+        a major Nordic nominated electricity market operator (NEMO) and
+        price-reference source; Nordic day-ahead trading is coupled
+        through the European market-coupling framework and local bidding
+        areas. eSett gives a common settlement layer for Denmark,
         Finland, Norway, and Sweden. Each country still has its own TSO,
         grid planning, tariff design, connection process,
         balancing-product details, and local network constraints. For a
@@ -4886,8 +4902,9 @@ basis exposure = area price - financial reference price</code></pre>
         <li>Area price: bidding-area price reflecting local supply,
         demand, and available transmission capacity.</li>
         <li>Bidding area: market area for which a local price is
-        calculated; each Nordic country’s TSO decides its bidding-area
-        division.</li>
+        calculated; Nordic bidding-zone definitions sit inside national
+        TSO operation and applicable EU/regulatory review
+        processes.</li>
         <li>Basis risk: difference between the price used for physical
         revenue and the price used for a hedge, PPA, or financial
         contract.</li>
@@ -4985,11 +5002,12 @@ Site B: 100,000 MWh x 37 EUR/MWh = EUR 3.7 million/year</code></pre>
         <p>The Nordic map has four layers that matter commercially.</p>
         <section id="market-layer" class="level5">
         <h5>Market Layer</h5>
-        <p>Nord Pool coordinates day-ahead trading through bidding
-        areas. The system price is a reference for many financial
-        contracts, while area prices can differ when transmission
-        constraints bind. The classic Nordic risk-management problem
-        includes both price level and system-to-area basis.</p>
+        <p>Nord Pool is one major route into Nordic day-ahead trading
+        through bidding areas. The system price is a reference for many
+        financial contracts, while area prices can differ when
+        transmission constraints bind. The classic Nordic
+        risk-management problem includes both price level and
+        system-to-area basis.</p>
         </section>
         <section id="physical-layer" class="level5">
         <h5>Physical Layer</h5>
@@ -5298,8 +5316,8 @@ Shortfall = 30 MWh</code></pre>
         forecast miss moves through trading, balancing, settlement, and
         partner performance.</p>
         </section>
-        <section id="the-mwh-dossier" class="level4">
-        <h4>The MWh Dossier</h4>
+        <section id="delivery-hour-evidence-trail" class="level4">
+        <h4>Delivery-Hour Evidence Trail</h4>
         <p>A well-governed organization should be able to reconstruct
         one delivery hour as a dossier.</p>
         <table>
@@ -5833,7 +5851,7 @@ operating_cash_before_debt =
         <p>Construction contribution: a one-off contribution toward grid
         works needed for connection or reinforcement.</p>
         <p>Loss charge: a charge intended to recover network energy
-        losses. Svenska kraftnat’s tariff source states that from 1
+        losses. Svenska kraftnät’s tariff source states that from 1
         January 2020, its energy-loss price is based on actual hourly
         market price per bidding zone plus a supplement charge.</p>
         <p>Limited grid access: an arrangement where a user accepts
@@ -5848,22 +5866,26 @@ operating_cash_before_debt =
         <h4>Numerical Intuition</h4>
         <p>Use these as dated examples, not universal tariff levels:</p>
         <ul>
-        <li>Sweden, Svenska kraftnat connection process source:
+        <li>Sweden, Svenska kraftnät connection process source:
         feasibility study fee described as <code>SEK 100,000</code>
         fixed plus <code>SEK 1,200/MW</code> variable for 2025.</li>
-        <li>Sweden, Svenska kraftnat tariff source: from 1 January 2020,
+        <li>Sweden, Svenska kraftnät tariff source: from 1 January 2020,
         energy losses are priced from actual hourly bidding-zone market
         prices plus a supplement charge.</li>
-        <li>Denmark, Energinet tariff catalogue 2026 source: 2026
-        consumption tariff cap described as <code>11.5 ore/kWh</code>
-        after use of saved bottleneck revenues; large consumers above
-        <code>100 GWh/year</code> have a reduced energy-based system
-        tariff in that source.</li>
+        <li>Denmark, Energinet tariff catalogue 2026 source: a 2026
+        consumption-tariff cap is described as
+        <code>11.5 Danish øre/kWh</code> after use of saved bottleneck
+        revenues; large consumers above <code>100 GWh/year</code> have a
+        reduced energy-based system tariff in that source. Treat this as
+        a transmission-tariff example, not a total delivered-energy
+        network charge.</li>
         <li>Finland, Fingrid main grid service pricing 2026 source: all
         energy-based fee components are calculated hourly by summing
         15-minute interval meter data; facilities of at least
-        <code>1 MW</code> are central to generation/storage/hybrid
-        tariff categories in the excerpt.</li>
+        <code>1 MW</code> are central to the generation, storage, and
+        hybrid tariff categories in the excerpt. Project work still
+        needs the current tariff sheet, connection category, and
+        metering setup.</li>
         </ul>
         <p>These examples cannot be compared directly without a country
         sheet: currency, voltage level, user class, tariff year, and
@@ -6499,12 +6521,13 @@ extra visible value = 1.05 million EUR/year</code></pre>
         </section>
         <section id="recap-17" class="level4">
         <h4>Recap</h4>
-        <p>Solar cash-flow decisions are hourly investment decisions
-        wearing annual labels. The right design is the one whose
-        contract premium, captured value, grid position, firming cost,
-        financing treatment, and merchant-tail range survive sensitivity
-        testing. In the scenario, a shaped PPA beats solar-only because
-        the premium covers residual firming, while the BESS waits for
+        <p>Solar cash-flow decisions depend on hourly production, price,
+        grid, and contract exposure even when the model reports annual
+        totals. The right design is the one whose contract premium,
+        captured value, grid position, firming cost, financing
+        treatment, and merchant-tail range survive sensitivity testing.
+        In the scenario, a shaped PPA beats solar-only because the
+        premium covers residual firming, while the BESS waits for
         stronger marginal evidence. The conclusion should always name
         the assumption that can overturn it.</p>
         <div class="lecture-end">
@@ -6599,15 +6622,19 @@ evidence promise</code></pre>
         <p>The contract value is:</p>
         <pre class="text"><code>100,000 MWh/year x 50 EUR/MWh x 10 years
 = 50,000,000 EUR</code></pre>
-        <p>RE-Source’s July 2025 guide notes that credit risk guarantees
-        can be about 10 percent of total contract value. In this
-        illustrative case:</p>
+        <p>RE-Source’s July 2025 guide gives about 10 percent of total
+        contract value as a credit-support scale example. It is not a
+        pricing rule. Live credit support depends on replacement cost,
+        mark-to-market exposure, potential future exposure, tenor,
+        thresholds, collateral form, parent support, and counterparty
+        quality. In this illustrative case:</p>
         <pre class="text"><code>credit support scale = 50,000,000 EUR x 10%
                      = 5,000,000 EUR</code></pre>
-        <p>That number changes the sales conversation. The customer may
-        like the PPA price but dislike posting support. The seller may
-        like the offtaker but dislike unsecured exposure. A “green
-        energy” product has become a balance-sheet negotiation.</p>
+        <p>A credit-support number at this scale changes the sales
+        conversation. The customer may like the PPA price but dislike
+        posting support. The seller may like the offtaker but dislike
+        unsecured exposure. A “green energy” product has become a
+        balance-sheet negotiation.</p>
         </section>
         <section id="the-risk-ledger" class="level4">
         <h4>The Risk Ledger</h4>
@@ -6816,8 +6843,8 @@ evidence promise</code></pre>
         <li>Which right does the seller need: dispatch, nomination,
         curtailment, storage use, or partner audit?</li>
         </ul>
-        <p>If these are unanswered, the PPA has only been named, not
-        priced.</p>
+        <p>A priced PPA needs these assignments before the offer leaves
+        the commercial team.</p>
         </section>
         <section id="misconceptions-17" class="level4">
         <h4>Misconceptions</h4>
@@ -7102,15 +7129,23 @@ control_mismatch      = promised_shape - dispatch_and_data_rights_held</code></p
         </table>
         <p>As-produced solar covers <code>80,000 MWh/year</code> on
         paper, but only <code>45,000 MWh/year</code> overlaps the
-        buyer’s load hours in this scenario. The buyer still buys
-        <code>75,000 MWh/year</code> from its supplier or the
+        buyer’s load hours in this scenario. The remaining
+        <code>35,000 MWh/year</code> is paid-for surplus that needs a
+        resale, settlement, basis, and certificate treatment. The buyer
+        still buys <code>75,000 MWh/year</code> from its supplier or the
         market:</p>
         <pre class="text"><code>residual_load = 120,000 - 45,000 = 75,000 MWh/year</code></pre>
-        <p>The buyer’s apparent average cost is:</p>
-        <pre class="text"><code>covered_cost = 45,000 x 48 = 2.16m EUR
+        <p>Before valuing surplus resale or settlement, the buyer’s
+        gross cash cost is:</p>
+        <pre class="text"><code>ppa_cost = 80,000 x 48 = 3.84m EUR
 residual_cost = 75,000 x 70 = 5.25m EUR
-total_cost = 7.41m EUR
-average_cost = 7.41m / 120,000 = 61.75 EUR/MWh</code></pre>
+gross_cost_before_surplus_value = 9.09m EUR</code></pre>
+        <p>The final average cost then depends on the surplus value:</p>
+        <pre class="text"><code>average_cost =
+  (9.09m EUR - 35,000 MWh x surplus_settlement_value)
+  / 120,000 MWh</code></pre>
+        <p>As-produced buyer economics therefore need both the PPA
+        payment and the surplus settlement line.</p>
         <p>A shaped PPA delivers <code>75,000 MWh/year</code> into the
         buyer’s target hours at <code>60 EUR/MWh</code>, leaving
         <code>45,000 MWh/year</code> residual:</p>
@@ -7496,20 +7531,20 @@ P_t = market/reference price, EUR/MWh</code></pre>
         <li>storage losses, degradation, and dispatch fees assigned to
         shaping: <code>100,000 EUR/year</code></li>
         </ul>
-        <pre class="text"><code>normal_residual_cost = 7,500 x 45 = 337,500 EUR/year
-stress_residual_cost = 5,000 x 120 = 600,000 EUR/year
-storage_and_dispatch_cost = 100,000 EUR/year
-
-shape_cost = 337,500 + 600,000 + 100,000
-           = 1,037,500 EUR/year
-
-shape_cost_per_MWh = 1,037,500 / 100,000
-                   = 10.38 EUR/MWh</code></pre>
+        <pre class="text"><code>base_expected_shape_cost =
+  7,500 x 45 + 100,000
+  = 437,500 EUR/year</code></pre>
+        <p>The stress bucket is a downside case, not an extra expected
+        line unless the pricing method assigns a probability or risk
+        margin to it:</p>
+        <pre class="text"><code>stress_residual_cost = 5,000 x 120 = 600,000 EUR/year</code></pre>
         <p>This is still an illustrative screen, but it is stronger than
-        a plug. It shows which hours create the price. If the stress
-        bucket is wrong, the quote changes; if the battery cannot
-        legally or economically serve the stress bucket, the product
-        boundary changes.</p>
+        a plug. It shows which hours create the price. Price the base
+        expected shape cost separately from the tail: through
+        probability weighting, a risk margin, a cap, a collar, a
+        pass-through, or a reopener. If the stress bucket is wrong, the
+        quote changes; if the battery cannot legally or economically
+        serve the stress bucket, the product boundary changes.</p>
         </section>
         <section id="sensitivity" class="level4">
         <h4>Sensitivity</h4>
@@ -7655,7 +7690,7 @@ buyer surplus = buyer willingness-to-pay - offer price</code></pre>
         <p>“A battery makes firming cheap.” A battery changes the cost
         function and spends optionality.</p>
         <p>“Customer value equals seller cost.” They are two sides of
-        the negotiation, not the same number.</p>
+        the negotiation and need separate estimates.</p>
         <p>“A risk margin fixes uncertainty.” A risk margin without
         named risks is an unexplained plug.</p>
         </section>
@@ -8378,11 +8413,11 @@ net arbitrage value = 12,100 - 2,160 - 600 = 9,340 EUR</code></pre>
         <p>The site, contract, and optimizer decide which rows can
         coexist.</p>
         </section>
-        <section id="bankable-revenue-is-not-the-same-as-expected-value"
+        <section id="bankable-revenue-and-expected-value"
         class="level4">
-        <h4>Bankable Revenue Is Not The Same As Expected Value</h4>
-        <p>A project owner can care about expected value. A lender cares
-        about enforceable downside protection.</p>
+        <h4>Bankable Revenue And Expected Value</h4>
+        <p>A project owner can care about expected value. A lender also
+        needs enforceable downside protection.</p>
         <p>Two stacks can have the same expected annual value and
         different investment value:</p>
         <table>
@@ -8722,11 +8757,11 @@ annualized_extra_capex
         limits.</p>
         <p>Incremental duration: additional MWh added while holding MW
         roughly fixed.</p>
-        <p>Insurance cycle cap: insurance-policy limit on cycling,
-        throughput, depth of discharge, duty cycle, or approved
-        operation. It is project-specific and should be read from the
-        policy or endorsement, not inferred from the technical
-        model.</p>
+        <p>Project policy constraint: a possible insurance, lender,
+        warranty, or operating-policy limit on cycling, throughput,
+        depth of discharge, duty cycle, or approved operation. Treat it
+        as a diligence question read from project documents, not as a
+        universal BESS market term.</p>
         <p>Net value per MWh: value of discharging an additional MWh
         after charging cost, efficiency loss, degradation, fees, and
         opportunity cost.</p>
@@ -8747,8 +8782,12 @@ annualized_extra_capex
         <code>USD 500/kWh</code> to below <code>USD 200/kWh</code>,
         depending on site, technology, and regulation.</p>
         <p>Use <code>USD 175/kWh</code> as a scale anchor rather than a
-        project quote. It tells you that extra duration is a capital
-        decision large enough to deserve its own evidence.</p>
+        project quote. It is an all-in four-hour system-cost anchor, not
+        the marginal cost of adding duration to a specific project.
+        Marginal duration pricing needs vendor or engineering,
+        procurement, and construction (EPC) quotes separating cells,
+        containers, power-conversion-system sharing, balance of plant,
+        augmentation, warranty, grid, tax, and financing effects.</p>
         </section>
         <section id="numerical-intuition-23" class="level4">
         <h4>Numerical Intuition</h4>
@@ -8759,7 +8798,8 @@ annualized_extra_capex
 100 MW / 400 MWh = 4 h</code></pre>
         <p>The four-hour version has <code>200 MWh</code> more energy
         capacity.</p>
-        <p>Using <code>USD 175/kWh</code> as a scale anchor:</p>
+        <p>Using the all-in <code>USD 175/kWh</code> figure only as an
+        order-of-magnitude screen:</p>
         <pre class="text"><code>200 MWh = 200,000 kWh
 extra energy block scale = 200,000 x 175 = USD 35,000,000</code></pre>
         <p>Use a rough <code>10%</code> annual carrying charge for the
@@ -9335,7 +9375,8 @@ degradation_cost_t = deg_cost_per_MWh x d_t x delta_t</code></pre>
         <pre class="text"><code>d_t + r_up_t &lt;= P_dis_max
 c_t + r_down_t &lt;= P_ch_max</code></pre>
         <p>Reserve sustain requirement:</p>
-        <pre class="text"><code>r_up_t x sustain_hours &lt;= soc_t - E_min</code></pre>
+        <pre class="text"><code>r_up_t x sustain_hours &lt;= soc_t - E_min
+r_down_t x sustain_hours &lt;= E_max - soc_t</code></pre>
         <p>Grid import/export:</p>
         <pre class="text"><code>c_t + site_load_t &lt;= import_limit_t
 d_t + solar_export_t &lt;= export_limit_t</code></pre>
@@ -9619,7 +9660,7 @@ terminal shortfall from 50 MWh discharge = 50 MWh - 40 MWh = 10 MWh</code></pre>
         <li>Does the ending SoC make economic sense?</li>
         </ol>
         <p>A model that empties the battery at the horizon end may be
-        exploiting the edge of the spreadsheet.</p>
+        omitting terminal value.</p>
         </section>
         <section id="recap-24" class="level4">
         <h4>Recap</h4>
@@ -10362,27 +10403,28 @@ degradation_cost = 16 EUR/MWh discharged</code></pre>
         promise, OEM approval, insurance endorsement, augmentation
         timing, or lower financeable value.</p>
         </section>
-        <section id="insurance-can-bind-the-dispatch-plan"
+        <section id="project-policies-can-bind-the-dispatch-plan"
         class="level4">
-        <h4>Insurance Can Bind The Dispatch Plan</h4>
-        <p>Insurance is a separate diligence item from physical
-        degradation and OEM warranty. A project policy may restrict
-        cycling, duty cycle, fire-safety operation, monitoring, approved
-        revenue modes, or claim eligibility. The exact language is
-        negotiated and project-specific, so the course does not use a
-        universal insurance-cycle number.</p>
+        <h4>Project Policies Can Bind The Dispatch Plan</h4>
+        <p>Insurance, lender covenants, OEM warranty, and operating
+        procedures are separate diligence items from the physical
+        degradation model. A project policy may restrict cycling, duty
+        cycle, fire-safety operation, monitoring, approved revenue
+        modes, or claim eligibility. The exact language is negotiated
+        and project-specific, so the course does not use a universal
+        insurance-cycle number.</p>
         <p>The modeling rule is:</p>
         <pre class="text"><code>useful_cycles_per_year =
   min(physical_opportunity_cycles,
       warranty_compatible_cycles,
-      insurance_permitted_cycles,
+      project_policy_permitted_cycles,
       grid_and_product_eligible_cycles)</code></pre>
         <p>If the policy allows fewer cycles than the dispatch model
         needs, the model should not quietly average the difference away.
-        The decision owner has to change one of the inputs: obtain an
-        endorsement, pay for different coverage, reduce cycling, change
-        the revenue stack, reprice the contract, or lower the asset
-        value.</p>
+        The decision owner has to change one of the inputs: obtain
+        written approval or an endorsement, change coverage, reduce
+        cycling, change the revenue stack, reprice the contract, or
+        lower the asset value.</p>
         </section>
         <section id="degradation-belongs-inside-the-optimizer"
         class="level4">
@@ -11676,7 +11718,7 @@ The marginal portfolio risk is materially different.</code></pre>
         <pre class="text"><code>Realized result
 - Feasible benchmark result
 = Execution delta</code></pre>
-        <p>The word <code>feasible</code> does almost all the work.</p>
+        <p><code>Feasible</code> is the controlling word.</p>
         <p>A benchmark simulates decisions that were possible before or
         during delivery, using only data that existed at that moment. It
         must respect:</p>
@@ -11718,7 +11760,7 @@ The marginal portfolio risk is materially different.</code></pre>
         frames imbalance settlement around BRPs, trades, metered data,
         and imbalance adjustments.</p>
         <p><code>BSP</code> is the party providing balancing services to
-        the TSO where qualified. Svenska kraftnat’s English page
+        the TSO where qualified. Svenska kraftnät’s English page
         describes the Swedish split of actor roles into BSP and BRP from
         1 May 2024 and notes that full independent BSP implementation is
         expected by 2028 at the latest.</p>
@@ -12003,7 +12045,7 @@ The marginal portfolio risk is materially different.</code></pre>
         settlement model. The eSett handbook frames imbalance settlement
         through trades, metering, reporting, settlement calculations,
         invoicing, collateral/risk management, and market behaviour
-        monitoring. Svenska kraftnat’s BRP/BSP page adds an important
+        monitoring. Svenska kraftnät’s BRP/BSP page adds an important
         Swedish caveat: BSP and BRP roles are being separated, with
         transition and IT-system constraints.</p>
         <p>For a renewable IPP, the practical work product is a monthly
@@ -12765,14 +12807,16 @@ The marginal portfolio risk is materially different.</code></pre>
         </section>
         <section id="numerical-intuition-29" class="level4">
         <h4>Numerical Intuition</h4>
-        <p>The first useful number is exposure:</p>
-        <pre class="text"><code>mark-to-market exposure = position MWh x price move</code></pre>
+        <p>The first useful number is stress PnL on an open
+        position:</p>
+        <pre class="text"><code>first-pass stress PnL = open MWh x adverse price move</code></pre>
         <p>If a position covers 36,000 MWh and the relevant price moves
         15 EUR/MWh against it:</p>
         <pre class="text"><code>36,000 MWh x 15 EUR/MWh = 540,000 EUR</code></pre>
-        <p>That number creates a cash and control question: who must
-        post collateral, when, under which contract, and with what
-        liquidity buffer?</p>
+        <p>That number creates a cash and control question. Current
+        mark-to-market and credit exposure then depend on trade price,
+        current curve, netting, thresholds, collateral terms, and
+        termination terms.</p>
         <p>VaR and expected shortfall are model outputs, not controls by
         themselves:</p>
         <pre class="text"><code>95% VaR = loss threshold exceeded in 5% of modeled cases
@@ -12785,8 +12829,8 @@ expected shortfall = average loss when losses exceed that threshold</code></pre>
         MW for 30 days.</p>
         <p>Approximate the energy:</p>
         <pre class="text"><code>50 MW x 24 h/day x 30 days = 36,000 MWh</code></pre>
-        <p>Now suppose the forward mark moves against the position by 20
-        EUR/MWh before delivery:</p>
+        <p>Now suppose the forward mark moves against the position by
+        <code>20 EUR/MWh</code> before delivery:</p>
         <pre class="text"><code>36,000 MWh x 20 EUR/MWh = 720,000 EUR</code></pre>
         <p>The portfolio may still be economically hedged against future
         spot prices. But it may need to fund collateral today.</p>
@@ -13128,9 +13172,9 @@ collateral need = 900,000 x 80%
         <p>“VaR measures how much we can lose.” VaR is a threshold under
         a model. It does not tell you how bad losses are beyond the
         threshold.</p>
-        <p>“Stress tests are pessimistic.” Stress tests are how you ask
-        whether the organization survives the case the ordinary model
-        dislikes thinking about.</p>
+        <p>“Stress tests are pessimistic.” Stress tests show whether the
+        organization has enough liquidity, limits, collateral, and
+        governance for a severe case.</p>
         <p>“Risk management prevents risk-taking.” Good risk management
         makes intentional risk-taking possible.</p>
         <p>“The ETRM is just software.” A system is only useful if
@@ -13235,7 +13279,7 @@ collateral need = 900,000 x 80%
         <section id="definitions-27" class="level4">
         <h4>Definitions</h4>
         <p>Ancillary services are services procured to maintain system
-        security and quality. Svenska kraftnat’s ancillary-service
+        security and quality. Svenska kraftnät’s ancillary-service
         material describes frequency containment, frequency restoration,
         manual restoration, fast frequency response, and disturbance
         reserves; other Nordic TSOs define their own product details.
@@ -13525,11 +13569,12 @@ collateral need = 900,000 x 80%
         <section id="definitions-28" class="level4">
         <h4>Definitions</h4>
         <p>Market time unit, or MTU, is the time block used for trading
-        or settlement. Nord Pool’s 15-minute MTU source says the Nordic
-        transition moved from 60-minute to 15-minute units across
-        day-ahead and intraday markets, with a phased rollout involving
-        SIDC from December 2024 and full European SDAC go-live on 30
-        September 2025.</p>
+        or settlement. Nord Pool’s 15-minute MTU source separates staged
+        Single Intraday Coupling (SIDC) rollout from Single Day-Ahead
+        Coupling (SDAC) day-ahead go-live. The SDAC 15-minute MTU
+        go-live was stated for trading day <code>2025-09-30</code>,
+        delivery day <code>2025-10-01</code>; 2026 decisions still need
+        current border, product, and liquidity data.</p>
         <p>Intraday liquidity is the ability to adjust positions after
         day-ahead clearing and before delivery at useful volume and
         price. Practitioner commentary on continuous intraday markets
@@ -13878,14 +13923,12 @@ local-flexibility value = qualified flexible MW x expected net payment x bankabi
   - degradation
   - operational conflicts</code></pre>
         <p>For a scarce connection option:</p>
-        <pre class="text"><code>exercise value
-  = value if built now
-  - value of waiting
-  - value of partnering
-  - cost of losing the grid position</code></pre>
-        <p>The last term matters when connection queues, tariff windows,
-        or local scarcity make the right difficult to recreate
-        later.</p>
+        <pre class="text"><code>decision value
+  = max(build now, wait, partner, sell/drop)
+  - development and carrying costs</code></pre>
+        <p>Exercise now only if the build-now path beats the best
+        feasible alternative after grid-position risk, queue risk,
+        tariff timing, and partnership value are considered.</p>
         </section>
         <section id="mechanism-21" class="level4">
         <h4>Mechanism</h4>
@@ -14105,9 +14148,10 @@ and how much is recovered or managed elsewhere?</code></pre>
         <code>30 EUR/MWh</code> area to a <code>100 EUR/MWh</code> area
         for one hour:</p>
         <pre class="text"><code>(100 - 30) EUR/MWh x 60 MWh = EUR 4,200/hour</code></pre>
-        <p>That value appears through congestion rent, redispatch cost,
-        curtailment, tariff recovery, or basis risk, depending on the
-        market design.</p>
+        <p>In a market-coupled example, spread times constrained flow is
+        visible congestion rent. In other designs, related congestion
+        costs may appear as redispatch, curtailment, tariff recovery, or
+        hedge basis, but those are separate cash-flow channels.</p>
         <p>Now put the idea into a portfolio exposure.</p>
         <p>A project generates <code>200 GWh/year</code>. The project is
         hedged against a broad area or system price, but its cash flow
@@ -14355,14 +14399,13 @@ and how much is recovered or managed elsewhere?</code></pre>
         <section id="first-principles-model-36" class="level4">
         <h4>First-Principles Model</h4>
         <p>A PPA product is a priced promise backed by capabilities.</p>
-        <pre class="text"><code>priced product
-  = buyer value
-  - residual firming cost
-  - balancing and hedge cost
-  - evidence and audit cost
-  - credit and collateral cost
-  - control-right cost
-  - risk margin</code></pre>
+        <pre class="text"><code>required seller premium
+  = residual firming cost
+  + balancing and hedge cost
+  + evidence and audit cost
+  + credit and collateral cost
+  + control-right cost
+  + risk margin</code></pre>
         <p>The capability stack is:</p>
         <pre class="text"><code>capability stack
   = assets
@@ -14373,7 +14416,10 @@ and how much is recovered or managed elsewhere?</code></pre>
   + dispatch/control rights
   + partner governance
   + financing and credit support</code></pre>
-        <p>If buyer value is lower than the cost stack, keep the offer
+        <p>The product clears only if buyer willingness to pay exceeds
+        the seller premium and the independent power producer (IPP) has
+        the rights, evidence, and operating control to perform. If the
+        buyer value is lower than the cost stack, keep the offer
         simpler. If buyer value is high but the seller lacks evidence or
         control, partner or defer. If the IPP owns the capability and
         the buyer pays for it, the next product path may be worth
@@ -14396,11 +14442,11 @@ and how much is recovered or managed elsewhere?</code></pre>
         <p>Credit cost is the cost of counterparty risk, collateral,
         parent guarantees, margining, termination exposure, and lender
         constraints.</p>
-        <p>Granular Guarantee of Origin is an energy-attribute
-        certificate concept that adds time and sometimes location detail
-        to the evidence chain. A marketed claim depends on the current
-        standard text, issuer rules, cancellation rules, audit rights,
-        and the buyer’s intended disclosure language.</p>
+        <p>Granular certificate or time-stamped attribute-certificate
+        concepts add temporal, and sometimes locational, detail to the
+        evidence chain. A marketed claim depends on the current standard
+        text, issuer rules, cancellation rules, audit rights, and the
+        buyer’s intended disclosure language.</p>
         </section>
         <section id="numerical-intuition-34" class="level4">
         <h4>Numerical Intuition</h4>
@@ -14738,8 +14784,13 @@ required margin = 1,750,000 USD/year / 3,500 MWh/year
         <p>The extra duration is:</p>
         <pre class="text"><code>100 MWh</code></pre>
         <p>Use the IEA <code>2030</code> four-hour cost anchor of
-        <code>175 USD/kWh</code> only as a scale check. The additional
-        100 MWh of duration therefore represents roughly:</p>
+        <code>175 USD/kWh</code> only as a scale check, not a project
+        quote or marginal-duration cost. The marginal cost of extending
+        this project needs vendor/EPC quotes separating cells,
+        containers, power-conversion-system sharing, balance of plant,
+        augmentation, warranty, grid, tax, and financing effects. As an
+        order-of-magnitude screen, the additional 100 MWh of duration
+        represents roughly:</p>
         <pre class="text"><code>100 MWh x 1,000 kWh/MWh x 175 USD/kWh = 17,500,000 USD</code></pre>
         <p>If the annual carrying charge is simplified to
         <code>10%</code>:</p>
@@ -14813,7 +14864,7 @@ required margin = 1,750,000 USD/year / 3,500 MWh/year
         may let the IPP switch between PPA firming, intraday
         optimization, reserves, imbalance management, curtailment
         recovery, and local congestion services.</p>
-        <p>But each value has a shadow.</p>
+        <p>Each value has an opportunity cost.</p>
         <p>The battery can spend the same MWh only once. If state of
         charge is reserved for an evening PPA, it may not be available
         for a reserve product. If it is held for a rare stress event, it
@@ -15157,11 +15208,12 @@ and who pays when the evidence or delivery does not match the promise?</code></p
         workload shifting fit different durations and control
         constraints. The same report cites a 2030 European
         short-duration/ramping flexibility need of roughly
-        <code>15-30 GW</code>, and a five-market estimate of
-        <code>16.9 GW</code> technical data-centre flexibility
-        potential, with up to <code>3.8 GW</code> realistically
-        available after participation willingness and operational
-        constraints.</p>
+        <code>15-30 GW</code>. It also cites a BloombergNEF/Eaton 2021
+        five-market estimate for Germany, Ireland, the Netherlands,
+        Norway, and the United Kingdom: <code>16.9 GW</code> of
+        technical data-centre flexibility potential, with up to
+        <code>3.8 GW</code> realistically available after participation
+        willingness and operational constraints.</p>
         <p>Those numbers do not price a PPA. They tell the strategist
         that data centers may become controllable grid participants
         after reliability, tenant consent, operating policy, market
@@ -15597,9 +15649,10 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         change. Procurement timing is service-specific: the tender
         conditions describe monthly, weekly, day-ahead, post-spot, and
         intraday routes where required. Read this as dated evidence that
-        some stability properties are operationally checked and can be
-        commercially handled outside the ordinary energy-price
-        stack.</p>
+        stability properties can be operational requirements or
+        procurement items; it does not establish that a generic
+        grid-forming inverter package is qualified, payable, or needed
+        at a specific site.</p>
         <section id="the-option-premium" class="level5">
         <h5>The Option Premium</h5>
         <p>Suppose a <code>100 MW</code> BESS project can buy an
@@ -15665,8 +15718,8 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
   x availability
   x controllability
   x payment_or_avoided_cost</code></pre>
-        <p>If any multiplier is close to zero, the revenue line is
-        mostly decoration.</p>
+        <p>If any multiplier is close to zero, do not underwrite the
+        revenue line.</p>
         <p>Dispatch opportunity cost:</p>
         <pre class="text"><code>opportunity_cost =
   best_feasible_energy_or_reserve_value_lost
@@ -15819,11 +15872,11 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         </tr>
         </tbody>
         </table>
-        <p>This is especially relevant for batteries. A BESS may be
-        technically fast, but speed is not the same as every system
-        service. Voltage support, short-circuit behavior, grid-forming
-        controls, FCR, aFRR, mFRR, black-start, and adequacy each have
-        different qualification and opportunity-cost logic.</p>
+        <p>This is especially relevant for batteries. A technically fast
+        BESS still needs service-specific qualification. Voltage
+        support, short-circuit behavior, grid-forming controls, FCR,
+        aFRR, mFRR, black-start, and adequacy each have different
+        qualification and opportunity-cost logic.</p>
         </section>
         <section id="misconceptions-33" class="level4">
         <h4>Misconceptions</h4>
@@ -16443,7 +16496,7 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <li>internalize execution only after value, scale, data, people,
         and controls are ready</li>
         </ul>
-        <p>The minimum viable internal brain is smaller than a trading
+        <p>The minimum internal control layer is smaller than a trading
         desk:</p>
         <ul>
         <li>position and exposure view</li>
@@ -16485,7 +16538,7 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <h4>In Practice</h4>
         <p>In Nordic practice, BRP/BSP role definitions, reserve
         qualification, imbalance settlement, and market access are
-        rulebook details. eSett and Svenska kraftnat are useful for the
+        rulebook details. eSett and Svenska kraftnät are useful for the
         role distinction, while product-specific participation still
         depends on the relevant market rules and date.</p>
         <p>The practice-relevant framework is portable:</p>
@@ -16979,10 +17032,11 @@ and with what feedback after delivery?</code></pre>
         The hourly obligation is:</p>
         <pre class="text"><code>promised shape = 30 MW x 4 h = 120 MWh/day</code></pre>
         <p>The project team proposes a battery with 100 MWh nameplate
-        energy. Suppose the operating plan keeps 20 MWh unavailable for
-        uncertainty, degradation margin, reserve commitments, or risk
-        control. The usable energy for the shape is then:</p>
-        <pre class="text"><code>usable battery energy = 100 MWh - 20 MWh = 80 MWh/day</code></pre>
+        energy. Suppose the operating plan leaves <code>80 MWh</code> of
+        deliverable evening energy after state-of-charge policy,
+        round-trip and auxiliary losses, degradation margin,
+        availability, reserve commitments, and grid export limits:</p>
+        <pre class="text"><code>deliverable battery energy = 80 MWh/day</code></pre>
         <p>Before market purchases, portfolio offsets, or contract
         flexibility, the daily residual exposure is:</p>
         <pre class="text"><code>residual exposure = 120 MWh - 80 MWh = 40 MWh/day</code></pre>
@@ -17511,6 +17565,13 @@ Financing treatment                 Lenders may discount merchant or optimizatio
   + (200 MWh / 24 h) x 10%
   = 60 + 10 + 0.8
   = 70.8 MW</code></pre>
+        <p>This is a toy stress-coverage score, not effective
+        load-carrying capability (ELCC), loss-of-load expectation
+        (LOLE), or market accreditation. A financeable adequacy value
+        needs chronological stress events, state of charge at event
+        start, recharge assumptions, availability, correlated weather
+        and outages, deliverability, and the market’s actual derating
+        rule.</p>
         <p>For the 8-hour design:</p>
         <pre class="text"><code>8-hour storage weighted dependable MW
   = 100 x 60%
@@ -18289,9 +18350,13 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <h4>Worked Solution</h4>
         <p>The quote stack must start with the energy the asset can
         naturally provide, then add the cost of reshaping that energy
-        into the buyer’s requested profile. The quote is usable only if
-        the term sheet assigns the residual mismatch to a party, a
-        price, a cap, or a reopener.</p>
+        into the buyer’s requested profile. In this scenario, the buyer
+        asks for <code>100 GWh/year</code> flat while the solar project
+        produces <code>90 GWh/year</code>; the annual clean-energy
+        shortfall and any certificate-backed replacement supply have to
+        be priced separately from hard-hour firming. The quote is usable
+        only if the term sheet assigns the residual mismatch to a party,
+        a price, a cap, or a reopener.</p>
         <table>
         <thead>
         <tr>
@@ -18737,7 +18802,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         permitting language. Preserving those options keeps the project
         from paying today for duration that the evidence does not yet
         support.</p>
-        <p>The commercial team should ask for five pieces of evidence
+        <p>The commercial team should ask for six pieces of evidence
         before revisiting 4 hours:</p>
         <ul>
         <li>a contract that pays for longer sustained delivery</li>
@@ -19103,10 +19168,12 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         shaped PPAs, reserve participation, and portfolio balancing.</p>
         <p>The first diligence request should be the grid-rights
         evidence pack: firm connection date, export capacity, import
-        capacity, curtailment rules, capacity-tariff exposure,
-        producer-payment geography, limited-access terms, metering
-        boundary, and whether BESS operation is allowed under the same
-        connection agreement or needs a separate approval.</p>
+        capacity, connection contribution, reinforcement cost,
+        securities or deposits, queue milestones, curtailment rules,
+        capacity-tariff exposure, producer-payment geography,
+        limited-access terms, metering boundary, and whether BESS
+        operation is allowed under the same connection agreement or
+        needs a separate approval.</p>
         <p>Site A should remain in development if the connection timing
         improves or if a buyer values the location enough to pay for the
         grid uncertainty. Site C is not a priority unless its low
@@ -19387,17 +19454,19 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         </section>
         <section id="decision-memo-3" class="level4">
         <h4>Decision Memo</h4>
-        <p>Recommendation: contract a portion of the asset under a
-        floor-like structure and keep a meaningful residual slice
-        merchant. Allocate battery capacity to the shaped PPA only if
-        the PPA premium rises or the PPA materially improves project
+        <p>Recommendation: contract a defined tranche of the asset under
+        a floor-like structure and keep a meaningful residual slice
+        merchant. The tranche must state MW, MWh, state-of-charge band,
+        cycle budget, priority rights, and reporting obligations.
+        Allocate battery capacity to the shaped PPA only if the PPA
+        premium rises or the PPA materially improves project
         financeability.</p>
         <p>The binding constraint is control-right allocation. Every MW
         reserved for a customer profile is a MW unavailable for reserve
         capacity, arbitrage, or response to a new market product. The
         term sheet should therefore state the priority order for reserve
         obligations, customer shape delivery, merchant arbitrage,
-        degradation limits, insurance-cycle limits, minimum state of
+        degradation limits, project-policy limits, minimum state of
         charge, availability reporting, termination triggers, and
         emergency override.</p>
         <p>It should also state the evidence layer: battery management
@@ -19423,20 +19492,24 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <p>The recommendation changes if merchant revenues saturate and
         the expected merchant stack falls by 40%.</p>
         <pre class="text"><code>1.70 million EUR/year x 60% = 1.02 million EUR/year</code></pre>
-        <p>In that world, the 0.90 million EUR/year floor becomes much
-        more attractive, and the shaped PPA premium may clear the
-        opportunity-cost test.</p>
+        <p>In that world, recompute the shaped-PPA opportunity cost
+        using the reduced merchant and residual values. The floor
+        becomes more attractive, and the shaped-PPA premium may clear
+        only if the repriced opportunity cost falls below the
+        premium.</p>
         </section>
         <section id="failure-mode-to-avoid-3" class="level4">
         <h4>Failure Mode To Avoid</h4>
         <p>Use last year’s reserve revenue, an arbitrage forecast, and a
         shaped-PPA premium as three additive upside lines, then haircut
         the total for prudence.</p>
-        <p>The same failure appears when the stack ignores policy
-        constraints. If the insurance contract allows fewer cycles,
+        <p>The same failure appears when the stack ignores
+        project-specific policy constraints. If the actual insurance,
+        warranty, lender, or operating documents allow fewer cycles,
         different duty cycles, or fewer operating modes than the
         optimizer assumes, part of the stack is unavailable unless the
-        owner changes coverage or changes operation.</p>
+        owner obtains approval, changes coverage, or changes
+        operation.</p>
         <p>Both versions double-count flexibility. The same MW, MWh,
         state of charge, control rights, cycle budget, warranty
         envelope, data evidence, and grid connection must serve every
@@ -19898,7 +19971,9 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <li>forecast timeliness meets the <code>98%</code>
         requirement</li>
         <li>settlement corrections are reconciled</li>
-        <li>the residual bidding/dispatch gap remains material</li>
+        <li>the residual bidding/dispatch gap remains material against
+        an agreed EUR threshold or percentage of monthly benchmark
+        revenue</li>
         <li>the gap occurs in intervals where action was feasible and
         permitted</li>
         </ul>
@@ -20044,10 +20119,12 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <p>Buyer premium:</p>
         <pre class="text"><code>350,400 MWh/year x 4 EUR/MWh
 = 1,401,600 EUR/year</code></pre>
-        <p>The premium covers the illustrated stress-hour procurement
-        cost before collateral, credit, evidence handling, operational
-        costs, and margin. The case still needs careful structuring
-        before rejection or approval.</p>
+        <p>The premium covers only the illustrated stress-hour
+        procurement cost before collateral, credit, evidence handling,
+        operational costs, margin, and any additional clean supply
+        needed to move from the initial <code>58%</code> hourly matching
+        level toward the <code>85%</code> threshold. The case still
+        needs careful structuring before rejection or approval.</p>
         </section>
         <section id="product-boundary" class="level4">
         <h4>Product Boundary</h4>
@@ -20170,8 +20247,9 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <p>Recommendation: offer a partnered hourly-matching product
         only if the contract defines the evidence standard, residual
         firming boundary, settlement method, fallback procurement rule,
-        and buyer-flexibility rights. Otherwise offer a narrower shaped
-        product and leave the buyer with the residual claim.</p>
+        buyer-flexibility rights, and the applicable accounting or
+        certificate framework. Otherwise offer a narrower shaped product
+        and leave the buyer with the residual claim.</p>
         <p>The seller should not promise a broad 24/7 clean-energy claim
         without the applicable accounting and certificate framework in
         the contract. The commercial product can still be valuable if it
@@ -20902,6 +20980,11 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         implementation until data rights, independent settlement checks,
         risk limits, and evidence-based partner attribution are
         working.</p>
+        <p>Add a monthly energy-risk forum with named authority for
+        limits, credit and collateral exceptions, model approvals,
+        partner escalations, and stop/redesign decisions. A small team
+        can run the operating model only if decision rights are
+        explicit.</p>
         <p>The operating model is deliberately constrained:</p>
         <ul>
         <li>one accountable owner coordinates decisions, partner
@@ -21760,12 +21843,12 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         pricing, portfolio exposure, model assumptions, capability
         strategy, and investment gates.
         </dd>
-        <dt id="glossary-granular-guarantee-of-origin" data-term="Granular Guarantee of Origin" data-definition="Certificate concept that adds temporal and sometimes locational granularity to energy attribute tracking.">
-        Granular Guarantee of Origin
+        <dt id="glossary-granular-certificate" data-term="Granular certificate" data-definition="Certificate or attribute-tracking concept that adds temporal and sometimes locational granularity to energy attribute tracking.">
+        Granular certificate
         </dt>
         <dd>
-        Certificate concept that adds temporal and sometimes locational
-        granularity to energy attribute tracking.
+        Certificate or attribute-tracking concept that adds temporal and
+        sometimes locational granularity to energy attribute tracking.
         </dd>
         <dt id="glossary-grid-tariff" data-term="Grid tariff" data-definition="Charge paid for use of the grid, potentially including fixed, capacity, energy, loss, and reactive-power components.">
         Grid tariff
@@ -21835,15 +21918,6 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         </dt>
         <dd>
         Resistance of rotating mass to sudden frequency change.
-        </dd>
-        <dt id="glossary-insurance-cycle-cap" data-term="Insurance cycle cap" data-definition="Insurance-policy limit on annual or lifetime cycling, throughput, depth of discharge, or duty cycle. It can bind even when the physical model and OEM warranty would allow more operation.">
-        Insurance cycle cap
-        </dt>
-        <dd>
-        Insurance-policy limit on annual or lifetime cycling,
-        throughput, depth of discharge, or duty cycle. It can bind even
-        when the physical model and OEM warranty would allow more
-        operation.
         </dd>
         <dt id="glossary-insurance-operating-covenant" data-term="Insurance operating covenant" data-definition="Condition in an insurance policy or endorsement that limits how an asset may be operated while keeping coverage, pricing, or claim eligibility intact. For BESS this may include cycle, throughput, duty-cycle, safety, monitoring, or approved-use restrictions.">
         Insurance operating covenant
@@ -22252,6 +22326,14 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         portfolio, data, control rights, risk limits, and evidence
         needed to offer a more advanced PPA product.
         </dd>
+        <dt id="glossary-project-policy-constraint" data-term="Project policy constraint" data-definition="Project-specific insurance, lender, warranty, or operating-policy limit on cycling, throughput, duty cycle, approved revenue modes, data retention, or claim eligibility.">
+        Project policy constraint
+        </dt>
+        <dd>
+        Project-specific insurance, lender, warranty, or
+        operating-policy limit on cycling, throughput, duty cycle,
+        approved revenue modes, data retention, or claim eligibility.
+        </dd>
         <dt id="glossary-qualification-chain" data-term="Qualification chain" data-definition="Sequence that turns technical capability into commercial value: specify, test, qualify, control, measure, settle, and enforce.">
         Qualification chain
         </dt>
@@ -22620,45 +22702,57 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Sources and Uses.
         </li>
         <li id="ref-2">
-        Svenska kraftnat, electricity statistics.
+        <a href="https://www.svk.se/en/" target="_blank" rel="noopener noreferrer">Svenska
+        kraftnät, electricity statistics.</a>
         </li>
         <li id="ref-3">
-        eSett, Nordic Imbalance Settlement Handbook v5.3.
+        <a href="https://www.esett.com/handbook/" target="_blank" rel="noopener noreferrer">eSett,
+        Nordic Imbalance Settlement Handbook v5.3.</a>
         </li>
         <li id="ref-4">
-        European Commission, Regulation (EU) 2017/2195 establishing a
-        guideline on electricity balancing.
+        <a href="https://eur-lex.europa.eu/eli/reg/2017/2195/oj" target="_blank" rel="noopener noreferrer">European
+        Commission, Regulation (EU) 2017/2195 establishing a guideline
+        on electricity balancing.</a>
         </li>
         <li id="ref-5">
         Energy Storage - A Nontechnical Guide.
         </li>
         <li id="ref-6">
-        RE-Source Platform, Corporate PPA Guide, July 2025.
+        <a href="https://resource-platform.eu/" target="_blank" rel="noopener noreferrer">RE-Source
+        Platform, Corporate PPA Guide, July 2025.</a>
         </li>
         <li id="ref-7">
-        Nord Pool, Bidding areas.
+        <a href="https://www.nordpoolgroup.com/en/the-power-market/Bidding-areas/" target="_blank" rel="noopener noreferrer">Nord
+        Pool, Bidding areas.</a>
         </li>
         <li id="ref-8">
-        Svenska kraftnat, Tariff charges.
+        <a href="https://www.svk.se/en/" target="_blank" rel="noopener noreferrer">Svenska
+        kraftnät, Tariff charges.</a>
         </li>
         <li id="ref-9">
-        Svenska kraftnat, Principles and guidelines for connecting to
-        the national grids.
+        <a href="https://www.svk.se/en/" target="_blank" rel="noopener noreferrer">Svenska
+        kraftnät, Principles and guidelines for connecting to the
+        national grids.</a>
         </li>
         <li id="ref-10">
-        Svenska kraftnat, Network Development Plan 2026-2035.
+        <a href="https://www.svk.se/en/" target="_blank" rel="noopener noreferrer">Svenska
+        kraftnät, Network Development Plan 2026-2035.</a>
         </li>
         <li id="ref-11">
-        ACER, Electricity Network Tariff Practices in Europe 2025.
+        <a href="https://www.acer.europa.eu/electricity/infrastructure/network-tariffs" target="_blank" rel="noopener noreferrer">ACER,
+        Electricity Network Tariff Practices in Europe 2025.</a>
         </li>
         <li id="ref-12">
-        Svenska kraftnat, Introduction of the BSP and BRP actor roles.
+        <a href="https://www.svk.se/en/" target="_blank" rel="noopener noreferrer">Svenska
+        kraftnät, Introduction of the BSP and BRP actor roles.</a>
         </li>
         <li id="ref-13">
-        Nord Pool, Day-ahead market.
+        <a href="https://www.nordpoolgroup.com/en/the-power-market/Day-ahead-market/" target="_blank" rel="noopener noreferrer">Nord
+        Pool, Day-ahead market.</a>
         </li>
         <li id="ref-14">
-        Nord Pool, Transition to 15-minute Market Time Unit.
+        <a href="https://www.nordpoolgroup.com/en/trading/transition-to-15-minute-market-time-unit-mtu/" target="_blank" rel="noopener noreferrer">Nord
+        Pool, Transition to 15-minute Market Time Unit.</a>
         </li>
         <li id="ref-15">
         Jenny Chase, Solar Power Finance Without the Jargon.
@@ -22669,7 +22763,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         More Details.
         </li>
         <li id="ref-17">
-        Svenska kraftnat, information on ancillary services.
+        <a href="https://www.svk.se/en/" target="_blank" rel="noopener noreferrer">Svenska
+        kraftnät, information on ancillary services.</a>
         </li>
         <li id="ref-18">
         Energinet, Ancillary services to be delivered in Denmark: tender
@@ -22719,8 +22814,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Agreements and Contracts for Difference across Member States.
         </li>
         <li id="ref-32">
-        EnergyTag, response on barriers to PPAs and granular energy
-        matching.
+        <a href="https://energytag.org/" target="_blank" rel="noopener noreferrer">EnergyTag,
+        response on barriers to PPAs and granular energy matching.</a>
         </li>
         <li id="ref-33">
         Efstathios E. Michaelides, Energy Storage: Driving the Renewable
@@ -22763,8 +22858,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Storage.
         </li>
         <li id="ref-44">
-        Professional Risk Managers’ International Association, The
-        Professional Risk Managers’ Guide to the Energy Market.
+        Professional Risk Managers' International Association, The
+        Professional Risk Managers' Guide to the Energy Market.
         </li>
         <li id="ref-45">
         Pexapark, The Next-Gen IPP Playbook.
@@ -22790,8 +22885,9 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Battery.
         </li>
         <li id="ref-51">
-        ENTSO-E, Data centres and the power system: expected trends,
-        challenges, and opportunities.
+        <a href="https://www.entsoe.eu/news/2026/05/08/from-energy-demand-to-grid-support-entso-e-explores-data-centres-dual-role/" target="_blank" rel="noopener noreferrer">ENTSO-E,
+        Data centres and the power system: expected trends, challenges,
+        and opportunities.</a>
         </li>
         <li id="ref-52">
         Damien Ernst, Energy Markets and Regulation lecture materials.
@@ -22801,7 +22897,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         batteries, and system services.
         </li>
         <li id="ref-54">
-        PRMIA, The Professional Risk Managers’ Guide to the Energy
+        PRMIA, The Professional Risk Managers' Guide to the Energy
         Market.
         </li>
         </ol>
@@ -22816,7 +22912,6 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
       <div class="rail-buttons">
         <a id="rail-prev" href="#home">Previous</a>
         <a id="rail-next" href="#home">Next</a>
-        <a href="#home">Course map</a>
       </div>
     </aside>
   </div>
@@ -22843,7 +22938,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
       <label class="feedback-honeypot" for="feedback-website">Website
         <input id="feedback-website" type="text" autocomplete="off" tabindex="-1">
       </label>
-      <p class="feedback-note" id="feedback-note">This sends the selected passage and your note to the course feedback log.</p>
+      <p class="feedback-note" id="feedback-note">This sends the selected passage and your note to the course feedback log. If the private endpoint is unavailable, the fallback opens a prefilled GitHub issue draft for your review.</p>
       <p class="feedback-error" id="feedback-error" hidden>Please add a short note.</p>
       <p class="feedback-success" id="feedback-success" hidden>Feedback sent. Thank you.</p>
       <div class="feedback-actions">
@@ -22883,16 +22978,12 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         return rootTitle().toLowerCase().includes("casebook");
       }
 
-      function isLocalSiteFile() {
-        return window.location.protocol === "file:" && window.location.pathname.includes("/Course/site/");
-      }
-
       function publicAssetPath(relativePath) {
-        return isLocalSiteFile() ? "../" + relativePath : relativePath;
+        return window.location.protocol === "file:" ? "../" + relativePath : relativePath;
       }
 
       function courseHomePath() {
-        return isLocalSiteFile() ? "power-markets-course.html" : "index.html";
+        return window.location.protocol === "file:" ? "power-markets-course.html" : "index.html";
       }
 
       function pdfPath(kind, versionText) {
@@ -23322,7 +23413,12 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         if (casebook) home.append(hero, methodology, route, arcHeading, arc, author);
         else home.append(hero, methodology, route, arcHeading, arc, author);
         const firstSection = root.querySelector(":scope > section.level2");
-        root.insertBefore(home, firstSection || root.firstChild);
+        const staticIntro = firstSection && ["how-to-use-these-notes", "how-to-use-this-casebook"].includes(firstSection.id)
+          ? firstSection
+          : null;
+        const insertionPoint = staticIntro ? staticIntro.nextElementSibling : firstSection;
+        root.insertBefore(home, insertionPoint || root.firstChild);
+        if (staticIntro) staticIntro.remove();
       }
 
       function setupToc(chapters) {

@@ -3,6 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Technical onboarding notes and applied cases for learning power markets through grid constraints, market institutions, contracts, numerical intuition, and decision frames.">
+  <link rel="canonical" href="https://sofianebo.github.io/power-market-notes/">
+  <meta property="og:title" content="Power Markets Casebook">
+  <meta property="og:description" content="Power-market notes, applied cases, Q&A overviews, glossary, and references for renewable portfolio work.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sofianebo.github.io/power-market-notes/">
+  <meta name="twitter:card" content="summary">
   <meta name="feedback-endpoint" content="https://power-market-feedback.sofianebo-power-market.workers.dev/feedback">
   <title>Power Markets Casebook</title>
   <script>
@@ -37,6 +44,8 @@
       --green: #2f7d46;
       --code-bg: #eef4f3;
       --shadow: 0 22px 58px rgba(20, 39, 35, 0.09);
+      --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --wash: #f3f8f6;
       --rail: 16rem;
       --sidebar: 19.5rem;
       --measure: 78ch;
@@ -63,6 +72,7 @@
       --green: #8ed29b;
       --code-bg: #101a17;
       --shadow: 0 24px 64px rgba(0, 0, 0, 0.34);
+      --wash: #14231f;
     }
 
     * {
@@ -1404,12 +1414,12 @@
 
     .bibliography li {
       margin: 0.45rem 0;
-      color: #30393d;
+      color: var(--ink);
     }
 
     :root[data-theme="dark"] .bibliography,
     :root[data-theme="dark"] .bibliography li {
-      color: var(--muted);
+      color: var(--ink);
     }
 
     .reading-rail {
@@ -1739,7 +1749,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.34.0
+        v0.35.0
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -1987,9 +1997,13 @@
         <h4>Worked Solution</h4>
         <p>The quote stack must start with the energy the asset can
         naturally provide, then add the cost of reshaping that energy
-        into the buyer’s requested profile. The quote is usable only if
-        the term sheet assigns the residual mismatch to a party, a
-        price, a cap, or a reopener.</p>
+        into the buyer’s requested profile. In this scenario, the buyer
+        asks for <code>100 GWh/year</code> flat while the solar project
+        produces <code>90 GWh/year</code>; the annual clean-energy
+        shortfall and any certificate-backed replacement supply have to
+        be priced separately from hard-hour firming. The quote is usable
+        only if the term sheet assigns the residual mismatch to a party,
+        a price, a cap, or a reopener.</p>
         <table>
         <thead>
         <tr>
@@ -2444,7 +2458,7 @@
         permitting language. Preserving those options keeps the project
         from paying today for duration that the evidence does not yet
         support.</p>
-        <p>The commercial team should ask for five pieces of evidence
+        <p>The commercial team should ask for six pieces of evidence
         before revisiting 4 hours:</p>
         <ul>
         <li>a contract that pays for longer sustained delivery</li>
@@ -2814,10 +2828,12 @@
         shaped PPAs, reserve participation, and portfolio balancing.</p>
         <p>The first diligence request should be the grid-rights
         evidence pack: firm connection date, export capacity, import
-        capacity, curtailment rules, capacity-tariff exposure,
-        producer-payment geography, limited-access terms, metering
-        boundary, and whether BESS operation is allowed under the same
-        connection agreement or needs a separate approval.</p>
+        capacity, connection contribution, reinforcement cost,
+        securities or deposits, queue milestones, curtailment rules,
+        capacity-tariff exposure, producer-payment geography,
+        limited-access terms, metering boundary, and whether BESS
+        operation is allowed under the same connection agreement or
+        needs a separate approval.</p>
         <p>Site A should remain in development if the connection timing
         improves or if a buyer values the location enough to pay for the
         grid uncertainty. Site C is not a priority unless its low
@@ -3101,17 +3117,19 @@
         </section>
         <section id="decision-memo-3" class="level4">
         <h4>Decision Memo</h4>
-        <p>Recommendation: contract a portion of the asset under a
-        floor-like structure and keep a meaningful residual slice
-        merchant. Allocate battery capacity to the shaped PPA only if
-        the PPA premium rises or the PPA materially improves project
+        <p>Recommendation: contract a defined tranche of the asset under
+        a floor-like structure and keep a meaningful residual slice
+        merchant. The tranche must state MW, MWh, state-of-charge band,
+        cycle budget, priority rights, and reporting obligations.
+        Allocate battery capacity to the shaped PPA only if the PPA
+        premium rises or the PPA materially improves project
         financeability.</p>
         <p>The binding constraint is control-right allocation. Every MW
         reserved for a customer profile is a MW unavailable for reserve
         capacity, arbitrage, or response to a new market product. The
         term sheet should therefore state the priority order for reserve
         obligations, customer shape delivery, merchant arbitrage,
-        degradation limits, insurance-cycle limits, minimum state of
+        degradation limits, project-policy limits, minimum state of
         charge, availability reporting, termination triggers, and
         emergency override.</p>
         <p>It should also state the evidence layer: battery management
@@ -3137,20 +3155,24 @@
         <p>The recommendation changes if merchant revenues saturate and
         the expected merchant stack falls by 40%.</p>
         <pre class="text"><code>1.70 million EUR/year x 60% = 1.02 million EUR/year</code></pre>
-        <p>In that world, the 0.90 million EUR/year floor becomes much
-        more attractive, and the shaped PPA premium may clear the
-        opportunity-cost test.</p>
+        <p>In that world, recompute the shaped-PPA opportunity cost
+        using the reduced merchant and residual values. The floor
+        becomes more attractive, and the shaped-PPA premium may clear
+        only if the repriced opportunity cost falls below the
+        premium.</p>
         </section>
         <section id="failure-mode-to-avoid-3" class="level4">
         <h4>Failure Mode To Avoid</h4>
         <p>Use last year’s reserve revenue, an arbitrage forecast, and a
         shaped-PPA premium as three additive upside lines, then haircut
         the total for prudence.</p>
-        <p>The same failure appears when the stack ignores policy
-        constraints. If the insurance contract allows fewer cycles,
+        <p>The same failure appears when the stack ignores
+        project-specific policy constraints. If the actual insurance,
+        warranty, lender, or operating documents allow fewer cycles,
         different duty cycles, or fewer operating modes than the
         optimizer assumes, part of the stack is unavailable unless the
-        owner changes coverage or changes operation.</p>
+        owner obtains approval, changes coverage, or changes
+        operation.</p>
         <p>Both versions double-count flexibility. The same MW, MWh,
         state of charge, control rights, cycle budget, warranty
         envelope, data evidence, and grid connection must serve every
@@ -3618,7 +3640,9 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <li>forecast timeliness meets the <code>98%</code>
         requirement</li>
         <li>settlement corrections are reconciled</li>
-        <li>the residual bidding/dispatch gap remains material</li>
+        <li>the residual bidding/dispatch gap remains material against
+        an agreed EUR threshold or percentage of monthly benchmark
+        revenue</li>
         <li>the gap occurs in intervals where action was feasible and
         permitted</li>
         </ul>
@@ -3768,10 +3792,12 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <p>Buyer premium:</p>
         <pre class="text"><code>350,400 MWh/year x 4 EUR/MWh
 = 1,401,600 EUR/year</code></pre>
-        <p>The premium covers the illustrated stress-hour procurement
-        cost before collateral, credit, evidence handling, operational
-        costs, and margin. The case still needs careful structuring
-        before rejection or approval.</p>
+        <p>The premium covers only the illustrated stress-hour
+        procurement cost before collateral, credit, evidence handling,
+        operational costs, margin, and any additional clean supply
+        needed to move from the initial <code>58%</code> hourly matching
+        level toward the <code>85%</code> threshold. The case still
+        needs careful structuring before rejection or approval.</p>
         </section>
         <section id="product-boundary" class="level4">
         <h4>Product Boundary</h4>
@@ -3894,8 +3920,9 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <p>Recommendation: offer a partnered hourly-matching product
         only if the contract defines the evidence standard, residual
         firming boundary, settlement method, fallback procurement rule,
-        and buyer-flexibility rights. Otherwise offer a narrower shaped
-        product and leave the buyer with the residual claim.</p>
+        buyer-flexibility rights, and the applicable accounting or
+        certificate framework. Otherwise offer a narrower shaped product
+        and leave the buyer with the residual claim.</p>
         <p>The seller should not promise a broad 24/7 clean-energy claim
         without the applicable accounting and certificate framework in
         the contract. The commercial product can still be valuable if it
@@ -4634,6 +4661,11 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         implementation until data rights, independent settlement checks,
         risk limits, and evidence-based partner attribution are
         working.</p>
+        <p>Add a monthly energy-risk forum with named authority for
+        limits, credit and collateral exceptions, model approvals,
+        partner escalations, and stop/redesign decisions. A small team
+        can run the operating model only if decision rights are
+        explicit.</p>
         <p>The operating model is deliberately constrained:</p>
         <ul>
         <li>one accountable owner coordinates decisions, partner
@@ -5494,12 +5526,12 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         pricing, portfolio exposure, model assumptions, capability
         strategy, and investment gates.
         </dd>
-        <dt id="glossary-granular-guarantee-of-origin" data-term="Granular Guarantee of Origin" data-definition="Certificate concept that adds temporal and sometimes locational granularity to energy attribute tracking.">
-        Granular Guarantee of Origin
+        <dt id="glossary-granular-certificate" data-term="Granular certificate" data-definition="Certificate or attribute-tracking concept that adds temporal and sometimes locational granularity to energy attribute tracking.">
+        Granular certificate
         </dt>
         <dd>
-        Certificate concept that adds temporal and sometimes locational
-        granularity to energy attribute tracking.
+        Certificate or attribute-tracking concept that adds temporal and
+        sometimes locational granularity to energy attribute tracking.
         </dd>
         <dt id="glossary-grid-tariff" data-term="Grid tariff" data-definition="Charge paid for use of the grid, potentially including fixed, capacity, energy, loss, and reactive-power components.">
         Grid tariff
@@ -5569,15 +5601,6 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         </dt>
         <dd>
         Resistance of rotating mass to sudden frequency change.
-        </dd>
-        <dt id="glossary-insurance-cycle-cap" data-term="Insurance cycle cap" data-definition="Insurance-policy limit on annual or lifetime cycling, throughput, depth of discharge, or duty cycle. It can bind even when the physical model and OEM warranty would allow more operation.">
-        Insurance cycle cap
-        </dt>
-        <dd>
-        Insurance-policy limit on annual or lifetime cycling,
-        throughput, depth of discharge, or duty cycle. It can bind even
-        when the physical model and OEM warranty would allow more
-        operation.
         </dd>
         <dt id="glossary-insurance-operating-covenant" data-term="Insurance operating covenant" data-definition="Condition in an insurance policy or endorsement that limits how an asset may be operated while keeping coverage, pricing, or claim eligibility intact. For BESS this may include cycle, throughput, duty-cycle, safety, monitoring, or approved-use restrictions.">
         Insurance operating covenant
@@ -5986,6 +6009,14 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         portfolio, data, control rights, risk limits, and evidence
         needed to offer a more advanced PPA product.
         </dd>
+        <dt id="glossary-project-policy-constraint" data-term="Project policy constraint" data-definition="Project-specific insurance, lender, warranty, or operating-policy limit on cycling, throughput, duty cycle, approved revenue modes, data retention, or claim eligibility.">
+        Project policy constraint
+        </dt>
+        <dd>
+        Project-specific insurance, lender, warranty, or
+        operating-policy limit on cycling, throughput, duty cycle,
+        approved revenue modes, data retention, or claim eligibility.
+        </dd>
         <dt id="glossary-qualification-chain" data-term="Qualification chain" data-definition="Sequence that turns technical capability into commercial value: specify, test, qualify, control, measure, settle, and enforce.">
         Qualification chain
         </dt>
@@ -6350,7 +6381,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         <h2>References</h2>
         <ol class="bibliography">
         <li id="ref-1">
-        RE-Source Platform, Corporate PPA Guide, July 2025.
+        <a href="https://resource-platform.eu/" target="_blank" rel="noopener noreferrer">RE-Source
+        Platform, Corporate PPA Guide, July 2025.</a>
         </li>
         <li id="ref-2">
         EFET and RE-Source, Power Purchase Agreement template materials.
@@ -6360,8 +6392,8 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Agreements and Contracts for Difference across Member States.
         </li>
         <li id="ref-4">
-        EnergyTag, response on barriers to PPAs and granular energy
-        matching.
+        <a href="https://energytag.org/" target="_blank" rel="noopener noreferrer">EnergyTag,
+        response on barriers to PPAs and granular energy matching.</a>
         </li>
         <li id="ref-5">
         Pexapark, Renewables Market Outlook 2026.
@@ -6384,17 +6416,20 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Energy Transition.
         </li>
         <li id="ref-11">
-        ACER, Electricity Network Tariff Practices in Europe 2025.
+        <a href="https://www.acer.europa.eu/electricity/infrastructure/network-tariffs" target="_blank" rel="noopener noreferrer">ACER,
+        Electricity Network Tariff Practices in Europe 2025.</a>
         </li>
         <li id="ref-12">
         DNV, Energy Storage Capacity Warranties: Beyond the Fine Print.
         </li>
         <li id="ref-13">
-        Svenska kraftnat, Principles and guidelines for connecting to
-        the national grids.
+        <a href="https://www.svk.se/en/" target="_blank" rel="noopener noreferrer">Svenska
+        kraftnät, Principles and guidelines for connecting to the
+        national grids.</a>
         </li>
         <li id="ref-14">
-        Svenska kraftnat, Network Development Plan 2026-2035.
+        <a href="https://www.svk.se/en/" target="_blank" rel="noopener noreferrer">Svenska
+        kraftnät, Network Development Plan 2026-2035.</a>
         </li>
         <li id="ref-15">
         Energinet, tariff design and tariff catalogue materials.
@@ -6410,11 +6445,13 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Electricity Grid.
         </li>
         <li id="ref-19">
-        European Commission, Regulation (EU) 2017/2195 establishing a
-        guideline on electricity balancing.
+        <a href="https://eur-lex.europa.eu/eli/reg/2017/2195/oj" target="_blank" rel="noopener noreferrer">European
+        Commission, Regulation (EU) 2017/2195 establishing a guideline
+        on electricity balancing.</a>
         </li>
         <li id="ref-20">
-        Svenska kraftnat, information on ancillary services.
+        <a href="https://www.svk.se/en/" target="_blank" rel="noopener noreferrer">Svenska
+        kraftnät, information on ancillary services.</a>
         </li>
         <li id="ref-21">
         Energinet, Ancillary services to be delivered in Denmark: tender
@@ -6432,10 +6469,12 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Storage.
         </li>
         <li id="ref-25">
-        eSett, Nordic Imbalance Settlement Handbook v5.3.
+        <a href="https://www.esett.com/handbook/" target="_blank" rel="noopener noreferrer">eSett,
+        Nordic Imbalance Settlement Handbook v5.3.</a>
         </li>
         <li id="ref-26">
-        Svenska kraftnat, Introduction of the BSP and BRP actor roles.
+        <a href="https://www.svk.se/en/" target="_blank" rel="noopener noreferrer">Svenska
+        kraftnät, Introduction of the BSP and BRP actor roles.</a>
         </li>
         <li id="ref-27">
         Fingrid, Nordic Balancing Model materials on MARI, PICASSO, and
@@ -6446,12 +6485,13 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Markets for Integration of Renewable Energy Sources.
         </li>
         <li id="ref-29">
-        Professional Risk Managers’ International Association, The
-        Professional Risk Managers’ Guide to the Energy Market.
+        Professional Risk Managers' International Association, The
+        Professional Risk Managers' Guide to the Energy Market.
         </li>
         <li id="ref-30">
-        ENTSO-E, Data centres and the power system: expected trends,
-        challenges, and opportunities.
+        <a href="https://www.entsoe.eu/news/2026/05/08/from-energy-demand-to-grid-support-entso-e-explores-data-centres-dual-role/" target="_blank" rel="noopener noreferrer">ENTSO-E,
+        Data centres and the power system: expected trends, challenges,
+        and opportunities.</a>
         </li>
         <li id="ref-31">
         Iris Marie Mack, Energy Trading and Risk Management.
@@ -6468,7 +6508,6 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
       <div class="rail-buttons">
         <a id="rail-prev" href="#home">Previous</a>
         <a id="rail-next" href="#home">Next</a>
-        <a href="#home">Course map</a>
       </div>
     </aside>
   </div>
@@ -6495,7 +6534,7 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
       <label class="feedback-honeypot" for="feedback-website">Website
         <input id="feedback-website" type="text" autocomplete="off" tabindex="-1">
       </label>
-      <p class="feedback-note" id="feedback-note">This sends the selected passage and your note to the course feedback log.</p>
+      <p class="feedback-note" id="feedback-note">This sends the selected passage and your note to the course feedback log. If the private endpoint is unavailable, the fallback opens a prefilled GitHub issue draft for your review.</p>
       <p class="feedback-error" id="feedback-error" hidden>Please add a short note.</p>
       <p class="feedback-success" id="feedback-success" hidden>Feedback sent. Thank you.</p>
       <div class="feedback-actions">
@@ -6535,16 +6574,12 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         return rootTitle().toLowerCase().includes("casebook");
       }
 
-      function isLocalSiteFile() {
-        return window.location.protocol === "file:" && window.location.pathname.includes("/Course/site/");
-      }
-
       function publicAssetPath(relativePath) {
-        return isLocalSiteFile() ? "../" + relativePath : relativePath;
+        return window.location.protocol === "file:" ? "../" + relativePath : relativePath;
       }
 
       function courseHomePath() {
-        return isLocalSiteFile() ? "power-markets-course.html" : "index.html";
+        return window.location.protocol === "file:" ? "power-markets-course.html" : "index.html";
       }
 
       function pdfPath(kind, versionText) {
@@ -6974,7 +7009,12 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         if (casebook) home.append(hero, methodology, route, arcHeading, arc, author);
         else home.append(hero, methodology, route, arcHeading, arc, author);
         const firstSection = root.querySelector(":scope > section.level2");
-        root.insertBefore(home, firstSection || root.firstChild);
+        const staticIntro = firstSection && ["how-to-use-these-notes", "how-to-use-this-casebook"].includes(firstSection.id)
+          ? firstSection
+          : null;
+        const insertionPoint = staticIntro ? staticIntro.nextElementSibling : firstSection;
+        root.insertBefore(home, insertionPoint || root.firstChild);
+        if (staticIntro) staticIntro.remove();
       }
 
       function setupToc(chapters) {
