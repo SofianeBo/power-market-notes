@@ -10,3 +10,10 @@ Published reader artifacts.
 - [Volume II Q&A Overview](slides/power-markets-volume-ii-qa-overview-v0.36.7.pdf)
 - [Volume III Q&A Overview](slides/power-markets-volume-iii-qa-overview-v0.36.7.pdf)
 - [Casebook Q&A Overview](slides/power-markets-casebook-qa-overview-v0.36.7.pdf)
+
+## Operational Notes
+
+`index.html` and `casebook.html` intentionally include the Cloudflare Web
+Analytics beacon for aggregate visitor metrics on the public GitHub Pages site.
+The private source-of-truth documentation is `Course/ANALYTICS.md` in
+`SofianeBo/power-market-course`.
