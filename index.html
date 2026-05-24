@@ -1866,7 +1866,7 @@ Notes">
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.36.7
+        v0.36.8
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -1919,6 +1919,11 @@ Notes">
         <li>Use the Casebook when a concept feels familiar enough to
         apply, then compare your answer with the worked decision
         frame.</li>
+        <li>Use the <a
+        href="https://solar-bess-modeling.streamlit.app/">Commercial
+        Workbench</a> with the shaped solar-storage cases when you want
+        to test delivery coverage, indicative premium, BESS value, and
+        partner evidence interactively.</li>
         <li>Return to the Q&amp;A Overview PDF after finishing a part to
         check what stuck and what still feels unclear.</li>
         </ul>
@@ -1938,6 +1943,10 @@ Notes">
         standards.</li>
         <li>The Casebook gives applied exercises: screens, memos, quote
         stacks, partner scorecards, and assumption flips.</li>
+        <li>The Commercial Workbench is the companion tool for the
+        shaped solar-storage thread: delivery coverage, residual gaps,
+        indicative premium, BESS value, and partner-evidence
+        discipline.</li>
         <li>The Glossary and References are the study and credibility
         layers: one for terms, one for the source trail.</li>
         </ul>
@@ -7516,7 +7525,7 @@ P_t = market/reference price, EUR/MWh</code></pre>
         probability weighting, a risk margin, a cap, a collar, a
         pass-through, or a reopener. If the stress bucket is wrong, the
         quote changes; if the battery cannot legally or economically
-        serve the stress bucket, the product boundary changes.</p>
+        serve the stress bucket, the offer has to change.</p>
         </section>
         <section id="sensitivity" class="level4">
         <h4>Sensitivity</h4>
@@ -15331,8 +15340,8 @@ firming_at_risk = 13,000 MWh x 150 EUR/MWh
         </tr>
         </tbody>
         </table>
-        <p>The strategy is to choose the product boundary before a term
-        sheet combines the obligations implicitly.</p>
+        <p>The strategy is to choose what the product actually promises
+        before a term sheet combines the obligations implicitly.</p>
         </section>
         <section id="example-product-decision-screen" class="level4">
         <h4>Example: Product Decision Screen</h4>
@@ -18210,10 +18219,20 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         </tbody>
         </table>
         </section>
-        <section id="product-boundary-to-price" class="level4">
-        <h4>Product Boundary To Price</h4>
-        <p>Before quoting a number, the seller needs to define the
-        product boundary. A shaped PPA bundles clean MWh with
+        <section id="commercial-workbench-companion" class="level4">
+        <h4>Commercial Workbench Companion</h4>
+        <p>Use the <a
+        href="https://solar-bess-modeling.streamlit.app/">Commercial
+        Workbench</a> alongside this case to explore the same logic
+        interactively: how much delivery is covered, where gaps remain,
+        what indicative premium is being tested, when the battery may be
+        worth more elsewhere, and what evidence you would want before
+        taking the idea into a real project.</p>
+        </section>
+        <section id="terms-to-pin-down-before-pricing" class="level4">
+        <h4>Terms To Pin Down Before Pricing</h4>
+        <p>Before naming a number, the seller needs to pin down what the
+        offer actually promises. A shaped PPA bundles clean MWh with
         settlement, evidence, and fallback obligations.</p>
         <table>
         <colgroup>
@@ -19273,6 +19292,15 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         </tbody>
         </table>
         </section>
+        <section id="commercial-workbench-companion-1" class="level4">
+        <h4>Commercial Workbench Companion</h4>
+        <p>Use the <a
+        href="https://solar-bess-modeling.streamlit.app/">Commercial
+        Workbench</a> after the worked solution in Case 1. Its BESS
+        value view mirrors this case’s main tension: whether the battery
+        should support a shaped customer product, back a floor-like
+        contract, or keep more merchant optionality.</p>
+        </section>
         <section id="tasks-3" class="level4">
         <h4>Tasks</h4>
         <ol type="1">
@@ -19828,6 +19856,15 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         A private partner scorecard should be at least as disciplined
         about raw evidence.</p>
         </section>
+        <section id="commercial-workbench-companion-2" class="level4">
+        <h4>Commercial Workbench Companion</h4>
+        <p>Use the <a
+        href="https://solar-bess-modeling.streamlit.app/">Commercial
+        Workbench</a> as a compact version of the evidence discipline in
+        this case. The partner-evidence view is useful when the question
+        is not “who was bad?” but “what evidence would make a commercial
+        action fair and defensible?”</p>
+        </section>
         <section id="scorecard" class="level4">
         <h4>Scorecard</h4>
         <p>Use a scorecard that separates result, evidence, and
@@ -20057,8 +20094,9 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <li>Calculate the annual buyer demand.</li>
         <li>Calculate stress-hour firming-at-risk.</li>
         <li>Compare the buyer premium with the stress exposure.</li>
-        <li>Define the product boundary and evidence standard.</li>
-        <li>Recommend the product boundary.</li>
+        <li>Define what the offer promises and how the evidence will be
+        checked.</li>
+        <li>Recommend the offer shape.</li>
         </ol>
         </section>
         <section id="worked-solution-5" class="level4">
@@ -20078,8 +20116,8 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         level toward the <code>85%</code> threshold. The case still
         needs careful structuring before rejection or approval.</p>
         </section>
-        <section id="product-boundary" class="level4">
-        <h4>Product Boundary</h4>
+        <section id="what-the-offer-must-promise" class="level4">
+        <h4>What The Offer Must Promise</h4>
         <p>The product should be split into claims that can be evidenced
         and controlled.</p>
         <table>
@@ -20250,7 +20288,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <td>No-bid on broad claim</td>
         <td>seller rejects uncapped 24/7 language</td>
         <td>avoids mispriced obligation</td>
-        <td>product boundary cannot be made auditable</td>
+        <td>offer cannot be made auditable</td>
         </tr>
         </tbody>
         </table>
@@ -20274,7 +20312,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <p>That decision sells the label before defining the product.
         Annual matching can hide the hours that drive firming cost,
         evidence disputes, and residual procurement exposure. A flat
-        load needs a time-indexed product boundary alongside the annual
+        load needs a time-indexed delivery promise alongside the annual
         energy total.</p>
         </section>
         <section id="links-back-to-the-lectures-5" class="level4">
@@ -23179,6 +23217,13 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
           courseLink.textContent = "Open Course";
           heroActions.appendChild(courseLink);
         }
+        const workbenchLink = document.createElement("a");
+        workbenchLink.className = "arc-link";
+        workbenchLink.href = "https://solar-bess-modeling.streamlit.app/";
+        workbenchLink.target = "_blank";
+        workbenchLink.rel = "noopener noreferrer";
+        workbenchLink.textContent = "Open Commercial Workbench";
+        heroActions.appendChild(workbenchLink);
         copy.append(h1, versionLine, p, heroActions);
         hero.append(copy);
 
