@@ -1866,7 +1866,7 @@ Notes">
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.36.8
+        v0.37.0
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -2710,8 +2710,9 @@ grid cost = EUR 5/MWh</code></pre>
         <h4>Current Debates Or Caveats</h4>
         <p>Tariff and connection claims are date-specific. The Swedish
         national-grid tariff details above come from a 2026-05-16
-        Svenska kraftnät source. Distribution-grid tariff treatment
-        remains a source gap for project-specific work.</p>
+        Svenska kraftnät source. Project-specific distribution-grid
+        tariff treatment still needs the relevant distribution system
+        operator (DSO) source.</p>
         <p>It does not compare Nordic countries. ACER warns through its
         definitions and methodology discussion that network charges
         include many different components, and country terms are not
@@ -3614,7 +3615,7 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         References: <sup><a href="#ref-4">[4]</a>
         <a href="#ref-17">[17]</a> <a href="#ref-18">[18]</a>
         <a href="#ref-19">[19]</a> <a href="#ref-20">[20]</a>
-        <a href="#ref-5">[5]</a></sup>
+        <a href="#ref-21">[21]</a> <a href="#ref-5">[5]</a></sup>
         </p>
         <p>At 14:00, a battery may sit still while the grid keeps moving
         around it. Its value may be in the MWh it delivers later, or in
@@ -3684,6 +3685,11 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <li>Svenska kraftnät’s source describes FFR, FCR, aFRR, mFRR,
         disturbance reserve, and power reserve as distinct
         services.</li>
+        <li>The Nordic TSOs’ 2025 battery paper says batteries can
+        participate in all five Nordic reserve products it reviews: FFR,
+        FCR-D, FCR-N, aFRR, and mFRR. Product eligibility still depends
+        on prequalification, bid size, endurance, control system, state
+        of charge, grid connection, and BRP/BSP setup.</li>
         <li>Energinet tender conditions effective 2025-09-23 state
         examples such as FCR in DK1 reaching full response within
         <code>30 seconds</code>, FFR activation as fast as
@@ -3748,6 +3754,13 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         cannot spend the same MW and MWh on every product at once. A
         committed reserve position constrains state of charge,
         availability, degradation, intraday trading, and arbitrage.</p>
+        <p>The Nordic TSO battery paper also separates prequalification
+        from actual supply. A battery can be prequalified in several
+        markets and in both directions, so prequalified MW is not the
+        same as installed capacity or active daily offer. For a project
+        screen, treat prequalification as access to a product; the
+        dispatch model still decides whether bidding the product beats
+        the feasible alternatives in that interval.</p>
         </section>
         <section id="examples-3" class="level4">
         <h4>Examples</h4>
@@ -3821,7 +3834,7 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         Inverter-Based Resources</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-10">[10]</a>
-        <a href="#ref-21">[21]</a> <a href="#ref-22">[22]</a>
+        <a href="#ref-22">[22]</a> <a href="#ref-23">[23]</a>
         <a href="#ref-5">[5]</a></sup>
         </p>
         <p>A solar project can look complete in a market model and still
@@ -4142,7 +4155,7 @@ reactive MVAr obligation or headroom</code></pre>
         Characteristics</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-1">[1]</a>
-        <a href="#ref-23">[23]</a></sup>
+        <a href="#ref-24">[24]</a></sup>
         </p>
         <p>Consider six assets, each labeled 100 MW. One burns fuel, one
         holds water, one waits for wind, one follows daylight, one
@@ -4406,8 +4419,8 @@ reactive MVAr obligation or headroom</code></pre>
         <h3>Chapter 12. Solar Production, Capture Price, And
         Cannibalization</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-23">[23]</a>
-        <a href="#ref-24">[24]</a> <a href="#ref-16">[16]</a></sup>
+        References: <sup><a href="#ref-24">[24]</a>
+        <a href="#ref-25">[25]</a> <a href="#ref-16">[16]</a></sup>
         </p>
         <p>A solar plant sells when the sun is up, when clouds allow
         output, and when the market clears the price for those hours. A
@@ -4830,9 +4843,9 @@ Gross spread value = 5,200 EUR</code></pre>
         Evidence</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-7">[7]</a>
-        <a href="#ref-3">[3]</a> <a href="#ref-25">[25]</a>
-        <a href="#ref-10">[10]</a> <a href="#ref-21">[21]</a>
-        <a href="#ref-11">[11]</a> <a href="#ref-23">[23]</a></sup>
+        <a href="#ref-3">[3]</a> <a href="#ref-26">[26]</a>
+        <a href="#ref-10">[10]</a> <a href="#ref-22">[22]</a>
+        <a href="#ref-11">[11]</a> <a href="#ref-24">[24]</a></sup>
         </p>
         <p>The Nordic market is useful to study because it combines
         regional integration with strong local differences. Nord Pool is
@@ -5235,7 +5248,7 @@ Project 2: Danish solar-plus-BESS, DK2, separate import treatment, customer-shap
         <p class="lecture-refs">
         References: <sup><a href="#ref-13">[13]</a>
         <a href="#ref-3">[3]</a> <a href="#ref-4">[4]</a>
-        <a href="#ref-26">[26]</a></sup>
+        <a href="#ref-27">[27]</a></sup>
         </p>
         <p>A solar farm sells tomorrow’s output before tomorrow’s
         weather exists. The forecast becomes a day-ahead position, the
@@ -5511,7 +5524,7 @@ and data available at the time, what should a feasible operator have done?</code
         <h3>Chapter 1. Asset Revenue And Cash Flow</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-11">[11]</a>
-        <a href="#ref-23">[23]</a> <a href="#ref-15">[15]</a></sup>
+        <a href="#ref-24">[24]</a> <a href="#ref-15">[15]</a></sup>
         </p>
         <p>A customer wants a smoother power shape than a solar plant
         naturally produces. The site can be technically sound, the
@@ -5762,8 +5775,9 @@ operating_cash_before_debt =
         <h3>Chapter 2. Grid Connection And Tariff Economics</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-8">[8]</a>
-        <a href="#ref-9">[9]</a> <a href="#ref-27">[27]</a>
-        <a href="#ref-28">[28]</a> <a href="#ref-11">[11]</a></sup>
+        <a href="#ref-9">[9]</a> <a href="#ref-28">[28]</a>
+        <a href="#ref-29">[29]</a> <a href="#ref-11">[11]</a>
+        <a href="#ref-30">[30]</a></sup>
         </p>
         <p>A project can clear the revenue model and still fail the
         grid-access screen. The connection offer fixes more than a cable
@@ -6055,6 +6069,14 @@ battery_capex_and_opex
         </table>
         <p>The commercial model should show the site as a grid-rights
         object, not as a latitude-longitude point alone.</p>
+        <p>The IFC utility-scale solar guide adds the development
+        diligence layer that often decides whether the grid screen is
+        real. A useful site memo should attach the grid connection
+        feasibility evidence, land and access constraints, geotechnical
+        and environmental screens, water and soiling assumptions,
+        permitting path, and construction access. Those items do not
+        replace the tariff model; they decide whether the tariff and
+        connection assumptions can be executed on the ground.</p>
         </section>
         <section id="misconceptions-16" class="level4">
         <h4>Misconceptions</h4>
@@ -6102,9 +6124,9 @@ battery_capex_and_opex
         <section id="v2-l03" class="level3">
         <h3>Chapter 3. Solar Asset Cash Flow</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-23">[23]</a>
-        <a href="#ref-15">[15]</a> <a href="#ref-29">[29]</a>
-        <a href="#ref-16">[16]</a></sup>
+        References: <sup><a href="#ref-24">[24]</a>
+        <a href="#ref-15">[15]</a> <a href="#ref-30">[30]</a>
+        <a href="#ref-31">[31]</a> <a href="#ref-16">[16]</a></sup>
         </p>
         <p>An investment committee receives three commercial designs for
         the same solar project. The first sells raw solar output. The
@@ -6225,6 +6247,15 @@ state_of_charge_{h+1} = state_of_charge_h + charge_h x efficiency - discharge_h<
         <p>The model should show the reason each case wins or loses. A
         hybrid design that only wins because all battery revenues are
         stacked without conflict should be rejected.</p>
+        <p>The IFC utility-scale solar guide is useful here because it
+        ties the project model to development evidence. Before an
+        investment case accepts annual yield, capex, opex, or schedule,
+        it should show the solar resource assessment, loss assumptions,
+        grid-connection feasibility, engineering, procurement, and
+        construction (EPC) allocation, operations and maintenance
+        (O&amp;M) allocation, permitting status, construction risk, and
+        financing due diligence. A clean cash-flow table is weak if the
+        underlying development packet cannot support the inputs.</p>
         </section>
         <section id="numerical-intuition-17" class="level4">
         <h4>Numerical Intuition</h4>
@@ -6522,8 +6553,8 @@ extra visible value = 1.05 million EUR/year</code></pre>
         <h3>Chapter 4. PPA Risk Allocation</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-6">[6]</a>
-        <a href="#ref-30">[30]</a> <a href="#ref-31">[31]</a>
-        <a href="#ref-24">[24]</a></sup>
+        <a href="#ref-32">[32]</a> <a href="#ref-33">[33]</a>
+        <a href="#ref-25">[25]</a></sup>
         </p>
         <p>A customer asks for a ten-year solar PPA. The first real
         decision is what the seller promises in each hour, what the
@@ -6864,8 +6895,10 @@ evidence promise</code></pre>
         <h3>Chapter 5. PPA Structure And Contract Design</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-6">[6]</a>
-        <a href="#ref-30">[30]</a> <a href="#ref-31">[31]</a>
-        <a href="#ref-32">[32]</a> <a href="#ref-24">[24]</a></sup>
+        <a href="#ref-32">[32]</a> <a href="#ref-33">[33]</a>
+        <a href="#ref-34">[34]</a> <a href="#ref-35">[35]</a>
+        <a href="#ref-36">[36]</a> <a href="#ref-37">[37]</a>
+        <a href="#ref-25">[25]</a></sup>
         </p>
         <p>A buyer buys a hedge, a renewable claim, a budget shape, a
         sustainability evidence package, or some mix of those. The
@@ -7057,6 +7090,73 @@ control_mismatch      = promised_shape - dispatch_and_data_rights_held</code></p
         </table>
         <p>Contract terms can blend rows, but the risk questions do not
         disappear.</p>
+        </section>
+        <section id="nordic-and-eu-structure-checks" class="level4">
+        <h4>Nordic And EU Structure Checks</h4>
+        <p>The 2025 Nordic Energy Research / AFRY PPA report makes the
+        structure menu more precise. It separates several routes that
+        can look similar from the seller’s side but allocate balancing,
+        supplier interface, certificate handling, and basis risk
+        differently.</p>
+        <table>
+        <colgroup>
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Route</th>
+        <th>Practical form</th>
+        <th>Main check before pricing</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Utility-buyer PPA</td>
+        <td>producer sells to a utility or trader</td>
+        <td>confirm whether the buyer manages balancing, supplier
+        interface, and resale</td>
+        </tr>
+        <tr>
+        <td>Utility-seller PPA</td>
+        <td>utility or trader sells power onward to a corporate
+        buyer</td>
+        <td>identify which risks remain with the producer after the
+        intermediary shapes or supplies the product</td>
+        </tr>
+        <tr>
+        <td>Corporate PPA with sleeving</td>
+        <td>producer, corporate, and supplier or sleeving entity share
+        settlement roles</td>
+        <td>map title transfer, imbalance, supplier top-up, certificate
+        treatment, and surplus handling</td>
+        </tr>
+        <tr>
+        <td>Financial PPA</td>
+        <td>parties settle a difference against a reference price while
+        physical supply is handled separately</td>
+        <td>test basis risk, collateral, accounting, reference-price
+        fit, and certificate transfer</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>Commission Recommendation (EU) 2026/917 uses the same
+        distinction for policy purposes. Physical PPAs bring delivery,
+        scheduling, balancing, and volume exposure into the contract
+        perimeter. Financial PPAs settle against a reference price and
+        leave physical supply and imbalance management to other
+        arrangements. Pay-as-produced structures move more volume and
+        profile risk to the offtaker; baseload or shaped structures move
+        more of that work to the producer, intermediary, portfolio, or
+        battery.</p>
+        <p>For a seller, the structure choice should name both the buyer
+        and the route-to-market actor. A shaped corporate PPA with a
+        sleeving supplier can be easier to deliver than a direct
+        physical promise if the sleeving contract clearly assigns
+        residual energy, imbalance, and supplier duties. A financial PPA
+        can be simpler operationally but more exposed to reference-price
+        and collateral questions.</p>
         </section>
         <section id="numerical-intuition-19" class="level4">
         <h4>Numerical Intuition</h4>
@@ -7356,9 +7456,10 @@ net_before_collateral_and_accounting = 0.88m EUR/year</code></pre>
         <section id="v2-l06" class="level3">
         <h3>Chapter 6. PPA Pricing, Shape Risk, And Customer Value</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-33">[33]</a>
-        <a href="#ref-6">[6]</a> <a href="#ref-30">[30]</a>
-        <a href="#ref-31">[31]</a> <a href="#ref-24">[24]</a></sup>
+        References: <sup><a href="#ref-38">[38]</a>
+        <a href="#ref-6">[6]</a> <a href="#ref-32">[32]</a>
+        <a href="#ref-33">[33]</a> <a href="#ref-34">[34]</a>
+        <a href="#ref-25">[25]</a></sup>
         </p>
         <p>A customer asks for solar at a fixed price with less hourly
         variability. Sales needs a EUR/MWh price, the project model has
@@ -7621,6 +7722,63 @@ buyer surplus = buyer willingness-to-pay - offer price</code></pre>
         value is embedded in the power price, the seller and buyer
         should still know what evidence is being transferred.</p>
         </section>
+        <section id="reference-price-and-nordic-liquidity"
+        class="level4">
+        <h4>Reference Price And Nordic Liquidity</h4>
+        <p>The Nordic Energy Research / AFRY report gives a useful
+        pricing discipline for Nordic PPAs. For a baseload PPA, the
+        reference price is the baseload electricity price: a
+        time-weighted price for the period. For a pay-as-produced PPA,
+        the reference price is the relevant capture price: a
+        generation-weighted price for that technology and profile.</p>
+        <p>That distinction changes the quote stack.</p>
+        <table>
+        <colgroup>
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Contract shape</th>
+        <th>Pricing reference</th>
+        <th>Main residual question</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Baseload</td>
+        <td>time-weighted market price over the delivery period</td>
+        <td>who sources or sells deviations from the flat block</td>
+        </tr>
+        <tr>
+        <td>Pay-as-produced</td>
+        <td>generation-weighted capture price</td>
+        <td>whether the buyer accepts the asset’s profile and
+        cannibalization exposure</td>
+        </tr>
+        <tr>
+        <td>Shaped or profile PPA</td>
+        <td>value of the promised profile hour by hour</td>
+        <td>whether shape cost is priced, capped, indexed, or passed
+        through</td>
+        </tr>
+        <tr>
+        <td>Financial PPA</td>
+        <td>reference-market settlement price</td>
+        <td>how basis, collateral, and accounting treatment affect the
+        buyer’s real hedge</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>The same report notes that forward markets and fundamental
+        models are the two main pricing approaches. Nordic
+        forward-market liquidity is weaker at longer tenors than the
+        term of many PPAs, so a ten- or fifteen-year price usually
+        cannot be read from one clean screen. A pricing memo should say
+        which inputs come from observable forwards, which come from a
+        fundamental view, and which remain negotiated risk premia.</p>
+        </section>
         <section id="example-10" class="level4">
         <h4>Example</h4>
         <p>The buyer wants smoother solar.</p>
@@ -7695,8 +7853,8 @@ buyer surplus = buyer willingness-to-pay - offer price</code></pre>
         <h3>Chapter 7. Investment Committee Proposals</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-11">[11]</a>
-        <a href="#ref-6">[6]</a> <a href="#ref-30">[30]</a>
-        <a href="#ref-31">[31]</a> <a href="#ref-34">[34]</a></sup>
+        <a href="#ref-6">[6]</a> <a href="#ref-32">[32]</a>
+        <a href="#ref-33">[33]</a> <a href="#ref-39">[39]</a></sup>
         </p>
         <p>Sales has a customer conversation before finance has a model.
         The customer wants solar, evening coverage, a price collar,
@@ -8173,9 +8331,10 @@ risk allocation and governance</code></pre>
         <h3>Chapter 8. BESS Revenue Stacks</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-17">[17]</a>
-        <a href="#ref-20">[20]</a> <a href="#ref-33">[33]</a>
-        <a href="#ref-35">[35]</a> <a href="#ref-22">[22]</a>
-        <a href="#ref-36">[36]</a> <a href="#ref-34">[34]</a></sup>
+        <a href="#ref-20">[20]</a> <a href="#ref-38">[38]</a>
+        <a href="#ref-40">[40]</a> <a href="#ref-23">[23]</a>
+        <a href="#ref-41">[41]</a> <a href="#ref-21">[21]</a>
+        <a href="#ref-39">[39]</a></sup>
         </p>
         <p>The project model looks better every time another BESS
         revenue line is added. Arbitrage fills one row, reserve capacity
@@ -8273,6 +8432,73 @@ risk allocation and governance</code></pre>
   obligations that fit inside MW, MWh, SoC, cycle, grid, and control constraints</code></pre>
         <p>not:</p>
         <pre class="text"><code>sum of every revenue source the asset could theoretically access</code></pre>
+        <p>Nordic reserve markets show why the resource accounting has
+        to be product-specific. The Nordic TSOs’ 2025 battery reserve
+        paper says batteries can participate in FFR, FCR-D, FCR-N, aFRR,
+        and mFRR, but each product asks for a different mix of response
+        speed, endurance, prequalification, and state-of-charge
+        management.</p>
+        <table>
+        <colgroup>
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Product</th>
+        <th>What the battery must reserve</th>
+        <th>Commercial implication</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>FFR</td>
+        <td>very fast upward response for low-inertia periods, with
+        short endurance options</td>
+        <td>mainly a speed and availability product; hours procured vary
+        with inertia conditions</td>
+        </tr>
+        <tr>
+        <td>FCR-D</td>
+        <td>automatic disturbance response outside the normal frequency
+        band; at least <code>20 min</code> endurance at full
+        activation</td>
+        <td>modest energy need, but power reservation and state of
+        charge still reduce other uses</td>
+        </tr>
+        <tr>
+        <td>FCR-N</td>
+        <td>symmetric normal-operation response with <code>1 h</code>
+        endurance in each direction</td>
+        <td>more energy-intensive for BESS because up and down
+        capability must both be credible</td>
+        </tr>
+        <tr>
+        <td>aFRR</td>
+        <td>automatic restoration service, procured separately up and
+        down, with Nordic endurance requirements in the
+        <code>1-4 h</code> range</td>
+        <td>competes directly with energy inventory and sustained
+        delivery promises</td>
+        </tr>
+        <tr>
+        <td>mFRR</td>
+        <td>manual restoration with <code>12.5 min</code> full
+        activation in the standard Nordic description and shorter EAM
+        endurance windows</td>
+        <td>ramp speed alone is insufficient; bid size, activation path,
+        and energy window matter</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>The same TSO paper warns that prequalified battery volumes do
+        not equal active market supply, because one asset can be
+        prequalified for several products and for both directions. It
+        also states the practical stacking rule plainly: the same
+        capacity cannot be bid into multiple markets for the same
+        delivery period. Product eligibility is therefore the start of
+        the screen; interval-level opportunity cost is the decision.</p>
         </section>
         <section id="numerical-intuition-22" class="level4">
         <h4>Numerical Intuition</h4>
@@ -8664,9 +8890,9 @@ unpriced_option_value</code></pre>
         <h3>Chapter 9. Battery Duration Selection</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-11">[11]</a>
-        <a href="#ref-33">[33]</a> <a href="#ref-35">[35]</a>
-        <a href="#ref-36">[36]</a> <a href="#ref-37">[37]</a>
-        <a href="#ref-34">[34]</a></sup>
+        <a href="#ref-38">[38]</a> <a href="#ref-40">[40]</a>
+        <a href="#ref-41">[41]</a> <a href="#ref-42">[42]</a>
+        <a href="#ref-21">[21]</a> <a href="#ref-39">[39]</a></sup>
         </p>
         <p>A developer is comparing two designs for the same battery:
         <code>100 MW / 200 MWh</code> and <code>100 MW / 400 MWh</code>.
@@ -8968,6 +9194,17 @@ extra energy block scale = 200,000 x 175 = USD 35,000,000</code></pre>
         </tr>
         </tbody>
         </table>
+        <p>The Nordic TSO battery-reserve paper gives concrete examples
+        of the spread between “fast” and “long enough.” FFR is very fast
+        and upward-only, with short endurance options. FCR-D needs at
+        least <code>20 min</code> of full activation. FCR-N needs
+        <code>1 h</code> of endurance in each direction. aFRR can
+        require <code>1-4 h</code> depending on country and market path.
+        mFRR uses a <code>12.5 min</code> full-activation standard in
+        the Nordic description, while the EAM endurance window is tied
+        to one or two market quarters. A one-hour battery can be
+        excellent for one product and weak for another; duration is a
+        product requirement before it is an asset label.</p>
         </section>
         <section id="site-lens" class="level5">
         <h5>2. Site Lens</h5>
@@ -9232,9 +9469,10 @@ Both fail if Y is true.</code></pre>
         <h3>Chapter 10. Dispatch Optimization</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-17">[17]</a>
-        <a href="#ref-11">[11]</a> <a href="#ref-22">[22]</a>
-        <a href="#ref-38">[38]</a> <a href="#ref-35">[35]</a>
-        <a href="#ref-33">[33]</a> <a href="#ref-39">[39]</a></sup>
+        <a href="#ref-11">[11]</a> <a href="#ref-23">[23]</a>
+        <a href="#ref-43">[43]</a> <a href="#ref-40">[40]</a>
+        <a href="#ref-38">[38]</a> <a href="#ref-44">[44]</a>
+        <a href="#ref-21">[21]</a></sup>
         </p>
         <p>An analyst receives a battery schedule: charge at noon,
         discharge in the evening, hold some capacity for reserve, finish
@@ -9358,6 +9596,15 @@ c_t + r_down_t &lt;= P_ch_max</code></pre>
         <p>Reserve sustain requirement:</p>
         <pre class="text"><code>r_up_t x sustain_hours &lt;= soc_t - E_min
 r_down_t x sustain_hours &lt;= E_max - soc_t</code></pre>
+        <p>Nordic reserve products give <code>sustain_hours</code> real
+        content. In the Nordic TSO battery paper, FCR-D requires at
+        least <code>20 min</code> of full activation, FCR-N requires
+        <code>1 h</code> in each direction, aFRR endurance can sit in
+        the <code>1-4 h</code> range depending on the country and market
+        path, and mFRR energy-activation endurance is described around
+        one or two market quarters. The optimizer should therefore
+        parameterize reserve commitments by product and geography
+        instead of treating “reserve” as one generic MW line.</p>
         <p>Grid import/export:</p>
         <pre class="text"><code>c_t + site_load_t &lt;= import_limit_t
 d_t + solar_export_t &lt;= export_limit_t</code></pre>
@@ -9664,8 +9911,8 @@ terminal shortfall from 50 MWh discharge = 50 MWh - 40 MWh = 10 MWh</code></pre>
         <p class="lecture-refs">
         References: <sup><a href="#ref-3">[3]</a>
         <a href="#ref-4">[4]</a> <a href="#ref-15">[15]</a>
-        <a href="#ref-38">[38]</a> <a href="#ref-40">[40]</a>
-        <a href="#ref-41">[41]</a></sup>
+        <a href="#ref-43">[43]</a> <a href="#ref-45">[45]</a>
+        <a href="#ref-46">[46]</a></sup>
         </p>
         <p>A forecasting vendor promises lower solar error. A partner
         says its own forecast is good enough. The trading team wants a
@@ -10139,10 +10386,10 @@ rebalance_value =
         <h3>Chapter 12. Battery Degradation, Warranties, And Operating
         Constraints</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-33">[33]</a>
-        <a href="#ref-35">[35]</a> <a href="#ref-36">[36]</a>
-        <a href="#ref-42">[42]</a> <a href="#ref-37">[37]</a>
-        <a href="#ref-43">[43]</a></sup>
+        References: <sup><a href="#ref-38">[38]</a>
+        <a href="#ref-40">[40]</a> <a href="#ref-41">[41]</a>
+        <a href="#ref-47">[47]</a> <a href="#ref-42">[42]</a>
+        <a href="#ref-48">[48]</a></sup>
         </p>
         <p>A dispatch case shows a clean trade: buy low, sell higher,
         cycle the battery, book the spread. But each MWh moved through
@@ -10540,8 +10787,8 @@ insurance policy, availability plan, or augmentation budget can support</code></
         <h3>Chapter 13. Project Valuation Under Uncertainty</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-11">[11]</a>
-        <a href="#ref-23">[23]</a> <a href="#ref-15">[15]</a>
-        <a href="#ref-34">[34]</a></sup>
+        <a href="#ref-24">[24]</a> <a href="#ref-15">[15]</a>
+        <a href="#ref-39">[39]</a></sup>
         </p>
         <p>An investment committee receives one clean base case: one
         IRR, one NPV, one debt-service path, one merchant-tail value.
@@ -11191,8 +11438,8 @@ Here is what remains merchant, operational, or partner-execution risk.</code></p
         <h3>Chapter 14. Portfolio Modeling And Hedging</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-7">[7]</a>
-        <a href="#ref-20">[20]</a> <a href="#ref-26">[26]</a>
-        <a href="#ref-6">[6]</a> <a href="#ref-34">[34]</a></sup>
+        <a href="#ref-20">[20]</a> <a href="#ref-27">[27]</a>
+        <a href="#ref-6">[6]</a> <a href="#ref-39">[39]</a></sup>
         </p>
         <p>The investment memo shows a clean project: attractive
         standalone economics, a familiar zone, a technology the team
@@ -11659,7 +11906,7 @@ The marginal portfolio risk is materially different.</code></pre>
         <p class="lecture-refs">
         References: <sup><a href="#ref-3">[3]</a>
         <a href="#ref-4">[4]</a> <a href="#ref-12">[12]</a>
-        <a href="#ref-20">[20]</a> <a href="#ref-38">[38]</a></sup>
+        <a href="#ref-20">[20]</a> <a href="#ref-43">[43]</a></sup>
         </p>
         <p>A quarterly report shows the trading partner earned less than
         the benchmark used in the plan. Sales needs an explanation,
@@ -12090,10 +12337,10 @@ The marginal portfolio risk is materially different.</code></pre>
         <h3>Chapter 16. Analytical Capability Development</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-3">[3]</a>
-        <a href="#ref-20">[20]</a> <a href="#ref-26">[26]</a>
-        <a href="#ref-44">[44]</a> <a href="#ref-38">[38]</a>
-        <a href="#ref-6">[6]</a> <a href="#ref-34">[34]</a>
-        <a href="#ref-45">[45]</a></sup>
+        <a href="#ref-20">[20]</a> <a href="#ref-27">[27]</a>
+        <a href="#ref-49">[49]</a> <a href="#ref-43">[43]</a>
+        <a href="#ref-6">[6]</a> <a href="#ref-39">[39]</a>
+        <a href="#ref-50">[50]</a></sup>
         </p>
         <p>A renewable IPP can spend its first analytics budget many
         ways: a pricing model, a data platform, an energy trading and
@@ -12705,8 +12952,8 @@ The marginal portfolio risk is materially different.</code></pre>
         <h3>Chapter 17. Trading Risk, Credit, Liquidity, And
         Controls</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-44">[44]</a>
-        <a href="#ref-26">[26]</a></sup>
+        References: <sup><a href="#ref-49">[49]</a>
+        <a href="#ref-27">[27]</a></sup>
         </p>
         <p>A portfolio manager opens the morning meeting by saying that
         the book is hedged. The statement is incomplete until the team
@@ -13203,7 +13450,7 @@ collateral need = 900,000 x 80%
         References: <sup><a href="#ref-4">[4]</a>
         <a href="#ref-17">[17]</a> <a href="#ref-18">[18]</a>
         <a href="#ref-19">[19]</a> <a href="#ref-20">[20]</a>
-        <a href="#ref-33">[33]</a> <a href="#ref-29">[29]</a></sup>
+        <a href="#ref-38">[38]</a> <a href="#ref-31">[31]</a></sup>
         </p>
         <p>A project model depends on one reserve product for most of
         the value. The battery can respond fast enough, the product has
@@ -13491,7 +13738,7 @@ collateral need = 900,000 x 80%
         References: <sup><a href="#ref-13">[13]</a>
         <a href="#ref-14">[14]</a> <a href="#ref-4">[4]</a>
         <a href="#ref-19">[19]</a> <a href="#ref-20">[20]</a>
-        <a href="#ref-40">[40]</a></sup>
+        <a href="#ref-45">[45]</a></sup>
         </p>
         <p>A quarter-hour price is only useful if the portfolio can do
         something with it. A solar forecast moves after the day-ahead
@@ -13763,8 +14010,8 @@ collateral need = 900,000 x 80%
         <h3>Chapter 3. Grid Constraints And Portfolio Strategy</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-7">[7]</a>
-        <a href="#ref-8">[8]</a> <a href="#ref-21">[21]</a>
-        <a href="#ref-11">[11]</a> <a href="#ref-46">[46]</a></sup>
+        <a href="#ref-8">[8]</a> <a href="#ref-22">[22]</a>
+        <a href="#ref-11">[11]</a> <a href="#ref-51">[51]</a></sup>
         </p>
         <p>A site with grid rights is more than a parcel of land and a
         resource study. It is an option on scarce network capacity: the
@@ -14032,9 +14279,9 @@ local-flexibility value = qualified flexible MW x expected net payment x bankabi
         <p class="lecture-refs">
         References: <sup><a href="#ref-7">[7]</a>
         <a href="#ref-4">[4]</a> <a href="#ref-11">[11]</a>
-        <a href="#ref-47">[47]</a> <a href="#ref-22">[22]</a>
-        <a href="#ref-46">[46]</a> <a href="#ref-48">[48]</a>
-        <a href="#ref-49">[49]</a></sup>
+        <a href="#ref-52">[52]</a> <a href="#ref-23">[23]</a>
+        <a href="#ref-51">[51]</a> <a href="#ref-53">[53]</a>
+        <a href="#ref-54">[54]</a></sup>
         </p>
         <p>A transmission constraint can appear as an area-price spread,
         a nodal price difference, redispatch cost, curtailment,
@@ -14339,8 +14586,10 @@ and how much is recovered or managed elsewhere?</code></pre>
         <h3>Chapter 5. PPA Structures And Market Evolution</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-6">[6]</a>
-        <a href="#ref-30">[30]</a> <a href="#ref-31">[31]</a>
-        <a href="#ref-32">[32]</a> <a href="#ref-24">[24]</a></sup>
+        <a href="#ref-32">[32]</a> <a href="#ref-33">[33]</a>
+        <a href="#ref-34">[34]</a> <a href="#ref-35">[35]</a>
+        <a href="#ref-36">[36]</a> <a href="#ref-37">[37]</a>
+        <a href="#ref-25">[25]</a></sup>
         </p>
         <p>A buyer asks for a cleaner and firmer product. That request
         may contain several priced demands: hedge value, residual
@@ -14473,6 +14722,38 @@ control-right and partner-governance cost = 0.80 EUR/MWh x 87,600 = 70,080 EUR/y
         increasing, but product bankability depends on priced firming,
         evidence rules, control rights, credit support, and the seller’s
         actual portfolio.</p>
+        </section>
+        <section id="market-evolution-evidence" class="level4">
+        <h4>Market-Evolution Evidence</h4>
+        <p>The current European and Nordic sources point in the same
+        direction: PPAs are becoming more important, but the bottleneck
+        is usually the allocation of risk rather than the absence of a
+        clever product name.</p>
+        <p>Commission Recommendation (EU) 2026/917 reports that EU
+        corporate PPA contracted electricity grew from
+        <code>7.4 TWh</code> in 2020 to <code>31.4 TWh</code> in 2024,
+        while the number of contracts rose from <code>60</code> to
+        <code>276</code>. It also notes that by 2024 solar PV formed the
+        majority of reported corporate PPA contracted electricity, more
+        than <code>10%</code> of contracts were hybrid, and ICT buyers
+        accounted for more than <code>40%</code> of committed
+        electricity. These are dated policy-context figures, useful for
+        sizing the strategic importance of the market.</p>
+        <p>The same Recommendation cites ACER’s 2024 conclusion that
+        existing voluntary PPA templates were sufficient for current
+        market needs. ACER’s assessment matters because it pushes the
+        product debate away from “we need another template” and toward
+        barriers such as project development, buyer credit, collateral,
+        accounting, market transparency, and cross-border risk.</p>
+        <p>The 2025 Nordic Energy Research / AFRY report adds
+        Nordic-specific friction. It reports a <code>43%</code> decline
+        in the Nordic PPA market from 2021 to 2024 in AFRY’s database,
+        highlights <code>12</code> Nordic bidding areas plus Iceland,
+        and treats basis risk, price opacity, contract tenor, credit,
+        accounting treatment, and regulatory change as recurring
+        barriers. That does not make Nordic PPAs unattractive. It means
+        a product roadmap needs a basis-risk view, a certificate view, a
+        credit view, and a structure view for each buyer path.</p>
         </section>
         <section id="product-paths" class="level4">
         <h4>Product Paths</h4>
@@ -14634,11 +14915,11 @@ control-right and partner-governance cost = 0.80 EUR/MWh x 87,600 = 70,080 EUR/y
         <h3>Chapter 6. Storage Duration And Long-Duration
         Flexibility</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-33">[33]</a>
-        <a href="#ref-5">[5]</a> <a href="#ref-41">[41]</a>
-        <a href="#ref-36">[36]</a> <a href="#ref-42">[42]</a>
+        References: <sup><a href="#ref-38">[38]</a>
+        <a href="#ref-5">[5]</a> <a href="#ref-46">[46]</a>
+        <a href="#ref-41">[41]</a> <a href="#ref-47">[47]</a>
         <a href="#ref-11">[11]</a> <a href="#ref-15">[15]</a>
-        <a href="#ref-50">[50]</a></sup>
+        <a href="#ref-55">[55]</a></sup>
         </p>
         <p>A project memo compares two battery sizes, one grid
         connection, one possible evening customer product, and a trading
@@ -15024,7 +15305,9 @@ required margin = 1,750,000 USD/year / 3,500 MWh/year
         Flexibility</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-6">[6]</a>
-        <a href="#ref-32">[32]</a> <a href="#ref-51">[51]</a></sup>
+        <a href="#ref-56">[56]</a> <a href="#ref-57">[57]</a>
+        <a href="#ref-58">[58]</a> <a href="#ref-37">[37]</a>
+        <a href="#ref-59">[59]</a></sup>
         </p>
         <p>A data-center buyer can bring a large load, long horizon,
         strong credit, and a visible climate claim. The risk starts when
@@ -15156,6 +15439,57 @@ and who pays when the evidence or delivery does not match the promise?</code></p
         </table>
         <p>If these fields are not priced and controlled, the seller has
         not defined the product well enough to price or market it.</p>
+        </section>
+        <section id="certificate-and-claim-mechanics" class="level4">
+        <h4>Certificate And Claim Mechanics</h4>
+        <p>The GHG Protocol Scope 2 Guidance and certificate standards
+        make one point operationally important for a 24/7-style product:
+        physical energy, contractual attributes, and public claims have
+        to be tracked separately.</p>
+        <p>In the Scope 2 Guidance, companies in markets with
+        contractual instruments report both location-based and
+        market-based Scope 2 totals. The location-based method uses
+        average grid emissions factors. The market-based method uses
+        contractual information such as energy attribute certificates,
+        direct contracts including PPAs where applicable,
+        supplier-specific emission rates, and residual mix. If a
+        contractual instrument does not meet the Scope 2 Quality
+        Criteria, the company uses fallback data in the market-based
+        hierarchy.</p>
+        <p>Energy attribute certificates represent attributes of
+        generated electricity. They can be bundled with a PPA or sold
+        separately. Once attributes are conveyed away from the
+        underlying electricity, the remaining electricity becomes “null
+        power” for market-based claims and should be treated with
+        residual-mix logic. This matters for a seller because a PPA can
+        transfer energy economics while leaving the evidence claim
+        incomplete, or transfer certificates while leaving hourly
+        physical supply quality unresolved.</p>
+        <p>EnergyTag’s Granular Certificate Scheme Standard v2 adds the
+        temporal layer. A granular certificate records a production or
+        storage-discharge interval with timestamps in UTC, with the
+        standard using a maximum production/storage discharge interval
+        of one hour. Its storage treatment also matters for hybrid
+        products: storage charge records, storage discharge records,
+        storage discharge granular certificates, and loss allocation
+        must be defined before stored energy can support a time-matched
+        evidence claim.</p>
+        <p>For a term sheet, the evidence schedule should therefore
+        specify:</p>
+        <ul>
+        <li>which certificate or attribute instrument is
+        transferred</li>
+        <li>whether the certificate is bundled with energy or sold
+        separately</li>
+        <li>production interval, cancellation, beneficiary, and registry
+        evidence</li>
+        <li>residual-mix treatment for uncovered or attribute-stripped
+        energy</li>
+        <li>storage charge/discharge evidence if BESS is used in the
+        claim</li>
+        <li>statement language the buyer may use, and language reserved
+        for legal/accounting review</li>
+        </ul>
         </section>
         <section id="numerical-intuition-36" class="level4">
         <h4>Numerical Intuition</h4>
@@ -15501,10 +15835,10 @@ firming_at_risk = 13,000 MWh x 150 EUR/MWh
         <section id="v3-l08" class="level3">
         <h3>Chapter 8. Grid-Forming Inverters And System Services</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-21">[21]</a>
-        <a href="#ref-22">[22]</a> <a href="#ref-18">[18]</a>
-        <a href="#ref-11">[11]</a> <a href="#ref-52">[52]</a>
-        <a href="#ref-53">[53]</a></sup>
+        References: <sup><a href="#ref-22">[22]</a>
+        <a href="#ref-23">[23]</a> <a href="#ref-18">[18]</a>
+        <a href="#ref-11">[11]</a> <a href="#ref-60">[60]</a>
+        <a href="#ref-61">[61]</a></sup>
         </p>
         <p>A project team can price the battery, the transformer, the
         grid connection, and the expected energy-market stack. Then an
@@ -15904,8 +16238,8 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <h3>Chapter 9. Data And Machine Learning In Energy
         Management</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-38">[38]</a>
-        <a href="#ref-41">[41]</a> <a href="#ref-54">[54]</a></sup>
+        References: <sup><a href="#ref-43">[43]</a>
+        <a href="#ref-46">[46]</a> <a href="#ref-62">[62]</a></sup>
         </p>
         <p>A forecast arrives before the day-ahead gate closes, or after
         the trader has already acted. A dispatch recommendation names a
@@ -16176,7 +16510,7 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <h3>Chapter 10. Trading Capability Design</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-3">[3]</a>
-        <a href="#ref-12">[12]</a> <a href="#ref-38">[38]</a></sup>
+        <a href="#ref-12">[12]</a> <a href="#ref-43">[43]</a></sup>
         </p>
         <p>The contract is signed, the partner has the market systems,
         and nominations, balancing, and dispatch can now move through
@@ -16568,8 +16902,8 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <h3>Chapter 11. IPP Operating Models For Active Portfolio
         Management</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-45">[45]</a>
-        <a href="#ref-26">[26]</a> <a href="#ref-54">[54]</a></sup>
+        References: <sup><a href="#ref-50">[50]</a>
+        <a href="#ref-27">[27]</a> <a href="#ref-62">[62]</a></sup>
         </p>
         <p>An active renewable IPP has more recurring choices than a
         simple asset owner: quote a shaped PPA, size a battery, decide
@@ -16910,8 +17244,8 @@ and with what feedback after delivery?</code></pre>
         References: <sup><a href="#ref-13">[13]</a>
         <a href="#ref-3">[3]</a> <a href="#ref-4">[4]</a>
         <a href="#ref-6">[6]</a> <a href="#ref-11">[11]</a>
-        <a href="#ref-33">[33]</a> <a href="#ref-45">[45]</a>
-        <a href="#ref-38">[38]</a> <a href="#ref-54">[54]</a></sup>
+        <a href="#ref-38">[38]</a> <a href="#ref-50">[50]</a>
+        <a href="#ref-43">[43]</a> <a href="#ref-62">[62]</a></sup>
         </p>
         <p>A customer asks for clean power in a shape the solar site
         does not naturally produce. The battery concept can cover part
@@ -17364,9 +17698,9 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <h3>Chapter 13. Resource Adequacy, Missing Money, And Capacity
         Markets</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-22">[22]</a>
-        <a href="#ref-47">[47]</a> <a href="#ref-41">[41]</a>
-        <a href="#ref-33">[33]</a></sup>
+        References: <sup><a href="#ref-23">[23]</a>
+        <a href="#ref-52">[52]</a> <a href="#ref-46">[46]</a>
+        <a href="#ref-38">[38]</a></sup>
         </p>
         <p>A renewable IPP is offered three ways to respond to scarcity:
         build a four-hour battery, invest in longer-duration storage, or
@@ -17734,8 +18068,8 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <h3>Chapter 14. Market Power, Scarcity Pricing, And
         Monitoring</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-47">[47]</a>
-        <a href="#ref-22">[22]</a> <a href="#ref-48">[48]</a></sup>
+        References: <sup><a href="#ref-52">[52]</a>
+        <a href="#ref-23">[23]</a> <a href="#ref-53">[53]</a></sup>
         </p>
         <p>A high-price hour needs an evidence pack. The system may have
         been genuinely short of energy, capacity, ramping, reserves, or
@@ -18083,9 +18417,9 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         Quote</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-6">[6]</a>
-        <a href="#ref-30">[30]</a> <a href="#ref-31">[31]</a>
-        <a href="#ref-32">[32]</a> <a href="#ref-34">[34]</a>
-        <a href="#ref-45">[45]</a></sup>
+        <a href="#ref-32">[32]</a> <a href="#ref-33">[33]</a>
+        <a href="#ref-37">[37]</a> <a href="#ref-39">[39]</a>
+        <a href="#ref-50">[50]</a></sup>
         </p>
         <p>A buyer asking for “solar plus storage” is usually asking for
         several things at once: price certainty, evidence of clean
@@ -18459,10 +18793,11 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <section id="case-02" class="level3">
         <h3>Case 2. The 1h, 2h, Or 4h Battery Decision</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-36">[36]</a>
-        <a href="#ref-42">[42]</a> <a href="#ref-5">[5]</a>
-        <a href="#ref-33">[33]</a> <a href="#ref-11">[11]</a>
-        <a href="#ref-37">[37]</a> <a href="#ref-34">[34]</a></sup>
+        References: <sup><a href="#ref-41">[41]</a>
+        <a href="#ref-47">[47]</a> <a href="#ref-5">[5]</a>
+        <a href="#ref-38">[38]</a> <a href="#ref-11">[11]</a>
+        <a href="#ref-42">[42]</a> <a href="#ref-21">[21]</a>
+        <a href="#ref-39">[39]</a></sup>
         </p>
         <p>Battery duration is an investment claim: the next MWh of
         energy capacity must earn more than it costs after efficiency,
@@ -18684,6 +19019,18 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         treats “cycles/year” as a commercial shorthand. Before live use,
         replace it with the warranty-compatible operating envelope and
         the actual insurance-policy limits.</p>
+        <p>The product-eligibility gate should use named product
+        requirements. In the Nordic transmission system operator (TSO)
+        battery paper, frequency containment reserve for disturbances
+        (FCR-D) needs at least <code>20 min</code> endurance, frequency
+        containment reserve for normal operation (FCR-N) needs
+        <code>1 h</code> in each direction, automatic frequency
+        restoration reserve (aFRR) can require <code>1-4 h</code>, and
+        manual frequency restoration reserve (mFRR) uses a different
+        activation and endurance logic. Those examples are product
+        checks for this case: 1h, 2h, and 4h should be matched to a
+        specific revenue product before they are compared as asset
+        labels.</p>
         </section>
         <section id="tasks-1" class="level4">
         <h4>Tasks</h4>
@@ -18842,8 +19189,9 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <p class="lecture-refs">
         References: <sup><a href="#ref-11">[11]</a>
         <a href="#ref-9">[9]</a> <a href="#ref-10">[10]</a>
-        <a href="#ref-27">[27]</a> <a href="#ref-28">[28]</a>
-        <a href="#ref-21">[21]</a> <a href="#ref-46">[46]</a></sup>
+        <a href="#ref-28">[28]</a> <a href="#ref-29">[29]</a>
+        <a href="#ref-22">[22]</a> <a href="#ref-51">[51]</a>
+        <a href="#ref-30">[30]</a></sup>
         </p>
         <p>Solar development often begins with land and irradiation.
         Project value often ends with grid access, tariffs, congestion,
@@ -19145,6 +19493,15 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         limited-access terms, metering boundary, and whether BESS
         operation is allowed under the same connection agreement or
         needs a separate approval.</p>
+        <p>The second diligence request should be the development
+        evidence pack: site access, land title or lease route,
+        geotechnical conditions, environmental restrictions, grid
+        interconnection feasibility study, permitting path, construction
+        logistics, engineering, procurement, and construction (EPC)
+        allocation, operations and maintenance (O&amp;M) assumptions,
+        and resource-assessment basis. The IFC solar guide treats these
+        as core bankability inputs rather than late-stage
+        documentation.</p>
         <p>Site A should remain in development if the connection timing
         improves or if a buyer values the location enough to pay for the
         grid uncertainty. Site C is not a priority unless its low
@@ -19195,10 +19552,10 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <p class="lecture-refs">
         References: <sup><a href="#ref-4">[4]</a>
         <a href="#ref-17">[17]</a> <a href="#ref-18">[18]</a>
-        <a href="#ref-19">[19]</a> <a href="#ref-36">[36]</a>
-        <a href="#ref-5">[5]</a> <a href="#ref-37">[37]</a>
-        <a href="#ref-39">[39]</a> <a href="#ref-34">[34]</a>
-        <a href="#ref-43">[43]</a></sup>
+        <a href="#ref-19">[19]</a> <a href="#ref-41">[41]</a>
+        <a href="#ref-5">[5]</a> <a href="#ref-42">[42]</a>
+        <a href="#ref-44">[44]</a> <a href="#ref-21">[21]</a>
+        <a href="#ref-39">[39]</a> <a href="#ref-48">[48]</a></sup>
         </p>
         <p>A battery revenue stack is a set of coupled obligations on
         the same MW, MWh, state of charge, grid rights, cycle budget,
@@ -19368,6 +19725,15 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         </tr>
         </tbody>
         </table>
+        <p>For Nordic reserve routes, add a product-specific appendix
+        before approving the stack. The Nordic TSOs’ 2025 battery paper
+        separates FFR, FCR-D, FCR-N, aFRR, and mFRR by response time,
+        endurance, bid size, and prequalification route. It also warns
+        that the same capacity cannot be bid in multiple markets for the
+        same delivery period. A revenue-stack proposal should therefore
+        show the exact delivery intervals where reserve capacity,
+        activation energy, PPA delivery, arbitrage, and state-of-charge
+        buffers overlap.</p>
         </section>
         <section id="worked-solution-3" class="level4">
         <h4>Worked Solution</h4>
@@ -19517,8 +19883,8 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <p class="lecture-refs">
         References: <sup><a href="#ref-3">[3]</a>
         <a href="#ref-4">[4]</a> <a href="#ref-12">[12]</a>
-        <a href="#ref-20">[20]</a> <a href="#ref-38">[38]</a>
-        <a href="#ref-44">[44]</a></sup>
+        <a href="#ref-20">[20]</a> <a href="#ref-43">[43]</a>
+        <a href="#ref-49">[49]</a></sup>
         </p>
         <p>A trading or optimization partner can execute the market
         interface, but the asset owner still needs evidence before it
@@ -19862,8 +20228,8 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         href="https://solar-bess-modeling.streamlit.app/">Commercial
         Workbench</a> as a compact version of the evidence discipline in
         this case. The partner-evidence view is useful when the question
-        is not “who was bad?” but “what evidence would make a commercial
-        action fair and defensible?”</p>
+        is: what evidence would make a commercial action fair and
+        defensible?</p>
         </section>
         <section id="scorecard" class="level4">
         <h4>Scorecard</h4>
@@ -20010,8 +20376,10 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <h3>Case 6. Data-Centre 24/7 Product Screen</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-6">[6]</a>
-        <a href="#ref-32">[32]</a> <a href="#ref-51">[51]</a>
-        <a href="#ref-34">[34]</a> <a href="#ref-30">[30]</a></sup>
+        <a href="#ref-56">[56]</a> <a href="#ref-57">[57]</a>
+        <a href="#ref-58">[58]</a> <a href="#ref-37">[37]</a>
+        <a href="#ref-59">[59]</a> <a href="#ref-39">[39]</a>
+        <a href="#ref-32">[32]</a></sup>
         </p>
         <p>Large electricity buyers increasingly care about both when
         clean energy is produced and how many clean MWh are bought over
@@ -20190,6 +20558,59 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         buyer-side flexibility as seller supply unless the buyer grants
         defined availability, control, telemetry, settlement rights, and
         an uptime-compatible operating policy.</p>
+        <p>Add the accounting and certificate evidence pack before the
+        offer is approved.</p>
+        <table>
+        <colgroup>
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Evidence item</th>
+        <th>Source-backed reason</th>
+        <th>Contract implication</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Dual Scope 2 boundary</td>
+        <td>GHG Protocol separates location-based and market-based Scope
+        2 reporting where contractual instruments exist</td>
+        <td>avoid language that treats annual certificates as physical
+        hourly delivery</td>
+        </tr>
+        <tr>
+        <td>Energy attribute certificate status</td>
+        <td>certificates transfer attributes; attributes can be bundled
+        or unbundled from the electricity</td>
+        <td>state whether GOs or other instruments are included,
+        transferred, canceled, or retained</td>
+        </tr>
+        <tr>
+        <td>Residual mix and null power</td>
+        <td>attribute-stripped energy cannot support the same renewable
+        claim</td>
+        <td>define fallback treatment for uncovered or
+        certificate-separated MWh</td>
+        </tr>
+        <tr>
+        <td>Granular time stamp</td>
+        <td>EnergyTag v2 uses UTC timestamps and production or
+        storage-discharge intervals up to one hour</td>
+        <td>align load, clean supply, and storage evidence at the same
+        interval</td>
+        </tr>
+        <tr>
+        <td>Storage evidence</td>
+        <td>storage charge and discharge records are needed to preserve
+        attribute accounting through storage</td>
+        <td>require BESS charge source, discharge record, losses, and
+        cancellation trail</td>
+        </tr>
+        </tbody>
+        </table>
         </section>
         <section id="numerical-intuition-48" class="level4">
         <h4>Numerical Intuition</h4>
@@ -20339,10 +20760,10 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <section id="case-07" class="level3">
         <h3>Case 7. Year-One Energy-Management Operating Model</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-45">[45]</a>
-        <a href="#ref-44">[44]</a> <a href="#ref-26">[26]</a>
-        <a href="#ref-38">[38]</a> <a href="#ref-6">[6]</a>
-        <a href="#ref-34">[34]</a></sup>
+        References: <sup><a href="#ref-50">[50]</a>
+        <a href="#ref-49">[49]</a> <a href="#ref-27">[27]</a>
+        <a href="#ref-43">[43]</a> <a href="#ref-6">[6]</a>
+        <a href="#ref-39">[39]</a></sup>
         </p>
         <p>An independent power producer (IPP) becomes an energy manager
         when it decides which revenue and risk decisions it must own,
@@ -21641,6 +22062,14 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Quantity accumulated or consumed over time, usually Wh, kWh,
         MWh, TWh.
         </dd>
+        <dt id="glossary-energy-attribute-certificate" data-term="Energy attribute certificate" data-definition="Instrument that represents attributes of generated electricity, such as renewable attributes, and can be transferred or canceled separately from physical electricity depending on the scheme.">
+        Energy attribute certificate
+        </dt>
+        <dd>
+        Instrument that represents attributes of generated electricity,
+        such as renewable attributes, and can be transferred or canceled
+        separately from physical electricity depending on the scheme.
+        </dd>
         <dt id="glossary-energy-management" data-term="Energy management" data-definition="Capability connecting forecasts, market positions, dispatch, contract obligations, imbalance exposure, partner execution, and portfolio risk.">
         Energy management
         </dt>
@@ -21861,6 +22290,14 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Inverter controlled to establish or support voltage/frequency
         reference behavior more actively.
         </dd>
+        <dt id="glossary-guarantee-of-origin" data-term="Guarantee of Origin" data-definition="European energy attribute certificate used to document electricity attributes within the relevant issuing and cancellation rules.">
+        Guarantee of Origin
+        </dt>
+        <dd>
+        European energy attribute certificate used to document
+        electricity attributes within the relevant issuing and
+        cancellation rules.
+        </dd>
         <dt id="glossary-hedge-quality-checklist" data-term="Hedge-quality checklist" data-definition="Test of whether a hedge matches the underlying exposure by reference price, volume, shape, tenor, basis, liquidity, collateral, and governance.">
         Hedge-quality checklist
         </dt>
@@ -21983,6 +22420,13 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         <dd>
         Pattern of demand across time.
         </dd>
+        <dt id="glossary-location-based-scope-2-method" data-term="Location-based Scope 2 method" data-definition="Scope 2 accounting method based on average emissions factors for the grid or location where electricity consumption occurs.">
+        Location-based Scope 2 method
+        </dt>
+        <dd>
+        Scope 2 accounting method based on average emissions factors for
+        the grid or location where electricity consumption occurs.
+        </dd>
         <dt id="glossary-long-duration-energy-storage" data-term="Long-duration energy storage" data-definition="Storage intended to address longer scarcity periods than short intra-day shifting.">
         Long-duration energy storage
         </dt>
@@ -22076,6 +22520,15 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         <dd>
         Time granularity of traded or settled energy, such as hourly or
         15-minute periods depending on market and date.
+        </dd>
+        <dt id="glossary-market-based-scope-2-method" data-term="Market-based Scope 2 method" data-definition="Scope 2 accounting method based on contractual instruments such as energy attribute certificates, qualifying PPAs, supplier-specific emission rates, and residual mix where available.">
+        Market-based Scope 2 method
+        </dt>
+        <dd>
+        Scope 2 accounting method based on contractual instruments such
+        as energy attribute certificates, qualifying PPAs,
+        supplier-specific emission rates, and residual mix where
+        available.
         </dd>
         <dt id="glossary-merchant-tail" data-term="Merchant tail" data-definition="Post-contracted or partially uncontracted period where project revenue depends more directly on market prices and exposed risks.">
         Merchant tail
@@ -22186,6 +22639,14 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         <dd>
         Net present value: discounted value of future cash flows minus
         investment cost.
+        </dd>
+        <dt id="glossary-null-power" data-term="Null power" data-definition="Electricity from which energy attributes have been separated, so it cannot support the same market-based renewable claim without a valid contractual instrument.">
+        Null power
+        </dt>
+        <dd>
+        Electricity from which energy attributes have been separated, so
+        it cannot support the same market-based renewable claim without
+        a valid contractual instrument.
         </dd>
         <dt id="glossary-numerical-weather-prediction" data-term="Numerical weather prediction" data-definition="Physics-based weather model used as an input to power, load, price, and system forecasts.">
         Numerical weather prediction
@@ -22388,6 +22849,14 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Load remaining after subtracting variable renewable generation
         or another specified supply category.
         </dd>
+        <dt id="glossary-residual-mix" data-term="Residual mix" data-definition="Emissions or attribute mix left for electricity consumption after contractual instruments such as certificates have been removed or claimed.">
+        Residual mix
+        </dt>
+        <dd>
+        Emissions or attribute mix left for electricity consumption
+        after contractual instruments such as certificates have been
+        removed or claimed.
+        </dd>
         <dt id="glossary-residual-obligation" data-term="Residual obligation" data-definition="Hourly MWh, EUR, evidence, or operational exposure left after contracted clean supply, storage, hedges, certificates, and control actions have been applied.">
         Residual obligation
         </dt>
@@ -22512,6 +22981,14 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         <dd>
         Battery energy currently stored, usually expressed as MWh or
         percent of usable capacity.
+        </dd>
+        <dt id="glossary-storage-discharge-granular-certificate" data-term="Storage discharge granular certificate" data-definition="Granular certificate associated with storage discharge, requiring matching storage charge/discharge records and loss treatment under the relevant scheme rules.">
+        Storage discharge granular certificate
+        </dt>
+        <dd>
+        Granular certificate associated with storage discharge,
+        requiring matching storage charge/discharge records and loss
+        treatment under the relevant scheme rules.
         </dd>
         <dt id="glossary-stress-test" data-term="Stress test" data-definition="Scenario analysis of severe but plausible or intentionally challenging market, credit, liquidity, or operational conditions.">
         Stress test
@@ -22768,125 +23245,160 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
         Nordic balancing changes.
         </li>
         <li id="ref-21">
-        Fingrid, Main Grid Development Plan 2026-2035.
+        <a href="https://www.svk.se/en/" target="_blank" rel="noopener noreferrer">Energinet,
+        Fingrid, Statnett, and Svenska kraftnät, Batteries in the Nordic
+        reserve markets, April 2025.</a>
         </li>
         <li id="ref-22">
+        Fingrid, Main Grid Development Plan 2026-2035.
+        </li>
+        <li id="ref-23">
         Daniel S. Kirschen and Goran Strbac, Fundamentals of Power
         System Economics.
         </li>
-        <li id="ref-23">
+        <li id="ref-24">
         IEA PVPS Task 1, Sweden national PV survey 2024.
         </li>
-        <li id="ref-24">
+        <li id="ref-25">
         Dominique Hischier, Nordic PPA Markets.
         </li>
-        <li id="ref-25">
+        <li id="ref-26">
         Per Christer Lund, Asmund Drivenes, Bjorn Tjomsland, and Per
         Otto Larsen, The Nordic Electricity Markets.
         </li>
-        <li id="ref-26">
+        <li id="ref-27">
         Iris Marie Mack, Energy Trading and Risk Management.
         </li>
-        <li id="ref-27">
+        <li id="ref-28">
         Energinet, tariff design and tariff catalogue materials.
         </li>
-        <li id="ref-28">
+        <li id="ref-29">
         Fingrid, main grid service pricing.
         </li>
-        <li id="ref-29">
-        Julien Jomaux, The Big Beautiful Batteries.
-        </li>
         <li id="ref-30">
-        EFET and RE-Source, Power Purchase Agreement template materials.
+        IFC / World Bank Group, Utility-Scale Solar Photovoltaic Power
+        Plants: A Project Developer's Guide.
         </li>
         <li id="ref-31">
+        Julien Jomaux, The Big Beautiful Batteries.
+        </li>
+        <li id="ref-32">
+        EFET and RE-Source, Power Purchase Agreement template materials.
+        </li>
+        <li id="ref-33">
         European Parliament, Overview of the diffusion of Power Purchase
         Agreements and Contracts for Difference across Member States.
         </li>
-        <li id="ref-32">
+        <li id="ref-34">
+        <a href="https://www.nordicenergy.org/" target="_blank" rel="noopener noreferrer">Nordic
+        Energy Research and AFRY, Power Purchase Agreements and their
+        use in the Nordics, 2025.</a>
+        </li>
+        <li id="ref-35">
+        <a href="https://eur-lex.europa.eu/eli/reco/2026/917/oj" target="_blank" rel="noopener noreferrer">European
+        Commission, Recommendation (EU) 2026/917 on removing barriers to
+        power purchase agreements.</a>
+        </li>
+        <li id="ref-36">
+        <a href="https://www.acer.europa.eu/" target="_blank" rel="noopener noreferrer">ACER,
+        Assessment on the need for voluntary Power Purchase Agreement
+        contract templates, 2024.</a>
+        </li>
+        <li id="ref-37">
         <a href="https://energytag.org/" target="_blank" rel="noopener noreferrer">EnergyTag,
         response on barriers to PPAs and granular energy matching.</a>
         </li>
-        <li id="ref-33">
+        <li id="ref-38">
         Efstathios E. Michaelides, Energy Storage: Driving the Renewable
         Energy Transition.
         </li>
-        <li id="ref-34">
+        <li id="ref-39">
         Pexapark, Renewables Market Outlook 2026.
         </li>
-        <li id="ref-35">
+        <li id="ref-40">
         Ardour Capital Investments, Energy Storage - A Nontechnical
         Guide.
         </li>
-        <li id="ref-36">
+        <li id="ref-41">
         International Energy Agency, Batteries and Secure Energy
         Transitions.
         </li>
-        <li id="ref-37">
+        <li id="ref-42">
         DNV, Energy Storage Capacity Warranties: Beyond the Fine Print.
         </li>
-        <li id="ref-38">
+        <li id="ref-43">
         Priyanka Shinde, Efficient Trading in the Short-term Electricity
         Markets for Integration of Renewable Energy Sources.
         </li>
-        <li id="ref-39">
+        <li id="ref-44">
         DNV, Hybrid Energy Resource Optimizer.
         </li>
-        <li id="ref-40">
+        <li id="ref-45">
         Alexandre Danthine, Unlocking Continuous Intraday Liquidity.
         </li>
-        <li id="ref-41">
+        <li id="ref-46">
         Godfrey Boyle, Renewable Electricity and the Grid: The Challenge
         of Variability.
         </li>
-        <li id="ref-42">
+        <li id="ref-47">
         NREL, Annual Technology Baseline: The 2024 Electricity Update.
         </li>
-        <li id="ref-43">
+        <li id="ref-48">
         Julien Jomaux, The Big Beautiful Batteries; Long-term BESS
         Revenues: My Personal Take; The Revenue Illusion in Battery
         Storage.
         </li>
-        <li id="ref-44">
+        <li id="ref-49">
         Professional Risk Managers' International Association, The
         Professional Risk Managers' Guide to the Energy Market.
         </li>
-        <li id="ref-45">
+        <li id="ref-50">
         Pexapark, The Next-Gen IPP Playbook.
         </li>
-        <li id="ref-46">
+        <li id="ref-51">
         Tom Brown and Philipp Glaum, Energy Economics Lecture 9: The
         Electricity Grid.
         </li>
-        <li id="ref-47">
+        <li id="ref-52">
         Anna Creti and Fulvio Fontini, Economics of Electricity Markets,
         Competition and Rules.
         </li>
-        <li id="ref-48">
+        <li id="ref-53">
         Ekaterina Moiseeva and Matin Bagherpour, Theory and Mathematics
         of Market Power in Electricity Markets.
         </li>
-        <li id="ref-49">
+        <li id="ref-54">
         Bertrand Cornelusse, How the European Day-Ahead Electricity
         Market Works lecture materials.
         </li>
-        <li id="ref-50">
+        <li id="ref-55">
         DNV and Nyrstar, Unlocking Industrial Flexibility: The Virtual
         Battery.
         </li>
-        <li id="ref-51">
+        <li id="ref-56">
+        <a href="https://ghgprotocol.org/scope-2-guidance" target="_blank" rel="noopener noreferrer">GHG
+        Protocol, Scope 2 Guidance.</a>
+        </li>
+        <li id="ref-57">
+        <a href="https://energytag.org/" target="_blank" rel="noopener noreferrer">EnergyTag,
+        Granular Certificate Scheme Standard v2.</a>
+        </li>
+        <li id="ref-58">
+        Association of Issuing Bodies, EECS Rules Release 8 v1.10.
+        </li>
+        <li id="ref-59">
         <a href="https://www.entsoe.eu/news/2026/05/08/from-energy-demand-to-grid-support-entso-e-explores-data-centres-dual-role/" target="_blank" rel="noopener noreferrer">ENTSO-E,
         Data centres and the power system: expected trends, challenges,
         and opportunities.</a>
         </li>
-        <li id="ref-52">
+        <li id="ref-60">
         Damien Ernst, Energy Markets and Regulation lecture materials.
         </li>
-        <li id="ref-53">
+        <li id="ref-61">
         Alexandre Danthine and Chaspierre, analysis on renewables,
         batteries, and system services.
         </li>
-        <li id="ref-54">
+        <li id="ref-62">
         PRMIA, The Professional Risk Managers' Guide to the Energy
         Market.
         </li>
