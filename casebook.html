@@ -1725,14 +1725,14 @@
         <li><a href="#case-02" id="toc-case-02">Case 2. The 1h, 2h, Or
         4h Battery Decision</a></li>
         <li><a href="#case-03" id="toc-case-03">Case 3. Grid-Constrained
-        Site Screen</a></li>
+        Site Assessment</a></li>
         <li><a href="#case-04" id="toc-case-04">Case 4. Battery Revenue
         Stacks Under Saturation</a></li>
         <li><a href="#case-05" id="toc-case-05">Case 5.
         Balance-Responsibility And Balancing-Service Performance
         Audit</a></li>
         <li><a href="#case-06" id="toc-case-06">Case 6. Data-Centre 24/7
-        Product Screen</a></li>
+        Product Test</a></li>
         <li><a href="#case-07" id="toc-case-07">Case 7. Year-One
         Energy-Management Operating Model</a></li>
         </ul></li>
@@ -1748,19 +1748,19 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.40.0
+        v0.40.1
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
-        and portfolio concepts into professional screens and memos.</p>
+        and portfolio concepts into professional decision memos and
+        models.</p>
         </blockquote>
         <p>The Casebook is the practice layer. Each case asks for a
-        concrete artifact: a quote stack, a duration screen, a
-        grid-aware site screen, a revenue-allocation memo, a partner
-        scorecard, a customer-product test, or an operating-model
-        roadmap. A strong answer states the recommendation, the binding
-        constraint, and the first assumption that would change the
-        recommendation.</p>
+        concrete artifact: a quote stack, a duration test, a grid-aware
+        site assessment, a revenue-allocation memo, a partner scorecard,
+        a customer-product test, or an operating-model roadmap. A strong
+        answer states the recommendation, the binding constraint, and
+        the first assumption that would change the recommendation.</p>
         <p>Use the <a
         href="https://solar-bess-modeling.streamlit.app/">Commercial
         Workbench</a> alongside Cases 1, 4, and 5 when you want to
@@ -2177,7 +2177,7 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         <p>Battery duration is an investment claim: the next MWh of
         energy capacity must earn more than it costs after efficiency,
         degradation, tariffs, grid rights, and contract obligations.
-        This case asks the duration question as an investment screen
+        This case asks the duration question as an investment test
         rather than as a technology preference.</p>
         <section id="decision-question-1" class="level4">
         <h4>Decision Question</h4>
@@ -2228,7 +2228,7 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         <td style="text-align: right;">1h, 2h, 4h</td>
         </tr>
         <tr>
-        <td>Carrying charge used for screen</td>
+        <td>Carrying charge used for the test</td>
         <td style="text-align: right;">10% of incremental
         capex/year</td>
         </tr>
@@ -2244,8 +2244,7 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         <td>Insurance policy</td>
         <td style="text-align: right;">scenario assumes the modeled
         operating plan is insurable; if a policy caps cycles or duty
-        cycle below the modeled plan, rerun the screen under that
-        cap</td>
+        cycle below the modeled plan, rerun the test under that cap</td>
         </tr>
         </tbody>
         </table>
@@ -2565,7 +2564,7 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         </section>
         </section>
         <section id="case-03" class="level3">
-        <h3>Case 3. Grid-Constrained Site Screen</h3>
+        <h3>Case 3. Grid-Constrained Site Assessment</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-11">[11]</a>
         <a href="#ref-14">[14]</a> <a href="#ref-15">[15]</a>
@@ -2576,7 +2575,7 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         <p>Solar development often begins with land and irradiation.
         Project value often ends with grid access, tariffs, congestion,
         curtailment, and what the connection agreement actually permits.
-        The work product is a grid-aware investment screen for three
+        The work product is a grid-aware investment assessment for three
         attractive sites.</p>
         <section id="decision-question-2" class="level4">
         <h4>Decision Question</h4>
@@ -2673,7 +2672,8 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         </tbody>
         </table>
         <p>Assume the merchant value before grid costs is 48 EUR/MWh for
-        all sites. Ignore capex differences for the first screen.</p>
+        all sites. Ignore capex differences for this first-pass
+        comparison.</p>
         </section>
         <section id="tasks-2" class="level4">
         <h4>Tasks</h4>
@@ -2682,7 +2682,7 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         <li>Calculate net value per MWh after grid/tariff/loss
         cost.</li>
         <li>Estimate annual gross margin before capex and opex.</li>
-        <li>Add a grid-rights and timing screen.</li>
+        <li>Add a grid-rights and timing assessment.</li>
         <li>Recommend the priority site.</li>
         </ol>
         </section>
@@ -2801,8 +2801,8 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         </tbody>
         </table>
         </section>
-        <section id="grid-rights-screen" class="level4">
-        <h4>Grid Rights Screen</h4>
+        <section id="grid-rights-assessment" class="level4">
+        <h4>Grid Rights Assessment</h4>
         <table>
         <colgroup>
         <col style="width: 25%" />
@@ -2848,7 +2848,7 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         <p>The tariff and connection question includes EUR/MWh, reserved
         capacity, geography, limited access, and producer payments.
         Nordic tariff work increasingly separates these items. A site
-        screen should therefore ask what capacity is being reserved,
+        assessment should therefore ask what capacity is being reserved,
         when it is firm, whether limited or interruptible access is
         acceptable, and whether import rights let the battery charge
         when the commercial case requires it.</p>
@@ -2896,8 +2896,8 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         </tr>
         </tbody>
         </table>
-        <p>Use this as an undiscounted screen rather than a project net
-        present value (NPV). It keeps a small annual yield advantage
+        <p>Use this as an undiscounted comparison rather than a project
+        net present value (NPV). It keeps a small annual yield advantage
         from hiding a large timing and optionality penalty.</p>
         </section>
         <section id="decision-memo-2" class="level4">
@@ -3829,7 +3829,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         </section>
         </section>
         <section id="case-06" class="level3">
-        <h3>Case 6. Data-Centre 24/7 Product Screen</h3>
+        <h3>Case 6. Data-Centre 24/7 Product Test</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-1">[1]</a>
         <a href="#ref-32">[32]</a> <a href="#ref-33">[33]</a>
@@ -4598,7 +4598,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <td>shaped offers need consistent risk pricing</td>
         </tr>
         <tr>
-        <td>BESS sizing and dispatch screen</td>
+        <td>BESS sizing and dispatch model</td>
         <td>build with optimizer input</td>
         <td style="text-align: right;"><code>140,000 EUR</code></td>
         <td>analyst + investment owner</td>
@@ -4712,7 +4712,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         </tr>
         </tbody>
         </table>
-        <p>The PPA quote stack and BESS screen receive more year-one
+        <p>The PPA quote stack and BESS model receive more year-one
         funding because live commercial and IC decisions can use them
         with available internal data. Partner commercial action waits
         for raw evidence.</p>
@@ -4756,7 +4756,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         </tr>
         <tr>
         <td>2</td>
-        <td>BESS duration/revenue-stack screen v1</td>
+        <td>BESS duration/revenue-stack model v1</td>
         <td>1h/2h/4h, grid-right, degradation, and control-right
         decisions</td>
         </tr>
@@ -4968,7 +4968,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         residual risk</td>
         </tr>
         <tr>
-        <td>BESS screen</td>
+        <td>BESS model</td>
         <td>changes IC decisions or preserves valuable design
         option</td>
         <td>dispatch value cannot be tied to grid rights, degradation,
@@ -5006,7 +5006,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         execution outsourced.</p>
         <p>Approve the full <code>900,000 EUR</code> allocation shown
         above. The first year should produce a PPA quote stack, BESS
-        design screen, data-right remediation, monthly portfolio risk
+        design model, data-right remediation, monthly portfolio risk
         pack, forecast evaluation layer, and a narrow feasible-benchmark
         pilot. Do not approve an internal trading desk or full ETRM
         implementation until data rights, independent settlement checks,
@@ -6488,11 +6488,11 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         contracted clean supply, storage, hedges, certificates, and
         control actions have been applied.
         </dd>
-        <dt id="glossary-residual-supply-index" data-term="Residual Supply Index" data-definition="Market-power screen comparing supply available without a supplier to demand; values below one indicate pivotality in the simple form.">
+        <dt id="glossary-residual-supply-index" data-term="Residual Supply Index" data-definition="Market-power diagnostic comparing supply available without a supplier to demand; values below one indicate pivotality in the simple form.">
         Residual Supply Index
         </dt>
         <dd>
-        Market-power screen comparing supply available without a
+        Market-power diagnostic comparing supply available without a
         supplier to demand; values below one indicate pivotality in the
         simple form.
         </dd>
@@ -6591,12 +6591,13 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         Risk that production or consumption timing differs from the
         contracted or hedged delivery shape.
         </dd>
-        <dt id="glossary-short-circuit-ratio" data-term="Short-circuit ratio" data-definition="Screening concept comparing grid strength to connected converter capacity; detailed definition depends on method.">
+        <dt id="glossary-short-circuit-ratio" data-term="Short-circuit ratio" data-definition="Grid-strength indicator comparing available short-circuit power with connected converter capacity; detailed definition depends on method.">
         Short-circuit ratio
         </dt>
         <dd>
-        Screening concept comparing grid strength to connected converter
-        capacity; detailed definition depends on method.
+        Grid-strength indicator comparing available short-circuit power
+        with connected converter capacity; detailed definition depends
+        on method.
         </dd>
         <dt id="glossary-state-of-charge" data-term="State of charge" data-definition="Battery energy currently stored, usually expressed as MWh or percent of usable capacity.">
         State of charge
@@ -7105,7 +7106,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
           return {
             label: "Casebook",
             title: "Applied Decision Practice",
-            summary: "The cases give bounded practice in screens, memos, scorecards, product tests, and operating-model choices.",
+            summary: "The cases give bounded practice in memos, scorecards, product tests, and operating-model choices.",
             points: [
               "Use the given facts before adding judgment.",
               "Find the binding constraint and the first assumption that changes the answer.",
@@ -7133,7 +7134,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
           return {
             label: "Volume II",
             title: "Commercial Analysis, Contracts, And Asset Decisions",
-            summary: "The second volume works through commercial and analytical examples: site screens, tariffs, PPAs, BESS sizing, dispatch, forecasting, valuation, risk, and portfolio controls.",
+            summary: "The second volume works through commercial and analytical examples: site assessments, tariffs, PPAs, BESS sizing, dispatch, forecasting, valuation, risk, and portfolio controls.",
             points: [
               "Decompose a PPA or battery case into price, shape, imbalance, grid, credit, optionality, and control rights.",
               "Ask what a model is allowed to know, what it is optimizing, and which constraints are binding.",
@@ -7160,8 +7161,8 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         if (volumeTitle.includes("Casebook") || volumeTitle.includes("Applied Cases")) {
           return {
             label: "Casebook",
-            title: "Applied Decision Memos And Model Screens",
-            summary: "The Casebook gives bounded exercises around quote stacks, duration screens, grid-aware site screens, partner scorecards, customer-product screens, and operating-model roadmaps.",
+            title: "Applied Decision Memos And Models",
+            summary: "The Casebook gives bounded exercises around quote stacks, duration tests, grid-aware site assessments, partner scorecards, customer-product tests, and operating-model roadmaps.",
             points: [
               "Use the lectures to produce a recommendation.",
               "Name the binding constraint, retained risk, and assumption that would change the decision.",
@@ -7228,7 +7229,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         const p = document.createElement("p");
         p.className = "home-lede";
         p.textContent = casebook
-          ? "The Casebook gives bounded commercial exercises. Each case asks for a concrete artifact: a quote stack, duration screen, site screen, partner scorecard, product memo, or operating-model choice."
+          ? "The Casebook gives bounded commercial exercises. Each case asks for a concrete artifact: a quote stack, duration test, site assessment, partner scorecard, product memo, or operating-model choice."
           : "These notes are for a fast, practical ramp into power markets, especially around renewable portfolios. They are written for analysts, business developers, quants, modelers, and other professionals entering power-market work without much prior domain experience. The volumes move from physical and institutional basics, to commercial examples and analytical workflows, to current strategic questions. The aim is to make key terms, units, constraints, and recurring trade-offs easier to recognize. The references provide the path for deeper study and follow-up.";
         const heroActions = document.createElement("div");
         heroActions.className = "arc-actions home-actions";
@@ -7266,7 +7267,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         arcTitle.textContent = casebook ? "Casebook Structure" : "Course Structure";
         const arcIntro = document.createElement("p");
         arcIntro.textContent = casebook
-          ? "The cases move from commercial screens to operating-model choices. Each case is standalone, and together they test whether the concepts can produce usable work."
+          ? "The cases move from commercial memos to operating-model choices. Each case is standalone, and together they test whether the concepts can produce usable work."
           : "The sequence moves from foundations to commercial examples to strategic questions, then into applied cases and reference material.";
         arcHeading.append(arcTitle, arcIntro);
 
@@ -8521,7 +8522,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
       if (brandTitle) brandTitle.textContent = rootTitle();
       const brandSubtitle = document.querySelector(".sidebar-brand span");
       if (brandSubtitle && isCasebookProduct()) {
-        brandSubtitle.textContent = "Applied decision cases with numerical screens and commercial memos.";
+        brandSubtitle.textContent = "Applied decision cases with numerical models and commercial memos.";
       }
       const chapters = collectChapters();
       buildHome(chapters);

@@ -1843,14 +1843,14 @@ Notes">
         <li><a href="#case-02" id="toc-case-02">Case 2. The 1h, 2h, Or
         4h Battery Decision</a></li>
         <li><a href="#case-03" id="toc-case-03">Case 3. Grid-Constrained
-        Site Screen</a></li>
+        Site Assessment</a></li>
         <li><a href="#case-04" id="toc-case-04">Case 4. Battery Revenue
         Stacks Under Saturation</a></li>
         <li><a href="#case-05" id="toc-case-05">Case 5.
         Balance-Responsibility And Balancing-Service Performance
         Audit</a></li>
         <li><a href="#case-06" id="toc-case-06">Case 6. Data-Centre 24/7
-        Product Screen</a></li>
+        Product Test</a></li>
         <li><a href="#case-07" id="toc-case-07">Case 7. Year-One
         Energy-Management Operating Model</a></li>
         </ul></li>
@@ -1866,7 +1866,7 @@ Notes">
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.40.0
+        v0.40.1
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -1941,8 +1941,8 @@ Notes">
         cannibalization, storage duration, AI and data centres,
         long-duration flexibility, adequacy, market design, and evidence
         standards.</li>
-        <li>The Casebook gives applied exercises: screens, memos, quote
-        stacks, partner scorecards, and assumption flips.</li>
+        <li>The Casebook gives applied exercises: memos, quote stacks,
+        partner scorecards, product tests, and assumption flips.</li>
         <li>The Commercial Workbench is the companion tool for the
         shaped solar-storage thread: delivery coverage, residual gaps,
         indicative premium, BESS value, and partner-evidence
@@ -3745,7 +3745,7 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <code>10 MW</code> reserve product in every market, because the
         product also defines response speed, endurance, symmetry,
         telemetry, prequalification, and state-of-charge management.</p>
-        <p>Use a four-field screen:</p>
+        <p>Use a four-field test:</p>
         <table>
         <colgroup>
         <col style="width: 50%" />
@@ -3845,7 +3845,7 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         from actual supply. A battery can be prequalified in several
         markets and in both directions, so prequalified MW is not the
         same as installed capacity or active daily offer. For a project
-        screen, treat prequalification as access to a product; the
+        model, treat prequalification as access to a product; the
         dispatch model still decides whether bidding the product beats
         the feasible alternatives in that interval.</p>
         </section>
@@ -3893,7 +3893,7 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <h4>Current Debates And Caveats</h4>
         <p>Ancillary-service saturation is plausible when many fast
         flexible assets chase a small product, but timing and magnitude
-        are market-specific. For a project screen, test saturation
+        are market-specific. For a project model, test saturation
         product by product: market size, eligible capacity,
         qualification rules, activation patterns, and the opportunity
         cost of using the same battery elsewhere.</p>
@@ -3985,7 +3985,7 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <li>Fault level / short-circuit strength: the network’s ability
         to supply fault current and maintain a clear voltage reference
         during faults.</li>
-        <li>Short-circuit ratio: a screening concept comparing grid
+        <li>Short-circuit ratio: a diagnostic concept comparing grid
         strength with converter capacity; definitions and thresholds
         depend on the study method.</li>
         <li>Grid-following inverter: inverter that synchronizes to an
@@ -4102,8 +4102,8 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         grid, an inverter has a clear voltage waveform to follow and
         protection systems see large fault currents. In a weak grid,
         converter controls become more important and can interact.
-        Practitioner material on short-circuit-ratio screening is useful
-        for intuition, but detailed threshold claims belong in
+        Practitioner material on short-circuit-ratio diagnostics is
+        useful for intuition, but detailed threshold claims belong in
         engineering studies, not in a general lecture.</p>
         <p>Inverter-based resources are programmable, which creates both
         opportunity and risk. A battery or solar inverter can be very
@@ -4167,8 +4167,8 @@ reactive MVAr obligation or headroom</code></pre>
         </tr>
         <tr>
         <td>Does the node look electrically weak?</td>
-        <td>Fault-level or short-circuit screening, local TSO/DSO study
-        language.</td>
+        <td>Fault-level or short-circuit diagnostics, local TSO/DSO
+        study language.</td>
         </tr>
         <tr>
         <td>What happens under N-1?</td>
@@ -4219,10 +4219,10 @@ reactive MVAr obligation or headroom</code></pre>
         fault-current capability, and grid-forming behavior is still
         evolving. Named products and eligibility need current TSO or
         grid-code evidence.</p>
-        <p>Technical screening concepts such as short-circuit ratio are
-        useful for framing the grid study. They are not a substitute for
-        the project’s interconnection study, equipment capability
-        curves, protection study, or TSO/DSO requirements.</p>
+        <p>Technical diagnostics such as short-circuit ratio are useful
+        for framing the grid study. They are not a substitute for the
+        project’s interconnection study, equipment capability curves,
+        protection study, or TSO/DSO requirements.</p>
         </section>
         <section id="recap-9" class="level4">
         <h4>Recap</h4>
@@ -5112,8 +5112,8 @@ basis exposure = area price - financial reference price</code></pre>
         daylight hours, unevenly by season and weather, and in a grid
         where bidding areas and local connection conditions can separate
         the commercial value of similar MWh.</p>
-        <section id="two-site-screen" class="level5">
-        <h5>Two-Site Screen</h5>
+        <section id="two-site-comparison" class="level5">
+        <h5>Two-Site Comparison</h5>
         <p>Take two illustrative <code>100 MW</code> solar projects with
         the same annual generation and capex.</p>
         <table>
@@ -5205,10 +5205,10 @@ Site B: 100,000 MWh x 37 EUR/MWh = EUR 3.7 million/year</code></pre>
         tariff table.</p>
         </section>
         </section>
-        <section id="evidence-screen" class="level4">
-        <h4>Evidence Screen</h4>
-        <p>A first Nordic project screen should separate what is common
-        regional structure from what is local evidence.</p>
+        <section id="evidence-checklist" class="level4">
+        <h4>Evidence Checklist</h4>
+        <p>A first Nordic project assessment should separate what is
+        common regional structure from what is local evidence.</p>
         <table>
         <colgroup>
         <col style="width: 33%" />
@@ -5792,7 +5792,7 @@ operating_cash_before_debt =
         <li><code>1 GW average x 8,760 hours/year = 8.76 TWh/year</code>.</li>
         <li>IEA PVPS reports Sweden’s 2024 average PV yield at
         <code>850 kWh/kWp</code>; a round
-        <code>1 GWh/year per megawatts peak (MWp)</code> is a screening
+        <code>1 GWh/year per megawatts peak (MWp)</code> is a first-pass
         simplification near the same order of magnitude. Site-specific
         irradiation, losses, degradation, and availability replace this
         round anchor in an investment model.</li>
@@ -5915,7 +5915,7 @@ operating_cash_before_debt =
         </ul>
         <p>An investment committee should receive the link from physical
         assumptions to risk-bearing cash flows alongside the IRR.</p>
-        <p>For a shaped customer offer, the same screen applies to the
+        <p>For a shaped customer offer, the same logic applies to the
         promise rather than the site. Show the MWh that the plant
         naturally produces, the MWh the customer wants in each period,
         the cost of filling the gap, and the portion of cash flow stable
@@ -5971,7 +5971,7 @@ operating_cash_before_debt =
         <a href="#ref-30">[30]</a></sup>
         </p>
         <p>A project can clear the revenue model and still fail the
-        grid-access screen. The connection offer fixes more than a cable
+        grid-access test. The connection offer fixes more than a cable
         route: it decides how many MW the site can inject or withdraw,
         which charges sit on capacity rather than energy, and when
         access can be limited. For a solar, battery, or hybrid project,
@@ -6119,10 +6119,10 @@ operating_cash_before_debt =
         access may be cheaper but changes dispatch. Compare the full net
         value of each access design:</p>
         <pre class="text"><code>net_value = market_value - tariff_cost - cost_of_constraints</code></pre>
-        <p>Connection timing belongs inside the same screen. A
+        <p>Connection timing belongs inside the same assessment. A
         higher-margin site that connects late can lose to a lower-margin
         site that can be built sooner.</p>
-        <p>Illustrative timing screen:</p>
+        <p>Illustrative timing test:</p>
         <table style="width:100%;">
         <colgroup>
         <col style="width: 23%" />
@@ -6200,7 +6200,7 @@ battery_capex_and_opex
         <li>Does co-location reduce network use or merely move cost into
         another tariff category?</li>
         </ul>
-        <p>Turn the answers into a site screen before ranking
+        <p>Turn the answers into a site assessment before ranking
         projects.</p>
         <table>
         <colgroup>
@@ -6209,7 +6209,7 @@ battery_capex_and_opex
         </colgroup>
         <thead>
         <tr>
-        <th>Site-Screen Field</th>
+        <th>Site-Assessment Field</th>
         <th>What To Record</th>
         </tr>
         </thead>
@@ -6261,10 +6261,10 @@ battery_capex_and_opex
         <p>The commercial model should show the site as a grid-rights
         object, not as a latitude-longitude point alone.</p>
         <p>The IFC utility-scale solar guide adds the development
-        diligence layer that often decides whether the grid screen is
-        real. A useful site memo should attach the grid connection
+        diligence layer that often decides whether the grid assessment
+        is real. A useful site memo should attach the grid connection
         feasibility evidence, land and access constraints, geotechnical
-        and environmental screens, water and soiling assumptions,
+        and environmental studies, water and soiling assumptions,
         permitting path, and construction access. Those items do not
         replace the tariff model; they decide whether the tariff and
         connection assumptions can be executed on the ground.</p>
@@ -6390,8 +6390,8 @@ state_of_charge_{h+1} = state_of_charge_h + charge_h x efficiency - discharge_h<
   - extra_grid_and_market_costs
   - capital_charge</code></pre>
         </section>
-        <section id="commercial-screen" class="level4">
-        <h4>Commercial Screen</h4>
+        <section id="commercial-test" class="level4">
+        <h4>Commercial Test</h4>
         <p>Compare designs on cash-flow quality as well as annual
         MWh.</p>
         <table>
@@ -6449,7 +6449,7 @@ state_of_charge_{h+1} = state_of_charge_h + charge_h x efficiency - discharge_h<
         </section>
         <section id="numerical-intuition-17" class="level4">
         <h4>Numerical Intuition</h4>
-        <p>Scenario assumptions for one investment screen. They are
+        <p>Scenario assumptions for one investment test. They are
         illustrative; current market inputs must be refreshed before use
         in a real case. The Swedish PV deployment and generation scale
         anchors come from IEA PVPS Task 1 Sweden 2024; the design
@@ -6512,7 +6512,7 @@ cash_flow_before_tax =
         moves by a few points changes the investment answer. The
         comparison below adds an explicit curtailment-value loss to all
         three designs, so the solar-only result moves from the first
-        screen’s <code>0.20m EUR/year</code> to
+        test’s <code>0.20m EUR/year</code> to
         <code>0.00m EUR/year</code>.</p>
         <section id="three-design-comparison" class="level5">
         <h5>Three-Design Comparison</h5>
@@ -6759,8 +6759,8 @@ extra visible value = 1.05 million EUR/year</code></pre>
         or a financial settlement against a reference price. Each
         version assigns quantity, shape, balancing, credit,
         certificates, data, and fallback exposure to different parties.
-        A usable PPA screen therefore starts with the mismatches before
-        it argues about the label.</p>
+        A usable PPA assessment therefore starts with the mismatches
+        before it argues about the label.</p>
         <section id="opening-puzzle-18" class="level4">
         <h4>Opening Puzzle</h4>
         <p>A customer, lender, trader, and asset manager all approve the
@@ -7497,8 +7497,8 @@ net_before_collateral_and_accounting = 0.88m EUR/year</code></pre>
         state that the hedge settles against a reference price rather
         than the buyer’s delivered cost.</p>
         </section>
-        <section id="recommendation-screen" class="level4">
-        <h4>Recommendation Screen</h4>
+        <section id="recommendation-test" class="level4">
+        <h4>Recommendation Test</h4>
         <p>Use a weighted decision table when the buyer has multiple
         objectives.</p>
         <table>
@@ -7759,7 +7759,7 @@ P_t = market/reference price, EUR/MWh</code></pre>
         <p>Reference price is the market index or formula against which
         a financial or indexed structure settles.</p>
         <p>Levelized cost of energy (LCOE) is a cost-of-production
-        metric. It is useful for asset screening, but a PPA price also
+        metric. It is useful for asset comparison, but a PPA price also
         has to cover shape, settlement, evidence, credit, balancing,
         optionality, and retained risk.</p>
         <p>Guarantee of origin (GO) is a certificate used in Europe to
@@ -7863,7 +7863,7 @@ P_t = market/reference price, EUR/MWh</code></pre>
         line unless the pricing method assigns a probability or risk
         margin to it:</p>
         <pre class="text"><code>stress_residual_cost = 5,000 x 120 = 600,000 EUR/year</code></pre>
-        <p>The screen shows which hours create the price. Price the base
+        <p>The table shows which hours create the price. Price the base
         expected shape cost separately from the tail: through
         probability weighting, a risk margin, a cap, a collar, a
         pass-through, or a reopener. If the stress bucket is wrong, the
@@ -7919,7 +7919,7 @@ P_t = market/reference price, EUR/MWh</code></pre>
         enough to buy. The commercial task is to find products where the
         seller’s controllable cost is below the buyer’s
         willingness-to-pay.</p>
-        <p>Use this screen:</p>
+        <p>Use this test:</p>
         <pre class="text"><code>seller margin = offer price - seller all-in cost
 buyer surplus = buyer willingness-to-pay - offer price</code></pre>
         <p>A good offer has both. If the seller margin is positive while
@@ -8017,9 +8017,10 @@ buyer surplus = buyer willingness-to-pay - offer price</code></pre>
         models are the two main pricing approaches. Nordic
         forward-market liquidity is weaker at longer tenors than the
         term of many PPAs, so a ten- or fifteen-year price usually
-        cannot be read from one clean screen. A pricing memo should say
-        which inputs come from observable forwards, which come from a
-        fundamental view, and which remain negotiated risk premia.</p>
+        cannot be read from one clean market curve. A pricing memo
+        should say which inputs come from observable forwards, which
+        come from a fundamental view, and which remain negotiated risk
+        premia.</p>
         </section>
         <section id="example-9" class="level4">
         <h4>Example</h4>
@@ -8146,7 +8147,7 @@ risk allocation and governance</code></pre>
         <section id="definitions-19" class="level4">
         <h4>Definitions</h4>
         <ul>
-        <li>Proposal screen: quick test of whether a customer promise is
+        <li>Proposal test: quick check of whether a customer promise is
         physically, commercially, and contractually plausible.</li>
         <li>Term-sheet variable: contract choice that changes cash flow
         or risk, such as quantity, settlement index, collar, curtailment
@@ -8552,8 +8553,9 @@ risk allocation and governance</code></pre>
         color and product patterns, but binding terms require the actual
         contract, legal review, current certificate rules, and current
         market/settlement sources.</p>
-        <p>The numerical case is an illustrative IC screen. It is
-        designed to teach structure, not to imply a market quote.</p>
+        <p>The numerical case is an illustrative investment-committee
+        (IC) test. It is designed to teach structure, not to imply a
+        market quote.</p>
         </section>
         <section id="recap-21" class="level4">
         <h4>Recap</h4>
@@ -8738,8 +8740,8 @@ risk allocation and governance</code></pre>
         prequalified for several products and for both directions. It
         also states the practical stacking rule plainly: the same
         capacity cannot be bid into multiple markets for the same
-        delivery period. Product eligibility is therefore the start of
-        the screen; interval-level opportunity cost is the decision.</p>
+        delivery period. Product eligibility is therefore the starting
+        point; interval-level opportunity cost is the decision.</p>
         </section>
         <section id="numerical-intuition-22" class="level4">
         <h4>Numerical Intuition</h4>
@@ -8786,7 +8788,7 @@ net arbitrage value = 12,100 - 2,160 - 600 = 9,340 EUR</code></pre>
         <pre class="text"><code>80 MWh x 70 EUR/MWh = 5,600 EUR</code></pre>
         <p>Now the same reserve contract is weak:</p>
         <pre class="text"><code>capacity payment - opportunity cost = 4,000 - 5,600 = -1,600 EUR</code></pre>
-        <p>The general screen is:</p>
+        <p>The general test is:</p>
         <pre class="text"><code>incremental_stack_value =
   capacity_payment
   + expected_activation_margin
@@ -8980,7 +8982,7 @@ stress_case_value</code></pre>
         </tr>
         </tbody>
         </table>
-        <p>Illustrative financeability screen:</p>
+        <p>Illustrative financeability test:</p>
         <table>
         <colgroup>
         <col style="width: 15%" />
@@ -9042,7 +9044,7 @@ stress_case_value</code></pre>
         hours, they flatten the spread they came to harvest. The first
         batteries may earn by exploiting scarcity across time. The later
         batteries may compete that scarcity away.</p>
-        <p>For a project screen, saturation changes two things:</p>
+        <p>For a project model, saturation changes two things:</p>
         <ul>
         <li>expected price: future reserve or spread revenue may be
         lower than recent history.</li>
@@ -9247,7 +9249,7 @@ annualized_extra_capex
         <p>The four-hour version has <code>200 MWh</code> more energy
         capacity.</p>
         <p>Using the all-in <code>USD 175/kWh</code> figure only as an
-        order-of-magnitude screen:</p>
+        order-of-magnitude test:</p>
         <pre class="text"><code>200 MWh = 200,000 kWh
 extra energy block scale = 200,000 x 175 = USD 35,000,000</code></pre>
         <p>Use a rough <code>10%</code> annual carrying charge for the
@@ -9261,7 +9263,7 @@ extra energy block scale = 200,000 x 175 = USD 35,000,000</code></pre>
         <pre class="text"><code>cycles_needed = 3,500,000 / (200 x 25) = 700 cycles/year</code></pre>
         <p>At <code>USD 75/MWh</code> net value:</p>
         <pre class="text"><code>cycles_needed = 3,500,000 / (200 x 75) = about 233 cycles/year</code></pre>
-        <p>This screen tells the team what evidence must support the
+        <p>This test tells the team what evidence must support the
         duration decision:</p>
         <pre class="text"><code>show me the cycles, the margin, the contract, and the constraint.</code></pre>
         </section>
@@ -9519,8 +9521,8 @@ extra energy block scale = 200,000 x 175 = USD 35,000,000</code></pre>
         property.</p>
         </section>
         </section>
-        <section id="worked-decision-screen" class="level4">
-        <h4>Worked Decision Screen</h4>
+        <section id="worked-decision-test" class="level4">
+        <h4>Worked Decision Test</h4>
         <p>Suppose a developer is comparing two designs for a
         solar-plus-storage project.</p>
         <table>
@@ -9605,10 +9607,9 @@ extra energy block scale = 200,000 x 175 = USD 35,000,000</code></pre>
         this grid connection allows charging, and the extra MWh survives
         degradation, insurance, and tariff costs,” then model it
         properly.</p>
-        <p>The same screen works for <code>1h</code>, <code>2h</code>,
+        <p>The same method works for <code>1h</code>, <code>2h</code>,
         and <code>4h</code> when each block is valued at the margin. The
-        next table is an illustrative scenario screen for
-        sensitivity.</p>
+        next table is an illustrative scenario test for sensitivity.</p>
         <table>
         <colgroup>
         <col style="width: 11%" />
@@ -9697,11 +9698,11 @@ Both fail if Y is true.</code></pre>
         useful cycles and net value than it costs through capital,
         degradation, insurance restrictions, tariffs, risk, and
         opportunity cost. That turns the opening <code>2h</code> versus
-        <code>4h</code> question into a screen: show the contract shape,
-        spread persistence, curtailment window, grid rights, warranty
-        and insurance limits, and portfolio need that will keep the
-        marginal MWh busy. Once duration clears that test, the next
-        decision is how to dispatch the battery.</p>
+        <code>4h</code> question into an investment test: show the
+        contract shape, spread persistence, curtailment window, grid
+        rights, warranty and insurance limits, and portfolio need that
+        will keep the marginal MWh busy. Once duration clears that test,
+        the next decision is how to dispatch the battery.</p>
         <div class="lecture-end">
 
         </div>
@@ -10962,7 +10963,7 @@ or wait and consume time</code></pre>
         aggressive early dispatch can create a later cost. A correct
         model links today’s cycling to tomorrow’s ability to
         perform.</p>
-        <p>The simple screen is:</p>
+        <p>The simple test is:</p>
         <pre class="text"><code>does today&#39;s dispatch bring forward augmentation,
 reduce availability,
 or weaken contract performance?</code></pre>
@@ -11506,12 +11507,12 @@ insurance policy, availability plan, or augmentation budget can support</code></
         <pre class="text"><code>DSCR = 2.70 / 2.41
      ~= 1.12x</code></pre>
         <p>In this illustrative case, the project may be attractive to
-        equity and still fail the debt-sizing screen because the
-        proposed debt service is too high for the downside cash flow.
-        The solution is not always “reject.” It could be less debt,
-        longer tenor, different amortization, stronger contracted
-        revenue, a different PPA structure, lower fixed grid cost, or a
-        clearer split between bankable revenue and merchant upside.</p>
+        equity and still fail the debt-sizing test because the proposed
+        debt service is too high for the downside cash flow. The
+        solution is not always “reject.” It could be less debt, longer
+        tenor, different amortization, stronger contracted revenue, a
+        different PPA structure, lower fixed grid cost, or a clearer
+        split between bankable revenue and merchant upside.</p>
         <p>This is debt sculpting in plain language: shape the debt
         service around the cash flows the lender is willing to count,
         rather than pretending all modeled upside supports the same
@@ -12029,7 +12030,7 @@ The marginal portfolio risk is materially different.</code></pre>
         <thead>
         <tr>
         <th>Portfolio question</th>
-        <th>Stronger screen</th>
+        <th>Stronger test</th>
         </tr>
         </thead>
         <tbody>
@@ -12255,11 +12256,11 @@ The marginal portfolio risk is materially different.</code></pre>
         counterfactual. If the relevant exposed volume is 250 GWh and
         the feasible gap is <code>1 EUR/MWh</code>, then:</p>
         <pre class="text"><code>1 EUR/MWh x 250,000 MWh = EUR 250,000</code></pre>
-        <p>The calculation is a materiality screen, not the scorecard.
-        The follow-up question is whether the <code>1 EUR/MWh</code> gap
-        is attributable to execution, data, risk limits, market
-        liquidity, settlement errors, missing control rights, or a
-        benchmark that was never feasible.</p>
+        <p>The calculation is a materiality test, not the scorecard. The
+        follow-up question is whether the <code>1 EUR/MWh</code> gap is
+        attributable to execution, data, risk limits, market liquidity,
+        settlement errors, missing control rights, or a benchmark that
+        was never feasible.</p>
         <section id="when-a-small-delta-matters" class="level5">
         <h5>When A Small Delta Matters</h5>
         <p>Suppose a partner manages 500 GWh/year of exposed production
@@ -12713,7 +12714,7 @@ The marginal portfolio risk is materially different.</code></pre>
         <td>high</td>
         </tr>
         <tr>
-        <td>BESS sizing and dispatch screen</td>
+        <td>BESS sizing and dispatch model</td>
         <td style="text-align: right;"><code>140,000 EUR</code></td>
         <td style="text-align: right;">medium</td>
         <td>project design and investment-committee (IC) support</td>
@@ -12874,7 +12875,7 @@ The marginal portfolio risk is materially different.</code></pre>
         in shaped-offer risk pricing.</td>
         </tr>
         <tr>
-        <td>BESS sizing and dispatch screen</td>
+        <td>BESS sizing and dispatch model</td>
         <td>Approve</td>
         <td style="text-align: right;"><code>140,000 EUR</code></td>
         <td>Addresses the <code>750,000 EUR/year</code> scenario value
@@ -12942,7 +12943,7 @@ The marginal portfolio risk is materially different.</code></pre>
         <pre class="text"><code>data rights
   -&gt; reconciliation
   -&gt; position and settlement truth
-  -&gt; PPA quote stack / BESS screen / risk pack
+  -&gt; PPA quote stack / BESS model / risk pack
   -&gt; feasible benchmark
   -&gt; partner mandate or fee redesign</code></pre>
         <p>PPA pricing can start before every partner feed is fixed,
@@ -12950,7 +12951,7 @@ The marginal portfolio risk is materially different.</code></pre>
         internally. Partner benchmarking cannot. It needs raw evidence
         from forecast, bid, schedule, dispatch, activation, meter, and
         settlement files.</p>
-        <p>BESS design sits between the two. A project screen can start
+        <p>BESS design sits between the two. A project model can start
         with scenario assumptions, but dispatch value should be haircut
         until optimizer control rights, reserve commitments, grid
         import/export rights, and degradation policy are explicit.</p>
@@ -12985,7 +12986,7 @@ The marginal portfolio risk is materially different.</code></pre>
         </tr>
         <tr>
         <td>Q2</td>
-        <td>BESS sizing and dispatch screen v1</td>
+        <td>BESS sizing and dispatch model v1</td>
         <td>IC can compare duration, revenue stack, degradation, grid
         rights, and control-right assumptions</td>
         </tr>
@@ -13108,7 +13109,7 @@ The marginal portfolio risk is materially different.</code></pre>
         risk</td>
         </tr>
         <tr>
-        <td>BESS screen</td>
+        <td>BESS model</td>
         <td>changes IC recommendation or design option</td>
         <td>optimizer value cannot be reconciled to constraints and
         degradation</td>
@@ -13147,7 +13148,7 @@ The marginal portfolio risk is materially different.</code></pre>
         <p>The constrained recommendation is:</p>
         <ol type="1">
         <li>Fund common data contracts and reconciliation first.</li>
-        <li>Build the PPA quote stack and BESS screen because live
+        <li>Build the PPA quote stack and BESS model because live
         commercial and IC decisions need them.</li>
         <li>Remediate partner data rights before scaling any
         scorecard.</li>
@@ -13689,7 +13690,7 @@ collateral need = 900,000 x 80%
         <section id="in-practice-26" class="level4">
         <h4>In Practice</h4>
         <p>For a renewable IPP, the first trading capability is often a
-        disciplined risk view before a trader with a screen.</p>
+        disciplined risk view before a live trading seat.</p>
         <p>That view should connect:</p>
         <ul>
         <li>physical assets</li>
@@ -13844,7 +13845,7 @@ collateral need = 900,000 x 80%
         <h4>Numerical Intuition</h4>
         <ul>
         <li><code>coverage ratio = eligible flexible MW / product procurement MW</code>.
-        Use this as the first saturation screen.</li>
+        Use this as the first saturation test.</li>
         <li><code>deliverable-energy ratio = usable MWh during activation window / required activation MWh</code>.
         This prevents MW-only saturation claims.</li>
         <li><code>2 h</code> and <code>4 h</code> duration examples are
@@ -13920,7 +13921,7 @@ collateral need = 900,000 x 80%
         </tr>
         </tbody>
         </table>
-        <p>Without this evidence, the screen can guide strategy, but it
+        <p>Without this evidence, the test can guide strategy, but it
         cannot support a current price forecast.</p>
         </section>
         </section>
@@ -13974,7 +13975,7 @@ collateral need = 900,000 x 80%
         re-optimize.</p>
         <p>The asset capability stayed constant; the scarce system need
         changed.</p>
-        <p>A simple allocation screen makes the saturation point
+        <p>A simple allocation test makes the saturation point
         concrete.</p>
         <table>
         <colgroup>
@@ -14066,10 +14067,9 @@ collateral need = 900,000 x 80%
         </section>
         <section id="current-debates-and-caveats-13" class="level4">
         <h4>Current Debates And Caveats</h4>
-        <p>As of 2026-05-16, saturation is used here as a
-        product-by-product screen. Country-wide or product-wide claims
-        about Nordic BESS ancillary-service saturation need current
-        market evidence.</p>
+        <p>As of 2026-05-16, saturation is treated here product by
+        product. Country-wide or product-wide claims about Nordic BESS
+        ancillary-service saturation need current market evidence.</p>
         <p>PICASSO 2025 material can anchor dated discussion of aFRR
         platform operation, including fast activation-optimization
         timing. Battery-project revenue forecasting still needs the
@@ -14120,7 +14120,7 @@ collateral need = 900,000 x 80%
         <p>An optimizer sees a close-to-delivery opportunity: buy in one
         quarter-hour, discharge in another, and reduce an imbalance that
         looked unavoidable yesterday.</p>
-        <p>The screen shows a price. The order book shows only a few MW.
+        <p>The model shows a price. The order book shows only a few MW.
         The gate will close soon. The battery is partly committed to a
         reserve product. The trading partner’s risk limit may reject the
         trade.</p>
@@ -14141,14 +14141,14 @@ collateral need = 900,000 x 80%
         option to rebalance, charge, discharge, withhold energy for a
         later obligation, or instruct a partner. The option has value
         only when it can be exercised.</p>
-        <p>Use this screen:</p>
+        <p>Use this tradability test:</p>
         <pre class="text"><code>monetizable granularity value
   = gross optionality pool
   x executable liquidity share
   x forecast-and-control confidence
   x execution capture
   - transaction, capability, and risk cost</code></pre>
-        <p>This strategy screen separates apparent value from tradable
+        <p>This strategy test separates apparent value from tradable
         value.</p>
         </section>
         <section id="definitions-28" class="level4">
@@ -14388,7 +14388,8 @@ collateral need = 900,000 x 80%
         because it controls when optionality can be exercised.</p>
         <section id="opening-puzzle-34" class="level4">
         <h4>Opening Puzzle</h4>
-        <p>Three solar-plus-BESS sites pass the first screen.</p>
+        <p>Three solar-plus-BESS sites pass the first internal
+        filter.</p>
         <p>One can connect quickly, but export is capped. One has
         stronger export rights, but the queue may delay connection. One
         has conditional access and a possible local-flexibility route,
@@ -14459,7 +14460,7 @@ collateral need = 900,000 x 80%
         <h4>Numerical Intuition</h4>
         <p>The first grid numbers are usually timing, curtailed MWh,
         import-enabled cycles, and qualifying flexible MW.</p>
-        <p>Use four project screens:</p>
+        <p>Use four project tests:</p>
         <pre class="text"><code>delay cost = annual contribution margin x years of delay
 curtailment loss = curtailed MWh x realized value of curtailed MWh
 import-right value = grid-charged cycles x net spread after losses, tariffs, and degradation
@@ -14650,8 +14651,8 @@ local-flexibility value = qualified flexible MW x expected net payment x bankabi
         a nodal price difference, redispatch cost, curtailment,
         congestion rent, network tariff, hedge-basis loss, or a contract
         clause. For an IPP, zonal and nodal markets decide where
-        locational risk enters the cash-flow model. The decision screen
-        is practical: where does congestion settle, who carries it,
+        locational risk enters the cash-flow model. The practical
+        questions are: where does congestion settle, who carries it,
         which hedge follows it, and whether the site or portfolio sees
         the signal early enough to change the decision.</p>
         <section id="opening-puzzle-35" class="level4">
@@ -14849,7 +14850,7 @@ and how much is recovered or managed elsewhere?</code></pre>
         <section id="decision-frame-8" class="level4">
         <h4>Decision Frame</h4>
         <p>For each asset, contract, or portfolio hedge, build a
-        locational-risk screen.</p>
+        locational-risk test.</p>
         <table>
         <colgroup>
         <col style="width: 33%" />
@@ -14897,7 +14898,7 @@ and how much is recovered or managed elsewhere?</code></pre>
         </tbody>
         </table>
         <p>For an IPP with Nordic area-price and grid exposure, this
-        screen matters for capture price, system-to-area basis, PPA
+        test matters for capture price, system-to-area basis, PPA
         settlement, BESS value near bottlenecks, tariff exposure, and
         whether a portfolio is diversified across real constraints or
         only across labels.</p>
@@ -14923,7 +14924,7 @@ and how much is recovered or managed elsewhere?</code></pre>
         <p>By 2026, European zonal-versus-nodal debate is best treated
         as an active design question about congestion visibility,
         liquidity, redispatch cost, hedging, investment signals, and
-        distributional consequences. The mechanism and risk screen here
+        distributional consequences. The mechanism and risk logic here
         do not recommend a specific Nordic or European market
         design.</p>
         <p>Reform status, redispatch cost allocation, and tariff
@@ -14936,7 +14937,7 @@ and how much is recovered or managed elsewhere?</code></pre>
         <p>A transmission constraint creates a local value difference.
         Zonal pricing, nodal pricing, redispatch, tariffs, curtailment,
         and hedges decide where that difference enters cash flows. The
-        decision screen is to locate the constraint, locate the price or
+        decision test is to locate the constraint, locate the price or
         cost channel, locate the hedge, and locate the control lever. If
         the hedge follows a different price than the asset’s physical
         exposure, market design has become portfolio risk.</p>
@@ -15435,13 +15436,13 @@ required margin = 1,750,000 USD/year / 3,500 MWh/year
         this project needs vendor/EPC quotes separating cells,
         containers, power-conversion-system sharing, balance of plant,
         augmentation, warranty, grid, tax, and financing effects. As an
-        order-of-magnitude screen, the additional 100 MWh of duration
+        order-of-magnitude test, the additional 100 MWh of duration
         represents roughly:</p>
         <pre class="text"><code>100 MWh x 1,000 kWh/MWh x 175 USD/kWh = 17,500,000 USD</code></pre>
         <p>If the annual carrying charge is simplified to
         <code>10%</code>:</p>
         <pre class="text"><code>annual hurdle = 17,500,000 USD x 10% = 1,750,000 USD/year</code></pre>
-        <p>Use this as a sanity screen. An EPC estimate or marginal
+        <p>Use this as a sanity check. An EPC estimate or marginal
         energy-block quote needs project design, supplier terms, site
         conditions, taxes, and financing.</p>
         <p>Now the decision becomes practical:</p>
@@ -16074,8 +16075,8 @@ firming_at_risk = 13,000 MWh x 150 EUR/MWh
         <p>The strategy is to choose what the product actually promises
         before a term sheet combines the obligations implicitly.</p>
         </section>
-        <section id="example-product-decision-screen" class="level4">
-        <h4>Example: Product Decision Screen</h4>
+        <section id="example-product-decision-test" class="level4">
+        <h4>Example: Product Decision Test</h4>
         <p>A data-center buyer asks for “24/7 clean power” in a
         constrained zone.</p>
         <p>The product team should write one page before pricing:</p>
@@ -16132,7 +16133,7 @@ firming_at_risk = 13,000 MWh x 150 EUR/MWh
         </tr>
         </tbody>
         </table>
-        <p>The screen ends in one of four decisions:</p>
+        <p>The test ends in one of four decisions:</p>
         <ul>
         <li>offer a simple annual PPA</li>
         <li>offer a shaped or portfolio-backed product with disclosed
@@ -16145,7 +16146,7 @@ firming_at_risk = 13,000 MWh x 150 EUR/MWh
         <section id="in-practice-32" class="level4">
         <h4>In Practice</h4>
         <p>For a renewable IPP, the first-year data-center playbook
-        should build a repeatable screen:</p>
+        should build a repeatable product test:</p>
         <ul>
         <li>load shape and siting: what does the customer actually
         consume, where, and under what connection limits?</li>
@@ -16207,7 +16208,7 @@ firming_at_risk = 13,000 MWh x 150 EUR/MWh
         <p>Detailed Scope 2, RE100, Association of Issuing Bodies (AIB),
         European Energy Certificate System (EECS), guarantee of origin
         (GO), and granular-certificate compliance treatment remains
-        outside this product-design screen. For dated product work, use
+        outside this product-design test. For dated product work, use
         the applicable primary standards and certificate rules. The
         commercial rule is narrower: do not sell a cleaner claim than
         the portfolio, evidence, and control rights can support.</p>
@@ -16508,8 +16509,8 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         </tbody>
         </table>
         </section>
-        <section id="example-commercial-proposal-screen" class="level4">
-        <h4>Example: Commercial Proposal Screen</h4>
+        <section id="example-commercial-proposal-test" class="level4">
+        <h4>Example: Commercial Proposal Test</h4>
         <p>The project team proposes grid-forming-ready inverters for a
         solar-plus-BESS site near a weak part of the network.</p>
         <p>The proposal is investment-ready only after seven questions
@@ -16810,8 +16811,8 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         </tr>
         </tbody>
         </table>
-        <p>A 12 percent forecast improvement is only the first screen.
-        The investment case should state how many MWh are still tradable
+        <p>A 12 percent forecast improvement is only the first test. The
+        investment case should state how many MWh are still tradable
         when the forecast arrives, who has the right to act, and what
         loss limit applies if the recommendation is wrong.</p>
         </section>
@@ -16848,7 +16849,7 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         transaction costs, risk limits, and contractual control rights
         available at the time. Otherwise the benchmark is
         hindsight-biased.</p>
-        <p>A build/buy/outsource screen:</p>
+        <p>A build/buy/outsource test:</p>
         <pre class="text"><code>own internally when:
   decision value is high
   x strategic control is high
@@ -17078,7 +17079,7 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <section id="numerical-intuition-41" class="level4">
         <h4>Numerical Intuition</h4>
         <p>Start with the observability gap.</p>
-        <p>Using a 15-minute operating screen, one asset produces
+        <p>Using a 15-minute operating interval, one asset produces
         <code>96</code> delivery intervals per day. A 25-asset portfolio
         creates:</p>
         <pre class="text"><code>25 assets x 96 intervals/day = 2,400 asset-intervals/day</code></pre>
@@ -17110,7 +17111,7 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         data-rights and analytics setup raises that to
         <code>80%</code>.</p>
         <pre class="text"><code>benchmarkable exposure gain = 80% - 40% = 40 percentage points</code></pre>
-        <p>The 15-minute screen is illustrative; the live interval
+        <p>The 15-minute interval is illustrative; the live interval
         depends on the relevant market, product, and implementation
         date. The gain in observability creates the ability to separate
         market conditions, forecast error, asset constraints, risk-limit
@@ -17332,9 +17333,9 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <pre class="text"><code>addressable value = 500,000 MWh/year x 0.60 EUR/MWh x 40%
                   = 120,000 EUR/year</code></pre>
         <p>If the data-rights and benchmark layer costs
-        <code>80,000 EUR/year</code>, it can clear the screen if the gap
-        is recurrent and the evidence improves. That supports data
-        rights and benchmark governance before it supports a full
+        <code>80,000 EUR/year</code>, it can clear the investment test
+        if the gap is recurrent and the evidence improves. That supports
+        data rights and benchmark governance before it supports a full
         internal trading desk.</p>
         </section>
         <section id="build-buy-outsource-decision-tree" class="level4">
@@ -17618,14 +17619,14 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
   x risk-control quality</code></pre>
         <p>Use this as a failure detector. If any factor is close to
         zero, the operating loop weakens.</p>
-        <p>Internalization screen:</p>
+        <p>Internalization test:</p>
         <pre class="text"><code>internalize when:
   retained value at stake
   x need for strategic control
   x ability to govern execution
   &gt;
   people + systems + liquidity + collateral + operational + model-risk cost</code></pre>
-        <p>This screen often supports internal analytics before internal
+        <p>This test often supports internal analytics before internal
         execution, benchmark ownership before market access, and risk
         ownership before trading autonomy.</p>
         </section>
@@ -18299,7 +18300,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
   = promised MW during stress
   - dependable owned MW during stress
   - contracted firming MW</code></pre>
-        <p>The capital-allocation screen is:</p>
+        <p>The capital-allocation test is:</p>
         <pre class="text"><code>risk-adjusted adequacy value
   = energy and flexibility value
   + bankable capacity revenue
@@ -18341,7 +18342,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <h4>Numerical Intuition</h4>
         <p>Use a derating curve before comparing technologies.</p>
         <p>Take a 100 MW / 200 MWh battery and assume all 200 MWh are
-        usable for this simple screen:</p>
+        usable for this simple test:</p>
         <pre class="text"><code>dependable MW over event = min(100 MW, 200 MWh / event duration)</code></pre>
         <table>
         <thead>
@@ -18428,7 +18429,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
   + (200 MWh / 24 h) x 10%
   = 60 + 10 + 0.8
   = 70.8 MW</code></pre>
-        <p>This toy stress-coverage score is only a teaching screen. A
+        <p>This toy stress-coverage score is only a teaching test. A
         financeable adequacy value needs chronological stress events,
         state of charge at event start, recharge assumptions,
         availability, correlated weather and outages, deliverability,
@@ -19380,7 +19381,7 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         <p>Battery duration is an investment claim: the next MWh of
         energy capacity must earn more than it costs after efficiency,
         degradation, tariffs, grid rights, and contract obligations.
-        This case asks the duration question as an investment screen
+        This case asks the duration question as an investment test
         rather than as a technology preference.</p>
         <section id="decision-question-1" class="level4">
         <h4>Decision Question</h4>
@@ -19431,7 +19432,7 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         <td style="text-align: right;">1h, 2h, 4h</td>
         </tr>
         <tr>
-        <td>Carrying charge used for screen</td>
+        <td>Carrying charge used for the test</td>
         <td style="text-align: right;">10% of incremental
         capex/year</td>
         </tr>
@@ -19447,8 +19448,7 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         <td>Insurance policy</td>
         <td style="text-align: right;">scenario assumes the modeled
         operating plan is insurable; if a policy caps cycles or duty
-        cycle below the modeled plan, rerun the screen under that
-        cap</td>
+        cycle below the modeled plan, rerun the test under that cap</td>
         </tr>
         </tbody>
         </table>
@@ -19764,7 +19764,7 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         </section>
         </section>
         <section id="case-03" class="level3">
-        <h3>Case 3. Grid-Constrained Site Screen</h3>
+        <h3>Case 3. Grid-Constrained Site Assessment</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-11">[11]</a>
         <a href="#ref-9">[9]</a> <a href="#ref-10">[10]</a>
@@ -19775,7 +19775,7 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         <p>Solar development often begins with land and irradiation.
         Project value often ends with grid access, tariffs, congestion,
         curtailment, and what the connection agreement actually permits.
-        The work product is a grid-aware investment screen for three
+        The work product is a grid-aware investment assessment for three
         attractive sites.</p>
         <section id="decision-question-2" class="level4">
         <h4>Decision Question</h4>
@@ -19872,7 +19872,8 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         </tbody>
         </table>
         <p>Assume the merchant value before grid costs is 48 EUR/MWh for
-        all sites. Ignore capex differences for the first screen.</p>
+        all sites. Ignore capex differences for this first-pass
+        comparison.</p>
         </section>
         <section id="tasks-2" class="level4">
         <h4>Tasks</h4>
@@ -19881,7 +19882,7 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         <li>Calculate net value per MWh after grid/tariff/loss
         cost.</li>
         <li>Estimate annual gross margin before capex and opex.</li>
-        <li>Add a grid-rights and timing screen.</li>
+        <li>Add a grid-rights and timing assessment.</li>
         <li>Recommend the priority site.</li>
         </ol>
         </section>
@@ -20000,8 +20001,8 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         </tbody>
         </table>
         </section>
-        <section id="grid-rights-screen" class="level4">
-        <h4>Grid Rights Screen</h4>
+        <section id="grid-rights-assessment" class="level4">
+        <h4>Grid Rights Assessment</h4>
         <table>
         <colgroup>
         <col style="width: 25%" />
@@ -20047,7 +20048,7 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         <p>The tariff and connection question includes EUR/MWh, reserved
         capacity, geography, limited access, and producer payments.
         Nordic tariff work increasingly separates these items. A site
-        screen should therefore ask what capacity is being reserved,
+        assessment should therefore ask what capacity is being reserved,
         when it is firm, whether limited or interruptible access is
         acceptable, and whether import rights let the battery charge
         when the commercial case requires it.</p>
@@ -20095,8 +20096,8 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         </tr>
         </tbody>
         </table>
-        <p>Use this as an undiscounted screen rather than a project net
-        present value (NPV). It keeps a small annual yield advantage
+        <p>Use this as an undiscounted comparison rather than a project
+        net present value (NPV). It keeps a small annual yield advantage
         from hiding a large timing and optionality penalty.</p>
         </section>
         <section id="decision-memo-2" class="level4">
@@ -21015,7 +21016,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         </section>
         </section>
         <section id="case-06" class="level3">
-        <h3>Case 6. Data-Centre 24/7 Product Screen</h3>
+        <h3>Case 6. Data-Centre 24/7 Product Test</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-6">[6]</a>
         <a href="#ref-56">[56]</a> <a href="#ref-57">[57]</a>
@@ -21776,7 +21777,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <td>shaped offers need consistent risk pricing</td>
         </tr>
         <tr>
-        <td>BESS sizing and dispatch screen</td>
+        <td>BESS sizing and dispatch model</td>
         <td>build with optimizer input</td>
         <td style="text-align: right;"><code>140,000 EUR</code></td>
         <td>analyst + investment owner</td>
@@ -21890,7 +21891,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         </tr>
         </tbody>
         </table>
-        <p>The PPA quote stack and BESS screen receive more year-one
+        <p>The PPA quote stack and BESS model receive more year-one
         funding because live commercial and IC decisions can use them
         with available internal data. Partner commercial action waits
         for raw evidence.</p>
@@ -21934,7 +21935,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         </tr>
         <tr>
         <td>2</td>
-        <td>BESS duration/revenue-stack screen v1</td>
+        <td>BESS duration/revenue-stack model v1</td>
         <td>1h/2h/4h, grid-right, degradation, and control-right
         decisions</td>
         </tr>
@@ -22146,7 +22147,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         residual risk</td>
         </tr>
         <tr>
-        <td>BESS screen</td>
+        <td>BESS model</td>
         <td>changes IC decisions or preserves valuable design
         option</td>
         <td>dispatch value cannot be tied to grid rights, degradation,
@@ -22184,7 +22185,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         execution outsourced.</p>
         <p>Approve the full <code>900,000 EUR</code> allocation shown
         above. The first year should produce a PPA quote stack, BESS
-        design screen, data-right remediation, monthly portfolio risk
+        design model, data-right remediation, monthly portfolio risk
         pack, forecast evaluation layer, and a narrow feasible-benchmark
         pilot. Do not approve an internal trading desk or full ETRM
         implementation until data rights, independent settlement checks,
@@ -23664,11 +23665,11 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         contracted clean supply, storage, hedges, certificates, and
         control actions have been applied.
         </dd>
-        <dt id="glossary-residual-supply-index" data-term="Residual Supply Index" data-definition="Market-power screen comparing supply available without a supplier to demand; values below one indicate pivotality in the simple form.">
+        <dt id="glossary-residual-supply-index" data-term="Residual Supply Index" data-definition="Market-power diagnostic comparing supply available without a supplier to demand; values below one indicate pivotality in the simple form.">
         Residual Supply Index
         </dt>
         <dd>
-        Market-power screen comparing supply available without a
+        Market-power diagnostic comparing supply available without a
         supplier to demand; values below one indicate pivotality in the
         simple form.
         </dd>
@@ -23767,12 +23768,13 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         Risk that production or consumption timing differs from the
         contracted or hedged delivery shape.
         </dd>
-        <dt id="glossary-short-circuit-ratio" data-term="Short-circuit ratio" data-definition="Screening concept comparing grid strength to connected converter capacity; detailed definition depends on method.">
+        <dt id="glossary-short-circuit-ratio" data-term="Short-circuit ratio" data-definition="Grid-strength indicator comparing available short-circuit power with connected converter capacity; detailed definition depends on method.">
         Short-circuit ratio
         </dt>
         <dd>
-        Screening concept comparing grid strength to connected converter
-        capacity; detailed definition depends on method.
+        Grid-strength indicator comparing available short-circuit power
+        with connected converter capacity; detailed definition depends
+        on method.
         </dd>
         <dt id="glossary-state-of-charge" data-term="State of charge" data-definition="Battery energy currently stored, usually expressed as MWh or percent of usable capacity.">
         State of charge
@@ -24383,7 +24385,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
           return {
             label: "Casebook",
             title: "Applied Decision Practice",
-            summary: "The cases give bounded practice in screens, memos, scorecards, product tests, and operating-model choices.",
+            summary: "The cases give bounded practice in memos, scorecards, product tests, and operating-model choices.",
             points: [
               "Use the given facts before adding judgment.",
               "Find the binding constraint and the first assumption that changes the answer.",
@@ -24411,7 +24413,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
           return {
             label: "Volume II",
             title: "Commercial Analysis, Contracts, And Asset Decisions",
-            summary: "The second volume works through commercial and analytical examples: site screens, tariffs, PPAs, BESS sizing, dispatch, forecasting, valuation, risk, and portfolio controls.",
+            summary: "The second volume works through commercial and analytical examples: site assessments, tariffs, PPAs, BESS sizing, dispatch, forecasting, valuation, risk, and portfolio controls.",
             points: [
               "Decompose a PPA or battery case into price, shape, imbalance, grid, credit, optionality, and control rights.",
               "Ask what a model is allowed to know, what it is optimizing, and which constraints are binding.",
@@ -24438,8 +24440,8 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         if (volumeTitle.includes("Casebook") || volumeTitle.includes("Applied Cases")) {
           return {
             label: "Casebook",
-            title: "Applied Decision Memos And Model Screens",
-            summary: "The Casebook gives bounded exercises around quote stacks, duration screens, grid-aware site screens, partner scorecards, customer-product screens, and operating-model roadmaps.",
+            title: "Applied Decision Memos And Models",
+            summary: "The Casebook gives bounded exercises around quote stacks, duration tests, grid-aware site assessments, partner scorecards, customer-product tests, and operating-model roadmaps.",
             points: [
               "Use the lectures to produce a recommendation.",
               "Name the binding constraint, retained risk, and assumption that would change the decision.",
@@ -24506,7 +24508,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         const p = document.createElement("p");
         p.className = "home-lede";
         p.textContent = casebook
-          ? "The Casebook gives bounded commercial exercises. Each case asks for a concrete artifact: a quote stack, duration screen, site screen, partner scorecard, product memo, or operating-model choice."
+          ? "The Casebook gives bounded commercial exercises. Each case asks for a concrete artifact: a quote stack, duration test, site assessment, partner scorecard, product memo, or operating-model choice."
           : "These notes are for a fast, practical ramp into power markets, especially around renewable portfolios. They are written for analysts, business developers, quants, modelers, and other professionals entering power-market work without much prior domain experience. The volumes move from physical and institutional basics, to commercial examples and analytical workflows, to current strategic questions. The aim is to make key terms, units, constraints, and recurring trade-offs easier to recognize. The references provide the path for deeper study and follow-up.";
         const heroActions = document.createElement("div");
         heroActions.className = "arc-actions home-actions";
@@ -24544,7 +24546,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         arcTitle.textContent = casebook ? "Casebook Structure" : "Course Structure";
         const arcIntro = document.createElement("p");
         arcIntro.textContent = casebook
-          ? "The cases move from commercial screens to operating-model choices. Each case is standalone, and together they test whether the concepts can produce usable work."
+          ? "The cases move from commercial memos to operating-model choices. Each case is standalone, and together they test whether the concepts can produce usable work."
           : "The sequence moves from foundations to commercial examples to strategic questions, then into applied cases and reference material.";
         arcHeading.append(arcTitle, arcIntro);
 
@@ -25799,7 +25801,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
       if (brandTitle) brandTitle.textContent = rootTitle();
       const brandSubtitle = document.querySelector(".sidebar-brand span");
       if (brandSubtitle && isCasebookProduct()) {
-        brandSubtitle.textContent = "Applied decision cases with numerical screens and commercial memos.";
+        brandSubtitle.textContent = "Applied decision cases with numerical models and commercial memos.";
       }
       const chapters = collectChapters();
       buildHome(chapters);
