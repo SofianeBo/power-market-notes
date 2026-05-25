@@ -1844,7 +1844,7 @@ Notes">
         4h Battery Decision</a></li>
         <li><a href="#case-03" id="toc-case-03">Case 3. Grid-Constrained
         Site Screen</a></li>
-        <li><a href="#case-04" id="toc-case-04">Case 4. BESS Revenue
+        <li><a href="#case-04" id="toc-case-04">Case 4. Battery Revenue
         Stacks Under Saturation</a></li>
         <li><a href="#case-05" id="toc-case-05">Case 5.
         Balance-Responsibility And Balancing-Service Performance
@@ -1866,7 +1866,7 @@ Notes">
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.38.1
+        v0.39.0
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -2193,10 +2193,10 @@ Notes">
         <p>Balance responsible party (BRP): party financially
         responsible for imbalances for a delivery point or
         portfolio.</p>
-        <p>TSO: transmission system operator. In the EU balancing
-        guideline, TSOs are responsible for organizing balancing
-        activities and maintaining system balance within their
-        mandates.</p>
+        <p>TSO: transmission system operator. Transmission system
+        operators (TSOs) organize balancing activities and maintain
+        system balance within their mandates under the EU balancing
+        guideline.</p>
         <p>Balancing capacity: power capability kept available for
         balancing service under product rules, usually measured in MW.
         The asset may be paid for readiness even before energy is
@@ -2214,8 +2214,8 @@ Notes">
 Forecast error = 1%
 Power error = 500 MW x 0.01 = 5 MW
 If it lasts 1 hour: 5 MW x 1 h = 5 MWh</code></pre>
-        <p>One percent sounds small. On a 500 MW portfolio, it is a 5 MW
-        real-time problem.</p>
+        <p>A 1% forecast miss on a 500 MW portfolio is a 5 MW real-time
+        problem.</p>
         <p>If the error lasts only 15 minutes:</p>
         <pre class="text"><code>5 MW x 0.25 h = 1.25 MWh</code></pre>
         <p>The power error is still 5 MW. The energy volume is smaller
@@ -2351,7 +2351,8 @@ If it lasts 1 hour: 5 MW x 1 h = 5 MWh</code></pre>
         <p>Portfolio A consumes exactly 10 MW every hour.</p>
         <p>Portfolio B consumes 20 MW in some hours and nearly nothing
         in others.</p>
-        <p>Annual energy is identical. The grid problem is not.</p>
+        <p>The two portfolios have the same annual energy and different
+        grid requirements.</p>
         <p>System operation is built around the load curve.</p>
         </section>
         <section id="first-principles-model-2" class="level4">
@@ -2492,11 +2493,11 @@ Hour 4: -10 MWh</code></pre>
         </section>
         <section id="current-debates-or-caveats-2" class="level4">
         <h4>Current Debates Or Caveats</h4>
-        <p>Practitioner sources describe growing solar-driven duck-curve
-        effects in parts of Europe, especially in solar-heavy hours. The
-        durable mechanism is the direction of the residual-load change;
-        price levels, capture-price figures, and country-year counts
-        need their own date, market area, and data definition.</p>
+        <p>Solar-heavy hours can lower residual load and realized solar
+        prices when demand, exports, storage, or flexible load do not
+        absorb the output. The mechanism is portable; price levels,
+        capture-price figures, and country-year counts need their own
+        date, market area, and data definition.</p>
         </section>
         <section id="recap-2" class="level4">
         <h4>Recap</h4>
@@ -2818,35 +2819,60 @@ grid cost = EUR 5/MWh</code></pre>
         </section>
         <section id="numerical-intuition-4" class="level4">
         <h4>Numerical Intuition</h4>
-        <p>One dated institutional number is useful here:</p>
-        <p>The 2026-05-16 Svenska kraftnät source says that, as of May
-        1, 2024, the previous Swedish balance-responsible role was
-        contractually split into BSP and BRP roles, with full
-        independent BSP implementation expected by 2028 at the latest
-        based on conditions known to Svenska kraftnät in that
-        source.</p>
-        <p>This Sweden-specific rule is dated and date-specific.</p>
-        <section id="worked-estimate-4" class="level5">
-        <h5>Worked Estimate</h5>
         <p>Map one 100 MW asset for one hour.</p>
         <p>If it is scheduled for 100 MW but delivers 96 MW:</p>
         <pre class="text"><code>power deviation = 96 MW - 100 MW = -4 MW
 energy deviation over 1 hour = -4 MWh</code></pre>
-        <p>Now ask who touches the deviation:</p>
-        <ul>
-        <li>The TSO cares because the physical system must balance.</li>
-        <li>The BRP cares because imbalance settlement compares actual
-        and position.</li>
-        <li>The DSO or metering party may care because metered data must
-        be reported correctly.</li>
-        <li>The BSP may care if balancing services were activated or
-        delivered.</li>
-        <li>The owner cares because money and partner performance flow
-        from the result.</li>
-        </ul>
-        <p>The same <code>-4 MWh</code> appears as physics, data,
-        settlement, and governance.</p>
-        </section>
+        <p>The first question is which artifact fixes each obligation.
+        In a <code>-4 MWh</code> miss, the schedule, meter, balancing
+        instruction, settlement statement, and commercial contract can
+        point to different actors.</p>
+        <table>
+        <colgroup>
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Question created by the <code>-4 MWh</code> miss</th>
+        <th>Evidence to inspect</th>
+        <th>Natural role in the simplified map</th>
+        <th>Why it matters</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>What was promised?</td>
+        <td>final schedule, trades, nominations</td>
+        <td>BRP / trader interface</td>
+        <td>sets the reference volume</td>
+        </tr>
+        <tr>
+        <td>What physically happened?</td>
+        <td>metered generation</td>
+        <td>DSO or metering party</td>
+        <td>sets actual delivery</td>
+        </tr>
+        <tr>
+        <td>Who corrected the physical system?</td>
+        <td>balancing activation and delivery data</td>
+        <td>TSO / BSP</td>
+        <td>explains real-time correction</td>
+        </tr>
+        <tr>
+        <td>Who carries the cash effect?</td>
+        <td>imbalance settlement and commercial contracts</td>
+        <td>BRP, owner, offtaker, or supplier depending on
+        agreement</td>
+        <td>separates formal role from economic exposure</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>The same <code>-4 MWh</code> therefore appears as physics,
+        data, settlement, and governance. The useful skill is tracing it
+        through the evidence chain before assigning blame or value.</p>
         </section>
         <section id="mechanism-4" class="level4">
         <h4>Mechanism</h4>
@@ -3093,20 +3119,13 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         </section>
         <section id="numerical-intuition-5" class="level4">
         <h4>Numerical Intuition</h4>
-        <ul>
-        <li>1 MW delivered for 1 hour is 1 MWh. This identity matters
-        because schedules are power over time, while settlement invoices
-        energy volumes.</li>
-        <li>Exact exchange volumes and participant counts change, so use
-        current Nord Pool annual or market pages when the counts matter.
-        The market-clock mechanism here does not depend on a fixed
-        number.</li>
-        <li>The Nord Pool 15-minute market time unit (MTU) source
-        described staged Nordic and European rollout steps through
-        2024-2025, with Single Day-Ahead Coupling (SDAC) 15-minute MTU
-        go-live stated as <code>2025-09-30</code>.</li>
-        </ul>
-        <section id="worked-estimate-5" class="level5">
+        <p>The market clock turns a power error into an energy exposure
+        by multiplying by the settlement interval:</p>
+        <pre class="text"><code>energy error = power error x settlement-interval hours</code></pre>
+        <p>A 3 MW residual error over one hour is 3 MWh. The same 3 MW
+        residual error over a 15-minute market time unit is 0.75 MWh,
+        because 15 minutes is 0.25 hours.</p>
+        <section id="worked-estimate-4" class="level5">
         <h5>Worked Estimate</h5>
         <p>Suppose a 100 MW solar plant sells 60 MW for one hour
         day-ahead.</p>
@@ -3116,9 +3135,52 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <p>If actual metered output is 42 MW, the remaining deviation
         is:</p>
         <pre class="text"><code>42 MWh actual - 45 MWh final schedule = -3 MWh imbalance</code></pre>
-        <p>The scale is the useful part. A 15 MW forecast miss can
-        become a 3 MWh imbalance if the intraday market lets the asset
-        repair most of the error before delivery.</p>
+        <p>The example separates the gross forecast miss from the
+        residual imbalance after intraday repair. A 15 MW forecast miss
+        can become a 3 MWh imbalance if the intraday market lets the
+        asset repair most of the error before delivery.</p>
+        <table>
+        <colgroup>
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Stage</th>
+        <th>Best available description</th>
+        <th>Action still possible</th>
+        <th>Error left for next stage</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Day-ahead</td>
+        <td>forecast and planned position</td>
+        <td>create the baseline schedule</td>
+        <td>forecast error</td>
+        </tr>
+        <tr>
+        <td>Intraday</td>
+        <td>updated forecast and available trades</td>
+        <td>repair the position</td>
+        <td>residual forecast and liquidity error</td>
+        </tr>
+        <tr>
+        <td>Balancing</td>
+        <td>physical system close to delivery</td>
+        <td>TSO correction</td>
+        <td>settlement exposure</td>
+        </tr>
+        <tr>
+        <td>Imbalance settlement</td>
+        <td>meter and final position</td>
+        <td>allocate money</td>
+        <td>no physical correction left</td>
+        </tr>
+        </tbody>
+        </table>
         </section>
         </section>
         <section id="equations" class="level4">
@@ -3149,10 +3211,10 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         TSOs activate balancing energy and reserves.</p>
         <p>Imbalance settlement is the accounting layer. eSett’s Nordic
         handbook frames the Nordic model as a common settlement
-        interface where BRPs’ imbalances are calculated from physical
-        volumes and traded energy volumes, with eSett acting as the
-        central settlement operator for Denmark, Finland, Norway, and
-        Sweden.</p>
+        interface where balance responsible parties’ (BRPs’) imbalances
+        are calculated from physical volumes and traded energy volumes,
+        with eSett acting as the central settlement operator for
+        Denmark, Finland, Norway, and Sweden.</p>
         </section>
         <section id="examples" class="level4">
         <h4>Examples</h4>
@@ -3201,9 +3263,9 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <p>Shorter market time units, such as 15 minutes, can reduce
         structural mismatch between flat schedules and changing physical
         output. Nord Pool’s MTU source describes a 2024-2025 rollout and
-        states European SDAC 15-minute MTU go-live on 2025-09-30; after
-        that date, the current official page is the live implementation
-        reference.</p>
+        stated European SDAC 15-minute MTU go-live on trading day
+        <code>2025-09-30</code>, for delivery day
+        <code>2025-10-01</code>.</p>
         <p>Continuous intraday design is also a live market-design
         topic. Practitioner sources emphasize liquidity and incentives;
         official market rules define the settled rule facts.</p>
@@ -3232,11 +3294,11 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <p>Consider one sunny hour in one bidding zone. Solar plants are
         producing, demand is finite, and the auction still has to choose
         enough offers to cover the hour. The solar plant’s own fuel cost
-        does not by itself decide what it earns. It may be paid a price
-        set by a more expensive plant at the edge of the stack, or it
-        may earn a low price when similar low-cost output pushes the
-        marginal unit down. The relevant question is which unit is
-        marginal in that hour.</p>
+        alone cannot decide what it earns. It may be paid a price set by
+        a more expensive plant at the edge of the stack, or it may earn
+        a low price when similar low-cost output pushes the marginal
+        unit down. The relevant question is which unit is marginal in
+        that hour.</p>
         <section id="opening-puzzle-6" class="level4">
         <h4>Opening Puzzle</h4>
         <p>If a solar plant has almost zero fuel cost, why does it
@@ -3314,7 +3376,7 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         and the clearing price can fall toward the next unit’s
         offer.</p>
         <p>These are illustrative numbers only, not market data.</p>
-        <section id="worked-estimate-6" class="level5">
+        <section id="worked-estimate-5" class="level5">
         <h5>Worked Estimate</h5>
         <p>Take a 100 MW solar portfolio for one sunny hour.</p>
         <p>Case A: price is 70 EUR/MWh.</p>
@@ -3440,9 +3502,9 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <section id="opening-puzzle-7" class="level4">
         <h4>Opening Puzzle</h4>
         <p>A solar plant forecasts 50 MWh for a settlement interval,
-        sells 50 MWh, and produces 45 MWh. No turbine exploded. No
-        trader made an obvious mistake. The sun was just weaker than
-        expected.</p>
+        sells 50 MWh, and produces 45 MWh. The weather was weaker than
+        expected, so the delivered volume is below the market
+        position.</p>
         <p>The system still received <code>5 MWh</code> less than the
         market position said it would receive.</p>
         <p>Who is short, who balances the system, and what price is
@@ -3491,7 +3553,7 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         EUR.</li>
         </ul>
         <p>These are scale anchors, not market-price claims.</p>
-        <section id="worked-estimate-7" class="level5">
+        <section id="worked-estimate-6" class="level5">
         <h5>Worked Estimate</h5>
         <p>Suppose a 100 MW solar plant is 5 MW short for one hour after
         intraday trading closes.</p>
@@ -3630,9 +3692,8 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <section id="opening-puzzle-8" class="level4">
         <h4>Opening Puzzle</h4>
         <p>A battery is idle at 14:00 and still earns revenue.</p>
-        <p>The asset did not deliver energy in that interval. It sold
-        availability: the right for the system operator to call on fast
-        MW if frequency moves.</p>
+        <p>The asset sold availability in that interval: the right for
+        the system operator to call on fast MW if frequency moves.</p>
         <p>What did the battery promise, and what energy headroom does
         that promise consume?</p>
         </section>
@@ -3719,20 +3780,21 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         </table>
         <p>The Nordic and Danish sources make this concrete. The Nordic
         TSOs’ 2025 battery paper says batteries can participate in all
-        five Nordic reserve products it reviews: FFR, FCR-D, FCR-N,
-        aFRR, and mFRR. Product eligibility still depends on
-        prequalification, bid size, endurance, control system, state of
-        charge, grid connection, and BRP/BSP setup. Energinet tender
-        conditions effective 2025-09-23 give dated Danish examples: FCR
-        in DK1 reaches full response within <code>30 seconds</code>, FFR
-        activation can be as fast as <code>0.7 seconds</code> in
-        low-inertia situations, and mFRR full delivery can be
-        <code>12.5 minutes</code> for daily procurement or up to
-        <code>90 minutes</code> for monthly procurement. These are
-        product/date examples, not universal timing rules.</p>
+        five Nordic reserve products it reviews: fast frequency reserve
+        (FFR), FCR-D, FCR-N, aFRR, and mFRR. Product eligibility still
+        depends on prequalification, bid size, endurance, control
+        system, state of charge, grid connection, and BRP/BSP setup.
+        Energinet tender conditions effective 2025-09-23 give dated
+        Danish examples: FCR in DK1 reaches full response within
+        <code>30 seconds</code>, FFR activation can be as fast as
+        <code>0.7 seconds</code> in low-inertia situations, and mFRR
+        full delivery can be <code>12.5 minutes</code> for daily
+        procurement or up to <code>90 minutes</code> for monthly
+        procurement. These are product/date examples, not universal
+        timing rules.</p>
         <p>For a current product decision, use the controlling product
         terms, not the summary table in this chapter.</p>
-        <section id="worked-estimate-8" class="level5">
+        <section id="worked-estimate-7" class="level5">
         <h5>Worked Estimate</h5>
         <p>A 10 MW / 20 MWh battery has 2 hours of duration at full
         power.</p>
@@ -3745,8 +3807,9 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         but earns 400 EUR from reserve capacity and expected activation,
         the reserve choice costs 200 EUR before considering strategic or
         risk benefits.</p>
-        <p>The exact numbers are illustrative. The structure is the
-        useful part.</p>
+        <p>The exact numbers are illustrative. The decision compares
+        reserve revenue with the best feasible use of the same MW and
+        MWh.</p>
         </section>
         </section>
         <section id="equations-3" class="level4">
@@ -3830,8 +3893,10 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <h4>Current Debates And Caveats</h4>
         <p>Ancillary-service saturation is plausible when many fast
         flexible assets chase a small product, but timing and magnitude
-        are market-specific. It does not teach saturation as universal
-        fact.</p>
+        are market-specific. For a project screen, test saturation
+        product by product: market size, eligible capacity,
+        qualification rules, activation patterns, and the opportunity
+        cost of using the same battery elsewhere.</p>
         <p>European balancing platforms such as PICASSO and MARI are
         important, but platform status and key performance indicators
         (KPIs) are dated claims. The PICASSO KPI report used here covers
@@ -3985,8 +4050,9 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <td>Voltage limit</td>
         <td>Can the node stay within voltage range in normal and
         stressed conditions?</td>
-        <td>Reactive obligations, inverter settings, STATCOM,
-        transformer tap strategy, or curtailment.</td>
+        <td>Reactive obligations, inverter settings, static synchronous
+        compensator (STATCOM), transformer tap strategy, or
+        curtailment.</td>
         </tr>
         <tr>
         <td>Fault strength</td>
@@ -4015,7 +4081,8 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         problems, not as afterthoughts. Fingrid’s 2026-2035 development
         plan similarly treats inverter-connected generation and storage
         as part of a changing stability problem, with grid-forming
-        storage and STATCOMs among possible solutions.</p>
+        storage and static synchronous compensators (STATCOMs) among
+        possible solutions.</p>
         </section>
         <section id="mechanism-9" class="level4">
         <h4>Mechanism</h4>
@@ -4150,8 +4217,8 @@ reactive MVAr obligation or headroom</code></pre>
         <h4>Current Debates And Caveats</h4>
         <p>Procurement of voltage support, inertia-like services,
         fault-current capability, and grid-forming behavior is still
-        evolving. Treat named products and eligibility as dated market
-        facts that need current TSO or grid-code evidence.</p>
+        evolving. Named products and eligibility need current TSO or
+        grid-code evidence.</p>
         <p>Technical screening concepts such as short-circuit ratio are
         useful for framing the grid study. They are not a substitute for
         the project’s interconnection study, equipment capability
@@ -4253,18 +4320,26 @@ reactive MVAr obligation or headroom</code></pre>
         electricity consumption of 136.6 TWh and generation of about
         169.6 TWh in 2024, with PV equal to 2.4% of consumption.</li>
         </ul>
-        <section id="worked-estimate-9" class="level5">
+        <section id="worked-estimate-8" class="level5">
         <h5>Worked Estimate</h5>
-        <p>Take a 100 MW solar asset. If we use a clearly provisional
-        Nordic PV capacity-factor assumption of 10-12%, annual energy
-        is:</p>
-        <pre class="text"><code>Energy = 100 MW x 8,760 h/year x 0.10 to 0.12
- = 87,600 to 105,120 MWh/year
- = about 88 to 105 GWh/year</code></pre>
-        <p>The scale matters more than the extra decimal: a 100 MW plant
-        is not a 100 MW average power source. At 10-12% capacity factor,
-        its average output over the year is about 10-12 MW. The missing
-        88-90 MW is the shape of sunlight, not a performance defect.</p>
+        <p>Start with the full-output envelope behind the Swedish PV
+        anchor:</p>
+        <pre class="text"><code>4,830.7 MW x 8,760 h/year = about 42.3 TWh/year if every MW ran at full output all year</code></pre>
+        <p>IEA PVPS estimated Swedish PV generation at 4.087 TWh in
+        2024. That is roughly one-tenth of the full-output envelope, but
+        because the capacity figure is end-2024 installed capacity,
+        treat it as a scale check rather than an official capacity
+        factor.</p>
+        <p>Now take a <code>100 MW</code> solar asset. Use the Swedish
+        fleet scale check as a rough magnitude anchor rather than a site
+        forecast:</p>
+        <pre class="text"><code>Energy = 100 MW x 8,760 h/year x 0.10
+       = about 88 GWh/year</code></pre>
+        <p>The scale matters more than the extra decimal: a
+        <code>100 MW</code> solar plant is not a <code>100 MW</code>
+        average power source. The gap between nameplate power and
+        average output is the shape of sunlight, not a performance
+        defect.</p>
         </section>
         </section>
         <section id="equations-4" class="level4">
@@ -4365,6 +4440,55 @@ reactive MVAr obligation or headroom</code></pre>
         </table>
         <p>Use a control-and-scarcity distinction: who controls the
         energy flow, and what runs out first?</p>
+        <section id="promise-test" class="level5">
+        <h5>Promise Test</h5>
+        <p>Before comparing revenue, ask what each asset can safely
+        promise.</p>
+        <table>
+        <colgroup>
+        <col style="width: 20%" />
+        <col style="width: 20%" />
+        <col style="width: 20%" />
+        <col style="width: 20%" />
+        <col style="width: 20%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Promise test</th>
+        <th>Solar PV</th>
+        <th>Battery</th>
+        <th>Reservoir hydro</th>
+        <th>Demand response</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Can it choose the hour?</td>
+        <td>only partly</td>
+        <td>yes, within state of charge</td>
+        <td>often, within water constraints</td>
+        <td>only if the customer process allows</td>
+        </tr>
+        <tr>
+        <td>What runs out first?</td>
+        <td>sunlight</td>
+        <td>stored MWh / warranty headroom</td>
+        <td>water / environmental limits</td>
+        <td>customer tolerance or process flexibility</td>
+        </tr>
+        <tr>
+        <td>What is risky to sell alone?</td>
+        <td>flat delivery outside sunny hours</td>
+        <td>long-duration energy</td>
+        <td>unlimited energy</td>
+        <td>unlimited interruption rights</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>This test is deliberately simple. It keeps a model from
+        treating all <code>100 MW</code> labels as equivalent before the
+        delivery promise has been specified.</p>
+        </section>
         </section>
         <section id="examples-4" class="level4">
         <h4>Examples</h4>
@@ -4418,10 +4542,11 @@ reactive MVAr obligation or headroom</code></pre>
         benchmarks are date-specific. IEA reports that battery costs
         fell sharply through 2023, but it avoids turning those global
         cost facts into Nordic project assumptions.</p>
-        <p>The claim that storage becomes essential above a particular
-        renewable penetration threshold appears in a technical storage
-        reference, but the threshold is system-specific. It should not
-        be taught as a universal tripwire.</p>
+        <p>Claims that storage becomes essential above a particular
+        renewable-penetration threshold are system-specific rather than
+        universal tripwires. Use them as prompts to ask about residual
+        load, grid constraints, flexibility, interconnection, and demand
+        response, not as a standalone planning rule.</p>
         </section>
         <section id="recap-10" class="level4">
         <h4>Recap</h4>
@@ -4463,11 +4588,13 @@ reactive MVAr obligation or headroom</code></pre>
         </section>
         <section id="first-principles-model-11" class="level4">
         <h4>First-Principles Model</h4>
-        <p>Revenue is not:</p>
-        <pre class="text"><code>average price x annual generation</code></pre>
-        <p>unless generation is spread like the average.</p>
-        <p>Revenue is:</p>
-        <pre class="text"><code>sum over hours of generation in that hour x price in that hour</code></pre>
+        <p>The simple average price is sufficient only if generation is
+        spread like the market average. Solar revenue is computed hour
+        by hour:</p>
+        <pre class="text"><code>revenue = sum over hours of generation in that hour x price in that hour</code></pre>
+        <p>The capture-price form divides that revenue by generated
+        MWh:</p>
+        <pre class="text"><code>capture price = sum_t(generation_t x price_t) / sum_t(generation_t)</code></pre>
         <p>If solar produces mostly at noon, then noon prices matter
         more than midnight prices. A high evening price does not help
         much if the plant is not producing then.</p>
@@ -4504,7 +4631,7 @@ reactive MVAr obligation or headroom</code></pre>
         <li>Illustrative numbers below are invented for teaching and are
         not market data.</li>
         </ul>
-        <section id="worked-estimate-10" class="level5">
+        <section id="worked-estimate-9" class="level5">
         <h5>Worked Estimate</h5>
         <p>Illustrative two-hour market:</p>
         <table>
@@ -4628,10 +4755,10 @@ reactive MVAr obligation or headroom</code></pre>
         </section>
         <section id="current-debates-and-caveats-6" class="level4">
         <h4>Current Debates And Caveats</h4>
-        <p>Practitioner sources cite sharp capture-rate declines in
-        specific markets and months, such as the Netherlands in May
-        2023. Those are examples of market-specific episodes; broader
-        claims need dated market data and exact definitions.</p>
+        <p>Practitioner sources cite market-specific capture-rate
+        episodes. Use those episodes to frame dated market analysis;
+        broader claims need the market area, period, source dataset, and
+        capture-rate definition.</p>
         <p>Negative-price hour counts are also date-specific. Avoid
         saying “Sweden has X negative-price hours” unless the source,
         market area, period, and methodology are locked.</p>
@@ -4718,16 +4845,16 @@ round-trip efficiency (RTE): how much energy survives the round trip</code></pre
         <ul>
         <li><code>100 MW / 200 MWh = 2 hours</code> by definition.</li>
         <li><code>100 MW / 400 MWh = 4 hours</code> by definition.</li>
-        <li>For illustration, assume <code>85-90%</code> round-trip
+        <li>For illustration, assume <code>90%</code> round-trip
         efficiency. Project work should use the original equipment
         manufacturer (OEM) warranty, test data, or a dated technical
         benchmark.</li>
-        <li>Technical storage reference example: one storage arbitrage
-        example uses 80% RTE; another uses charge/discharge efficiencies
-        separately. These are examples, not universal battery
-        facts.</li>
+        <li>Michaelides’ storage chapter defines round-trip efficiency
+        as the product of charge and discharge efficiency and gives an
+        80% storage example. This chapter uses 90% as a round scenario
+        assumption, not as a universal battery benchmark.</li>
         </ul>
-        <section id="worked-estimate-11" class="level5">
+        <section id="worked-estimate-10" class="level5">
         <h5>Worked Estimate</h5>
         <p>Suppose a battery charges with <code>100 MWh</code> when
         power is cheap. If RTE is 90%, it can later discharge:</p>
@@ -4922,12 +5049,13 @@ basis exposure = area price - financial reference price</code></pre>
         still carry risk under a system-price hedge or a contract priced
         from a different reference.</p>
         <p>Settlement adds a second layer. eSett’s Nordic model
-        calculates and settles imbalances for BRPs from trades and
-        realized consumption or production, handles balancing-service
-        settlement for BSPs, and runs collateral, invoicing, reporting,
-        and market-behaviour monitoring functions. The commercial model
-        has to know where the asset sits in that settlement
-        structure.</p>
+        calculates and settles imbalances for balance responsible
+        parties (BRPs) from trades and realized consumption or
+        production, handles balancing-service settlement for balancing
+        service providers (BSPs), and runs collateral, invoicing,
+        reporting, and market-behaviour monitoring functions. The
+        commercial model has to know where the asset sits in that
+        settlement structure.</p>
         </section>
         <section id="definitions-13" class="level4">
         <h4>Definitions</h4>
@@ -5208,9 +5336,8 @@ Project 2: Danish solar-plus-BESS, DK2, separate import treatment, customer-shap
         </tr>
         </tbody>
         </table>
-        <p>The card is modest by design. It prevents a regional label
-        from entering a project model as if it were an economic
-        assumption.</p>
+        <p>The compact card keeps regional labels from entering a
+        project model as economic assumptions.</p>
         </section>
         <section id="misconceptions-13" class="level4">
         <h4>Misconceptions</h4>
@@ -5663,19 +5790,20 @@ operating_cash_before_debt =
         <ul>
         <li><code>1 MW x 1 hour = 1 MWh</code>.</li>
         <li><code>1 GW average x 8,760 hours/year = 8.76 TWh/year</code>.</li>
-        <li>For Sweden/Nordic first screens,
-        <code>1 GWh/year per MWp</code> is a useful order-of-magnitude
-        PV anchor from a <code>~10-12%</code> capacity-factor screen.
-        Site-specific irradiation, losses, degradation, and availability
-        replace this round anchor in an investment model.</li>
+        <li>IEA PVPS reports Sweden’s 2024 average PV yield at
+        <code>850 kWh/kWp</code>; a round
+        <code>1 GWh/year per megawatts peak (MWp)</code> is a screening
+        simplification near the same order of magnitude. Site-specific
+        irradiation, losses, degradation, and availability replace this
+        round anchor in an investment model.</li>
         </ul>
         <p>The commercial anchor is sensitivity:</p>
         <pre class="text"><code>annual cash-flow sensitivity = exposed MWh/year x assumption change</code></pre>
-        <p>Treat the numbers in this section as unit and sensitivity
-        anchors. Deal benchmarks for DSCR, leverage, PPA tenor, WACC,
-        capex, and opex have to come from the specific project, lender,
-        country, contract, and date.</p>
-        <section id="worked-estimate-12" class="level5">
+        <p>The numbers in this section are unit and sensitivity anchors.
+        Deal benchmarks for DSCR, leverage, PPA tenor, WACC, capex, and
+        opex have to come from the specific project, lender, country,
+        contract, and date.</p>
+        <section id="worked-estimate-11" class="level5">
         <h5>Worked Estimate</h5>
         <p>Illustrative asset:</p>
         <ul>
@@ -5721,18 +5849,52 @@ operating_cash_before_debt =
         <p>The model reveals which assumptions matter enough to change
         the decision.</p>
         </section>
-        <section id="example-8" class="level4">
-        <h4>Example</h4>
-        <p>Two projects each produce <code>100 GWh/year</code>.</p>
-        <p>Project A sells mostly during high-value hours and realizes
-        <code>55 EUR/MWh</code>. Project B sells mostly during low-value
-        hours and realizes <code>45 EUR/MWh</code>.</p>
-        <pre class="text"><code>annual revenue gap = 100,000 MWh/year x (55 - 45) EUR/MWh
- = EUR 1,000,000/year</code></pre>
-        <p>If the capex, opex, and debt service are similar, this is a
-        material commercial difference. It can decide leverage, covenant
-        headroom, equity distributions, and whether merchant exposure
-        adds useful upside or unacceptable risk.</p>
+        <section
+        id="example-the-lower-yield-site-wins-on-realized-cash-flow"
+        class="level4">
+        <h4>Example: The Lower-Yield Site Wins On Realized Cash
+        Flow</h4>
+        <p>Suppose Site A produces <code>100 GWh/year</code> and
+        realizes <code>45 EUR/MWh</code>. Site B has better timing, grid
+        position, and contract cover, so it realizes
+        <code>55 EUR/MWh</code>.</p>
+        <p>The break-even generation for Site B is:</p>
+        <pre class="text"><code>break_even_generation_B =
+  100,000 MWh/year x 45 EUR/MWh / 55 EUR/MWh
+  = 81,818 MWh/year
+  = 81.8 GWh/year</code></pre>
+        <p>Site B can be a stronger financial asset even with lower
+        yield:</p>
+        <table>
+        <thead>
+        <tr>
+        <th>Site</th>
+        <th style="text-align: right;">Generation</th>
+        <th style="text-align: right;">Realized Price</th>
+        <th style="text-align: right;">Gross Revenue</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>A</td>
+        <td style="text-align: right;"><code>100 GWh/year</code></td>
+        <td style="text-align: right;"><code>45 EUR/MWh</code></td>
+        <td
+        style="text-align: right;"><code>4.50 million EUR/year</code></td>
+        </tr>
+        <tr>
+        <td>B</td>
+        <td style="text-align: right;"><code>90 GWh/year</code></td>
+        <td style="text-align: right;"><code>55 EUR/MWh</code></td>
+        <td
+        style="text-align: right;"><code>4.95 million EUR/year</code></td>
+        </tr>
+        </tbody>
+        </table>
+        <p>The lower-yield site wins when realized-price gain, grid-cost
+        saving, contract quality, and debt headroom outweigh the lost
+        MWh. The investment memo should therefore show both expected MWh
+        and break-even MWh.</p>
         </section>
         <section id="in-practice-15" class="level4">
         <h4>In Practice</h4>
@@ -5753,6 +5915,11 @@ operating_cash_before_debt =
         </ul>
         <p>An investment committee should receive the link from physical
         assumptions to risk-bearing cash flows alongside the IRR.</p>
+        <p>For a shaped customer offer, the same screen applies to the
+        promise rather than the site. Show the MWh that the plant
+        naturally produces, the MWh the customer wants in each period,
+        the cost of filling the gap, and the portion of cash flow stable
+        enough to support financing.</p>
         </section>
         <section id="misconceptions-15" class="level4">
         <h4>Misconceptions</h4>
@@ -5897,8 +6064,8 @@ operating_cash_before_debt =
         consumption-tariff cap is described as
         <code>11.5 Danish øre/kWh</code> after use of saved bottleneck
         revenues; large consumers above <code>100 GWh/year</code> have a
-        reduced energy-based system tariff in that source. Treat this as
-        a transmission-tariff example, not a total delivered-energy
+        reduced energy-based system tariff in that source. This is a
+        transmission-tariff example, not a total delivered-energy
         network charge.</li>
         <li>Finland, Fingrid main grid service pricing 2026 source: all
         energy-based fee components are calculated hourly by summing
@@ -5911,7 +6078,7 @@ operating_cash_before_debt =
         <p>These examples cannot be compared directly without a country
         sheet: currency, voltage level, user class, tariff year, and
         inclusion/exclusion of DSO charges differ.</p>
-        <section id="worked-estimate-13" class="level5">
+        <section id="worked-estimate-12" class="level5">
         <h5>Worked Estimate</h5>
         <p>Illustrative connection:</p>
         <ul>
@@ -6132,14 +6299,13 @@ battery_capex_and_opex
         </section>
         <section id="recap-16" class="level4">
         <h4>Recap</h4>
-        <p>Treat grid access as a priced operating right, not as
-        background infrastructure. The connection determines how much
-        power can move, when that right can be constrained, and which
-        costs attach to MW, MWh, losses, reactive power, or overruns.
-        Two identical batteries can diverge before their first trade. A
-        useful project model annualizes one-off costs, separates
-        capacity from usage charges, and prices curtailment or
-        interruption as part of the dispatch problem.</p>
+        <p>Grid access is a priced operating right. The connection
+        determines how much power can move, when that right can be
+        constrained, and which costs attach to MW, MWh, losses, reactive
+        power, or overruns. Two identical batteries can diverge before
+        their first trade. A useful project model annualizes one-off
+        costs, separates capacity from usage charges, and prices
+        curtailment or interruption as part of the dispatch problem.</p>
         <div class="lecture-end">
 
         </div>
@@ -6166,8 +6332,8 @@ battery_capex_and_opex
         cash flow.</p>
         <section id="opening-puzzle-17" class="level4">
         <h4>Opening Puzzle</h4>
-        <p>A <code>100 MWp</code> solar project can be offered three
-        ways:</p>
+        <p>A <code>100 megawatts peak (MWp)</code> solar project can be
+        offered three ways:</p>
         <ul>
         <li>sell as-produced solar</li>
         <li>sell a shaped daytime/evening profile</li>
@@ -6343,7 +6509,11 @@ cash_flow_before_tax =
   4.80 - 0.40 - 1.00 - 3.20
   = 0.20 million EUR/year</code></pre>
         <p>The project is alive, but thin. A capture assumption that
-        moves by a few points changes the investment answer.</p>
+        moves by a few points changes the investment answer. The
+        comparison below adds an explicit curtailment-value loss to all
+        three designs, so the solar-only result moves from the first
+        screen’s <code>0.20m EUR/year</code> to
+        <code>0.00m EUR/year</code>.</p>
         <section id="three-design-comparison" class="level5">
         <h5>Three-Design Comparison</h5>
         <p>Add two contract alternatives.</p>
@@ -6528,8 +6698,8 @@ extra visible value = 1.05 million EUR/year</code></pre>
         buyer tolerance band, or portfolio hedge</li>
         <li>keep the battery option alive only if dispatch rights and an
         additional value pool are secured</li>
-        <li>show IC a merchant-tail range that does not use today’s
-        capture rate as a permanent fact</li>
+        <li>show the investment committee (IC) a merchant-tail range
+        that does not use today’s capture rate as a permanent fact</li>
         </ul>
         </section>
         <section id="common-failure-modes" class="level4">
@@ -6542,8 +6712,8 @@ extra visible value = 1.05 million EUR/year</code></pre>
         hurdle. Flexibility has value only when the project owns the
         right to use it and the value exceeds capital, wear, fees, and
         opportunity cost.</p>
-        <p>“Treat the merchant tail as upside” gives the project credit
-        for risk without pricing future capture erosion, curtailment,
+        <p>“The merchant tail is upside” gives the project credit for
+        risk without pricing future capture erosion, curtailment,
         repowering needs, and market-design uncertainty.</p>
         </section>
         <section id="caveats-current-debates-2" class="level4">
@@ -6723,8 +6893,8 @@ evidence promise</code></pre>
         </tr>
         <tr>
         <td>Certificates</td>
-        <td>Are GOs bundled, unbundled, separately priced, or
-        excluded?</td>
+        <td>Are guarantees of origin (GOs) bundled, unbundled,
+        separately priced, or excluded?</td>
         <td>Double-claiming or customer-evidence failure.</td>
         </tr>
         <tr>
@@ -6781,7 +6951,7 @@ evidence promise</code></pre>
         termination, and valuation. These terms allocate payment when
         the expected settlement process fails.</p>
         </section>
-        <section id="example-9" class="level4">
+        <section id="example-8" class="level4">
         <h4>Example</h4>
         <p>Take the same 100 MW solar plant.</p>
         <p>Contract A says the buyer takes all metered output at a fixed
@@ -6800,6 +6970,53 @@ evidence promise</code></pre>
         The PPA may hedge one price while the buyer pays another.</p>
         <p>The same plant can therefore produce three different
         businesses.</p>
+        <section id="residual-firming-test" class="level5">
+        <h5>Residual Firming Test</h5>
+        <p>For Contract B, make the delivery obligation visible before
+        pricing:</p>
+        <pre class="text"><code>20 MW flat every hour =
+  20 MW x 8,760 h/year
+  = 175,200 MWh/year
+  = 175.2 GWh/year</code></pre>
+        <p>A <code>20 MW</code> flat delivery obligation is larger than
+        a <code>100 GWh/year</code> solar output assumption before
+        hourly shape is considered. The term sheet must say who supplies
+        the residual <code>75.2 GWh/year</code> equivalent, who pays for
+        expensive hours, and whether the exposure is capped, indexed,
+        passed through, or a no-bid condition.</p>
+        <table>
+        <colgroup>
+        <col style="width: 50%" />
+        <col style="width: 50%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Residual term</th>
+        <th>Commercial decision</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Uncapped seller firming</td>
+        <td>Seller prices a short position in difficult hours.</td>
+        </tr>
+        <tr>
+        <td>Cap</td>
+        <td>Seller accepts defined exposure; buyer owns the tail beyond
+        the cap.</td>
+        </tr>
+        <tr>
+        <td>Index or pass-through</td>
+        <td>Buyer carries an observable residual cost driver; fixed PPA
+        price should fall.</td>
+        </tr>
+        <tr>
+        <td>Reopener or no-bid</td>
+        <td>Product is not financeable or controllable under current
+        terms.</td>
+        </tr>
+        </tbody>
+        </table>
         <p>For a shaped or fixed-schedule product, the term sheet also
         needs a residual-firming rule. The seller can carry expected
         residuals inside the fixed price, but the tail cannot be left
@@ -6860,6 +7077,7 @@ evidence promise</code></pre>
         <p>These terms decide whether a shaped offer is a bounded
         product or an uncapped short position in difficult hours.</p>
         </section>
+        </section>
         <section id="in-practice-17" class="level4">
         <h4>In Practice</h4>
         <p>Before a PPA offer goes to pricing, answer these
@@ -6907,9 +7125,9 @@ evidence promise</code></pre>
         certificates prove the claim, what credit support stands behind
         the promise, and what fallback applies when delivery, payment,
         curtailment, or market disruption breaks the expected path. Once
-        those assignments are visible, the commercial question changes
-        from “what kind of PPA is this?” to “which mismatches have been
-        priced, controlled, or left open?”</p>
+        those assignments are visible, the commercial discussion can
+        focus on the mismatches that are priced, controlled, capped,
+        transferred, or still open.</p>
         <div class="lecture-end">
 
         </div>
@@ -7803,7 +8021,7 @@ buyer surplus = buyer willingness-to-pay - offer price</code></pre>
         which inputs come from observable forwards, which come from a
         fundamental view, and which remain negotiated risk premia.</p>
         </section>
-        <section id="example-10" class="level4">
+        <section id="example-9" class="level4">
         <h4>Example</h4>
         <p>The buyer wants smoother solar.</p>
         <p>Option A is as-produced solar at 51 EUR/MWh. The buyer takes
@@ -7886,8 +8104,9 @@ buyer surplus = buyer willingness-to-pay - offer price</code></pre>
         turn that sentence into an offer that can survive modeling,
         legal drafting, lender questions, operations, and partner
         execution. The translation layer runs from customer promise, to
-        term-sheet variables, to hourly economics, to an IC packet with
-        a recommendation and a clear assumption that can flip it.</p>
+        term-sheet variables, to hourly economics, to an investment
+        committee (IC) packet with a recommendation and a clear
+        assumption that can flip it.</p>
         <section id="opening-puzzle-21" class="level4">
         <h4>Opening Puzzle</h4>
         <p>Sales asks:</p>
@@ -8343,9 +8562,7 @@ risk allocation and governance</code></pre>
         risk ownership, operating control, and evidence. The proposal is
         ready when IC can see the offer price, the retained risks, the
         partner-execution plan, and the first assumption that would
-        change the recommendation. At that point the discussion is no
-        longer “can we quote?” It is “under these terms and evidence,
-        should we?”</p>
+        change the recommendation.</p>
         <div class="lecture-end">
 
         </div>
@@ -8458,10 +8675,10 @@ risk allocation and governance</code></pre>
         <pre class="text"><code>sum of every revenue source the asset could theoretically access</code></pre>
         <p>Nordic reserve markets show why the resource accounting has
         to be product-specific. The Nordic TSOs’ 2025 battery reserve
-        paper says batteries can participate in FFR, FCR-D, FCR-N, aFRR,
-        and mFRR, but each product asks for a different mix of response
-        speed, endurance, prequalification, and state-of-charge
-        management.</p>
+        paper says batteries can participate in fast frequency reserve
+        (FFR), FCR-D, FCR-N, aFRR, and mFRR, but each product asks for a
+        different mix of response speed, endurance, prequalification,
+        and state-of-charge management.</p>
         <table>
         <colgroup>
         <col style="width: 33%" />
@@ -8509,8 +8726,8 @@ risk allocation and governance</code></pre>
         <tr>
         <td>mFRR</td>
         <td>manual restoration with <code>12.5 min</code> full
-        activation in the standard Nordic description and shorter EAM
-        endurance windows</td>
+        activation in the standard Nordic description and shorter energy
+        activation market (EAM) endurance windows</td>
         <td>ramp speed alone is insufficient; bid size, activation path,
         and energy window matter</td>
         </tr>
@@ -8818,7 +9035,7 @@ stress_case_value</code></pre>
         batteries that want to enter them.</p>
         <p>If a product needs <code>X MW</code> and many similar assets
         can provide <code>X MW</code>, the marginal value of the next
-        asset falls. Treat this as a market-structure risk:</p>
+        asset falls. The market-structure risk is:</p>
         <pre class="text"><code>small product need + fast entry + similar assets = revenue compression risk</code></pre>
         <p>Energy arbitrage can compress too. If many batteries charge
         in the same low-price hours and discharge in the same high-price
@@ -8990,8 +9207,8 @@ annualized_extra_capex
         roughly fixed.</p>
         <p>Project policy constraint: a possible insurance, lender,
         warranty, or operating-policy limit on cycling, throughput,
-        depth of discharge, duty cycle, or approved operation. Treat it
-        as a diligence question read from project documents, not as a
+        depth of discharge, duty cycle, or approved operation. Read it
+        from project documents as a diligence question, not as a
         universal BESS market term.</p>
         <p>Net value per MWh: value of discharging an additional MWh
         after charging cost, efficiency loss, degradation, fees, and
@@ -9225,10 +9442,11 @@ extra energy block scale = 200,000 x 175 = USD 35,000,000</code></pre>
         <code>1 h</code> of endurance in each direction. aFRR can
         require <code>1-4 h</code> depending on country and market path.
         mFRR uses a <code>12.5 min</code> full-activation standard in
-        the Nordic description, while the EAM endurance window is tied
-        to one or two market quarters. A one-hour battery can be
-        excellent for one product and weak for another; duration is a
-        product requirement before it is an asset label.</p>
+        the Nordic description, while the energy activation market (EAM)
+        endurance window is tied to one or two market quarters. A
+        one-hour battery can be excellent for one product and weak for
+        another; duration is a product requirement before it is an asset
+        label.</p>
         </section>
         <section id="site-lens" class="level5">
         <h5>2. Site Lens</h5>
@@ -9652,8 +9870,8 @@ d_t + solar_export_t &lt;= export_limit_t</code></pre>
         and the BESS can discharge only <code>12 MWh</code> without
         violating state of charge or reserve headroom, the remaining
         <code>8 MWh</code> is a firming purchase, a buyer pass-through,
-        a portfolio allocation, or a delivery failure. The optimizer has
-        not made the shortfall disappear. It has assigned it.</p>
+        a portfolio allocation, or a delivery failure. The optimizer
+        identifies where the shortfall sits under the chosen rules.</p>
         <p>The exact model changes by product. The discipline does not:
         every symbol needs a unit and every constraint needs an economic
         reason.</p>
@@ -9958,7 +10176,8 @@ terminal shortfall from 50 MWh discharge = 50 MWh - 40 MWh = 10 MWh</code></pre>
         <thead>
         <tr>
         <th>Model</th>
-        <th style="text-align: right;">Physical MAE</th>
+        <th style="text-align: right;">Physical mean absolute error
+        (MAE)</th>
         <th style="text-align: right;">Value-weighted error</th>
         </tr>
         </thead>
@@ -10175,7 +10394,8 @@ annualized_net_value = 14,000 x 12 = 168,000 EUR/year</code></pre>
         </thead>
         <tbody>
         <tr>
-        <td>MAE / RMSE in MWh</td>
+        <td>Mean absolute error (MAE) / root mean square error (RMSE) in
+        MWh</td>
         <td>average physical forecast quality</td>
         <td>price, liquidity, penalties, and ability to act</td>
         </tr>
@@ -10466,7 +10686,7 @@ rebalance_value =
   - grid_and_market_fees
   - opportunity_cost
   - warranty_insurance_or_availability_penalties</code></pre>
-        <p>Positive gross spread is only the beginning.</p>
+        <p>Gross spread is one input.</p>
         </section>
         <section id="definitions-22" class="level4">
         <h4>Definitions</h4>
@@ -10923,7 +11143,7 @@ insurance policy, availability plan, or augmentation budget can support</code></
         <p>Use this section for sensitivity structure. The actual
         leverage, DSCR, WACC, capex, opex, IRR target, and tariff
         assumptions belong in a deal-specific evidence pack.</p>
-        <section id="worked-estimate-14" class="level5">
+        <section id="worked-estimate-13" class="level5">
         <h5>Worked Estimate</h5>
         <p>Illustrative solar project:</p>
         <ul>
@@ -11476,10 +11696,10 @@ Here is what remains merchant, operational, or partner-execution risk.</code></p
         knows how to build, and a contract structure that can be
         explained. The portfolio question is what the company already
         owns in the same hours, same price area, same grid bottleneck,
-        or same partner perimeter. A new asset is not an isolated cash
-        flow; it adds exposure to some market conditions and reduces
-        exposure to others. Portfolio modeling measures that marginal
-        change before the project is treated as safer than it is.</p>
+        or same partner perimeter. A new asset changes exposure: it adds
+        dependence on some market conditions and reduces dependence on
+        others. Portfolio modeling measures that marginal change before
+        the project is treated as safer than it is.</p>
         <section id="opening-puzzle-28" class="level4">
         <h4>Opening Puzzle</h4>
         <p>A 100 MW solar project has a strong standalone NPV. Should a
@@ -11942,14 +12162,14 @@ The marginal portfolio risk is materially different.</code></pre>
         the benchmark used in the plan. Sales needs an explanation,
         finance needs a quantified impact, and the asset owner needs to
         know whether the result came from execution, market conditions,
-        constraints, data quality, or the mandate itself. Realized PnL
-        cannot answer that alone. The required comparison is a feasible
-        version of the same quarter: schedules, bids, dispatch choices,
-        data, risk limits, contract rights, and market windows that were
-        actually available at the time. Only then can governance
-        separate poor execution from low spreads, bad forecasts,
-        curtailment, missing data, or limits the partner was never
-        allowed to cross.</p>
+        constraints, data quality, or the mandate itself. Realized
+        profit and loss (PnL) cannot answer that alone. The required
+        comparison is a feasible version of the same quarter: schedules,
+        bids, dispatch choices, data, risk limits, contract rights, and
+        market windows that were actually available at the time. Only
+        then can governance separate poor execution from low spreads,
+        bad forecasts, curtailment, missing data, or limits the partner
+        was never allowed to cross.</p>
         <section id="opening-puzzle-29" class="level4">
         <h4>Opening Puzzle</h4>
         <p>Your outsourced trading partner earns <code>2 EUR/MWh</code>
@@ -12190,7 +12410,7 @@ The marginal portfolio risk is materially different.</code></pre>
         <td style="text-align: right;">Any material event</td>
         <td style="text-align: right;">Repeated events or high-value
         days</td>
-        <td>Treat benchmark as unverified and trigger data-right
+        <td>Mark benchmark as unverified and trigger data-right
         review.</td>
         </tr>
         <tr>
@@ -12376,15 +12596,16 @@ The marginal portfolio risk is materially different.</code></pre>
         <a href="#ref-6">[6]</a> <a href="#ref-39">[39]</a>
         <a href="#ref-50">[50]</a></sup>
         </p>
-        <p>A renewable IPP can spend its first analytics budget many
-        ways: a pricing model, a data platform, an energy trading and
-        risk management (ETRM) system, a forecast vendor, a partner
-        scorecard, a risk pack, a quant hire, or a battery optimizer.
-        Each choice sounds sensible in isolation. The constraint is that
-        year-one budget, headcount, data rights, and management
-        attention are scarce. The roadmap has to choose which decisions
-        receive analytical capability now, which are bought, and which
-        are deliberately left rough until the evidence improves.</p>
+        <p>A renewable independent power producer (IPP) can spend its
+        first analytics budget many ways: a pricing model, a data
+        platform, an energy trading and risk management (ETRM) system, a
+        forecast vendor, a partner scorecard, a risk pack, a quant hire,
+        or a battery optimizer. Each choice sounds sensible in
+        isolation. The constraint is that year-one budget, headcount,
+        data rights, and management attention are scarce. The roadmap
+        has to choose which decisions receive analytical capability now,
+        which are bought, and which are deliberately left rough until
+        the evidence improves.</p>
         <section id="opening-puzzle-30" class="level4">
         <h4>Opening Puzzle</h4>
         <p>Management approves a constrained year-one build:</p>
@@ -12392,9 +12613,11 @@ The marginal portfolio risk is materially different.</code></pre>
         <li>budget: <code>900,000 EUR</code></li>
         <li>team: <code>1 accountable owner</code>,
         <code>1 analyst</code>, and <code>0.5 data engineer</code></li>
-        <li>outsourced BRP/BSP and optimizer execution</li>
+        <li>outsourced balance responsible party (BRP), balancing
+        service provider (BSP), and optimizer execution</li>
         <li>incomplete partner data rights</li>
-        <li>three value pools under pressure: shaped PPAs, BESS design,
+        <li>three value pools under pressure: shaped power purchase
+        agreements (PPAs), battery energy storage system (BESS) design,
         partner oversight</li>
         </ul>
         <p>The ideal analytical engine can wait. The immediate question
@@ -12413,9 +12636,8 @@ The marginal portfolio risk is materially different.</code></pre>
   x data/control_readiness
   x implementation_feasibility
   / governance_risk</code></pre>
-        <p>Treat the score as a disciplined conversation. It prevents
-        the roadmap from starting with the tool that has the best
-        demo.</p>
+        <p>The score disciplines the conversation. It prevents the
+        roadmap from starting with the tool that has the best demo.</p>
         </section>
         <section id="budget-and-headcount-constraint" class="level4">
         <h4>Budget And Headcount Constraint</h4>
@@ -12459,6 +12681,12 @@ The marginal portfolio risk is materially different.</code></pre>
         </tbody>
         </table>
         <p>Candidate backlog:</p>
+        <p>All costs in this backlog are scenario budget assumptions for
+        the exercise, not vendor quotes or market benchmarks. Pexapark
+        and PRMIA support the capability categories and control
+        questions; a live procurement would replace these placeholders
+        with dated vendor proposals, implementation estimates,
+        information-security review, and internal staffing costs.</p>
         <table>
         <colgroup>
         <col style="width: 17%" />
@@ -12488,7 +12716,7 @@ The marginal portfolio risk is materially different.</code></pre>
         <td>BESS sizing and dispatch screen</td>
         <td style="text-align: right;"><code>140,000 EUR</code></td>
         <td style="text-align: right;">medium</td>
-        <td>project design and IC support</td>
+        <td>project design and investment-committee (IC) support</td>
         <td>medium</td>
         </tr>
         <tr>
@@ -12610,106 +12838,103 @@ The marginal portfolio risk is materially different.</code></pre>
         rights are missing, the first workstream is data rights before a
         sophisticated benchmark.</p>
         </section>
-        <section id="prioritized-roadmap" class="level4">
-        <h4>Prioritized Roadmap</h4>
-        <p>Fund the first six items immediately. Keep the benchmark
-        pilot and validation budget as gated reserves that release only
-        when data-rights work has made them useful.</p>
+        <section id="year-one-budget-decision" class="level4">
+        <h4>Year-One Budget Decision</h4>
+        <p>The roadmap has to fit the <code>900,000 EUR</code> budget
+        and the small team. Data-rights work remains in scope; broad
+        scorecard automation waits until the evidence base improves.</p>
         <table>
         <colgroup>
         <col style="width: 23%" />
-        <col style="width: 17%" />
         <col style="width: 23%" />
-        <col style="width: 17%" />
-        <col style="width: 17%" />
+        <col style="width: 30%" />
+        <col style="width: 23%" />
         </colgroup>
         <thead>
         <tr>
-        <th style="text-align: right;">Priority</th>
         <th>Capability</th>
-        <th style="text-align: right;">Year-one funding</th>
-        <th>Why now</th>
-        <th>Main dependency</th>
+        <th>Year-one decision</th>
+        <th style="text-align: right;">Budget</th>
+        <th>Reason</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-        <td style="text-align: right;">1</td>
         <td>Data contracts and reconciliation</td>
+        <td>Approve</td>
         <td style="text-align: right;"><code>130,000 EUR</code></td>
-        <td>makes every later model auditable</td>
-        <td>partner/system access</td>
+        <td>Required before quote, risk, settlement, and partner
+        evidence can be trusted.</td>
         </tr>
         <tr>
-        <td style="text-align: right;">2</td>
         <td>PPA quote stack and risk map</td>
+        <td>Approve</td>
         <td style="text-align: right;"><code>160,000 EUR</code></td>
-        <td>shaped offers need priced risk now</td>
-        <td>commercial owner and term-sheet discipline</td>
+        <td>Addresses the <code>560,000 EUR/year</code> scenario value
+        in shaped-offer risk pricing.</td>
         </tr>
         <tr>
-        <td style="text-align: right;">3</td>
         <td>BESS sizing and dispatch screen</td>
+        <td>Approve</td>
         <td style="text-align: right;"><code>140,000 EUR</code></td>
-        <td>three projects need IC support</td>
-        <td>optimizer and degradation assumptions</td>
+        <td>Addresses the <code>750,000 EUR/year</code> scenario value
+        across three project decisions.</td>
         </tr>
         <tr>
-        <td style="text-align: right;">4</td>
         <td>Partner data-rights remediation</td>
+        <td>Approve</td>
         <td style="text-align: right;"><code>120,000 EUR</code></td>
-        <td>scorecards are weak without raw evidence</td>
-        <td>contract amendments</td>
+        <td>Full scorecards are weak until raw evidence exists.</td>
         </tr>
         <tr>
-        <td style="text-align: right;">5</td>
         <td>Monthly portfolio risk pack</td>
+        <td>Approve</td>
         <td style="text-align: right;"><code>110,000 EUR</code></td>
-        <td>gives management one exposure view</td>
-        <td>common position data</td>
+        <td>Gives management one exposure view from the same position
+        data.</td>
         </tr>
         <tr>
-        <td style="text-align: right;">6</td>
         <td>Forecast/vendor evaluation layer</td>
+        <td>Approve</td>
         <td style="text-align: right;"><code>90,000 EUR</code></td>
-        <td>supports PPA, BESS, and partner decisions</td>
-        <td>time-stamped forecast archive</td>
+        <td>Supports PPA, BESS, and partner decisions through a
+        time-stamped forecast archive.</td>
         </tr>
         <tr>
-        <td style="text-align: right;">7</td>
-        <td>Feasible benchmark scorecard pilot</td>
-        <td style="text-align: right;"><code>150,000 EUR</code></td>
-        <td>start after data rights improve</td>
-        <td>forecast, bid, schedule, dispatch, meter, settlement
-        files</td>
+        <td>Feasible benchmark scorecard</td>
+        <td>Gate as pilot</td>
+        <td style="text-align: right;"><code>50,000 EUR</code></td>
+        <td>Define method and test one asset/month sample; defer
+        automation.</td>
         </tr>
         <tr>
-        <td style="text-align: right;">8</td>
         <td>Contingency and validation</td>
+        <td>Approve</td>
         <td style="text-align: right;"><code>100,000 EUR</code></td>
-        <td>protects delivery and independent review</td>
-        <td>steering discipline</td>
+        <td>Protects delivery and independent review.</td>
         </tr>
         <tr>
-        <td style="text-align: right;"></td>
-        <td><strong>Total</strong></td>
-        <td
-        style="text-align: right;"><strong><code>1,000,000 EUR</code></strong></td>
-        <td></td>
-        <td></td>
+        <td>Full ETRM implementation</td>
+        <td>Defer</td>
+        <td style="text-align: right;"><code>650,000 EUR+</code></td>
+        <td>Exceeds year-one budget, team capacity, and control
+        readiness.</td>
+        </tr>
+        <tr>
+        <td>Internal trading desk build</td>
+        <td>Defer</td>
+        <td style="text-align: right;"><code>1.5m EUR+</code></td>
+        <td>Data rights, limits, settlement, and risk controls are
+        prerequisites.</td>
         </tr>
         </tbody>
         </table>
-        <p>The list exceeds the <code>900,000 EUR</code> budget by
-        <code>100,000 EUR</code>. The forced cut is the benchmark pilot
-        scope, not the data-rights work. Reduce the pilot from
-        <code>150,000 EUR</code> to <code>50,000 EUR</code> in year one:
-        define methodology, run one asset/month sample, and defer
-        automation until evidence quality improves.</p>
         <p>Approved year-one budget:</p>
         <pre class="text"><code>130 + 160 + 140 + 120 + 110 + 90 + 50 + 100 = 900 thousand EUR</code></pre>
-        <p>The roadmap therefore funds a small benchmark prototype
-        rather than a full partner-governance platform.</p>
+        <p>The roadmap therefore spends <code>50,000 EUR</code> on
+        benchmark method and sample testing, not
+        <code>180,000 EUR</code> on a platform that cannot yet prove
+        attribution.</p>
         </section>
         <section id="capability-dependencies" class="level4">
         <h4>Capability Dependencies</h4>
@@ -13080,7 +13305,7 @@ The marginal portfolio risk is materially different.</code></pre>
 expected shortfall = average loss when losses exceed that threshold</code></pre>
         <p>VaR tells you where the tail begins. Expected shortfall tells
         you something about the tail.</p>
-        <section id="worked-estimate-15" class="level5">
+        <section id="worked-estimate-14" class="level5">
         <h5>Worked Estimate</h5>
         <p>Suppose a renewable portfolio has a forward sale covering 50
         MW for 30 days.</p>
@@ -13136,7 +13361,7 @@ expected shortfall = average loss when losses exceed that threshold</code></pre>
         <p>A price move can hurt the economics.</p>
         <p>A counterparty default can turn a gain into a loss.</p>
         <p>A margin call can force a cash scramble.</p>
-        <p>A stale curve can make the risk report lie.</p>
+        <p>A stale curve can make the valuation wrong.</p>
         <p>A missing position can make a limit meaningless.</p>
         <p>Stale spreadsheet data may make the risk report wrong.</p>
         <p>A trading control system makes risk visible early enough for
@@ -13180,12 +13405,13 @@ expected shortfall = average loss when losses exceed that threshold</code></pre>
         <tr>
         <td>Credit exposure</td>
         <td>Who owes whom if the market moved today?</td>
-        <td>current exposure and PFE</td>
+        <td>current exposure and potential future exposure (PFE)</td>
         </tr>
         <tr>
         <td>Liquidity</td>
         <td>What cash could be needed before revenue arrives?</td>
-        <td>CFaR, LaR, collateral due</td>
+        <td>cash-flow-at-risk (CFaR), liquidity-at-risk (LaR),
+        collateral due</td>
         </tr>
         <tr>
         <td>Basis and shape</td>
@@ -13285,13 +13511,15 @@ expected shortfall = average loss when losses exceed that threshold</code></pre>
 -&gt; collateral / credit-limit usage
 -&gt; cash forecast
 -&gt; liquidity buffer or action</code></pre>
-        <p>PRMIA’s credit-risk material supports current exposure,
-        potential future exposure, netting, collateral, and settlement
-        information as core credit inputs. Its liquidity-risk material
-        separates funding liquidity from trading liquidity and
-        introduces cash-flow-at-risk and liquidity-at-risk concepts. In
-        plain language: a hedge can be economically useful and still
-        create a cash call at the worst time.</p>
+        <p>PRMIA’s chapter on credit-risk management for energy and
+        commodity derivatives supports current exposure, potential
+        future exposure, netting, collateral, and settlement information
+        as core credit inputs. PRMIA’s chapter on liquidity-risk
+        measurement for energy firms separates funding liquidity from
+        trading liquidity and introduces cash-flow-at-risk and
+        liquidity-at-risk concepts. In plain language: a hedge can be
+        economically useful and still create a cash call at the worst
+        time.</p>
         <p>Illustrative stress:</p>
         <ul>
         <li>Forward sale: 36,000 MWh.</li>
@@ -13376,7 +13604,64 @@ collateral need = 900,000 x 80%
         <p>Escalation is a pre-agreed way to keep decisions from
         becoming improvised during stress.</p>
         </section>
-        <section id="example-11" class="level4">
+        <section id="decision-frame-trading-mandate-readiness"
+        class="level4">
+        <h4>Decision Frame: Trading Mandate Readiness</h4>
+        <p>A hedge or dispatch mandate is not ready if the largest
+        modeled collateral call cannot be funded before the related
+        revenue arrives. In the worked stress:</p>
+        <pre class="text"><code>36,000 MWh x 25 EUR/MWh x 80% = 720,000 EUR</code></pre>
+        <p>If treasury cannot reserve or source that cash under the
+        collateral timetable, reduce size, change collateral terms, net
+        the exposure, or do not trade.</p>
+        <table>
+        <colgroup>
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Gate</th>
+        <th>Must be visible before approval</th>
+        <th>If missing</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Position</td>
+        <td>MW/MWh by hour, zone, product, and counterparty</td>
+        <td>Do not expand mandate.</td>
+        </tr>
+        <tr>
+        <td>Valuation</td>
+        <td>independent curve, mark-to-market, stress PnL</td>
+        <td>Cap size or require review.</td>
+        </tr>
+        <tr>
+        <td>Credit / liquidity</td>
+        <td>current exposure, PFE, collateral timing, cash buffer</td>
+        <td>Reduce size or renegotiate terms.</td>
+        </tr>
+        <tr>
+        <td>Operations</td>
+        <td>confirmations, settlement, meter data, stale-curve
+        checks</td>
+        <td>Treat as control exception.</td>
+        </tr>
+        <tr>
+        <td>Partner evidence</td>
+        <td>forecasts, bids, schedules, dispatch, activation,
+        settlement</td>
+        <td>Do not attribute underperformance commercially.</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>This turns risk measurement into an approval test. The
+        mandate is sized by the exposure the organization can value,
+        fund, reconcile, and escalate.</p>
+        </section>
+        <section id="example-10" class="level4">
         <h4>Example</h4>
         <p>Consider a solar-heavy portfolio with three exposures:</p>
         <ul>
@@ -13566,11 +13851,11 @@ collateral need = 900,000 x 80%
         setup, not the finding: they matter only relative to the
         product’s activation duration, state-of-charge rules, and
         opportunity cost.</li>
-        <li><code>85-90%</code> round-trip efficiency is an illustrative
-        BESS anchor. Project work should check the specific technology,
-        warranty, operating mode, and data source.</li>
+        <li>Round-trip efficiency is project-specific. Project work
+        should check the specific technology, warranty, operating mode,
+        and data source before using an efficiency assumption.</li>
         </ul>
-        <section id="worked-estimate-16" class="level5">
+        <section id="worked-estimate-15" class="level5">
         <h5>Worked Estimate</h5>
         <p>Suppose a product needs <code>X MW</code> of reserved
         capacity in a bidding area and batteries under development add
@@ -13635,9 +13920,8 @@ collateral need = 900,000 x 80%
         </tr>
         </tbody>
         </table>
-        <p>Without this evidence, the chapter still gives a strategy
-        screen, but it should not be read as a current price
-        forecast.</p>
+        <p>Without this evidence, the screen can guide strategy, but it
+        cannot support a current price forecast.</p>
         </section>
         </section>
         <section id="equations-8" class="level4">
@@ -13680,7 +13964,7 @@ collateral need = 900,000 x 80%
         <p>The mechanism is durable. The dated debate is which step a
         given country/product has reached in 2026.</p>
         </section>
-        <section id="example-12" class="level4">
+        <section id="example-11" class="level4">
         <h4>Example</h4>
         <p>A 50 MW / 100 MWh BESS can either reserve 40 MW for an
         automatic reserve product or use that headroom for intraday and
@@ -13792,11 +14076,10 @@ collateral need = 900,000 x 80%
         applicable product rules, response times, settlement design,
         procurement volumes, eligible capacity, and decision-date market
         evidence.</p>
-        <p>The right dated formulation is: “Analysts in 2026 should test
-        ancillary-service saturation product by product, because
+        <p>For a 2026 analyst, the product-by-product test is
         reserve-market size, qualification rules, activation patterns,
-        and BESS entry can change faster than a project finance
-        model.”</p>
+        eligible BESS entry, and the opportunity cost of using the same
+        MW and MWh elsewhere.</p>
         </section>
         <section id="recap-32" class="level4">
         <h4>Recap</h4>
@@ -13996,7 +14279,7 @@ collateral need = 900,000 x 80%
         operate through nights, weekends, and abnormal market
         conditions.</p>
         </section>
-        <section id="example-13" class="level4">
+        <section id="example-12" class="level4">
         <h4>Example</h4>
         <p>A solar-plus-BESS portfolio clears day-ahead based on
         yesterday’s forecast. By intraday, cloud timing shifts. The
@@ -14066,12 +14349,11 @@ collateral need = 900,000 x 80%
         useful for framing the access, design, market-maker, and
         incentive debate. It should not be used alone to assert current
         liquidity depth or trading profitability.</p>
-        <p>The careful dated formulation is: by 2026, European and
-        Nordic market-design discussions increasingly treat 15-minute
-        products, close-to-delivery trading, and balancing-platform
-        integration as central to renewable integration; the commercial
-        value remains market-, border-, product-, and
-        capability-specific.</p>
+        <p>By 2026, European and Nordic market-design discussions
+        increasingly treat 15-minute products, close-to-delivery
+        trading, and balancing-platform integration as central to
+        renewable integration. The commercial value remains market-,
+        border-, product-, and capability-specific.</p>
         </section>
         <section id="recap-33" class="level4">
         <h4>Recap</h4>
@@ -14182,7 +14464,7 @@ collateral need = 900,000 x 80%
 curtailment loss = curtailed MWh x realized value of curtailed MWh
 import-right value = grid-charged cycles x net spread after losses, tariffs, and degradation
 local-flexibility value = qualified flexible MW x expected net payment x bankability haircut</code></pre>
-        <section id="worked-estimate-17" class="level5">
+        <section id="worked-estimate-16" class="level5">
         <h5>Worked Estimate</h5>
         <p>Take a 100 MW solar project with an illustrative
         <code>1,000</code> full-load-hour assumption:</p>
@@ -14274,7 +14556,7 @@ local-flexibility value = qualified flexible MW x expected net payment x bankabi
         unpriced curtailment risk, or when the battery cannot
         import/export in the way the product economics require.</p>
         </section>
-        <section id="example-14" class="level4">
+        <section id="example-13" class="level4">
         <h4>Example</h4>
         <p>A solar project has 100 MW of generation capacity and 70 MW
         of firm export. A co-located battery can reduce noon clipping
@@ -14338,10 +14620,9 @@ local-flexibility value = qualified flexible MW x expected net payment x bankabi
         Finnish, Danish, or Norwegian grid example should be treated as
         local evidence unless the official rule is checked for the
         specific site and date.</p>
-        <p>The cautious dated formulation is: by 2026, grid bottlenecks
-        and tariff reform are central variables for renewable and BESS
-        strategy, but site value remains connection-, tariff-, and
-        rule-specific.</p>
+        <p>By 2026, grid bottlenecks and tariff reform are central
+        variables for renewable and BESS strategy. Site value remains
+        connection-, tariff-, and rule-specific.</p>
         </section>
         <section id="recap-34" class="level4">
         <h4>Recap</h4>
@@ -14536,7 +14817,7 @@ and how much is recovered or managed elsewhere?</code></pre>
         <p>Decision rule:</p>
         <pre class="text"><code>find the constraint, then find the settlement channel</code></pre>
         </section>
-        <section id="example-15" class="level4">
+        <section id="example-14" class="level4">
         <h4>Example</h4>
         <p>An IPP considers a 150 MW solar project inside a large
         bidding zone.</p>
@@ -14587,7 +14868,7 @@ and how much is recovered or managed elsewhere?</code></pre>
         <td>1. Locate the physical constraint</td>
         <td>Which line, transformer, zone boundary, or local grid limit
         can bind?</td>
-        <td>Treat the revenue forecast as ungrounded.</td>
+        <td>Revenue forecast is ungrounded until this is known.</td>
         </tr>
         <tr>
         <td>2. Locate the price signal</td>
@@ -14610,7 +14891,8 @@ and how much is recovered or managed elsewhere?</code></pre>
         <td>5. Locate the investment signal</td>
         <td>Would a different site, grid offer, or portfolio mix change
         the answer?</td>
-        <td>Escalate before IC, not after signing.</td>
+        <td>Escalate before investment committee, not after
+        signing.</td>
         </tr>
         </tbody>
         </table>
@@ -14820,37 +15102,36 @@ control-right and partner-governance cost = 0.80 EUR/MWh x 87,600 = 70,080 EUR/y
         <p>EnergyTag’s 2026 response is useful debate framing for hybrid
         PPAs, firming costs, granular evidence, and hourly matching. It
         reports market observations and cites studies suggesting
-        material value from better matching in selected cases. Treat
-        those figures as prompts for pricing questions unless the
-        underlying study, geography, standard, and period are checked
-        directly.</p>
+        material value from better matching in selected cases. Those
+        figures frame pricing questions; the underlying study,
+        geography, standard, and period still control any quantitative
+        claim.</p>
         <p>Pexapark-style market commentary is useful for the claim that
         IPPs are being pushed toward more active revenue management,
-        structuring, and portfolio capability. Treat reported
-        thresholds, market shares, and adoption claims as dated
-        practitioner color unless independently sourced.</p>
-        <p>A cautious formulation is: buyer interest in shaped, hybrid,
-        portfolio-backed, and evidence-aware PPAs appears to be
-        increasing, but product bankability depends on priced firming,
-        evidence rules, control rights, credit support, and the seller’s
-        actual portfolio.</p>
+        structuring, and portfolio capability. Reported thresholds,
+        market shares, and adoption claims remain dated practitioner
+        color unless independently sourced.</p>
+        <p>Buyer interest in shaped, hybrid, portfolio-backed, and
+        evidence-aware PPAs appears to be increasing. Product
+        bankability still depends on priced firming, evidence rules,
+        control rights, credit support, and the seller’s actual
+        portfolio.</p>
         </section>
         <section id="market-evolution-evidence" class="level4">
         <h4>Market-Evolution Evidence</h4>
-        <p>The current European and Nordic sources point in the same
-        direction: PPAs are becoming more important, but the bottleneck
-        is usually the allocation of risk rather than the absence of a
-        clever product name.</p>
+        <p>The European and Nordic evidence should be read separately
+        before drawing a product conclusion.</p>
         <p>Commission Recommendation (EU) 2026/917 reports that EU
         corporate PPA contracted electricity grew from
         <code>7.4 TWh</code> in 2020 to <code>31.4 TWh</code> in 2024,
         while the number of contracts rose from <code>60</code> to
         <code>276</code>. It also notes that by 2024 solar PV formed the
         majority of reported corporate PPA contracted electricity, more
-        than <code>10%</code> of contracts were hybrid, and ICT buyers
-        accounted for more than <code>40%</code> of committed
-        electricity. These are dated policy-context figures, useful for
-        sizing the strategic importance of the market.</p>
+        than <code>10%</code> of contracts were hybrid, and information
+        and communications technology (ICT) buyers accounted for more
+        than <code>40%</code> of committed electricity. These are dated
+        policy-context figures, useful for sizing the strategic
+        importance of the market.</p>
         <p>The same Recommendation cites ACER’s 2024 conclusion that
         existing voluntary PPA templates were sufficient for current
         market needs. ACER’s assessment matters because it pushes the
@@ -14863,9 +15144,13 @@ control-right and partner-governance cost = 0.80 EUR/MWh x 87,600 = 70,080 EUR/y
         highlights <code>12</code> Nordic bidding areas plus Iceland,
         and treats basis risk, price opacity, contract tenor, credit,
         accounting treatment, and regulatory change as recurring
-        barriers. That does not make Nordic PPAs unattractive. It means
-        a product roadmap needs a basis-risk view, a certificate view, a
-        credit view, and a structure view for each buyer path.</p>
+        barriers. A Nordic product roadmap therefore needs a basis-risk
+        view, a certificate view, a credit view, and a structure view
+        for each buyer path.</p>
+        <p>The product-strategy implication is narrower than “PPAs are
+        rising.” Product work has to price risk allocation: shape,
+        basis, credit, collateral, evidence, tenor, control rights, and
+        residual firming.</p>
         </section>
         <section id="product-paths" class="level4">
         <h4>Product Paths</h4>
@@ -14946,7 +15231,7 @@ control-right and partner-governance cost = 0.80 EUR/MWh x 87,600 = 70,080 EUR/y
         firming it cannot price, or credit exposure it cannot
         finance.</p>
         </section>
-        <section id="example-16" class="level4">
+        <section id="example-15" class="level4">
         <h4>Example</h4>
         <p>A buyer asks for a “24/7-style” clean product.</p>
         <p>Start with the priced path:</p>
@@ -15365,9 +15650,9 @@ required margin = 1,750,000 USD/year / 3,500 MWh/year
         <h4>Misconceptions</h4>
         <p>“Four hours is twice as good as two.” Only if the extra two
         hours solve paid events often enough.</p>
-        <p>“LDES is just a bigger battery.” Longer scarcity durations
-        change technology, utilization, contract, finance, and siting
-        logic.</p>
+        <p>“Long-duration energy storage (LDES) is just a bigger
+        battery.” Longer scarcity durations change technology,
+        utilization, contract, finance, and siting logic.</p>
         <p>“A battery solves firm clean supply.” A battery helps inside
         its MW, MWh, state-of-charge, efficiency, degradation, grid, and
         contract limits.</p>
@@ -15843,7 +16128,7 @@ firming_at_risk = 13,000 MWh x 150 EUR/MWh
         <td>Does the local grid support the load and product
         structure?</td>
         <td>Proceed to site economics.</td>
-        <td>Treat grid as a binding constraint in the product.</td>
+        <td>Model grid as a binding constraint in the product.</td>
         </tr>
         </tbody>
         </table>
@@ -16070,11 +16355,12 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <p>Third, Fingrid’s 2026-2035 grid development plan treats
         inverter-dominated areas as a stability problem requiring
         technical solutions such as grid-forming storage, synchronous
-        compensators, STATCOMs, and updated grid-code work. That is a
-        planning signal, not a generic revenue forecast. For an IPP it
-        means the commercial file should track whether stability
-        capability affects connection timing, connection terms,
-        curtailment exposure, or a separately procured service.</p>
+        compensators, static synchronous compensators (STATCOMs), and
+        updated grid-code work. That is a planning signal, not a generic
+        revenue forecast. For an IPP it means the commercial file should
+        track whether stability capability affects connection timing,
+        connection terms, curtailment exposure, or a separately procured
+        service.</p>
         <section id="the-option-premium" class="level5">
         <h5>The Option Premium</h5>
         <p>Suppose a <code>100 MW</code> BESS project can buy an
@@ -16234,7 +16520,8 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         connection capacity?</li>
         <li>Is the capability required, paid, or merely hoped for?</li>
         <li>Which document defines performance: grid code, tender,
-        connection agreement, OEM specification, or pilot protocol?</li>
+        connection agreement, original equipment manufacturer (OEM)
+        specification, or pilot protocol?</li>
         <li>What is the incremental cost and what revenue or avoided
         cost clears it?</li>
         <li>What dispatch freedom do we lose?</li>
@@ -16411,15 +16698,16 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         might happen?” An optimizer answers “what should we do, given
         what we know?” A control system asks “are we allowed to do it,
         and how badly can it go wrong?”</p>
-        <p>Wind and solar forecasting sources make the same point from
-        the physical side: the useful forecast horizon depends on the
-        decision. Very short horizons support dispatch and balancing;
-        day-ahead horizons support scheduling and market positions;
-        longer horizons support planning and valuation. Accuracy tends
-        to decay with horizon, and different methods need different
-        inputs. Physical models need site and asset detail; statistical
-        and learning models need long, clean histories. The right model
-        is matched to the decision horizon.</p>
+        <p>Wind-forecasting material in <em>Renewable Electricity and
+        the Grid</em> makes the same point from the physical side: the
+        useful forecast horizon depends on the decision. Very short
+        horizons support dispatch and balancing; day-ahead horizons
+        support scheduling and market positions; longer horizons support
+        planning and valuation. Accuracy tends to decay with horizon,
+        and different methods need different inputs. Physical models
+        need site and asset detail; statistical and learning models need
+        long, clean histories. The right model is matched to the
+        decision horizon.</p>
         </section>
         <section id="definitions-35" class="level4">
         <h4>Definitions</h4>
@@ -16475,6 +16763,57 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         higher-value project may be earlier data delivery, intraday
         access, a cleaner partner interface, or a contract amendment
         that gives the asset owner the right to act.</p>
+        </section>
+        <section id="evidence-pack-for-funding-a-model" class="level4">
+        <h4>Evidence Pack For Funding A Model</h4>
+        <p>A model investment case needs evidence that the
+        recommendation can reach an action.</p>
+        <table>
+        <colgroup>
+        <col style="width: 30%" />
+        <col style="width: 40%" />
+        <col style="width: 30%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Evidence item</th>
+        <th style="text-align: right;">Metric</th>
+        <th>Decision use</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Timing coverage</td>
+        <td style="text-align: right;">recommendations received before
+        gate closure / total recommendations</td>
+        <td>Buy or build only if the model can still change the
+        action.</td>
+        </tr>
+        <tr>
+        <td>Tradable exposure</td>
+        <td style="text-align: right;">MWh with market access,
+        liquidity, and control rights</td>
+        <td>Size the value pool before funding model complexity.</td>
+        </tr>
+        <tr>
+        <td>Benchmark validity</td>
+        <td style="text-align: right;">replay uses only information
+        known before each decision</td>
+        <td>Reject hindsight backtests for partner governance.</td>
+        </tr>
+        <tr>
+        <td>Model downside</td>
+        <td style="text-align: right;">MW affected x hours x adverse
+        EUR/MWh x detection count</td>
+        <td>Decide automation limit, human approval, and drift
+        monitoring.</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>A 12 percent forecast improvement is only the first screen.
+        The investment case should state how many MWh are still tradable
+        when the forecast arrives, who has the right to act, and what
+        loss limit applies if the recommendation is wrong.</p>
         </section>
         <section id="model-risk" class="level4">
         <h4>Model Risk</h4>
@@ -16544,31 +16883,65 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         bid rules, minimum sizes, transaction costs, and reserve
         commitments. Optimization that ignores the asset is an
         incomplete calculation.</p>
+        <p>Priyanka Shinde’s work on efficient trading in short-term
+        electricity markets for renewable integration supports this
+        discipline: stochastic intraday and virtual-power-plant models
+        can improve decisions, but only when market inputs, transaction
+        costs, computation, risk preferences, and gate timing are
+        represented. For an IPP, the practical implication is narrower:
+        fund models where the operating decision is observable and
+        executable.</p>
         <p>Fifth, automate only where the loss from delay is larger than
         the model-risk charge. Sometimes the right design is a
         decision-support model with a human owner and a narrow
         mandate.</p>
         </section>
-        <section id="example-17" class="level4">
+        <section id="example-16" class="level4">
         <h4>Example</h4>
         <p>Consider a solar-plus-BESS portfolio with outsourced market
         execution.</p>
         <p>Three AI projects are proposed:</p>
-        <ol type="1">
-        <li>A price-forecasting model for merchant arbitrage.</li>
-        <li>A partner-monitoring model that reconstructs feasible
-        dispatch and nominations.</li>
-        <li>A short-horizon solar forecast that improves intraday
-        repair.</li>
-        </ol>
-        <p>The first proposal may be the least useful one. The
-        first-year value may be in the second or third.</p>
-        <p>The price model faces noisy markets, liquidity limits,
-        transaction costs, and strategy decay. The partner model may
-        reveal whether a retained risk is being managed well. The
-        short-horizon forecast may reduce imbalances if it arrives
-        before the relevant action window and if control rights
-        exist.</p>
+        <table>
+        <colgroup>
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Proposal</th>
+        <th>Evidence required before funding</th>
+        <th>Default first-year choice</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Price model for merchant arbitrage</td>
+        <td>tradable MWh, liquidity, transaction cost, risk limits, and
+        time-consistent backtest</td>
+        <td>buy or observe until owned actionability is proven</td>
+        </tr>
+        <tr>
+        <td>Partner-monitoring model</td>
+        <td>forecast, bid, schedule, dispatch, meter, activation, and
+        settlement files with timestamps</td>
+        <td>build benchmark method internally</td>
+        </tr>
+        <tr>
+        <td>Short-horizon solar forecast</td>
+        <td>delivery before intraday action window, control rights, and
+        value-weighted error tracking</td>
+        <td>buy forecast input; build value layer internally</td>
+        </tr>
+        <tr>
+        <td>Battery optimizer</td>
+        <td>SoC, grid limits, reserve commitments, degradation cost,
+        warranty constraints, PPA obligations</td>
+        <td>outsource execution if needed; own objective and audit
+        logic</td>
+        </tr>
+        </tbody>
+        </table>
         <p>The decision question is:</p>
         <pre class="text"><code>Which model changes a decision we actually own or can govern?</code></pre>
         <p>If the answer is “none,” the right action is to change the
@@ -16705,8 +17078,9 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <section id="numerical-intuition-41" class="level4">
         <h4>Numerical Intuition</h4>
         <p>Start with the observability gap.</p>
-        <p>At 15-minute granularity, one asset produces <code>96</code>
-        delivery intervals per day. A 25-asset portfolio creates:</p>
+        <p>Using a 15-minute operating screen, one asset produces
+        <code>96</code> delivery intervals per day. A 25-asset portfolio
+        creates:</p>
         <pre class="text"><code>25 assets x 96 intervals/day = 2,400 asset-intervals/day</code></pre>
         <p>If the owner receives only monthly revenue totals, most
         operational decisions are invisible. If it receives
@@ -16722,7 +17096,7 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <p>Partner fees, headcount thresholds, market share, and
         optimizer-volume thresholds are date- and firm-specific. They
         should be treated as deal inputs, not general rules.</p>
-        <section id="worked-estimate-18" class="level5">
+        <section id="worked-estimate-17" class="level5">
         <h5>Worked Estimate</h5>
         <p>Internalization value can be sketched as:</p>
         <pre class="text"><code>internalization value
@@ -16736,7 +17110,9 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         data-rights and analytics setup raises that to
         <code>80%</code>.</p>
         <pre class="text"><code>benchmarkable exposure gain = 80% - 40% = 40 percentage points</code></pre>
-        <p>That gain in observability creates the ability to separate
+        <p>The 15-minute screen is illustrative; the live interval
+        depends on the relevant market, product, and implementation
+        date. The gain in observability creates the ability to separate
         market conditions, forecast error, asset constraints, risk-limit
         choices, partner execution, and missing data.</p>
         <p>The structure matters more than the exact percentage:
@@ -16871,8 +17247,8 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <td>Own limits and cash-stress view</td>
         <td>Buy systems</td>
         <td>Outsource admin, not accountability</td>
-        <td>Current exposure, PFE, collateral, and liquidity
-        reports</td>
+        <td>Current exposure, potential future exposure (PFE),
+        collateral, and liquidity reports</td>
         </tr>
         <tr>
         <td>Partner performance</td>
@@ -16895,6 +17271,71 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <p>The matrix prevents a common mistake: outsourcing the action
         while accidentally outsourcing the evidence needed to judge the
         action.</p>
+        </section>
+        <section id="data-rights-and-service-levels" class="level4">
+        <h4>Data Rights And Service Levels</h4>
+        <p>The partner agreement should make the evidence trail
+        explicit.</p>
+        <table>
+        <colgroup>
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Area</th>
+        <th>Required evidence from partner</th>
+        <th>Cadence</th>
+        <th>Internal right retained</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Nominations and balancing</td>
+        <td>forecasts, nominations, accepted bids, activations, prices,
+        volumes, imbalance settlement lines</td>
+        <td>interval-level plus settlement close</td>
+        <td>benchmark and dispute material deviations</td>
+        </tr>
+        <tr>
+        <td>BESS dispatch</td>
+        <td>state of charge, availability, reserve commitments, dispatch
+        instructions, degradation cost, warranty constraint</td>
+        <td>near-real-time or daily</td>
+        <td>approve objective function and risk limits</td>
+        </tr>
+        <tr>
+        <td>Credit and liquidity</td>
+        <td>collateral, current exposure, fees, limit usage, settlement
+        cash timing</td>
+        <td>daily or monthly by exposure type</td>
+        <td>set limits and escalation rules</td>
+        </tr>
+        <tr>
+        <td>Data quality</td>
+        <td>missing files, stale curves, unreconciled meters, changed
+        assumptions</td>
+        <td>exception-based plus monthly review</td>
+        <td>require remediation before attribution claims</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>A small leakage number can justify a serious control layer
+        only after the organization can observe and influence it.
+        Suppose an outsourced optimizer governs
+        <code>500 GWh/year</code>. A feasible benchmark finds a
+        recurring <code>0.60 EUR/MWh</code> avoidable gap, but only
+        <code>40%</code> is observable and controllable after
+        data-right, mandate, and constraint filters:</p>
+        <pre class="text"><code>addressable value = 500,000 MWh/year x 0.60 EUR/MWh x 40%
+                  = 120,000 EUR/year</code></pre>
+        <p>If the data-rights and benchmark layer costs
+        <code>80,000 EUR/year</code>, it can clear the screen if the gap
+        is recurrent and the evidence improves. That supports data
+        rights and benchmark governance before it supports a full
+        internal trading desk.</p>
         </section>
         <section id="build-buy-outsource-decision-tree" class="level4">
         <h4>Build-Buy-Outsource Decision Tree</h4>
@@ -16926,7 +17367,7 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <p>Once that exists, the firm can decide what to internalize
         from evidence rather than organizational fashion.</p>
         </section>
-        <section id="example-18" class="level4">
+        <section id="example-17" class="level4">
         <h4>Example</h4>
         <p>A solar-plus-BESS IPP has outsourced BRP/BSP and optimization
         services. A month later, the battery shows lower revenue than
@@ -16952,11 +17393,17 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         </section>
         <section id="in-practice-35" class="level4">
         <h4>In Practice</h4>
-        <p>In Nordic practice, BRP/BSP role definitions, reserve
-        qualification, imbalance settlement, and market access are
-        rulebook details. eSett and Svenska kraftnät are useful for the
-        role distinction, while product-specific participation still
-        depends on the relevant market rules and date.</p>
+        <p>In Nordic practice, eSett’s Nordic Imbalance Settlement
+        Handbook v5.3 is useful for settlement mechanics: agreements,
+        imbalance settlement, balancing-service settlement, invoicing,
+        collateral, and risk management. A Svenska kraftnät source
+        fetched on 2026-05-16 is a dated Swedish implementation example
+        for the BSP/BRP actor-role split, stating that the contractual
+        split took effect on May 1, 2024 and that full independent BSP
+        implementation was expected no later than 2028 based on the
+        conditions in that source. Product-specific participation still
+        depends on the relevant country, product, rulebook, and
+        date.</p>
         <p>The practice-relevant framework is portable:</p>
         <ul>
         <li>outsource execution where external scale and 24/7 operations
@@ -16995,9 +17442,10 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         </section>
         <section id="current-debates-and-caveats-18" class="level4">
         <h4>Current Debates And Caveats</h4>
-        <p>Current optimizer models, FPA-like structures, trading-desk
-        economics, and partner market shares are date-specific. No claim
-        is made here about what is common in 2026 market practice.</p>
+        <p>Current optimizer models, fixed-price or floor-style
+        structures, trading-desk economics, and partner market shares
+        are date-specific. Use current evidence before turning any of
+        them into a 2026 market-practice claim.</p>
         <p>The durable claim is narrower: market access, execution,
         analytics, risk ownership, decision rights, and governance are
         separate. Outsourcing one leaves the others to be governed
@@ -17134,7 +17582,7 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <p>Cost-and-risk includes people, systems, vendor lock-in,
         operational incidents, model error, compliance burden,
         collateral, and distraction.</p>
-        <section id="worked-estimate-19" class="level5">
+        <section id="worked-estimate-18" class="level5">
         <h5>Worked Estimate</h5>
         <p>Suppose <code>500 GWh/year</code> is exposed to shaped-PPA
         pricing and residual firming decisions. A recurring
@@ -17286,7 +17734,7 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         made only after the firm can reconstruct positions, run limits,
         explain settlement, and measure partner performance.</p>
         </section>
-        <section id="example-19" class="level4">
+        <section id="example-18" class="level4">
         <h4>Example</h4>
         <p>A buyer wants a shaped renewable product: flatter than solar,
         cleaner than generic market power, and priced for several
@@ -17382,19 +17830,15 @@ and with what feedback after delivery?</code></pre>
         governance in one decision.</p>
         <section id="opening-puzzle-43" class="level4">
         <h4>Opening Puzzle</h4>
-        <p>A customer wants a shaped clean-power product. The
-        development team has a solar site. The battery team has a 50 MW
-        / 100 MWh concept. A trading partner says optimization will
-        handle the market side. Finance wants to know whether the
-        product is bankable. Strategy wants to know whether the offer
-        can become a portfolio template.</p>
-        <p>The decision memo has to say what decision must be made, what
-        is physically possible, what is contractually promised, what
-        market risk remains, who controls the actions, what the
-        recommendation is, and which assumption would flip it. A phrase
-        such as “solar plus storage” becomes decision-ready only after
-        the memo translates it into coverage, residual exposure, rights,
-        evidence, and limits.</p>
+        <p>An investment committee receives a one-page recommendation:
+        approve a shaped clean-power offer for a large customer. The
+        packet contains a solar site, a 50 MW / 100 MWh battery concept,
+        an optimizer, and a target price. Each ingredient is plausible
+        on its own.</p>
+        <p>The committee still lacks the decision. Which constraint
+        binds first: physical coverage, stress-hour firming, grid
+        access, dispatch control, credit support, or partner evidence?
+        Which assumption would change the recommendation?</p>
         </section>
         <section id="first-principles-model-43" class="level4">
         <h4>First-Principles Model</h4>
@@ -17970,7 +18414,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <p>The second design is more useful for longer events, but it
         also costs more and may cycle less often. The question is
         whether the market or contract pays for that extra duration.</p>
-        <section id="worked-estimate-20" class="level5">
+        <section id="worked-estimate-19" class="level5">
         <h5>Worked Estimate</h5>
         <p>Suppose a planning study or contract stress test says
         scarcity events are distributed as:</p>
@@ -18078,7 +18522,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         penalties are asymmetric, or the buyer premium does not cover
         firming cost.</p>
         </section>
-        <section id="example-20" class="level4">
+        <section id="example-19" class="level4">
         <h4>Example</h4>
         <p>A data-center buyer wants a clean product that is firm during
         winter evening stress. The IPP owns solar, a four-hour BESS, and
@@ -18280,8 +18724,8 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <pre class="text"><code>1,200 MW - 500 MW - 450 MW = 250 MW</code></pre>
         <p>The supplier is needed for at least <code>250 MW</code>.</p>
         </section>
-        <section id="residual-supply-index" class="level5">
-        <h5>2. Residual Supply Index</h5>
+        <section id="residual-supply-index-rsi" class="level5">
+        <h5>2. Residual Supply Index (RSI)</h5>
         <pre class="text"><code>RSI = (total available supply - supplier available supply) / load</code></pre>
         <p>Suppose total available supply is:</p>
         <pre class="text"><code>500 MW imports + 450 MW other local + 300 MW supplier = 1,250 MW</code></pre>
@@ -18366,20 +18810,23 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <tr>
         <td>Rule boundary</td>
         <td>Did the behavior violate rules or obligations?</td>
-        <td>Applicable market rules, REMIT-style reporting and
+        <td>Applicable market rules, Regulation on Wholesale Energy
+        Market Integrity and Transparency (REMIT)-style reporting and
         monitoring evidence, TSO instructions, internal approvals.</td>
         </tr>
         </tbody>
         </table>
         <p>Creti and Fontini distinguish structural market power from
         behavioral market power and discuss physical withholding,
-        economic withholding, HHI, Lerner-style margins, Pivotal
-        Supplier Index, and Residual Supplier Index. Kirschen and Strbac
-        emphasize why high demand and inelastic short-run conditions
-        make electricity vulnerable to market power and why ex ante
-        mitigation and ex post monitoring both exist. Those sources
-        support the evidence structure; they do not license a claim
-        about a named market participant.</p>
+        economic withholding, the Herfindahl-Hirschman Index (HHI),
+        Lerner-style margins, Pivotal Supplier Index, and Residual
+        Supply Index. Kirschen and Strbac emphasize why high demand and
+        inelastic short-run conditions make electricity vulnerable to
+        market power and why ex ante mitigation and ex post monitoring
+        both exist. Those sources support the evidence structure for
+        analyzing a market participant; a named-market claim still needs
+        the participant, period, data, rule boundary, and conduct
+        evidence.</p>
         </section>
         <section id="mechanism-31" class="level4">
         <h4>Mechanism</h4>
@@ -18404,7 +18851,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         supply tests are closer to the operational question: under the
         actual constraint, who was needed?</p>
         </section>
-        <section id="example-21" class="level4">
+        <section id="example-20" class="level4">
         <h4>Example</h4>
         <p>An owner has two units behind a bottleneck.</p>
         <ul>
@@ -18480,8 +18927,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         </tr>
         <tr>
         <td>Compliance culture</td>
-        <td>Treat high-price hours as evidence-intensive, not as a place
-        for casual explanations.</td>
+        <td>Require an evidence trail for high-price hours.</td>
         </tr>
         </tbody>
         </table>
@@ -18514,9 +18960,8 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         markets, capacity mechanisms, redispatch, transmission
         expansion, local flexibility, demand response, or bid
         mitigation.</p>
-        <p>No current enforcement or misconduct claim is made here. Any
-        claim about current abuse, REMIT status, mitigation action, or
-        named-market conduct needs official current evidence.</p>
+        <p>Claims about current abuse, REMIT status, mitigation action,
+        or named-market conduct need official current evidence.</p>
         </section>
         <section id="recap-45" class="level4">
         <h4>Recap</h4>
@@ -18852,20 +19297,29 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <pre class="text"><code>20 MWh/h x 250 h/year x 120 EUR/MWh = 600,000 EUR/year</code></pre>
         <p>The fixed risk margin in the quote is:</p>
         <pre class="text"><code>100,000 MWh/year x 2 EUR/MWh = 200,000 EUR/year</code></pre>
-        <p>The quoted margin falls short of the illustrated stress case.
-        The product can still be commercial if the contract caps the
-        seller’s hard-hour procurement risk at a fixed price.</p>
+        <p>The quoted margin falls short of the illustrated stress case
+        by <code>400,000 EUR/year</code>.</p>
+        <pre class="text"><code>Uncovered stress cost = 600,000 - 200,000 = 400,000 EUR/year
+Premium needed to absorb the full stress = 400,000 / 100,000 MWh = 4 EUR/MWh
+Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
+        <p>That price exceeds the buyer’s <code>68 EUR/MWh</code>
+        ceiling. The shaped product is commercial at
+        <code>65 EUR/MWh</code> only if the term sheet caps, indexes,
+        passes through, or reopens hard-hour firming beyond the quoted
+        risk margin.</p>
         </section>
         <section id="decision-memo" class="level4">
         <h4>Decision Memo</h4>
         <p>Recommendation: offer the shaped product at 65 EUR/MWh only
         with a residual-firming collar.</p>
-        <p>The seller should own expected shaping and imbalance risk
-        inside the quoted stack. The buyer should accept either a
-        pass-through, cap, index, or renegotiation trigger for residual
-        hard-hour firming beyond the agreed collar. Without that
-        boundary, the product embeds a short volatility position inside
-        the PPA.</p>
+        <p>The collar should be explicit. In this scenario the fixed
+        price includes <code>200,000 EUR/year</code> of risk margin. The
+        seller can cover hard-hour firming inside that budget; volumes
+        or costs beyond it need a pass-through, index, hard cap, or
+        reopener. If the buyer wants the seller to carry the full
+        illustrated stress case inside the fixed price, the quote rises
+        to about <code>69 EUR/MWh</code>, above the stated buyer
+        ceiling.</p>
         <p>The investment-committee test is whether the price, cap,
         credit terms, evidence package, data rights, and dispatch rights
         describe the same product. If the buyer wants the seller to
@@ -18936,9 +19390,10 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <section id="situation-1" class="level4">
         <h4>Situation</h4>
         <p>A solar project has secured land and a grid position. The
-        grid connection can export the solar plant, but adding storage
-        requires choosing a battery duration before the PPA and
-        optimizer contracts are finalized.</p>
+        grid connection can export the solar plant, but adding a battery
+        energy storage system (BESS) requires choosing a battery
+        duration before the power purchase agreement (PPA) and optimizer
+        contracts are finalized.</p>
         <p>The commercial team wants a simple answer. The answer depends
         on how scarcity, grid access, contract value, warranty limits,
         and insurance limits change from the first hour to later
@@ -18961,7 +19416,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <tbody>
         <tr>
         <td>Solar project size</td>
-        <td style="text-align: right;">80 MWp</td>
+        <td style="text-align: right;">80 megawatts peak (MWp)</td>
         </tr>
         <tr>
         <td>Grid export limit</td>
@@ -19324,9 +19779,9 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         attractive sites.</p>
         <section id="decision-question-2" class="level4">
         <h4>Decision Question</h4>
-        <p>Which site should the IPP prioritize when irradiation, grid
-        rights, tariffs, and portfolio fit point in different
-        directions?</p>
+        <p>Which site should the independent power producer (IPP)
+        prioritize when irradiation, grid rights, tariffs, and portfolio
+        fit point in different directions?</p>
         </section>
         <section id="situation-2" class="level4">
         <h4>Situation</h4>
@@ -19338,7 +19793,12 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         </section>
         <section id="scenario-data-2" class="level4">
         <h4>Scenario Data</h4>
-        <p>These are scenario assumptions.</p>
+        <p>These are scenario assumptions. They are not tariff quotes or
+        connection terms. The named grid and tariff sources support the
+        categories to diligence: firm timing, reserved capacity,
+        import/export rights, limited-access terms, curtailment
+        treatment, capacity-tariff exposure, and producer-payment
+        geography.</p>
         <table>
         <colgroup>
         <col style="width: 20%" />
@@ -19357,7 +19817,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <tbody>
         <tr>
         <td>Solar size</td>
-        <td style="text-align: right;">100 MWp</td>
+        <td style="text-align: right;">100 megawatts peak (MWp)</td>
         <td style="text-align: right;">90 MWp</td>
         <td style="text-align: right;">110 MWp</td>
         </tr>
@@ -19392,7 +19852,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <td style="text-align: right;">11 EUR/MWh</td>
         </tr>
         <tr>
-        <td>BESS import allowed</td>
+        <td>Battery energy storage system (BESS) import allowed</td>
         <td style="text-align: right;">conditional</td>
         <td style="text-align: right;">yes</td>
         <td style="text-align: right;">no</td>
@@ -19544,37 +20004,43 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <h4>Grid Rights Screen</h4>
         <table>
         <colgroup>
-        <col style="width: 33%" />
-        <col style="width: 33%" />
-        <col style="width: 33%" />
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        <col style="width: 25%" />
         </colgroup>
         <thead>
         <tr>
         <th>Site</th>
-        <th>Grid And Commercial Signal</th>
-        <th>Investment Meaning</th>
+        <th>Invest / Hold / Drop</th>
+        <th>Binding Reason</th>
+        <th>First Evidence That Would Change The Treatment</th>
         </tr>
         </thead>
         <tbody>
         <tr>
         <td>A</td>
-        <td>highest base margin, but 2030 firm connection, conditional
-        BESS import, weak zone fit</td>
-        <td>value is delayed and the storage strategy is not yet
-        firm</td>
+        <td>Hold</td>
+        <td>2030 firm connection and conditional BESS import rights make
+        the higher annual margin hard to use</td>
+        <td>firm 2028 connection, confirmed import rights, and a priced
+        grid-cost/security package</td>
         </tr>
         <tr>
         <td>B</td>
-        <td>lower output, but 2028 connection, low curtailment, full
-        BESS import, strong zone fit</td>
-        <td>lower headline MWh but better executable optionality</td>
+        <td>Advance</td>
+        <td>2028 connection, low curtailment, full BESS import, and
+        strong portfolio fit make the cash flow executable</td>
+        <td>unexpected capacity-tariff exposure, queue slippage, or
+        weaker metering/import rights</td>
         </tr>
         <tr>
         <td>C</td>
-        <td>high output, no BESS import, high curtailment and grid
-        cost</td>
-        <td>looks large on MWp but weak for shaped products and
-        flexibility</td>
+        <td>Drop from near-term priority</td>
+        <td>no BESS import, high curtailment, and high grid/tariff/loss
+        cost weaken shaped-product optionality</td>
+        <td>faster-than-assumed permitting path plus changed
+        import/export rights</td>
         </tr>
         </tbody>
         </table>
@@ -19589,17 +20055,49 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <section id="numerical-intuition-48" class="level4">
         <h4>Numerical Intuition</h4>
         <p>The top-line spread between sites is small after grid
-        effects.</p>
-        <pre class="text"><code>Site A gross margin - Site B gross margin = about 0.11 million EUR/year</code></pre>
-        <p>That uplift is too small to dominate a two-year connection
-        delay, weaker portfolio fit, conditional battery import rights,
-        and higher grid uncertainty.</p>
-        <p>The undiscounted value delayed by choosing Site A over a
-        near-term 2028 site is roughly:</p>
-        <pre class="text"><code>2 years x 4.03 million EUR/year = 8.06 million EUR of gross margin timing exposure</code></pre>
-        <p>Use this as a screen, rather than a project net present value
-        (NPV), to prevent a small annual yield advantage from hiding a
-        large timing and optionality penalty.</p>
+        effects, while the timing penalty is large.</p>
+        <table>
+        <colgroup>
+        <col style="width: 21%" />
+        <col style="width: 28%" />
+        <col style="width: 28%" />
+        <col style="width: 21%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Timing Test</th>
+        <th style="text-align: right;">Calculation</th>
+        <th style="text-align: right;">Result</th>
+        <th>Decision Meaning</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Site A annual uplift over Site B</td>
+        <td style="text-align: right;">4.03 - 3.92 million EUR/year</td>
+        <td style="text-align: right;">0.11 million EUR/year</td>
+        <td>small recurring advantage</td>
+        </tr>
+        <tr>
+        <td>Opportunity cost of waiting for Site A instead of advancing
+        Site B</td>
+        <td style="text-align: right;">2 years x 3.92 million
+        EUR/year</td>
+        <td style="text-align: right;">7.84 million EUR</td>
+        <td>near-term margin deferred</td>
+        </tr>
+        <tr>
+        <td>Simple catch-up period before discounting</td>
+        <td style="text-align: right;">7.84 / 0.11 years</td>
+        <td style="text-align: right;">about 71 years</td>
+        <td>Site A does not beat Site B unless the connection and
+        import-rights assumptions change</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>Use this as an undiscounted screen rather than a project net
+        present value (NPV). It keeps a small annual yield advantage
+        from hiding a large timing and optionality penalty.</p>
         </section>
         <section id="decision-memo-2" class="level4">
         <h4>Decision Memo</h4>
@@ -19609,6 +20107,9 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         curtailment, lower grid cost, stronger portfolio fit, and full
         BESS import rights. Those features make it more useful for
         shaped PPAs, reserve participation, and portfolio balancing.</p>
+        <p>Site A remains a development hold, not a near-term investment
+        priority, unless firm connection timing and battery import
+        rights change.</p>
         <p>The first diligence request should be the grid-rights
         evidence pack: firm connection date, export capacity, import
         capacity, connection contribution, reinforcement cost,
@@ -19672,7 +20173,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         </section>
         </section>
         <section id="case-04" class="level3">
-        <h3>Case 4. BESS Revenue Stacks Under Saturation</h3>
+        <h3>Case 4. Battery Revenue Stacks Under Saturation</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-4">[4]</a>
         <a href="#ref-17">[17]</a> <a href="#ref-18">[18]</a>
@@ -19850,8 +20351,12 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         </tbody>
         </table>
         <p>For Nordic reserve routes, add a product-specific appendix
-        before approving the stack. The Nordic TSOs’ 2025 battery paper
-        separates FFR, FCR-D, FCR-N, aFRR, and mFRR by response time,
+        before approving the stack. The Nordic transmission system
+        operators’ (TSOs’) 2025 battery paper separates fast frequency
+        reserve (FFR), frequency containment reserve for disturbances
+        (FCR-D), frequency containment reserve for normal operation
+        (FCR-N), automatic frequency restoration reserve (aFRR), and
+        manual frequency restoration reserve (mFRR) by response time,
         endurance, bid size, and prequalification route. It also warns
         that the same capacity cannot be bid in multiple markets for the
         same delivery period. A revenue-stack proposal should therefore
@@ -19925,12 +20430,16 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <section id="decision-memo-3" class="level4">
         <h4>Decision Memo</h4>
         <p>Recommendation: contract a defined tranche of the asset under
-        a floor-like structure and keep a meaningful residual slice
-        merchant. The tranche must state MW, MWh, state-of-charge band,
-        cycle budget, priority rights, and reporting obligations.
-        Allocate battery capacity to the shaped PPA only if the PPA
-        premium rises or the PPA materially improves project
-        financeability.</p>
+        a floor-like structure and keep the residual slice merchant. A
+        first term-sheet version could reserve
+        <code>25 MW / 50 MWh</code> for the floor-backed obligation and
+        leave the other <code>25 MW / 50 MWh</code>, plus any unused
+        state-of-charge headroom under the priority rules, available for
+        merchant optimization. The exact split can move, but the tranche
+        must state MW, MWh, state-of-charge band, cycle budget, priority
+        rights, and reporting obligations. Allocate battery capacity to
+        the shaped PPA only if the PPA premium rises or the PPA
+        materially improves project financeability.</p>
         <p>The binding constraint is control-right allocation. Every MW
         reserved for a customer profile is a MW unavailable for reserve
         capacity, arbitrage, or response to a new market product. The
@@ -19962,11 +20471,16 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <p>The recommendation changes if merchant revenues saturate and
         the expected merchant stack falls by 40%.</p>
         <pre class="text"><code>1.70 million EUR/year x 60% = 1.02 million EUR/year</code></pre>
-        <p>In that world, recompute the shaped-PPA opportunity cost
-        using the reduced merchant and residual values. The floor
-        becomes more attractive, and the shaped-PPA premium may clear
-        only if the repriced opportunity cost falls below the
-        premium.</p>
+        <p>If the residual merchant value after reserving PPA capacity
+        falls by the same 40%, it becomes:</p>
+        <pre class="text"><code>0.80 million EUR/year x 60% = 0.48 million EUR/year</code></pre>
+        <p>The repriced opportunity cost is then:</p>
+        <pre class="text"><code>1.02 - 0.48 = 0.54 million EUR/year</code></pre>
+        <p>Against a <code>0.75 million EUR/year</code> shaped-PPA
+        premium, the PPA tranche now clears expected opportunity cost
+        before financeability and risk adjustments. The recommendation
+        changes only if the control-rights, cycle, state-of-charge, and
+        insurance constraints can be written into the term sheet.</p>
         </section>
         <section id="failure-mode-to-avoid-3" class="level4">
         <h4>Failure Mode To Avoid</h4>
@@ -20026,12 +20540,12 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         </section>
         <section id="situation-4" class="level4">
         <h4>Situation</h4>
-        <p>A renewable IPP outsources balance responsible party (BRP)
-        and balancing service provider (BSP) execution work. The partner
-        sends monthly revenue reports. The asset owner wants to know
-        whether the partner created value, leaked value, or operated
-        within realistic constraints before opening a commercial
-        renegotiation.</p>
+        <p>A renewable independent power producer (IPP) outsources
+        balance responsible party (BRP) and balancing service provider
+        (BSP) execution work. The partner sends monthly revenue reports.
+        The asset owner wants to know whether the partner created value,
+        leaked value, or operated within realistic constraints before
+        opening a commercial renegotiation.</p>
         <p>The partner contract allows performance review, but the
         current data annex is weak. Forecast files, bid files, schedule
         revisions, optimizer recommendations, manual overrides, meter
@@ -20088,7 +20602,9 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <p>The feasible benchmark uses only information available before
         gate closure, actual grid and asset limits, contracted control
         rights, agreed risk limits, and market products the partner was
-        allowed to access.</p>
+        allowed to access. The percentage thresholds in this case are
+        contract-scenario thresholds, not eSett rules or generic market
+        standards.</p>
         <p>Raw attribution pack:</p>
         <table>
         <colgroup>
@@ -20417,10 +20933,12 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         </tr>
         </tbody>
         </table>
-        <p>The scorecard should be repeated for at least three
-        comparable months before commercial penalties are applied,
-        unless the contract already defines automatic data-delivery
-        breaches.</p>
+        <p>The scorecard thresholds are scenario contract requirements
+        for this exercise. They should be replaced by the actual
+        service-level agreement before a live partner review. The
+        scorecard should be repeated for at least three comparable
+        months before commercial penalties are applied, unless the
+        contract already defines automatic data-delivery breaches.</p>
         </section>
         <section id="decision-memo-4" class="level4">
         <h4>Decision Memo</h4>
@@ -20509,9 +21027,9 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         clean energy is produced and how many clean MWh are bought over
         a year. The seller must separate physical supply, financial
         settlement, certificate evidence, residual firming, credit, and
-        control rights. The decision is whether a renewable IPP should
-        offer a 24/7-style product, narrow the promise, partner, or walk
-        away.</p>
+        control rights. The decision is whether a renewable independent
+        power producer (IPP) should offer a 24/7-style product, narrow
+        the promise, partner, or walk away.</p>
         <section id="decision-question-5" class="level4">
         <h4>Decision Question</h4>
         <p>Should the seller offer hourly matched clean power, a
@@ -20607,6 +21125,90 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         needed to move from the initial <code>58%</code> hourly matching
         level toward the <code>85%</code> threshold. The case still
         needs careful structuring before rejection or approval.</p>
+        <p>Hourly matching gap:</p>
+        <table>
+        <colgroup>
+        <col style="width: 21%" />
+        <col style="width: 28%" />
+        <col style="width: 28%" />
+        <col style="width: 21%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Matching Gap</th>
+        <th style="text-align: right;">Calculation</th>
+        <th style="text-align: right;">Result</th>
+        <th>Decision Meaning</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Clean MWh currently matched hourly</td>
+        <td style="text-align: right;">350.4 GWh/year x 58%</td>
+        <td style="text-align: right;">203.2 GWh/year</td>
+        <td>starting point for the premium claim</td>
+        </tr>
+        <tr>
+        <td>Clean MWh needed for 85% hourly matching</td>
+        <td style="text-align: right;">350.4 GWh/year x 85%</td>
+        <td style="text-align: right;">297.8 GWh/year</td>
+        <td>target product obligation</td>
+        </tr>
+        <tr>
+        <td>Incremental time-matched clean gap</td>
+        <td style="text-align: right;">297.8 - 203.2 GWh/year</td>
+        <td style="text-align: right;">94.6 GWh/year</td>
+        <td>must come from partner supply, storage, buyer flexibility,
+        or narrowed promise</td>
+        </tr>
+        <tr>
+        <td>Minimum annual clean-supply gap versus target</td>
+        <td style="text-align: right;">297.8 - 260.0 GWh/year</td>
+        <td style="text-align: right;">37.8 GWh/year</td>
+        <td>even annual volume is short before timing is solved</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>Premium headroom:</p>
+        <table>
+        <colgroup>
+        <col style="width: 27%" />
+        <col style="width: 36%" />
+        <col style="width: 36%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Premium Headroom</th>
+        <th style="text-align: right;">Calculation</th>
+        <th style="text-align: right;">Result</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Buyer premium</td>
+        <td style="text-align: right;">350,400 MWh/year x 4 EUR/MWh</td>
+        <td style="text-align: right;">1.40 million EUR/year</td>
+        </tr>
+        <tr>
+        <td>Stress-hour firming cost</td>
+        <td style="text-align: right;">22 MWh/h x 300 h/year x 150
+        EUR/MWh</td>
+        <td style="text-align: right;">0.99 million EUR/year</td>
+        </tr>
+        <tr>
+        <td>Remaining headroom before credit, evidence, operations,
+        margin, and non-stress matching</td>
+        <td style="text-align: right;">1.40 - 0.99 million EUR/year</td>
+        <td style="text-align: right;">0.41 million EUR/year</td>
+        </tr>
+        <tr>
+        <td>Remaining headroom spread across load</td>
+        <td style="text-align: right;">0.41 million EUR / 350,400
+        MWh</td>
+        <td style="text-align: right;">about 1.17 EUR/MWh</td>
+        </tr>
+        </tbody>
+        </table>
         </section>
         <section id="what-the-offer-must-promise" class="level4">
         <h4>What The Offer Must Promise</h4>
@@ -20709,8 +21311,9 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <td>Energy attribute certificate status</td>
         <td>certificates transfer attributes; attributes can be bundled
         or unbundled from the electricity</td>
-        <td>state whether GOs or other instruments are included,
-        transferred, canceled, or retained</td>
+        <td>state whether guarantees of origin (GOs) or other
+        instruments are included, transferred, canceled, or
+        retained</td>
         </tr>
         <tr>
         <td>Residual mix and null power</td>
@@ -20730,8 +21333,8 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <td>Storage evidence</td>
         <td>storage charge and discharge records are needed to preserve
         attribute accounting through storage</td>
-        <td>require BESS charge source, discharge record, losses, and
-        cancellation trail</td>
+        <td>require battery energy storage system (BESS) charge source,
+        discharge record, losses, and cancellation trail</td>
         </tr>
         </tbody>
         </table>
@@ -20779,20 +21382,59 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         </section>
         <section id="decision-memo-5" class="level4">
         <h4>Decision Memo</h4>
-        <p>Recommendation: offer a partnered hourly-matching product
-        only if the contract defines the evidence standard, residual
-        firming boundary, settlement method, fallback procurement rule,
-        buyer-flexibility rights, and the applicable accounting or
-        certificate framework. Otherwise offer a narrower shaped product
-        and leave the buyer with the residual claim.</p>
-        <p>The seller should not promise a broad 24/7 clean-energy claim
-        without the applicable accounting and certificate framework in
-        the contract. The commercial product can still be valuable if it
-        says exactly what is being delivered: hourly matched supply to a
-        defined threshold, financial settlement against a defined
-        reference, and residual procurement above a defined
-        boundary.</p>
+        <p>Recommendation: do not offer a broad self-supplied 24/7
+        clean-energy claim. Offer the partnered hourly-matching product
+        only if the partner contract covers the 94.6 GWh/year
+        time-matched clean gap, caps or passes through stress-hour
+        procurement, and provides the evidence trail required by the
+        selected certificate/accounting framework. Otherwise offer the
+        narrower shaped product.</p>
+        <p>Any broad 24/7 clean-energy claim needs the applicable
+        accounting and certificate framework in the contract. The
+        commercial product can still be valuable if it says exactly what
+        is being delivered: hourly matched supply to a defined
+        threshold, financial settlement against a defined reference, and
+        residual procurement above a defined boundary.</p>
         <p>The recommended offer is therefore a product ladder:</p>
+        <table>
+        <colgroup>
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Approval Gate</th>
+        <th>Minimum Condition</th>
+        <th>If Missing</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Hourly matching</td>
+        <td>load, generation, storage, and residual procurement measured
+        on the same interval</td>
+        <td>sell shaped product, not hourly claim</td>
+        </tr>
+        <tr>
+        <td>Residual firming</td>
+        <td>cap, pass-through, index, or named partner supply</td>
+        <td>no-bid on broad claim</td>
+        </tr>
+        <tr>
+        <td>Evidence framework</td>
+        <td>certificate status, cancellation rule, storage treatment,
+        and audit trail defined before signing</td>
+        <td>remove 24/7-style language</td>
+        </tr>
+        <tr>
+        <td>Buyer flexibility</td>
+        <td>telemetry, control rights, availability, and
+        uptime-compatible policy</td>
+        <td>exclude buyer flexibility from seller supply</td>
+        </tr>
+        </tbody>
+        </table>
         <table>
         <colgroup>
         <col style="width: 25%" />
@@ -20904,17 +21546,20 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <section id="situation-6" class="level4">
         <h4>Situation</h4>
         <p>The company has operating solar assets, a growing development
-        pipeline, several structured PPA discussions, and first battery
-        projects entering commercial design. Trading execution and
-        balancing are mostly outsourced. Partner reporting is useful but
-        incomplete. Management wants a credible year-one operating model
-        without approving a large desk or full energy trading and risk
-        management (ETRM) implementation.</p>
+        pipeline, several structured power purchase agreement (PPA)
+        discussions, and first battery projects entering commercial
+        design. Trading execution and balancing are mostly outsourced.
+        Partner reporting is useful but incomplete. Management wants a
+        credible year-one operating model without approving a large desk
+        or full energy trading and risk management (ETRM)
+        implementation.</p>
         <p>The operating model must support four decisions:</p>
         <ul>
         <li>shaped PPA pricing</li>
-        <li>BESS sizing and dispatch value</li>
-        <li>BRP/BSP and optimizer oversight</li>
+        <li>battery energy storage system (BESS) sizing and dispatch
+        value</li>
+        <li>balance responsible party (BRP), balancing service provider
+        (BSP), and optimizer oversight</li>
         <li>portfolio exposure and risk escalation</li>
         </ul>
         </section>
@@ -21135,7 +21780,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <td>build with optimizer input</td>
         <td style="text-align: right;"><code>140,000 EUR</code></td>
         <td>analyst + investment owner</td>
-        <td>IC decisions are live</td>
+        <td>investment committee (IC) decisions are live</td>
         </tr>
         <tr>
         <td>Partner data-right remediation</td>
@@ -21213,8 +21858,38 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         gaps make a full scorecard expensive and weak. The stronger
         year-one allocation funds the data annex and only a narrow
         benchmark pilot.</p>
-        <pre class="text"><code>full_scorecard_without_data_rights = high spend + weak attribution
-data_rights_first + small pilot = slower automation + stronger governance</code></pre>
+        <table>
+        <colgroup>
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Route</th>
+        <th>Spend First</th>
+        <th>What It Buys</th>
+        <th>Why It Wins Or Loses</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Full scorecard now</td>
+        <td>automation and dashboards</td>
+        <td>broad reporting surface</td>
+        <td>weak attribution if raw forecasts, bids, dispatch logs, and
+        settlement files remain incomplete</td>
+        </tr>
+        <tr>
+        <td>Data rights plus pilot</td>
+        <td>data annex, reconciliation, narrow benchmark</td>
+        <td>fewer assets covered at first</td>
+        <td>stronger governance because the scorecard rests on evidence
+        the owner can inspect</td>
+        </tr>
+        </tbody>
+        </table>
         <p>The PPA quote stack and BESS screen receive more year-one
         funding because live commercial and IC decisions can use them
         with available internal data. Partner commercial action waits

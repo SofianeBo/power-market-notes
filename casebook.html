@@ -1726,7 +1726,7 @@
         4h Battery Decision</a></li>
         <li><a href="#case-03" id="toc-case-03">Case 3. Grid-Constrained
         Site Screen</a></li>
-        <li><a href="#case-04" id="toc-case-04">Case 4. BESS Revenue
+        <li><a href="#case-04" id="toc-case-04">Case 4. Battery Revenue
         Stacks Under Saturation</a></li>
         <li><a href="#case-05" id="toc-case-05">Case 5.
         Balance-Responsibility And Balancing-Service Performance
@@ -1748,7 +1748,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.38.1
+        v0.39.0
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -2085,20 +2085,29 @@
         <pre class="text"><code>20 MWh/h x 250 h/year x 120 EUR/MWh = 600,000 EUR/year</code></pre>
         <p>The fixed risk margin in the quote is:</p>
         <pre class="text"><code>100,000 MWh/year x 2 EUR/MWh = 200,000 EUR/year</code></pre>
-        <p>The quoted margin falls short of the illustrated stress case.
-        The product can still be commercial if the contract caps the
-        seller’s hard-hour procurement risk at a fixed price.</p>
+        <p>The quoted margin falls short of the illustrated stress case
+        by <code>400,000 EUR/year</code>.</p>
+        <pre class="text"><code>Uncovered stress cost = 600,000 - 200,000 = 400,000 EUR/year
+Premium needed to absorb the full stress = 400,000 / 100,000 MWh = 4 EUR/MWh
+Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
+        <p>That price exceeds the buyer’s <code>68 EUR/MWh</code>
+        ceiling. The shaped product is commercial at
+        <code>65 EUR/MWh</code> only if the term sheet caps, indexes,
+        passes through, or reopens hard-hour firming beyond the quoted
+        risk margin.</p>
         </section>
         <section id="decision-memo" class="level4">
         <h4>Decision Memo</h4>
         <p>Recommendation: offer the shaped product at 65 EUR/MWh only
         with a residual-firming collar.</p>
-        <p>The seller should own expected shaping and imbalance risk
-        inside the quoted stack. The buyer should accept either a
-        pass-through, cap, index, or renegotiation trigger for residual
-        hard-hour firming beyond the agreed collar. Without that
-        boundary, the product embeds a short volatility position inside
-        the PPA.</p>
+        <p>The collar should be explicit. In this scenario the fixed
+        price includes <code>200,000 EUR/year</code> of risk margin. The
+        seller can cover hard-hour firming inside that budget; volumes
+        or costs beyond it need a pass-through, index, hard cap, or
+        reopener. If the buyer wants the seller to carry the full
+        illustrated stress case inside the fixed price, the quote rises
+        to about <code>69 EUR/MWh</code>, above the stated buyer
+        ceiling.</p>
         <p>The investment-committee test is whether the price, cap,
         credit terms, evidence package, data rights, and dispatch rights
         describe the same product. If the buyer wants the seller to
@@ -2178,9 +2187,10 @@
         <section id="situation-1" class="level4">
         <h4>Situation</h4>
         <p>A solar project has secured land and a grid position. The
-        grid connection can export the solar plant, but adding storage
-        requires choosing a battery duration before the PPA and
-        optimizer contracts are finalized.</p>
+        grid connection can export the solar plant, but adding a battery
+        energy storage system (BESS) requires choosing a battery
+        duration before the power purchase agreement (PPA) and optimizer
+        contracts are finalized.</p>
         <p>The commercial team wants a simple answer. The answer depends
         on how scarcity, grid access, contract value, warranty limits,
         and insurance limits change from the first hour to later
@@ -2203,7 +2213,7 @@
         <tbody>
         <tr>
         <td>Solar project size</td>
-        <td style="text-align: right;">80 MWp</td>
+        <td style="text-align: right;">80 megawatts peak (MWp)</td>
         </tr>
         <tr>
         <td>Grid export limit</td>
@@ -2570,9 +2580,9 @@
         attractive sites.</p>
         <section id="decision-question-2" class="level4">
         <h4>Decision Question</h4>
-        <p>Which site should the IPP prioritize when irradiation, grid
-        rights, tariffs, and portfolio fit point in different
-        directions?</p>
+        <p>Which site should the independent power producer (IPP)
+        prioritize when irradiation, grid rights, tariffs, and portfolio
+        fit point in different directions?</p>
         </section>
         <section id="situation-2" class="level4">
         <h4>Situation</h4>
@@ -2584,7 +2594,12 @@
         </section>
         <section id="scenario-data-2" class="level4">
         <h4>Scenario Data</h4>
-        <p>These are scenario assumptions.</p>
+        <p>These are scenario assumptions. They are not tariff quotes or
+        connection terms. The named grid and tariff sources support the
+        categories to diligence: firm timing, reserved capacity,
+        import/export rights, limited-access terms, curtailment
+        treatment, capacity-tariff exposure, and producer-payment
+        geography.</p>
         <table>
         <colgroup>
         <col style="width: 20%" />
@@ -2603,7 +2618,7 @@
         <tbody>
         <tr>
         <td>Solar size</td>
-        <td style="text-align: right;">100 MWp</td>
+        <td style="text-align: right;">100 megawatts peak (MWp)</td>
         <td style="text-align: right;">90 MWp</td>
         <td style="text-align: right;">110 MWp</td>
         </tr>
@@ -2638,7 +2653,7 @@
         <td style="text-align: right;">11 EUR/MWh</td>
         </tr>
         <tr>
-        <td>BESS import allowed</td>
+        <td>Battery energy storage system (BESS) import allowed</td>
         <td style="text-align: right;">conditional</td>
         <td style="text-align: right;">yes</td>
         <td style="text-align: right;">no</td>
@@ -2790,37 +2805,43 @@
         <h4>Grid Rights Screen</h4>
         <table>
         <colgroup>
-        <col style="width: 33%" />
-        <col style="width: 33%" />
-        <col style="width: 33%" />
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        <col style="width: 25%" />
         </colgroup>
         <thead>
         <tr>
         <th>Site</th>
-        <th>Grid And Commercial Signal</th>
-        <th>Investment Meaning</th>
+        <th>Invest / Hold / Drop</th>
+        <th>Binding Reason</th>
+        <th>First Evidence That Would Change The Treatment</th>
         </tr>
         </thead>
         <tbody>
         <tr>
         <td>A</td>
-        <td>highest base margin, but 2030 firm connection, conditional
-        BESS import, weak zone fit</td>
-        <td>value is delayed and the storage strategy is not yet
-        firm</td>
+        <td>Hold</td>
+        <td>2030 firm connection and conditional BESS import rights make
+        the higher annual margin hard to use</td>
+        <td>firm 2028 connection, confirmed import rights, and a priced
+        grid-cost/security package</td>
         </tr>
         <tr>
         <td>B</td>
-        <td>lower output, but 2028 connection, low curtailment, full
-        BESS import, strong zone fit</td>
-        <td>lower headline MWh but better executable optionality</td>
+        <td>Advance</td>
+        <td>2028 connection, low curtailment, full BESS import, and
+        strong portfolio fit make the cash flow executable</td>
+        <td>unexpected capacity-tariff exposure, queue slippage, or
+        weaker metering/import rights</td>
         </tr>
         <tr>
         <td>C</td>
-        <td>high output, no BESS import, high curtailment and grid
-        cost</td>
-        <td>looks large on MWp but weak for shaped products and
-        flexibility</td>
+        <td>Drop from near-term priority</td>
+        <td>no BESS import, high curtailment, and high grid/tariff/loss
+        cost weaken shaped-product optionality</td>
+        <td>faster-than-assumed permitting path plus changed
+        import/export rights</td>
         </tr>
         </tbody>
         </table>
@@ -2835,17 +2856,49 @@
         <section id="numerical-intuition-2" class="level4">
         <h4>Numerical Intuition</h4>
         <p>The top-line spread between sites is small after grid
-        effects.</p>
-        <pre class="text"><code>Site A gross margin - Site B gross margin = about 0.11 million EUR/year</code></pre>
-        <p>That uplift is too small to dominate a two-year connection
-        delay, weaker portfolio fit, conditional battery import rights,
-        and higher grid uncertainty.</p>
-        <p>The undiscounted value delayed by choosing Site A over a
-        near-term 2028 site is roughly:</p>
-        <pre class="text"><code>2 years x 4.03 million EUR/year = 8.06 million EUR of gross margin timing exposure</code></pre>
-        <p>Use this as a screen, rather than a project net present value
-        (NPV), to prevent a small annual yield advantage from hiding a
-        large timing and optionality penalty.</p>
+        effects, while the timing penalty is large.</p>
+        <table>
+        <colgroup>
+        <col style="width: 21%" />
+        <col style="width: 28%" />
+        <col style="width: 28%" />
+        <col style="width: 21%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Timing Test</th>
+        <th style="text-align: right;">Calculation</th>
+        <th style="text-align: right;">Result</th>
+        <th>Decision Meaning</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Site A annual uplift over Site B</td>
+        <td style="text-align: right;">4.03 - 3.92 million EUR/year</td>
+        <td style="text-align: right;">0.11 million EUR/year</td>
+        <td>small recurring advantage</td>
+        </tr>
+        <tr>
+        <td>Opportunity cost of waiting for Site A instead of advancing
+        Site B</td>
+        <td style="text-align: right;">2 years x 3.92 million
+        EUR/year</td>
+        <td style="text-align: right;">7.84 million EUR</td>
+        <td>near-term margin deferred</td>
+        </tr>
+        <tr>
+        <td>Simple catch-up period before discounting</td>
+        <td style="text-align: right;">7.84 / 0.11 years</td>
+        <td style="text-align: right;">about 71 years</td>
+        <td>Site A does not beat Site B unless the connection and
+        import-rights assumptions change</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>Use this as an undiscounted screen rather than a project net
+        present value (NPV). It keeps a small annual yield advantage
+        from hiding a large timing and optionality penalty.</p>
         </section>
         <section id="decision-memo-2" class="level4">
         <h4>Decision Memo</h4>
@@ -2855,6 +2908,9 @@
         curtailment, lower grid cost, stronger portfolio fit, and full
         BESS import rights. Those features make it more useful for
         shaped PPAs, reserve participation, and portfolio balancing.</p>
+        <p>Site A remains a development hold, not a near-term investment
+        priority, unless firm connection timing and battery import
+        rights change.</p>
         <p>The first diligence request should be the grid-rights
         evidence pack: firm connection date, export capacity, import
         capacity, connection contribution, reinforcement cost,
@@ -2921,7 +2977,7 @@
         </section>
         </section>
         <section id="case-04" class="level3">
-        <h3>Case 4. BESS Revenue Stacks Under Saturation</h3>
+        <h3>Case 4. Battery Revenue Stacks Under Saturation</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-21">[21]</a>
         <a href="#ref-22">[22]</a> <a href="#ref-23">[23]</a>
@@ -3099,8 +3155,12 @@
         </tbody>
         </table>
         <p>For Nordic reserve routes, add a product-specific appendix
-        before approving the stack. The Nordic TSOs’ 2025 battery paper
-        separates FFR, FCR-D, FCR-N, aFRR, and mFRR by response time,
+        before approving the stack. The Nordic transmission system
+        operators’ (TSOs’) 2025 battery paper separates fast frequency
+        reserve (FFR), frequency containment reserve for disturbances
+        (FCR-D), frequency containment reserve for normal operation
+        (FCR-N), automatic frequency restoration reserve (aFRR), and
+        manual frequency restoration reserve (mFRR) by response time,
         endurance, bid size, and prequalification route. It also warns
         that the same capacity cannot be bid in multiple markets for the
         same delivery period. A revenue-stack proposal should therefore
@@ -3174,12 +3234,16 @@
         <section id="decision-memo-3" class="level4">
         <h4>Decision Memo</h4>
         <p>Recommendation: contract a defined tranche of the asset under
-        a floor-like structure and keep a meaningful residual slice
-        merchant. The tranche must state MW, MWh, state-of-charge band,
-        cycle budget, priority rights, and reporting obligations.
-        Allocate battery capacity to the shaped PPA only if the PPA
-        premium rises or the PPA materially improves project
-        financeability.</p>
+        a floor-like structure and keep the residual slice merchant. A
+        first term-sheet version could reserve
+        <code>25 MW / 50 MWh</code> for the floor-backed obligation and
+        leave the other <code>25 MW / 50 MWh</code>, plus any unused
+        state-of-charge headroom under the priority rules, available for
+        merchant optimization. The exact split can move, but the tranche
+        must state MW, MWh, state-of-charge band, cycle budget, priority
+        rights, and reporting obligations. Allocate battery capacity to
+        the shaped PPA only if the PPA premium rises or the PPA
+        materially improves project financeability.</p>
         <p>The binding constraint is control-right allocation. Every MW
         reserved for a customer profile is a MW unavailable for reserve
         capacity, arbitrage, or response to a new market product. The
@@ -3211,11 +3275,16 @@
         <p>The recommendation changes if merchant revenues saturate and
         the expected merchant stack falls by 40%.</p>
         <pre class="text"><code>1.70 million EUR/year x 60% = 1.02 million EUR/year</code></pre>
-        <p>In that world, recompute the shaped-PPA opportunity cost
-        using the reduced merchant and residual values. The floor
-        becomes more attractive, and the shaped-PPA premium may clear
-        only if the repriced opportunity cost falls below the
-        premium.</p>
+        <p>If the residual merchant value after reserving PPA capacity
+        falls by the same 40%, it becomes:</p>
+        <pre class="text"><code>0.80 million EUR/year x 60% = 0.48 million EUR/year</code></pre>
+        <p>The repriced opportunity cost is then:</p>
+        <pre class="text"><code>1.02 - 0.48 = 0.54 million EUR/year</code></pre>
+        <p>Against a <code>0.75 million EUR/year</code> shaped-PPA
+        premium, the PPA tranche now clears expected opportunity cost
+        before financeability and risk adjustments. The recommendation
+        changes only if the control-rights, cycle, state-of-charge, and
+        insurance constraints can be written into the term sheet.</p>
         </section>
         <section id="failure-mode-to-avoid-3" class="level4">
         <h4>Failure Mode To Avoid</h4>
@@ -3281,12 +3350,12 @@
         </section>
         <section id="situation-4" class="level4">
         <h4>Situation</h4>
-        <p>A renewable IPP outsources balance responsible party (BRP)
-        and balancing service provider (BSP) execution work. The partner
-        sends monthly revenue reports. The asset owner wants to know
-        whether the partner created value, leaked value, or operated
-        within realistic constraints before opening a commercial
-        renegotiation.</p>
+        <p>A renewable independent power producer (IPP) outsources
+        balance responsible party (BRP) and balancing service provider
+        (BSP) execution work. The partner sends monthly revenue reports.
+        The asset owner wants to know whether the partner created value,
+        leaked value, or operated within realistic constraints before
+        opening a commercial renegotiation.</p>
         <p>The partner contract allows performance review, but the
         current data annex is weak. Forecast files, bid files, schedule
         revisions, optimizer recommendations, manual overrides, meter
@@ -3343,7 +3412,9 @@
         <p>The feasible benchmark uses only information available before
         gate closure, actual grid and asset limits, contracted control
         rights, agreed risk limits, and market products the partner was
-        allowed to access.</p>
+        allowed to access. The percentage thresholds in this case are
+        contract-scenario thresholds, not eSett rules or generic market
+        standards.</p>
         <p>Raw attribution pack:</p>
         <table>
         <colgroup>
@@ -3672,10 +3743,12 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         </tr>
         </tbody>
         </table>
-        <p>The scorecard should be repeated for at least three
-        comparable months before commercial penalties are applied,
-        unless the contract already defines automatic data-delivery
-        breaches.</p>
+        <p>The scorecard thresholds are scenario contract requirements
+        for this exercise. They should be replaced by the actual
+        service-level agreement before a live partner review. The
+        scorecard should be repeated for at least three comparable
+        months before commercial penalties are applied, unless the
+        contract already defines automatic data-delivery breaches.</p>
         </section>
         <section id="decision-memo-4" class="level4">
         <h4>Decision Memo</h4>
@@ -3768,9 +3841,9 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         clean energy is produced and how many clean MWh are bought over
         a year. The seller must separate physical supply, financial
         settlement, certificate evidence, residual firming, credit, and
-        control rights. The decision is whether a renewable IPP should
-        offer a 24/7-style product, narrow the promise, partner, or walk
-        away.</p>
+        control rights. The decision is whether a renewable independent
+        power producer (IPP) should offer a 24/7-style product, narrow
+        the promise, partner, or walk away.</p>
         <section id="decision-question-5" class="level4">
         <h4>Decision Question</h4>
         <p>Should the seller offer hourly matched clean power, a
@@ -3866,6 +3939,90 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         needed to move from the initial <code>58%</code> hourly matching
         level toward the <code>85%</code> threshold. The case still
         needs careful structuring before rejection or approval.</p>
+        <p>Hourly matching gap:</p>
+        <table>
+        <colgroup>
+        <col style="width: 21%" />
+        <col style="width: 28%" />
+        <col style="width: 28%" />
+        <col style="width: 21%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Matching Gap</th>
+        <th style="text-align: right;">Calculation</th>
+        <th style="text-align: right;">Result</th>
+        <th>Decision Meaning</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Clean MWh currently matched hourly</td>
+        <td style="text-align: right;">350.4 GWh/year x 58%</td>
+        <td style="text-align: right;">203.2 GWh/year</td>
+        <td>starting point for the premium claim</td>
+        </tr>
+        <tr>
+        <td>Clean MWh needed for 85% hourly matching</td>
+        <td style="text-align: right;">350.4 GWh/year x 85%</td>
+        <td style="text-align: right;">297.8 GWh/year</td>
+        <td>target product obligation</td>
+        </tr>
+        <tr>
+        <td>Incremental time-matched clean gap</td>
+        <td style="text-align: right;">297.8 - 203.2 GWh/year</td>
+        <td style="text-align: right;">94.6 GWh/year</td>
+        <td>must come from partner supply, storage, buyer flexibility,
+        or narrowed promise</td>
+        </tr>
+        <tr>
+        <td>Minimum annual clean-supply gap versus target</td>
+        <td style="text-align: right;">297.8 - 260.0 GWh/year</td>
+        <td style="text-align: right;">37.8 GWh/year</td>
+        <td>even annual volume is short before timing is solved</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>Premium headroom:</p>
+        <table>
+        <colgroup>
+        <col style="width: 27%" />
+        <col style="width: 36%" />
+        <col style="width: 36%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Premium Headroom</th>
+        <th style="text-align: right;">Calculation</th>
+        <th style="text-align: right;">Result</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Buyer premium</td>
+        <td style="text-align: right;">350,400 MWh/year x 4 EUR/MWh</td>
+        <td style="text-align: right;">1.40 million EUR/year</td>
+        </tr>
+        <tr>
+        <td>Stress-hour firming cost</td>
+        <td style="text-align: right;">22 MWh/h x 300 h/year x 150
+        EUR/MWh</td>
+        <td style="text-align: right;">0.99 million EUR/year</td>
+        </tr>
+        <tr>
+        <td>Remaining headroom before credit, evidence, operations,
+        margin, and non-stress matching</td>
+        <td style="text-align: right;">1.40 - 0.99 million EUR/year</td>
+        <td style="text-align: right;">0.41 million EUR/year</td>
+        </tr>
+        <tr>
+        <td>Remaining headroom spread across load</td>
+        <td style="text-align: right;">0.41 million EUR / 350,400
+        MWh</td>
+        <td style="text-align: right;">about 1.17 EUR/MWh</td>
+        </tr>
+        </tbody>
+        </table>
         </section>
         <section id="what-the-offer-must-promise" class="level4">
         <h4>What The Offer Must Promise</h4>
@@ -3968,8 +4125,9 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <td>Energy attribute certificate status</td>
         <td>certificates transfer attributes; attributes can be bundled
         or unbundled from the electricity</td>
-        <td>state whether GOs or other instruments are included,
-        transferred, canceled, or retained</td>
+        <td>state whether guarantees of origin (GOs) or other
+        instruments are included, transferred, canceled, or
+        retained</td>
         </tr>
         <tr>
         <td>Residual mix and null power</td>
@@ -3989,8 +4147,8 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <td>Storage evidence</td>
         <td>storage charge and discharge records are needed to preserve
         attribute accounting through storage</td>
-        <td>require BESS charge source, discharge record, losses, and
-        cancellation trail</td>
+        <td>require battery energy storage system (BESS) charge source,
+        discharge record, losses, and cancellation trail</td>
         </tr>
         </tbody>
         </table>
@@ -4038,20 +4196,59 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         </section>
         <section id="decision-memo-5" class="level4">
         <h4>Decision Memo</h4>
-        <p>Recommendation: offer a partnered hourly-matching product
-        only if the contract defines the evidence standard, residual
-        firming boundary, settlement method, fallback procurement rule,
-        buyer-flexibility rights, and the applicable accounting or
-        certificate framework. Otherwise offer a narrower shaped product
-        and leave the buyer with the residual claim.</p>
-        <p>The seller should not promise a broad 24/7 clean-energy claim
-        without the applicable accounting and certificate framework in
-        the contract. The commercial product can still be valuable if it
-        says exactly what is being delivered: hourly matched supply to a
-        defined threshold, financial settlement against a defined
-        reference, and residual procurement above a defined
-        boundary.</p>
+        <p>Recommendation: do not offer a broad self-supplied 24/7
+        clean-energy claim. Offer the partnered hourly-matching product
+        only if the partner contract covers the 94.6 GWh/year
+        time-matched clean gap, caps or passes through stress-hour
+        procurement, and provides the evidence trail required by the
+        selected certificate/accounting framework. Otherwise offer the
+        narrower shaped product.</p>
+        <p>Any broad 24/7 clean-energy claim needs the applicable
+        accounting and certificate framework in the contract. The
+        commercial product can still be valuable if it says exactly what
+        is being delivered: hourly matched supply to a defined
+        threshold, financial settlement against a defined reference, and
+        residual procurement above a defined boundary.</p>
         <p>The recommended offer is therefore a product ladder:</p>
+        <table>
+        <colgroup>
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Approval Gate</th>
+        <th>Minimum Condition</th>
+        <th>If Missing</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Hourly matching</td>
+        <td>load, generation, storage, and residual procurement measured
+        on the same interval</td>
+        <td>sell shaped product, not hourly claim</td>
+        </tr>
+        <tr>
+        <td>Residual firming</td>
+        <td>cap, pass-through, index, or named partner supply</td>
+        <td>no-bid on broad claim</td>
+        </tr>
+        <tr>
+        <td>Evidence framework</td>
+        <td>certificate status, cancellation rule, storage treatment,
+        and audit trail defined before signing</td>
+        <td>remove 24/7-style language</td>
+        </tr>
+        <tr>
+        <td>Buyer flexibility</td>
+        <td>telemetry, control rights, availability, and
+        uptime-compatible policy</td>
+        <td>exclude buyer flexibility from seller supply</td>
+        </tr>
+        </tbody>
+        </table>
         <table>
         <colgroup>
         <col style="width: 25%" />
@@ -4171,17 +4368,20 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <section id="situation-6" class="level4">
         <h4>Situation</h4>
         <p>The company has operating solar assets, a growing development
-        pipeline, several structured PPA discussions, and first battery
-        projects entering commercial design. Trading execution and
-        balancing are mostly outsourced. Partner reporting is useful but
-        incomplete. Management wants a credible year-one operating model
-        without approving a large desk or full energy trading and risk
-        management (ETRM) implementation.</p>
+        pipeline, several structured power purchase agreement (PPA)
+        discussions, and first battery projects entering commercial
+        design. Trading execution and balancing are mostly outsourced.
+        Partner reporting is useful but incomplete. Management wants a
+        credible year-one operating model without approving a large desk
+        or full energy trading and risk management (ETRM)
+        implementation.</p>
         <p>The operating model must support four decisions:</p>
         <ul>
         <li>shaped PPA pricing</li>
-        <li>BESS sizing and dispatch value</li>
-        <li>BRP/BSP and optimizer oversight</li>
+        <li>battery energy storage system (BESS) sizing and dispatch
+        value</li>
+        <li>balance responsible party (BRP), balancing service provider
+        (BSP), and optimizer oversight</li>
         <li>portfolio exposure and risk escalation</li>
         </ul>
         </section>
@@ -4402,7 +4602,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <td>build with optimizer input</td>
         <td style="text-align: right;"><code>140,000 EUR</code></td>
         <td>analyst + investment owner</td>
-        <td>IC decisions are live</td>
+        <td>investment committee (IC) decisions are live</td>
         </tr>
         <tr>
         <td>Partner data-right remediation</td>
@@ -4480,8 +4680,38 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         gaps make a full scorecard expensive and weak. The stronger
         year-one allocation funds the data annex and only a narrow
         benchmark pilot.</p>
-        <pre class="text"><code>full_scorecard_without_data_rights = high spend + weak attribution
-data_rights_first + small pilot = slower automation + stronger governance</code></pre>
+        <table>
+        <colgroup>
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Route</th>
+        <th>Spend First</th>
+        <th>What It Buys</th>
+        <th>Why It Wins Or Loses</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Full scorecard now</td>
+        <td>automation and dashboards</td>
+        <td>broad reporting surface</td>
+        <td>weak attribution if raw forecasts, bids, dispatch logs, and
+        settlement files remain incomplete</td>
+        </tr>
+        <tr>
+        <td>Data rights plus pilot</td>
+        <td>data annex, reconciliation, narrow benchmark</td>
+        <td>fewer assets covered at first</td>
+        <td>stronger governance because the scorecard rests on evidence
+        the owner can inspect</td>
+        </tr>
+        </tbody>
+        </table>
         <p>The PPA quote stack and BESS screen receive more year-one
         funding because live commercial and IC decisions can use them
         with available internal data. Partner commercial action waits
