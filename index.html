@@ -1866,7 +1866,7 @@ Notes">
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.37.0
+        v0.38.0
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -2001,9 +2001,9 @@ Notes">
         measured in MWh:</p>
         <pre class="text"><code>1 MW x 1 hour = 1 MWh</code></pre>
         <p>A project with high annual energy may still fail a commercial
-        obligation if its hourly power arrives at the wrong times. A
-        buyer does not live in an annual spreadsheet. A factory, a city,
-        and a grid live minute by minute.</p>
+        obligation if its hourly power arrives at the wrong times.
+        Factories, cities, and grids need power in specific intervals,
+        not only annual totals.</p>
         </section>
         <section id="definitions" class="level4">
         <h4>Definitions</h4>
@@ -2713,10 +2713,11 @@ grid cost = EUR 5/MWh</code></pre>
         Svenska kraftnät source. Project-specific distribution-grid
         tariff treatment still needs the relevant distribution system
         operator (DSO) source.</p>
-        <p>It does not compare Nordic countries. ACER warns through its
-        definitions and methodology discussion that network charges
-        include many different components, and country terms are not
-        harmonized enough for casual comparison.</p>
+        <p>This chapter does not compare Nordic tariff regimes country
+        by country. ACER’s tariff taxonomy is enough to show why casual
+        comparison is risky: network charges combine different capacity,
+        energy, loss, reactive-power, connection, voltage-level,
+        user-type, and national design choices.</p>
         </section>
         <section id="recap-3" class="level4">
         <h4>Recap</h4>
@@ -2962,9 +2963,8 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         portfolio. The DSO or grid operator supplies metered data. The
         TSO maintains system balance. If the asset or battery provides
         reserves, the BSP role applies.</p>
-        <p>If production misses forecast, the asset owner should not ask
-        only “Who traded it?”</p>
-        <p>Ask:</p>
+        <p>If production misses forecast, the asset owner needs the
+        responsibility map:</p>
         <ul>
         <li>Who had balance responsibility?</li>
         <li>Who controlled bidding?</li>
@@ -2973,7 +2973,7 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <li>Who earned balancing-service revenue, if any?</li>
         <li>Who bore imbalance cost?</li>
         </ul>
-        <p>Those questions form a first partner-oversight check.</p>
+        <p>These questions form a first partner-oversight check.</p>
         </section>
         <section id="in-practice-4" class="level4">
         <h4>In Practice</h4>
@@ -3679,35 +3679,59 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         </section>
         <section id="numerical-intuition-8" class="level4">
         <h4>Numerical Intuition</h4>
-        <p>The following are source-specific examples, not universal
-        rules:</p>
-        <ul>
-        <li>Svenska kraftnät’s source describes FFR, FCR, aFRR, mFRR,
-        disturbance reserve, and power reserve as distinct
-        services.</li>
-        <li>The Nordic TSOs’ 2025 battery paper says batteries can
-        participate in all five Nordic reserve products it reviews: FFR,
-        FCR-D, FCR-N, aFRR, and mFRR. Product eligibility still depends
-        on prequalification, bid size, endurance, control system, state
-        of charge, grid connection, and BRP/BSP setup.</li>
-        <li>Energinet tender conditions effective 2025-09-23 state
-        examples such as FCR in DK1 reaching full response within
-        <code>30 seconds</code>, FFR activation as fast as
-        <code>0.7 seconds</code> in low-inertia situations, and mFRR
-        full delivery within <code>12.5 minutes</code> for daily
-        procurement or up to <code>90 minutes</code> for monthly
-        procurement. These are Danish product/date examples, not
-        universal timing rules.</li>
-        <li>Nordic Balancing Model’s source states MARI and PICASSO use
-        a 15-minute market time unit and an activation optimisation
-        function.</li>
-        </ul>
-        <p>The Energinet timing examples above come from tender
-        conditions effective 2025-09-23. The English tender text is
-        informational; the Danish text controls if there is
-        inconsistency. For a current product decision, the Danish
-        controlling text and latest tender terms define the
-        obligation.</p>
+        <p>Reserve products differ first by time, then by obligation. A
+        battery that can move <code>10 MW</code> is not automatically a
+        <code>10 MW</code> reserve product in every market, because the
+        product also defines response speed, endurance, symmetry,
+        telemetry, prequalification, and state-of-charge management.</p>
+        <p>Use a four-field screen:</p>
+        <table>
+        <colgroup>
+        <col style="width: 50%" />
+        <col style="width: 50%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Field</th>
+        <th>Commercial meaning</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>response time</td>
+        <td>how quickly MW must appear</td>
+        </tr>
+        <tr>
+        <td>sustain duration</td>
+        <td>how much MWh must be held available</td>
+        </tr>
+        <tr>
+        <td>activation logic</td>
+        <td>whether the asset moves automatically, by TSO signal, or
+        through market activation</td>
+        </tr>
+        <tr>
+        <td>opportunity cost</td>
+        <td>which arbitrage, PPA-shaping, or other reserve use is
+        blocked</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>The Nordic and Danish sources make this concrete. The Nordic
+        TSOs’ 2025 battery paper says batteries can participate in all
+        five Nordic reserve products it reviews: FFR, FCR-D, FCR-N,
+        aFRR, and mFRR. Product eligibility still depends on
+        prequalification, bid size, endurance, control system, state of
+        charge, grid connection, and BRP/BSP setup. Energinet tender
+        conditions effective 2025-09-23 give dated Danish examples: FCR
+        in DK1 reaches full response within <code>30 seconds</code>, FFR
+        activation can be as fast as <code>0.7 seconds</code> in
+        low-inertia situations, and mFRR full delivery can be
+        <code>12.5 minutes</code> for daily procurement or up to
+        <code>90 minutes</code> for monthly procurement. These are
+        product/date examples, not universal timing rules.</p>
+        <p>For a current product decision, use the controlling product
+        terms, not the summary table in this chapter.</p>
         <section id="worked-estimate-8" class="level5">
         <h5>Worked Estimate</h5>
         <p>A 10 MW / 20 MWh battery has 2 hours of duration at full
@@ -9486,18 +9510,21 @@ Both fail if Y is true.</code></pre>
         them.</p>
         <section id="opening-puzzle-24" class="level4">
         <h4>Opening Puzzle</h4>
-        <p>An optimizer says:</p>
-        <pre class="text"><code>charge at noon
-discharge in the evening</code></pre>
-        <p>To evaluate the schedule, specify what the optimizer knew and
-        what it was allowed to choose.</p>
-        <p>Did it know the future price, or only a forecast? Did it
-        reserve capacity for frequency response? Did it include
-        degradation? Did it respect grid import limits? Did it have the
-        right to dispatch the asset, or did a contract give that right
-        to someone else? Did it leave energy for tomorrow morning?</p>
-        <p>An optimizer is a disciplined answer to a specified problem.
-        The evaluation question is:</p>
+        <p>A battery schedule charges at noon, discharges in the
+        evening, holds reserve headroom, and ends the day with a target
+        state of charge. The schedule is not enough to judge the model.
+        Evaluation starts by reconstructing the problem statement:</p>
+        <ul>
+        <li>information available at decision time;</li>
+        <li>price or forecast source;</li>
+        <li>reserve products and sustain requirements;</li>
+        <li>degradation, warranty, and terminal state-of-charge
+        costs;</li>
+        <li>import/export limits and grid charging rights;</li>
+        <li>contract delivery obligations and penalties;</li>
+        <li>dispatch and control rights.</li>
+        </ul>
+        <p>The evaluation question is:</p>
         <pre class="text"><code>What problem did we ask it to solve?</code></pre>
         </section>
         <section id="first-principles-model-24" class="level4">
@@ -9631,9 +9658,11 @@ d_t + solar_export_t &lt;= export_limit_t</code></pre>
         every symbol needs a unit and every constraint needs an economic
         reason.</p>
         </section>
+        <section id="numerical-intuition-24" class="level4">
+        <h4>Numerical Intuition</h4>
         <section id="information-terminal-soc-and-shadow-price"
-        class="level4">
-        <h4>Information, Terminal SoC, And Shadow Price</h4>
+        class="level5">
+        <h5>Information, Terminal SoC, And Shadow Price</h5>
         <p>Power-system economics has a simple lesson that matters a lot
         for batteries: energy and reserve are linked. Kirschen and
         Strbac show that the sale of reserve and energy should be
@@ -9674,6 +9703,7 @@ terminal shortfall from 50 MWh discharge = 50 MWh - 40 MWh = 10 MWh</code></pre>
         tradable at 18:00. A dispatch model therefore evaluates one
         battery across obligations and time instead of ranking markets
         or hours one by one.</p>
+        </section>
         </section>
         <section id="shadow-prices-and-binding-constraints"
         class="level4">
@@ -10027,7 +10057,7 @@ terminal shortfall from 50 MWh discharge = 50 MWh - 40 MWh = 10 MWh</code></pre>
         <p>A single model may serve several rows, but each row has its
         own clock and cash-flow weight.</p>
         </section>
-        <section id="numerical-intuition-24" class="level4">
+        <section id="numerical-intuition-25" class="level4">
         <h4>Numerical Intuition</h4>
         <p>Scenario: <code>50 MWp</code> solar portfolio, 30 days,
         hourly settlement. Current process and vendor tool are compared
@@ -10490,7 +10520,7 @@ rebalance_value =
         different wear profile from a deep, high-power cycle in poor
         thermal conditions.</p>
         </section>
-        <section id="numerical-intuition-25" class="level4">
+        <section id="numerical-intuition-26" class="level4">
         <h4>Numerical Intuition</h4>
         <section id="dispatch-threshold-for-cycling" class="level5">
         <h5>Dispatch Threshold For Cycling</h5>
@@ -10866,7 +10896,7 @@ insurance policy, availability plan, or augmentation budget can support</code></
         market prices, capture, curtailment, tariff design, degradation,
         and residual asset condition.</p>
         </section>
-        <section id="numerical-intuition-26" class="level4">
+        <section id="numerical-intuition-27" class="level4">
         <h4>Numerical Intuition</h4>
         <p>Use sensitivity as the useful number:</p>
         <pre class="text"><code>annual cash-flow sensitivity = exposed MWh x change in EUR/MWh</code></pre>
@@ -11386,22 +11416,22 @@ Here is what remains merchant, operational, or partner-execution risk.</code></p
         </section>
         <section id="misconceptions-21" class="level4">
         <h4>Misconceptions</h4>
-        <p>“More model detail means more truth” is false. Detail can
-        hide fragile assumptions.</p>
-        <p>“The base case is expected value” is false unless scenarios
-        and probabilities are defined.</p>
-        <p>“Lender value and equity value are the same” is false. Debt
-        cares about downside resilience; equity also cares about upside
-        and residual optionality.</p>
+        <p>“More model detail means more truth.” Detail can hide fragile
+        assumptions.</p>
+        <p>“The base case is expected value.” Only if scenarios and
+        probabilities are defined.</p>
+        <p>“Lender value and equity value are the same.” Debt cares
+        about downside resilience; equity also cares about upside and
+        residual optionality.</p>
         <p>“A contracted project is de-risked” is incomplete. Contracts
         can leave volume, shape, balancing, curtailment, credit, tariff,
         and operational risk exposed.</p>
         <p>“Merchant tail is just terminal value” is too narrow.
         Merchant tail depends on market design, asset condition,
         repowering, capture erosion, and future contractability.</p>
-        <p>“Debt is cheaper, so more debt is always better” is false.
-        Debt can increase equity returns in the good case while making
-        the downside case fail earlier.</p>
+        <p>“Debt is cheaper, so more debt is always better.” Debt can
+        increase equity returns in the good case while making the
+        downside case fail earlier.</p>
         </section>
         <section id="caveats-current-debates-6" class="level4">
         <h4>Caveats / Current Debates</h4>
@@ -11524,7 +11554,7 @@ Here is what remains merchant, operational, or partner-execution risk.</code></p
         operational authority to decide how an asset is charged,
         discharged, bid, curtailed, or scheduled.</p>
         </section>
-        <section id="numerical-intuition-27" class="level4">
+        <section id="numerical-intuition-28" class="level4">
         <h4>Numerical Intuition</h4>
         <p>Use exposure concentration before using market data:</p>
         <pre class="text"><code>concentrated exposure = volume x common risk driver x correlation</code></pre>
@@ -11997,15 +12027,19 @@ The marginal portfolio risk is materially different.</code></pre>
         charge, settlement line items, and model/risk-limit
         settings.</p>
         </section>
-        <section id="numerical-intuition-28" class="level4">
+        <section id="numerical-intuition-29" class="level4">
         <h4>Numerical Intuition</h4>
         <p>The scorecard number is feasible leakage:</p>
         <pre class="text"><code>feasible leakage = feasible benchmark value - actual realized value</code></pre>
-        <p>This turns a governance conversation from opinion into a
-        testable counterfactual. If the relevant exposed volume is 250
-        GWh and the feasible gap is <code>1 EUR/MWh</code>, then:</p>
+        <p>This turns a governance conversation into a testable
+        counterfactual. If the relevant exposed volume is 250 GWh and
+        the feasible gap is <code>1 EUR/MWh</code>, then:</p>
         <pre class="text"><code>1 EUR/MWh x 250,000 MWh = EUR 250,000</code></pre>
-        <p>The calculation is a materiality screen.</p>
+        <p>The calculation is a materiality screen, not the scorecard.
+        The follow-up question is whether the <code>1 EUR/MWh</code> gap
+        is attributable to execution, data, risk limits, market
+        liquidity, settlement errors, missing control rights, or a
+        benchmark that was never feasible.</p>
         <section id="when-a-small-delta-matters" class="level5">
         <h5>When A Small Delta Matters</h5>
         <p>Suppose a partner manages 500 GWh/year of exposed production
@@ -12311,10 +12345,10 @@ The marginal portfolio risk is materially different.</code></pre>
         deterministic approaches in short-term market settings, while
         also highlighting computational cost and dependence on
         forecasts.</p>
-        <p>The benchmark should therefore be good enough to govern. It
-        does not need to be a research paper. A transparent, feasible,
-        checked benchmark often beats an opaque optimizer that nobody
-        can explain after a bad week.</p>
+        <p>For governance, transparency matters. A benchmark that can be
+        reproduced from contemporaneous data, constraints, and rights is
+        more useful than an opaque optimizer whose result cannot be
+        attributed after a bad week.</p>
         </section>
         <section id="recap-29" class="level4">
         <h4>Recap</h4>
@@ -12512,8 +12546,8 @@ The marginal portfolio risk is materially different.</code></pre>
         fund the capabilities that change decisions and unlock later
         capabilities.</p>
         </section>
-        <section id="value-pools" class="level4">
-        <h4>Value Pools</h4>
+        <section id="numerical-intuition-30" class="level4">
+        <h4>Numerical Intuition</h4>
         <p>Illustrative annual value at stake:</p>
         <table>
         <colgroup>
@@ -13029,10 +13063,9 @@ The marginal portfolio risk is materially different.</code></pre>
         trades, positions, valuations, limits, settlements, and
         reporting.</p>
         </section>
-        <section id="numerical-intuition-29" class="level4">
+        <section id="numerical-intuition-31" class="level4">
         <h4>Numerical Intuition</h4>
-        <p>The first useful number is stress PnL on an open
-        position:</p>
+        <p>Start with stress PnL on an open position:</p>
         <pre class="text"><code>first-pass stress PnL = open MWh x adverse price move</code></pre>
         <p>If a position covers 36,000 MWh and the relevant price moves
         15 EUR/MWh against it:</p>
@@ -13522,7 +13555,7 @@ collateral need = 900,000 x 80%
         need, activation need, or liquidity. It does not mean “all
         batteries are unprofitable.”</p>
         </section>
-        <section id="numerical-intuition-30" class="level4">
+        <section id="numerical-intuition-32" class="level4">
         <h4>Numerical Intuition</h4>
         <ul>
         <li><code>coverage ratio = eligible flexible MW / product procurement MW</code>.
@@ -13536,11 +13569,6 @@ collateral need = 900,000 x 80%
         <li><code>85-90%</code> round-trip efficiency is an illustrative
         BESS anchor. Project work should check the specific technology,
         warranty, operating mode, and data source.</li>
-        <li>The 2025 PICASSO KPI report states an Activation
-        Optimisation Function cycle time of less than
-        <code>10 seconds</code> for aFRR activation optimization. In the
-        2025 PICASSO KPI report, this is a platform-operation detail
-        rather than a generic battery-market rule.</li>
         </ul>
         <section id="worked-estimate-16" class="level5">
         <h5>Worked Estimate</h5>
@@ -13558,6 +13586,58 @@ collateral need = 900,000 x 80%
         risk.</p>
         <p>This is enough to reject a naive case where last year’s
         reserve price is copied forward as if no one else can enter.</p>
+        </section>
+        <section id="evidence-pack-for-a-saturation-claim"
+        class="level5">
+        <h5>Evidence Pack For A Saturation Claim</h5>
+        <p>A saturation claim is credible only when the numerator and
+        denominator are both specified.</p>
+        <table>
+        <colgroup>
+        <col style="width: 50%" />
+        <col style="width: 50%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Evidence item</th>
+        <th>Why it matters</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>product procurement volume by country, bidding area, and
+        period</td>
+        <td>defines the size of the need</td>
+        </tr>
+        <tr>
+        <td>qualified and actively offered flexible MW</td>
+        <td>separates technical eligibility from actual market
+        supply</td>
+        </tr>
+        <tr>
+        <td>endurance and state-of-charge requirements</td>
+        <td>filters nameplate MW into deliverable MW</td>
+        </tr>
+        <tr>
+        <td>mutually exclusive commitments across products</td>
+        <td>prevents double-counting the same battery headroom</td>
+        </tr>
+        <tr>
+        <td>historical capacity prices, activation volumes, and
+        availability penalties</td>
+        <td>shows whether compression is price, quantity, or performance
+        driven</td>
+        </tr>
+        <tr>
+        <td>entry pipeline and connection timing</td>
+        <td>tests whether supply growth is near enough to affect the
+        investment case</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>Without this evidence, the chapter still gives a strategy
+        screen, but it should not be read as a current price
+        forecast.</p>
         </section>
         </section>
         <section id="equations-8" class="level4">
@@ -13707,9 +13787,11 @@ collateral need = 900,000 x 80%
         about Nordic BESS ancillary-service saturation need current
         market evidence.</p>
         <p>PICASSO 2025 material can anchor dated discussion of aFRR
-        platform operation. Battery-project revenue forecasting still
-        needs the applicable product rules, response times, settlement
-        design, and decision-date market evidence.</p>
+        platform operation, including fast activation-optimization
+        timing. Battery-project revenue forecasting still needs the
+        applicable product rules, response times, settlement design,
+        procurement volumes, eligible capacity, and decision-date market
+        evidence.</p>
         <p>The right dated formulation is: “Analysts in 2026 should test
         ancillary-service saturation product by product, because
         reserve-market size, qualification rules, activation patterns,
@@ -13815,7 +13897,7 @@ collateral need = 900,000 x 80%
         forecast, decide, trade, nominate, and monitor outside office
         hours. It can be internal, outsourced, or hybrid.</p>
         </section>
-        <section id="numerical-intuition-31" class="level4">
+        <section id="numerical-intuition-33" class="level4">
         <h4>Numerical Intuition</h4>
         <p>Start with value at stake, then apply feasibility
         haircuts.</p>
@@ -14091,7 +14173,7 @@ collateral need = 900,000 x 80%
         It is bankable only when product rules, qualification, metering,
         dispatch authority, and payment terms are clear.</p>
         </section>
-        <section id="numerical-intuition-32" class="level4">
+        <section id="numerical-intuition-34" class="level4">
         <h4>Numerical Intuition</h4>
         <p>The first grid numbers are usually timing, curtailed MWh,
         import-enabled cycles, and qualifying flexible MW.</p>
@@ -14360,7 +14442,7 @@ and how much is recovered or managed elsewhere?</code></pre>
         cash flow.</li>
         </ul>
         </section>
-        <section id="numerical-intuition-33" class="level4">
+        <section id="numerical-intuition-35" class="level4">
         <h4>Numerical Intuition</h4>
         <p>Start with the visible congestion value:</p>
         <pre class="text"><code>congestion value = price spread x constrained flow</code></pre>
@@ -14462,8 +14544,7 @@ and how much is recovered or managed elsewhere?</code></pre>
         project sits behind an internal bottleneck during high-solar
         hours. The market design does not publish a separate nodal
         energy price for that bottleneck.</p>
-        <p>The investment memo should not stop at “one zone, one price.”
-        It should ask:</p>
+        <p>The investment memo needs a congestion-exposure check:</p>
         <ul>
         <li>Is output likely to be curtailed in sunny constrained
         hours?</li>
@@ -14670,15 +14751,45 @@ and how much is recovered or managed elsewhere?</code></pre>
         text, issuer rules, cancellation rules, audit rights, and the
         buyer’s intended disclosure language.</p>
         </section>
-        <section id="numerical-intuition-34" class="level4">
+        <section id="numerical-intuition-36" class="level4">
         <h4>Numerical Intuition</h4>
-        <p>Use a priced path before any product ladder.</p>
-        <p>Suppose a buyer has a flat <code>10 MW</code> load:</p>
-        <pre class="text"><code>annual consumption = 10 MW x 8,760 h/year
-                   = 87,600 MWh/year</code></pre>
-        <p>An as-produced solar PPA may cover annual MWh at low cost but
-        leave evening and winter exposure. A shaped product must price
-        the residual:</p>
+        <p>Use a priced path before any product ladder. Suppose an IPP
+        is considering three offers for the same buyer load:</p>
+        <table>
+        <colgroup>
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Offer</th>
+        <th>Seller promise</th>
+        <th>Main retained exposure</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>As-produced PPA</td>
+        <td>deliver metered renewable output and certificates</td>
+        <td>buyer keeps shape, volume, and residual market exposure</td>
+        </tr>
+        <tr>
+        <td>Shaped PPA</td>
+        <td>deliver a closer hourly or block profile</td>
+        <td>seller prices residual firming, imbalance, basis, and
+        dispatch constraints</td>
+        </tr>
+        <tr>
+        <td>Evidence-rich product</td>
+        <td>add stronger time/location evidence and reporting</td>
+        <td>seller prices certificate data, audit trail, residual
+        supply, credit, and claim control</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>The shape premium starts with the uncovered hours after
+        portfolio and storage are modeled:</p>
         <pre class="text"><code>residual firming cost
   = uncovered MWh x replacement cost
   + imbalance cost
@@ -14689,7 +14800,8 @@ and how much is recovered or managed elsewhere?</code></pre>
         <pre class="text"><code>uncovered volume after portfolio and storage = 25,000 MWh/year
 net residual firming cost = 9 EUR/MWh
 residual firming cost = 25,000 x 9 = 225,000 EUR/year</code></pre>
-        <p>Add evidence, credit, and control costs:</p>
+        <p>For a buyer load of <code>87,600 MWh/year</code>, add
+        evidence, credit, and control costs:</p>
         <pre class="text"><code>evidence and audit systems = 0.60 EUR/MWh x 87,600 = 52,560 EUR/year
 credit and collateral cost = 1.20 EUR/MWh x 87,600 = 105,120 EUR/year
 control-right and partner-governance cost = 0.80 EUR/MWh x 87,600 = 70,080 EUR/year</code></pre>
@@ -14990,7 +15102,7 @@ control-right and partner-governance cost = 0.80 EUR/MWh x 87,600 = 70,080 EUR/y
         demand flexibility, or portfolio diversity to make uncertain
         supply meet a target obligation.</p>
         </section>
-        <section id="numerical-intuition-35" class="level4">
+        <section id="numerical-intuition-37" class="level4">
         <h4>Numerical Intuition</h4>
         <p>Start with the marginal duration hurdle:</p>
         <pre class="text"><code>required margin per MWh
@@ -15491,7 +15603,7 @@ and who pays when the evidence or delivery does not match the promise?</code></p
         for legal/accounting review</li>
         </ul>
         </section>
-        <section id="numerical-intuition-36" class="level4">
+        <section id="numerical-intuition-38" class="level4">
         <h4>Numerical Intuition</h4>
         <p>The decision number is residual firming-at-risk:</p>
         <pre class="text"><code>firming_at_risk =
@@ -15917,7 +16029,7 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         system strength and fault behavior. They matter for protection
         and stability, but exact values are system-specific.</p>
         </section>
-        <section id="numerical-intuition-37" class="level4">
+        <section id="numerical-intuition-39" class="level4">
         <h4>Numerical Intuition</h4>
         <p>Start with the paid-or-required capability gap:</p>
         <pre class="text"><code>capability_gap =
@@ -15940,8 +16052,8 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <code>172.5 MW</code> violate a voltage limit, and local
         reactive support becomes more effective than remote control,
         especially after contingencies. The transferable claim is that
-        voltage support is locational. A service can be valuable at one
-        node and low value elsewhere.</p>
+        voltage support is locational. A service can have high value at
+        one node and limited value elsewhere.</p>
         <p>Second, Energinet’s 2025 Danish ancillary-service tender
         conditions for DK1 and DK2 list stability properties such as
         short-circuit power, inertia, reactive reserves, and voltage
@@ -15955,6 +16067,14 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         procurement items; it does not establish that a generic
         grid-forming inverter package is qualified, payable, or needed
         at a specific site.</p>
+        <p>Third, Fingrid’s 2026-2035 grid development plan treats
+        inverter-dominated areas as a stability problem requiring
+        technical solutions such as grid-forming storage, synchronous
+        compensators, STATCOMs, and updated grid-code work. That is a
+        planning signal, not a generic revenue forecast. For an IPP it
+        means the commercial file should track whether stability
+        capability affects connection timing, connection terms,
+        curtailment exposure, or a separately procured service.</p>
         <section id="the-option-premium" class="level5">
         <h5>The Option Premium</h5>
         <p>Suppose a <code>100 MW</code> BESS project can buy an
@@ -16106,9 +16226,8 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <h4>Example: Commercial Proposal Screen</h4>
         <p>The project team proposes grid-forming-ready inverters for a
         solar-plus-BESS site near a weak part of the network.</p>
-        <p>The board should not ask:</p>
-        <pre class="text"><code>Will grid-forming be important?</code></pre>
-        <p>It should ask:</p>
+        <p>The proposal is investment-ready only after seven questions
+        are answered:</p>
         <ol type="1">
         <li>What local system problem are we solving: voltage, fault
         level, frequency response, weak-grid stability, restoration, or
@@ -16185,9 +16304,11 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <p>“Grid-forming means extra revenue.” Only if a service is
         defined, qualified, controllable, measured, and paid or
         otherwise valuable.</p>
-        <p>“No market product means no value.” False. The value may
-        appear through connection approval, avoided curtailment, avoided
-        remedial action, or future optionality.</p>
+        <p>“No market product means no value.” The value may sit outside
+        a standard revenue line: connection approval, avoided
+        curtailment, avoided remedial action, or future optionality.
+        Keep it out of base-case revenue until the path is
+        documented.</p>
         <p>“Fast battery equals system-service battery.” Fast response
         is one property. The service may need reactive capability, fault
         behavior, state of charge, controls, telemetry, or restoration
@@ -16323,15 +16444,15 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <p>Value-weighted error is forecast error weighted by the
         economic consequence of being wrong in that interval.</p>
         </section>
-        <section id="numerical-intuition-38" class="level4">
+        <section id="numerical-intuition-40" class="level4">
         <h4>Numerical Intuition</h4>
-        <p>The first useful number is value-weighted error.</p>
+        <p>Start with value-weighted error.</p>
         <pre class="text"><code>20 MWh error x 5 EUR/MWh consequence  =   100 EUR
 20 MWh error x 80 EUR/MWh consequence = 1,600 EUR</code></pre>
         <p>The physical error is the same. The commercial error is 16
         times larger in the second interval. A model can improve average
         accuracy and still miss the hours that matter.</p>
-        <p>The second useful number is captured value:</p>
+        <p>Then calculate captured value:</p>
         <pre class="text"><code>captured value
   = raw uplift x actionability factor - model cost - model-risk charge</code></pre>
         <p>Use the actionability factor as a disciplined way to avoid
@@ -16357,8 +16478,8 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         </section>
         <section id="model-risk" class="level4">
         <h4>Model Risk</h4>
-        <p>The third useful number asks how badly an automated action
-        can fail.</p>
+        <p>Model value at risk asks how badly an automated action can
+        fail.</p>
         <p>Suppose a model can affect 40 MW for two hours. In a bad
         regime it can be wrong by 100 EUR/MWh. If that happens 15 times
         before the error is caught:</p>
@@ -16581,7 +16702,7 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <p>Benchmark: a comparison standard. A useful benchmark is
         feasible, information-timed, contract-aware, and cost-aware.</p>
         </section>
-        <section id="numerical-intuition-39" class="level4">
+        <section id="numerical-intuition-41" class="level4">
         <h4>Numerical Intuition</h4>
         <p>Start with the observability gap.</p>
         <p>At 15-minute granularity, one asset produces <code>96</code>
@@ -16995,7 +17116,7 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         physical constraints. The exact software stack changes over
         time, but unauditable handoffs create governance risk.</p>
         </section>
-        <section id="numerical-intuition-40" class="level4">
+        <section id="numerical-intuition-42" class="level4">
         <h4>Numerical Intuition</h4>
         <p>Rank capabilities by addressable value rather than by
         perceived sophistication.</p>
@@ -17320,8 +17441,10 @@ and with what feedback after delivery?</code></pre>
         decision, evidence, retained risk, owner, next measurement, and
         assumption-flip test.</p>
         </section>
-        <section id="the-capstone-case" class="level4">
-        <h4>The Capstone Case</h4>
+        <section id="numerical-intuition-43" class="level4">
+        <h4>Numerical Intuition</h4>
+        <section id="the-capstone-case" class="level5">
+        <h5>The Capstone Case</h5>
         <p>Use a deliberately simple shaped-PPA case.</p>
         <p>The customer asks for 30 MW from 18:00 to 22:00 every day.
         The hourly obligation is:</p>
@@ -17341,6 +17464,7 @@ and with what feedback after delivery?</code></pre>
 The product can still be viable only if residual exposure is priced, hedged,
 contractually transferred, or covered by portfolio/market actions under clear control rights.</code></pre>
         <p>The memo then prices or assigns the residual exposure.</p>
+        </section>
         </section>
         <section id="the-diagnostic-ratios" class="level4">
         <h4>The Diagnostic Ratios</h4>
@@ -17769,7 +17893,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         for availability, qualified capacity, or reliability
         contribution in addition to energy.</p>
         </section>
-        <section id="numerical-intuition-41" class="level4">
+        <section id="numerical-intuition-44" class="level4">
         <h4>Numerical Intuition</h4>
         <p>Use a derating curve before comparing technologies.</p>
         <p>Take a 100 MW / 200 MWh battery and assume all 200 MWh are
@@ -18145,7 +18269,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         capability.</li>
         </ul>
         </section>
-        <section id="numerical-intuition-42" class="level4">
+        <section id="numerical-intuition-45" class="level4">
         <h4>Numerical Intuition</h4>
         <p>Use three tests. None proves misconduct by itself; together
         they organize the investigation.</p>
@@ -18722,7 +18846,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         EUR/MWh ceiling. The tail risk still needs an explicit
         boundary.</p>
         </section>
-        <section id="numerical-intuition-43" class="level4">
+        <section id="numerical-intuition-46" class="level4">
         <h4>Numerical Intuition</h4>
         <p>The stress firming cost is:</p>
         <pre class="text"><code>20 MWh/h x 250 h/year x 120 EUR/MWh = 600,000 EUR/year</code></pre>
@@ -19059,7 +19183,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <p>The third and fourth hours miss their 700,000 EUR/year hurdle
         by about 450,000 EUR/year.</p>
         </section>
-        <section id="numerical-intuition-44" class="level4">
+        <section id="numerical-intuition-47" class="level4">
         <h4>Numerical Intuition</h4>
         <p>The best duration is the last block whose marginal value
         exceeds its marginal cost.</p>
@@ -19462,7 +19586,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         acceptable, and whether import rights let the battery charge
         when the commercial case requires it.</p>
         </section>
-        <section id="numerical-intuition-45" class="level4">
+        <section id="numerical-intuition-48" class="level4">
         <h4>Numerical Intuition</h4>
         <p>The top-line spread between sites is small after grid
         effects.</p>
@@ -19786,7 +19910,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         shaped PPA route is attractive only if the PPA premium is high
         enough to compensate for lost merchant optionality.</p>
         </section>
-        <section id="numerical-intuition-46" class="level4">
+        <section id="numerical-intuition-49" class="level4">
         <h4>Numerical Intuition</h4>
         <p>The opportunity cost of using battery capacity for the shaped
         PPA is:</p>
@@ -20140,7 +20264,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         execution leakage, but the missing forecast, bid, and optimizer
         files make a fee claim premature.</p>
         </section>
-        <section id="numerical-intuition-47" class="level4">
+        <section id="numerical-intuition-50" class="level4">
         <h4>Numerical Intuition</h4>
         <p>The headline gap overstates the partner-action amount.</p>
         <pre class="text"><code>residual_bidding_gap_share = 0.11 / 0.50 = 22%
@@ -20612,7 +20736,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         </tbody>
         </table>
         </section>
-        <section id="numerical-intuition-48" class="level4">
+        <section id="numerical-intuition-51" class="level4">
         <h4>Numerical Intuition</h4>
         <p>Annual coverage can look acceptable while hourly matching is
         weak.</p>
