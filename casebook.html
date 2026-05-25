@@ -1748,7 +1748,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.38.0
+        v0.38.1
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -7088,6 +7088,38 @@ data_rights_first + small pilot = slower automation + stronger governance</code>
             deckAction.textContent = "Q&A Overview PDF";
             actionRow.appendChild(deckAction);
           }
+          body.append(title, summary, points, actionRow);
+          step.append(label, body);
+          arc.appendChild(step);
+        }
+
+        if (!casebook) {
+          const step = document.createElement("section");
+          step.className = "arc-step";
+          const label = document.createElement("div");
+          label.className = "arc-label";
+          label.textContent = "Companion";
+          const body = document.createElement("div");
+          body.className = "arc-body";
+          const title = document.createElement("h3");
+          title.textContent = "Commercial Workbench";
+          const summary = document.createElement("p");
+          summary.className = "arc-summary";
+          summary.textContent = "Interactive companion for the shaped solar-storage cases.";
+          const points = document.createElement("ul");
+          points.className = "arc-points";
+          const point = document.createElement("li");
+          point.textContent = "Use it to test delivery coverage, residual gaps, indicative premium, BESS value, and partner evidence while working through Cases 1, 4, and 5.";
+          points.appendChild(point);
+          const actionRow = document.createElement("div");
+          actionRow.className = "arc-actions";
+          const action = document.createElement("a");
+          action.className = "arc-link";
+          action.href = "https://solar-bess-modeling.streamlit.app/";
+          action.target = "_blank";
+          action.rel = "noopener noreferrer";
+          action.textContent = "Open Workbench";
+          actionRow.appendChild(action);
           body.append(title, summary, points, actionRow);
           step.append(label, body);
           arc.appendChild(step);
