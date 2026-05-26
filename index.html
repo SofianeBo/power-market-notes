@@ -1866,7 +1866,7 @@ Notes">
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.40.1
+        v0.40.2
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -13776,8 +13776,8 @@ collateral need = 900,000 x 80%
         paid well, and the technical eligibility case is credible. A
         strategy decision has to go beyond eligibility and last year’s
         spread: how large is the product, how many similar assets can
-        qualify, and what value remains when the easy scarcity rent is
-        competed away?</p>
+        qualify, what the connection allows the battery to do, and what
+        value remains when the easy scarcity rent is competed away?</p>
         <p>The saturation problem is the transition from a scarce
         premium product to a more competitive revenue stack. A battery
         may still be valuable after the first premium product
@@ -13785,9 +13785,11 @@ collateral need = 900,000 x 80%
         attractive line item toward a stack that can survive stress:
         arbitrage, intraday optionality, co-location value, avoided
         curtailment, grid-tariff value, contracted flexibility, or
-        portfolio balancing. The capital-allocation test is whether the
-        asset still earns its place when everyone can see the same
-        opportunity.</p>
+        portfolio balancing. This migration only matters if the site has
+        enough usable import, export, metering, and operating rights to
+        move into the next revenue layer. The capital-allocation test is
+        whether the asset still earns its place when everyone can see
+        the same opportunity.</p>
         <section id="opening-puzzle-32" class="level4">
         <h4>Opening Puzzle</h4>
         <p>A battery developer shows you a revenue case where most of
@@ -13919,6 +13921,13 @@ collateral need = 900,000 x 80%
         <td>tests whether supply growth is near enough to affect the
         investment case</td>
         </tr>
+        <tr>
+        <td>connection capacity, import/export rights, and metering
+        treatment</td>
+        <td>tests whether the battery can actually shift from the
+        crowded product into arbitrage, shaping, local flexibility, or
+        portfolio balancing</td>
+        </tr>
         </tbody>
         </table>
         <p>Without this evidence, the test can guide strategy, but it
@@ -13962,6 +13971,15 @@ collateral need = 900,000 x 80%
         <li>The investment case needs a feasible stack under stress
         rather than one premium product copied forward.</li>
         </ol>
+        <p>The site connection decides how far that migration can go. A
+        battery with limited import rights, capped export, restrictive
+        metering, or a queue-delayed connection may lose access to the
+        replacement use case exactly when the first product becomes
+        crowded. Chapter 3, <a href="#v3-l03">Grid Constraints And
+        Portfolio Strategy</a>, treats that as a portfolio strategy
+        problem; here it is a saturation check: compression in one
+        revenue line is survivable only if another feasible line can
+        absorb the same finite MW and MWh.</p>
         <p>The mechanism is durable. The dated debate is which step a
         given country/product has reached in 2026.</p>
         </section>
@@ -14042,6 +14060,9 @@ collateral need = 900,000 x 80%
         <li>Does the asset owner control dispatch, or does the
         BRP/BSP/optimizer?</li>
         <li>Which commitments are mutually exclusive?</li>
+        <li>Do the connection terms allow the import, export, metering,
+        and operating pattern required by the fallback revenue
+        layer?</li>
         <li>Is the battery preserving state of charge for reserves at
         the expense of solar-shaping value?</li>
         <li>If reserve revenue falls, what part of the stack remains:
@@ -14068,8 +14089,10 @@ collateral need = 900,000 x 80%
         <section id="current-debates-and-caveats-13" class="level4">
         <h4>Current Debates And Caveats</h4>
         <p>As of 2026-05-16, saturation is treated here product by
-        product. Country-wide or product-wide claims about Nordic BESS
-        ancillary-service saturation need current market evidence.</p>
+        product and site by site. Country-wide or product-wide claims
+        about Nordic BESS ancillary-service saturation need current
+        market evidence, and project decisions also need current
+        connection evidence.</p>
         <p>PICASSO 2025 material can anchor dated discussion of aFRR
         platform operation, including fast activation-optimization
         timing. Battery-project revenue forecasting still needs the
@@ -14078,8 +14101,9 @@ collateral need = 900,000 x 80%
         evidence.</p>
         <p>For a 2026 analyst, the product-by-product test is
         reserve-market size, qualification rules, activation patterns,
-        eligible BESS entry, and the opportunity cost of using the same
-        MW and MWh elsewhere.</p>
+        eligible BESS entry, connection capacity, import/export rights,
+        and the opportunity cost of using the same MW and MWh
+        elsewhere.</p>
         </section>
         <section id="recap-32" class="level4">
         <h4>Recap</h4>
@@ -14087,11 +14111,12 @@ collateral need = 900,000 x 80%
         flexibility is scarce, but the same visibility that attracts the
         first projects can erode the premium. The mental model is a
         finite system need facing a growing pool of eligible capacity,
-        with opportunity cost, degradation, exclusivity, and
-        state-of-charge rules deciding what the reserve award is really
-        worth. After saturation, the question returns to the opening
-        model: if the single product stops carrying the case, does the
-        remaining stack still justify the asset?</p>
+        with opportunity cost, degradation, exclusivity, connection
+        rights, and state-of-charge rules deciding what the reserve
+        award is really worth. After saturation, the question returns to
+        the opening model: if the single product stops carrying the
+        case, does the site’s feasible remaining stack still justify the
+        asset?</p>
         <div class="lecture-end">
 
         </div>
@@ -14105,16 +14130,20 @@ collateral need = 900,000 x 80%
         <a href="#ref-19">[19]</a> <a href="#ref-20">[20]</a>
         <a href="#ref-45">[45]</a></sup>
         </p>
-        <p>A quarter-hour price is only useful if the portfolio can do
-        something with it. A solar forecast moves after the day-ahead
-        auction, a battery has more state of charge than expected, and a
-        partner sees a tradable imbalance in the intraday book. The
-        commercial question is whether that new information can be
-        exercised before gate closure, at enough volume, without
-        consuming a more valuable reserve, PPA, or settlement position.
-        Granularity creates options. Liquidity, control rights, systems,
-        and partner execution decide how many of those options become
-        money.</p>
+        <p>Shorter market intervals and better intraday access create
+        more chances to adjust a renewable portfolio after the day-ahead
+        auction. For an IPP, the first question is commercial: does
+        finer granularity create enough executable value to pay for
+        better forecasts, data, partner oversight, and possibly 24/7
+        operations?</p>
+        <p>A solar forecast moves after day-ahead clearing, a battery
+        has more state of charge than expected, or a partner sees a
+        tradable imbalance in the intraday book. The opportunity matters
+        only if the portfolio can act before gate closure, at enough
+        volume, without consuming a more valuable reserve, PPA, or
+        settlement position. Granularity creates options. Liquidity,
+        control rights, systems, and partner execution decide how many
+        of those options become money.</p>
         <section id="opening-puzzle-33" class="level4">
         <h4>Opening Puzzle</h4>
         <p>An optimizer sees a close-to-delivery opportunity: buy in one
@@ -25604,8 +25633,21 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
           if (highlightButton) highlightButton.disabled = !payload.highlightRange;
           toolbar.hidden = false;
           const chipWidth = toolbar.offsetWidth || 220;
-          const top = Math.max(76, payload.rect.top - 44);
-          const left = Math.min(window.innerWidth - chipWidth - 12, Math.max(12, payload.rect.left));
+          const chipHeight = toolbar.offsetHeight || 44;
+          const margin = 12;
+          const gap = 10;
+          const mobileSelection = window.matchMedia && window.matchMedia("(max-width: 720px)").matches;
+          let top = mobileSelection
+            ? payload.rect.bottom + gap
+            : payload.rect.top - chipHeight - gap;
+          if (mobileSelection && top + chipHeight > window.innerHeight - margin) {
+            top = payload.rect.top - chipHeight - gap;
+          }
+          if (!mobileSelection && top < margin) {
+            top = payload.rect.bottom + gap;
+          }
+          top = Math.min(window.innerHeight - chipHeight - margin, Math.max(margin, top));
+          const left = Math.min(window.innerWidth - chipWidth - margin, Math.max(margin, payload.rect.left));
           toolbar.style.top = top + "px";
           toolbar.style.left = left + "px";
         };

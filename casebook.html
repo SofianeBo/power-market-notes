@@ -1748,7 +1748,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.40.1
+        v0.40.2
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -8325,8 +8325,21 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
           if (highlightButton) highlightButton.disabled = !payload.highlightRange;
           toolbar.hidden = false;
           const chipWidth = toolbar.offsetWidth || 220;
-          const top = Math.max(76, payload.rect.top - 44);
-          const left = Math.min(window.innerWidth - chipWidth - 12, Math.max(12, payload.rect.left));
+          const chipHeight = toolbar.offsetHeight || 44;
+          const margin = 12;
+          const gap = 10;
+          const mobileSelection = window.matchMedia && window.matchMedia("(max-width: 720px)").matches;
+          let top = mobileSelection
+            ? payload.rect.bottom + gap
+            : payload.rect.top - chipHeight - gap;
+          if (mobileSelection && top + chipHeight > window.innerHeight - margin) {
+            top = payload.rect.top - chipHeight - gap;
+          }
+          if (!mobileSelection && top < margin) {
+            top = payload.rect.bottom + gap;
+          }
+          top = Math.min(window.innerHeight - chipHeight - margin, Math.max(margin, top));
+          const left = Math.min(window.innerWidth - chipWidth - margin, Math.max(margin, payload.rect.left));
           toolbar.style.top = top + "px";
           toolbar.style.left = left + "px";
         };
