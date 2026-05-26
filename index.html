@@ -1739,7 +1739,7 @@ Notes">
         <li><a href="#v1-l02" id="toc-v1-l02">Chapter 2. Real-Time Power
         System Balancing</a></li>
         <li><a href="#v1-l03" id="toc-v1-l03">Chapter 3. Load Shape And
-        Time Variation</a></li>
+        Hourly Profiles</a></li>
         <li><a href="#v1-l04" id="toc-v1-l04">Chapter 4. Networks,
         Bidding Zones, Tariffs, And Congestion</a></li>
         <li><a href="#v1-l05" id="toc-v1-l05">Chapter 5. Market
@@ -1866,7 +1866,7 @@ Notes">
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.41.0
+        v0.42.0
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -1958,8 +1958,7 @@ Notes">
         <section id="v1-l01" class="level3">
         <h3>Chapter 1. Energy, Power, And Delivery Timing</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-1">[1]</a>
-        <a href="#ref-2">[2]</a> <a href="#ref-3">[3]</a></sup>
+        References: <sup><a href="#ref-1">[1]</a></sup>
         </p>
         <p>A customer buys electricity, but delivery happens at a rate,
         in a place, and at a time. A factory needs power in this hour. A
@@ -2096,10 +2095,6 @@ Notes">
         ask both “How many MWh per year?” and “What hourly shape are we
         selling, and who carries the mismatch between production and
         customer demand?”</p>
-        <p>In Sweden, production and consumption statistics are based on
-        measured hourly values reported to eSett. The operational record
-        is hourly because running and settling the system requires more
-        than annual totals.</p>
         </section>
         <section id="misconceptions" class="level4">
         <h4>Misconceptions</h4>
@@ -2132,8 +2127,8 @@ Notes">
         <section id="v1-l02" class="level3">
         <h3>Chapter 2. Real-Time Power System Balancing</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-4">[4]</a>
-        <a href="#ref-5">[5]</a></sup>
+        References: <sup><a href="#ref-2">[2]</a>
+        <a href="#ref-3">[3]</a></sup>
         </p>
         <p>A solar portfolio is scheduled to deliver power during the
         next hour. Cloud cover arrives earlier than forecast, output
@@ -2257,11 +2252,11 @@ If it lasts 1 hour: 5 MW x 1 h = 5 MWh</code></pre>
         to 13:00.</p>
         <p>At 12:20, cloud cover arrives faster than forecast. Actual
         output falls to 85 MW.</p>
-        <p>The system cannot say, “We will true-up at the end of the
-        month.” Someone else must increase injection, reduce demand,
-        release stored energy, or change flows. Later, settlement
-        determines who pays or receives for the deviation, depending on
-        the market rules and prices.</p>
+        <p>The system cannot wait for month-end settlement. Someone else
+        must increase injection, reduce demand, release stored energy,
+        or change flows. Later, settlement determines who pays or
+        receives for the deviation, depending on the market rules and
+        prices.</p>
         <p>The physical problem comes first. The financial problem is
         the institutional wrapper around it.</p>
         </section>
@@ -2316,18 +2311,19 @@ If it lasts 1 hour: 5 MW x 1 h = 5 MWh</code></pre>
         </section>
         </section>
         <section id="v1-l03" class="level3">
-        <h3>Chapter 3. Load Shape And Time Variation</h3>
+        <h3>Chapter 3. Load Shape And Hourly Profiles</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-1">[1]</a>
-        <a href="#ref-2">[2]</a> <a href="#ref-6">[6]</a></sup>
+        <a href="#ref-4">[4]</a> <a href="#ref-5">[5]</a></sup>
         </p>
-        <p>One hour of metering gives a number; a year of metering gives
-        a curve. That curve is the object the power system has to serve:
-        how much energy was used, and when each MW was needed. Two
-        customers can have the same annual MWh and require different
-        wires, generators, batteries, trading actions, and contracts. A
-        useful first step is to treat demand as a time series rather
-        than a single total.</p>
+        <p>Annual demand is useful, but it hides the hours that drive
+        power-system decisions. A factory with a steady 10 MW load and a
+        factory that reaches 50 MW for short periods can consume the
+        same annual energy and need different connection capacity,
+        contracts, tariffs, and balancing arrangements. This chapter
+        turns annual MWh into an hour-by-hour profile: the shape of
+        demand, the shape of generation, and the mismatch someone has to
+        manage.</p>
         <section id="opening-puzzle-2" class="level4">
         <h4>Opening Puzzle</h4>
         <p>Two portfolios each consume <code>87,600 MWh/year</code>.</p>
@@ -2336,22 +2332,23 @@ If it lasts 1 hour: 5 MW x 1 h = 5 MWh</code></pre>
         in others.</p>
         <p>The two portfolios have the same annual energy and different
         grid requirements.</p>
-        <p>System operation is built around the load curve.</p>
+        <p>The missing object is the hourly profile.</p>
         </section>
         <section id="first-principles-model-2" class="level4">
         <h4>First-Principles Model</h4>
-        <p>Load is demand over time:</p>
+        <p>Load is demand in each delivery interval:</p>
         <pre class="text"><code>load(t) = electrical demand at time t</code></pre>
-        <p>Generation is also a time series:</p>
+        <p>Generation has its own profile:</p>
         <pre class="text"><code>generation(t) = electrical output at time t</code></pre>
-        <p>The mismatch is where power-market structure begins.</p>
-        <p>For a simplified system with variable renewable
-        generation:</p>
-        <pre class="text"><code>residual load(t) = demand(t) - variable renewable generation(t)</code></pre>
-        <p>This definition depends on the convention: you must state
-        which resources are subtracted. If you subtract solar only,
-        residual load means “load net of solar.” If you subtract wind
-        and solar, it means “load net of wind and solar.”</p>
+        <p>The useful comparison is the difference between demand and
+        output in the same interval.</p>
+        <p>For a simplified system:</p>
+        <pre class="text"><code>residual load(t) = load(t) - selected generation(t)</code></pre>
+        <p>The phrase “selected generation” forces the convention into
+        the open. If you subtract solar only, residual load means “load
+        net of solar.” If you subtract wind and solar, it means “load
+        net of wind and solar.” The equation is useful only after that
+        choice is stated.</p>
         </section>
         <section id="definitions-2" class="level4">
         <h4>Definitions</h4>
@@ -2378,9 +2375,10 @@ If it lasts 1 hour: 5 MW x 1 h = 5 MWh</code></pre>
         average load is:</p>
         <pre class="text"><code>87,600 MWh/year / 8,760 h/year = 10 MW</code></pre>
         <p>But peak could be 12 MW, 20 MW, or 50 MW. The average does
-        not tell you.</p>
-        <p>For capacity factor, a 100 MW generator producing 175,200 MWh
-        in a non-leap year has:</p>
+        not tell you the peak, the ramp, or which hours create the
+        constraint.</p>
+        <p>For capacity factor, a 100 MW generator producing 175,200
+        MWh/year has:</p>
         <pre class="text"><code>capacity factor = 175,200 MWh / (100 MW x 8,760 h)
 capacity factor = 175,200 / 876,000 = 20%</code></pre>
         <p>This calculation is a unit example rather than a technology
@@ -2405,22 +2403,26 @@ capacity factor = 175,200 / 876,000 = 20%</code></pre>
         </section>
         <section id="mechanism-2" class="level4">
         <h4>Mechanism</h4>
-        <p>Load shape matters because the grid has to meet the curve,
-        not the average.</p>
-        <p>Daily shape: mornings, evenings, working hours, and
-        industrial schedules all create different ramps and peaks.</p>
-        <p>Seasonal shape: heating, cooling, daylight, hydrology, and
-        industrial activity shift demand and generation across the
-        year.</p>
-        <p>Renewable shape: solar is correlated with sunlight; wind is
-        weather-driven; hydro depends on water availability and
-        reservoir strategy.</p>
-        <p>Residual load is the curve left for other resources to serve.
-        If solar output rises strongly at midday, residual load may fall
-        at midday and rise again in the evening. That creates
-        flexibility needs and can change price shape.</p>
-        <p>This connects physics to PPAs: a contract promises both
-        annual MWh quantity and ownership of the shape.</p>
+        <p>Load shape matters because the system is built and operated
+        for intervals, not annual totals.</p>
+        <p>Start with the flat 10 MW portfolio. It uses 87,600 MWh/year
+        and needs roughly 10 MW every hour. A peaky portfolio can use
+        the same annual energy and still require much more connection
+        capacity during its high-load hours. That peak affects wires,
+        reserve needs, tariffs, and the value of flexibility.</p>
+        <p>Generation has a profile too. Solar output is concentrated in
+        daylight hours; wind follows weather; hydro depends on water
+        availability and reservoir operation. The system has to match
+        the demand profile and the generation profile hour by hour.</p>
+        <p>Residual load is the part left after subtracting the
+        generation category you are studying. If solar output rises
+        strongly at midday, residual load can fall at midday and rise
+        again in the evening. That shape creates ramping needs and
+        changes which resources are valuable in which hours.</p>
+        <p>This is also why power purchase agreements (PPAs) care about
+        shape. A contract may promise annual MWh, an as-produced
+        profile, a flat block, or a shaped product. Each version assigns
+        the hourly mismatch to someone.</p>
         </section>
         <section id="example-2" class="level4">
         <h4>Example</h4>
@@ -2474,24 +2476,15 @@ Hour 4: -10 MWh</code></pre>
         <p>Capacity factor compresses time into one ratio. It does not
         show hourly shape.</p>
         </section>
-        <section id="current-debates-or-caveats" class="level4">
-        <h4>Current Debates Or Caveats</h4>
-        <p>Solar-heavy hours can lower residual load and realized solar
-        prices when demand, exports, storage, or flexible load do not
-        absorb the output. The mechanism is portable; price levels,
-        capture-price figures, and country-year counts need their own
-        date, market area, and data definition.</p>
-        </section>
         <section id="recap-2" class="level4">
         <h4>Recap</h4>
-        <p>Annual MWh gives the energy total; load shape gives the
-        timing requirement. Once demand and generation are drawn as time
-        series, peak load becomes a constraint, residual load becomes
-        the curve other resources must serve, and capacity factor
-        becomes a compressed view of a richer pattern. The same total
-        energy can leave hourly surplus, shortage, or a contract
-        exposure for someone to absorb. Power-market reasoning improves
-        when the clock stays in the model.</p>
+        <p>Annual MWh gives the volume. The hourly profile shows peaks,
+        ramps, surplus hours, shortfall hours, and contract exposure.
+        Peak load is a constraint, residual load is the remaining demand
+        after a stated generation category is subtracted, and capacity
+        factor is only a compressed production ratio. Two portfolios
+        with the same annual energy can create very different grid
+        needs, market value, and PPA risk.</p>
         <div class="lecture-end">
 
         </div>
@@ -2501,17 +2494,17 @@ Hour 4: -10 MWh</code></pre>
         <h3>Chapter 4. Networks, Bidding Zones, Tariffs, And
         Congestion</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-7">[7]</a>
-        <a href="#ref-8">[8]</a> <a href="#ref-9">[9]</a>
-        <a href="#ref-10">[10]</a> <a href="#ref-11">[11]</a></sup>
+        References: <sup><a href="#ref-6">[6]</a>
+        <a href="#ref-7">[7]</a> <a href="#ref-8">[8]</a>
+        <a href="#ref-9">[9]</a> <a href="#ref-10">[10]</a></sup>
         </p>
-        <p>A solar map can make a site look obvious: strong production,
-        clean layout, healthy MWh. Then the model reaches the connection
-        point. The local wire may not have room, the export path may
-        bind, or the available right may come with tariff and
-        curtailment terms that change the economics. In power markets,
-        location is the path by which each MWh becomes deliverable,
-        priced, and paid for.</p>
+        <p>In power markets, location is the path by which each MWh
+        becomes deliverable, priced, and paid for. A solar map can make
+        a site look obvious: strong production, clean layout, healthy
+        MWh. Then the model reaches the connection point. The local wire
+        may not have room, the export path may bind, or the available
+        right may come with tariff and curtailment terms that change the
+        economics.</p>
         <section id="opening-puzzle-3" class="level4">
         <h4>Opening Puzzle</h4>
         <p>A project model says a solar plant is profitable.</p>
@@ -2690,7 +2683,7 @@ grid cost = EUR 5/MWh</code></pre>
         maturity evidence, agreements, capacity allocation, and cost
         responsibility. The exact rules are jurisdiction-specific.</p>
         </section>
-        <section id="current-debates-or-caveats-1" class="level4">
+        <section id="current-debates-or-caveats" class="level4">
         <h4>Current Debates Or Caveats</h4>
         <p>Tariff and connection claims depend on the rulebook, network
         owner, voltage level, user class, and tariff year. The Swedish
@@ -2721,7 +2714,7 @@ grid cost = EUR 5/MWh</code></pre>
         <section id="v1-l05" class="level3">
         <h3>Chapter 5. Market Participants And Responsibilities</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-3">[3]</a>
+        References: <sup><a href="#ref-11">[11]</a>
         <a href="#ref-12">[12]</a></sup>
         </p>
         <p>Consider a 100 MW asset that promised 100 MW for the hour and
@@ -3013,7 +3006,7 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <p>Execution can be outsourced. Economic exposure, governance,
         and strategic understanding cannot be outsourced completely.</p>
         </section>
-        <section id="current-debates-or-caveats-2" class="level4">
+        <section id="current-debates-or-caveats-1" class="level4">
         <h4>Current Debates Or Caveats</h4>
         <p>Actor roles are jurisdiction-specific and changing. Swedish
         BSP/BRP implementation is explicitly date-specific; Nordic/eSett
@@ -3042,8 +3035,8 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <h3>Chapter 6. Electricity Market Timeframes</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-13">[13]</a>
-        <a href="#ref-14">[14]</a> <a href="#ref-3">[3]</a>
-        <a href="#ref-4">[4]</a></sup>
+        <a href="#ref-14">[14]</a> <a href="#ref-11">[11]</a>
+        <a href="#ref-2">[2]</a></sup>
         </p>
         <p>A solar plant has several time-stamped descriptions during a
         market day. Yesterday’s schedule says one thing, the latest
@@ -3472,8 +3465,8 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <section id="v1-l08" class="level3">
         <h3>Chapter 8. Forecast Error And Imbalance Settlement</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-3">[3]</a>
-        <a href="#ref-4">[4]</a> <a href="#ref-12">[12]</a></sup>
+        References: <sup><a href="#ref-11">[11]</a>
+        <a href="#ref-2">[2]</a> <a href="#ref-12">[12]</a></sup>
         </p>
         <p>A control room can be calm while the meter quietly disagrees
         with the plan. A solar forecast said one thing, the market
@@ -3658,10 +3651,10 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <section id="v1-l09" class="level3">
         <h3>Chapter 9. Frequency, Reserves, And Ancillary Services</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-4">[4]</a>
+        References: <sup><a href="#ref-2">[2]</a>
         <a href="#ref-17">[17]</a> <a href="#ref-18">[18]</a>
         <a href="#ref-19">[19]</a> <a href="#ref-20">[20]</a>
-        <a href="#ref-21">[21]</a> <a href="#ref-5">[5]</a></sup>
+        <a href="#ref-21">[21]</a> <a href="#ref-3">[3]</a></sup>
         </p>
         <p>At 14:00, a battery may sit still while the grid keeps moving
         around it. Its value may be in the MWh it delivers later, or in
@@ -3906,9 +3899,9 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <h3>Chapter 10. Voltage, Reactive Power, Inertia, And
         Inverter-Based Resources</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-10">[10]</a>
+        References: <sup><a href="#ref-9">[9]</a>
         <a href="#ref-22">[22]</a> <a href="#ref-23">[23]</a>
-        <a href="#ref-5">[5]</a></sup>
+        <a href="#ref-3">[3]</a></sup>
         </p>
         <p>A solar project can look complete in a market model and still
         fail the grid conversation. The annual MWh are attractive, the
@@ -4765,7 +4758,7 @@ reactive MVAr obligation or headroom</code></pre>
         <section id="v1-l13" class="level3">
         <h3>Chapter 13. Battery Storage And Time Shifting</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-5">[5]</a></sup>
+        References: <sup><a href="#ref-3">[3]</a></sup>
         </p>
         <p>A control room may see prices fall at noon and rise again in
         the evening. A battery can take energy from one hour and return
@@ -4977,10 +4970,10 @@ Gross spread value = 5,200 EUR</code></pre>
         <h3>Chapter 14. Nordic Market Structure, Settlement, And Grid
         Evidence</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-7">[7]</a>
-        <a href="#ref-3">[3]</a> <a href="#ref-26">[26]</a>
-        <a href="#ref-10">[10]</a> <a href="#ref-22">[22]</a>
-        <a href="#ref-11">[11]</a> <a href="#ref-24">[24]</a></sup>
+        References: <sup><a href="#ref-6">[6]</a>
+        <a href="#ref-11">[11]</a> <a href="#ref-26">[26]</a>
+        <a href="#ref-9">[9]</a> <a href="#ref-22">[22]</a>
+        <a href="#ref-10">[10]</a> <a href="#ref-24">[24]</a></sup>
         </p>
         <p>The Nordic market is useful to study because it combines
         regional integration with strong local differences. Nord Pool is
@@ -5382,7 +5375,7 @@ Project 2: Danish solar-plus-BESS, DK2, separate import treatment, customer-shap
         <h3>Chapter 15. Power Market System Map</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-13">[13]</a>
-        <a href="#ref-3">[3]</a> <a href="#ref-4">[4]</a>
+        <a href="#ref-11">[11]</a> <a href="#ref-2">[2]</a>
         <a href="#ref-27">[27]</a></sup>
         </p>
         <p>A solar farm sells tomorrow’s output before tomorrow’s
@@ -5658,7 +5651,7 @@ and data available at the time, what should a feasible operator have done?</code
         <section id="v2-l01" class="level3">
         <h3>Chapter 1. Asset Revenue And Cash Flow</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-11">[11]</a>
+        References: <sup><a href="#ref-10">[10]</a>
         <a href="#ref-24">[24]</a> <a href="#ref-15">[15]</a></sup>
         </p>
         <p>A customer wants a smoother power shape than a solar plant
@@ -5949,9 +5942,9 @@ operating_cash_before_debt =
         <section id="v2-l02" class="level3">
         <h3>Chapter 2. Grid Connection And Tariff Economics</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-8">[8]</a>
-        <a href="#ref-9">[9]</a> <a href="#ref-28">[28]</a>
-        <a href="#ref-29">[29]</a> <a href="#ref-11">[11]</a>
+        References: <sup><a href="#ref-7">[7]</a>
+        <a href="#ref-8">[8]</a> <a href="#ref-28">[28]</a>
+        <a href="#ref-29">[29]</a> <a href="#ref-10">[10]</a>
         <a href="#ref-30">[30]</a></sup>
         </p>
         <p>A project can clear the revenue model and still fail the
@@ -6730,7 +6723,7 @@ extra visible value = 1.05 million EUR/year</code></pre>
         <section id="v2-l04" class="level3">
         <h3>Chapter 4. PPA Risk Allocation</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-6">[6]</a>
+        References: <sup><a href="#ref-5">[5]</a>
         <a href="#ref-32">[32]</a> <a href="#ref-33">[33]</a>
         <a href="#ref-25">[25]</a></sup>
         </p>
@@ -7121,7 +7114,7 @@ evidence promise</code></pre>
         <section id="v2-l05" class="level3">
         <h3>Chapter 5. PPA Structure And Contract Design</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-6">[6]</a>
+        References: <sup><a href="#ref-5">[5]</a>
         <a href="#ref-32">[32]</a> <a href="#ref-33">[33]</a>
         <a href="#ref-34">[34]</a> <a href="#ref-35">[35]</a>
         <a href="#ref-36">[36]</a> <a href="#ref-37">[37]</a>
@@ -7684,7 +7677,7 @@ net_before_collateral_and_accounting = 0.88m EUR/year</code></pre>
         <h3>Chapter 6. PPA Pricing, Shape Risk, And Customer Value</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-38">[38]</a>
-        <a href="#ref-6">[6]</a> <a href="#ref-32">[32]</a>
+        <a href="#ref-5">[5]</a> <a href="#ref-32">[32]</a>
         <a href="#ref-33">[33]</a> <a href="#ref-34">[34]</a>
         <a href="#ref-25">[25]</a></sup>
         </p>
@@ -8080,8 +8073,8 @@ buyer surplus = buyer willingness-to-pay - offer price</code></pre>
         <section id="v2-l07" class="level3">
         <h3>Chapter 7. Investment Committee Proposals</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-11">[11]</a>
-        <a href="#ref-6">[6]</a> <a href="#ref-32">[32]</a>
+        References: <sup><a href="#ref-10">[10]</a>
+        <a href="#ref-5">[5]</a> <a href="#ref-32">[32]</a>
         <a href="#ref-33">[33]</a> <a href="#ref-39">[39]</a></sup>
         </p>
         <p>Sales has a customer conversation before finance has a model.
@@ -8327,7 +8320,7 @@ risk allocation and governance</code></pre>
         <td>Volume</td>
         <td>Contract shortfall and firming</td>
         <td>As-produced variability</td>
-        <td>Tolerance band or true-up</td>
+        <td>Tolerance band or settlement adjustment</td>
         </tr>
         <tr>
         <td>Shape</td>
@@ -9117,7 +9110,7 @@ unpriced_option_value</code></pre>
         <section id="v2-l09" class="level3">
         <h3>Chapter 9. Battery Duration Selection</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-11">[11]</a>
+        References: <sup><a href="#ref-10">[10]</a>
         <a href="#ref-38">[38]</a> <a href="#ref-40">[40]</a>
         <a href="#ref-41">[41]</a> <a href="#ref-42">[42]</a>
         <a href="#ref-21">[21]</a> <a href="#ref-39">[39]</a></sup>
@@ -9697,7 +9690,7 @@ Both fail if Y is true.</code></pre>
         <h3>Chapter 10. Dispatch Optimization</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-17">[17]</a>
-        <a href="#ref-11">[11]</a> <a href="#ref-23">[23]</a>
+        <a href="#ref-10">[10]</a> <a href="#ref-23">[23]</a>
         <a href="#ref-43">[43]</a> <a href="#ref-40">[40]</a>
         <a href="#ref-38">[38]</a> <a href="#ref-44">[44]</a>
         <a href="#ref-21">[21]</a></sup>
@@ -10143,8 +10136,8 @@ terminal shortfall from 50 MWh discharge = 50 MWh - 40 MWh = 10 MWh</code></pre>
         <section id="v2-l11" class="level3">
         <h3>Chapter 11. Forecasting, Error, And Commercial Value</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-3">[3]</a>
-        <a href="#ref-4">[4]</a> <a href="#ref-15">[15]</a>
+        References: <sup><a href="#ref-11">[11]</a>
+        <a href="#ref-2">[2]</a> <a href="#ref-15">[15]</a>
         <a href="#ref-43">[43]</a> <a href="#ref-45">[45]</a>
         <a href="#ref-46">[46]</a></sup>
         </p>
@@ -11022,7 +11015,7 @@ insurance policy, availability plan, or augmentation budget can support</code></
         <section id="v2-l13" class="level3">
         <h3>Chapter 13. Project Valuation Under Uncertainty</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-11">[11]</a>
+        References: <sup><a href="#ref-10">[10]</a>
         <a href="#ref-24">[24]</a> <a href="#ref-15">[15]</a>
         <a href="#ref-39">[39]</a></sup>
         </p>
@@ -11673,9 +11666,9 @@ Here is what remains merchant, operational, or partner-execution risk.</code></p
         <section id="v2-l14" class="level3">
         <h3>Chapter 14. Portfolio Modeling And Hedging</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-7">[7]</a>
+        References: <sup><a href="#ref-6">[6]</a>
         <a href="#ref-20">[20]</a> <a href="#ref-27">[27]</a>
-        <a href="#ref-6">[6]</a> <a href="#ref-39">[39]</a></sup>
+        <a href="#ref-5">[5]</a> <a href="#ref-39">[39]</a></sup>
         </p>
         <p>The investment memo shows a clean project: attractive
         standalone economics, a familiar zone, a technology the team
@@ -12140,8 +12133,8 @@ The marginal portfolio risk is materially different.</code></pre>
         <section id="v2-l15" class="level3">
         <h3>Chapter 15. Trading Partners And Performance Scorecards</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-3">[3]</a>
-        <a href="#ref-4">[4]</a> <a href="#ref-12">[12]</a>
+        References: <sup><a href="#ref-11">[11]</a>
+        <a href="#ref-2">[2]</a> <a href="#ref-12">[12]</a>
         <a href="#ref-20">[20]</a> <a href="#ref-43">[43]</a></sup>
         </p>
         <p>A quarterly report shows the trading partner earned less than
@@ -12576,10 +12569,10 @@ The marginal portfolio risk is materially different.</code></pre>
         <section id="v2-l16" class="level3">
         <h3>Chapter 16. Analytical Capability Development</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-3">[3]</a>
+        References: <sup><a href="#ref-11">[11]</a>
         <a href="#ref-20">[20]</a> <a href="#ref-27">[27]</a>
         <a href="#ref-49">[49]</a> <a href="#ref-43">[43]</a>
-        <a href="#ref-6">[6]</a> <a href="#ref-39">[39]</a>
+        <a href="#ref-5">[5]</a> <a href="#ref-39">[39]</a>
         <a href="#ref-50">[50]</a></sup>
         </p>
         <p>A renewable independent power producer (IPP) can spend its
@@ -13751,7 +13744,7 @@ collateral need = 900,000 x 80%
         <section id="v3-l01" class="level3">
         <h3>Chapter 1. BESS Revenue Saturation</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-4">[4]</a>
+        References: <sup><a href="#ref-2">[2]</a>
         <a href="#ref-17">[17]</a> <a href="#ref-18">[18]</a>
         <a href="#ref-19">[19]</a> <a href="#ref-20">[20]</a>
         <a href="#ref-38">[38]</a> <a href="#ref-31">[31]</a></sup>
@@ -14111,7 +14104,7 @@ collateral need = 900,000 x 80%
         <h3>Chapter 2. Intraday Market Liquidity And Granularity</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-13">[13]</a>
-        <a href="#ref-14">[14]</a> <a href="#ref-4">[4]</a>
+        <a href="#ref-14">[14]</a> <a href="#ref-2">[2]</a>
         <a href="#ref-19">[19]</a> <a href="#ref-20">[20]</a>
         <a href="#ref-45">[45]</a></sup>
         </p>
@@ -14387,9 +14380,9 @@ collateral need = 900,000 x 80%
         <section id="v3-l03" class="level3">
         <h3>Chapter 3. Grid Constraints And Portfolio Strategy</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-7">[7]</a>
-        <a href="#ref-8">[8]</a> <a href="#ref-22">[22]</a>
-        <a href="#ref-11">[11]</a> <a href="#ref-51">[51]</a></sup>
+        References: <sup><a href="#ref-6">[6]</a>
+        <a href="#ref-7">[7]</a> <a href="#ref-22">[22]</a>
+        <a href="#ref-10">[10]</a> <a href="#ref-51">[51]</a></sup>
         </p>
         <p>A site with grid rights is more than a parcel of land and a
         resource study. It is an option on scarce network capacity: the
@@ -14655,8 +14648,8 @@ local-flexibility value = qualified flexible MW x expected net payment x bankabi
         <section id="v3-l04" class="level3">
         <h3>Chapter 4. Zonal And Nodal Market Design</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-7">[7]</a>
-        <a href="#ref-4">[4]</a> <a href="#ref-11">[11]</a>
+        References: <sup><a href="#ref-6">[6]</a>
+        <a href="#ref-2">[2]</a> <a href="#ref-10">[10]</a>
         <a href="#ref-52">[52]</a> <a href="#ref-23">[23]</a>
         <a href="#ref-51">[51]</a> <a href="#ref-53">[53]</a>
         <a href="#ref-54">[54]</a></sup>
@@ -14963,7 +14956,7 @@ and how much is recovered or managed elsewhere?</code></pre>
         <section id="v3-l05" class="level3">
         <h3>Chapter 5. PPA Structures And Market Evolution</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-6">[6]</a>
+        References: <sup><a href="#ref-5">[5]</a>
         <a href="#ref-32">[32]</a> <a href="#ref-33">[33]</a>
         <a href="#ref-34">[34]</a> <a href="#ref-35">[35]</a>
         <a href="#ref-36">[36]</a> <a href="#ref-37">[37]</a>
@@ -15328,9 +15321,9 @@ control-right and partner-governance cost = 0.80 EUR/MWh x 87,600 = 70,080 EUR/y
         Flexibility</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-38">[38]</a>
-        <a href="#ref-5">[5]</a> <a href="#ref-46">[46]</a>
+        <a href="#ref-3">[3]</a> <a href="#ref-46">[46]</a>
         <a href="#ref-41">[41]</a> <a href="#ref-47">[47]</a>
-        <a href="#ref-11">[11]</a> <a href="#ref-15">[15]</a>
+        <a href="#ref-10">[10]</a> <a href="#ref-15">[15]</a>
         <a href="#ref-55">[55]</a></sup>
         </p>
         <p>A project memo compares two battery sizes, one grid
@@ -15716,7 +15709,7 @@ required margin = 1,750,000 USD/year / 3,500 MWh/year
         <h3>Chapter 7. Data Centres, 24/7 Procurement, And
         Flexibility</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-6">[6]</a>
+        References: <sup><a href="#ref-5">[5]</a>
         <a href="#ref-56">[56]</a> <a href="#ref-57">[57]</a>
         <a href="#ref-58">[58]</a> <a href="#ref-37">[37]</a>
         <a href="#ref-59">[59]</a></sup>
@@ -16249,7 +16242,7 @@ firming_at_risk = 13,000 MWh x 150 EUR/MWh
         <p class="lecture-refs">
         References: <sup><a href="#ref-22">[22]</a>
         <a href="#ref-23">[23]</a> <a href="#ref-18">[18]</a>
-        <a href="#ref-11">[11]</a> <a href="#ref-60">[60]</a>
+        <a href="#ref-10">[10]</a> <a href="#ref-60">[60]</a>
         <a href="#ref-61">[61]</a></sup>
         </p>
         <p>A project team can price the battery, the transformer, the
@@ -17018,7 +17011,7 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <section id="v3-l10" class="level3">
         <h3>Chapter 10. Trading Capability Design</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-3">[3]</a>
+        References: <sup><a href="#ref-11">[11]</a>
         <a href="#ref-12">[12]</a> <a href="#ref-43">[43]</a></sup>
         </p>
         <p>The contract is signed, the partner has the market systems,
@@ -17825,8 +17818,8 @@ and with what feedback after delivery?</code></pre>
         <h3>Chapter 12. Decision Memos For Power-Market Strategy</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-13">[13]</a>
-        <a href="#ref-3">[3]</a> <a href="#ref-4">[4]</a>
-        <a href="#ref-6">[6]</a> <a href="#ref-11">[11]</a>
+        <a href="#ref-11">[11]</a> <a href="#ref-2">[2]</a>
+        <a href="#ref-5">[5]</a> <a href="#ref-10">[10]</a>
         <a href="#ref-38">[38]</a> <a href="#ref-50">[50]</a>
         <a href="#ref-43">[43]</a> <a href="#ref-62">[62]</a></sup>
         </p>
@@ -18999,7 +18992,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <h3>Case 1. Shaped Solar-Storage Power Purchase Agreement
         Quote</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-6">[6]</a>
+        References: <sup><a href="#ref-5">[5]</a>
         <a href="#ref-32">[32]</a> <a href="#ref-33">[33]</a>
         <a href="#ref-37">[37]</a> <a href="#ref-39">[39]</a>
         <a href="#ref-50">[50]</a></sup>
@@ -19386,8 +19379,8 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         <h3>Case 2. The 1h, 2h, Or 4h Battery Decision</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-41">[41]</a>
-        <a href="#ref-47">[47]</a> <a href="#ref-5">[5]</a>
-        <a href="#ref-38">[38]</a> <a href="#ref-11">[11]</a>
+        <a href="#ref-47">[47]</a> <a href="#ref-3">[3]</a>
+        <a href="#ref-38">[38]</a> <a href="#ref-10">[10]</a>
         <a href="#ref-42">[42]</a> <a href="#ref-21">[21]</a>
         <a href="#ref-39">[39]</a></sup>
         </p>
@@ -19779,8 +19772,8 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         <section id="case-03" class="level3">
         <h3>Case 3. Grid-Constrained Site Assessment</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-11">[11]</a>
-        <a href="#ref-9">[9]</a> <a href="#ref-10">[10]</a>
+        References: <sup><a href="#ref-10">[10]</a>
+        <a href="#ref-8">[8]</a> <a href="#ref-9">[9]</a>
         <a href="#ref-28">[28]</a> <a href="#ref-29">[29]</a>
         <a href="#ref-22">[22]</a> <a href="#ref-51">[51]</a>
         <a href="#ref-30">[30]</a></sup>
@@ -20189,10 +20182,10 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         <section id="case-04" class="level3">
         <h3>Case 4. Battery Revenue Stacks Under Saturation</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-4">[4]</a>
+        References: <sup><a href="#ref-2">[2]</a>
         <a href="#ref-17">[17]</a> <a href="#ref-18">[18]</a>
         <a href="#ref-19">[19]</a> <a href="#ref-41">[41]</a>
-        <a href="#ref-5">[5]</a> <a href="#ref-42">[42]</a>
+        <a href="#ref-3">[3]</a> <a href="#ref-42">[42]</a>
         <a href="#ref-44">[44]</a> <a href="#ref-21">[21]</a>
         <a href="#ref-39">[39]</a> <a href="#ref-48">[48]</a></sup>
         </p>
@@ -20533,8 +20526,8 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         <h3>Case 5. Balance-Responsibility And Balancing-Service
         Performance Audit</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-3">[3]</a>
-        <a href="#ref-4">[4]</a> <a href="#ref-12">[12]</a>
+        References: <sup><a href="#ref-11">[11]</a>
+        <a href="#ref-2">[2]</a> <a href="#ref-12">[12]</a>
         <a href="#ref-20">[20]</a> <a href="#ref-43">[43]</a>
         <a href="#ref-49">[49]</a></sup>
         </p>
@@ -21031,7 +21024,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <section id="case-06" class="level3">
         <h3>Case 6. Data-Centre 24/7 Product Test</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-6">[6]</a>
+        References: <sup><a href="#ref-5">[5]</a>
         <a href="#ref-56">[56]</a> <a href="#ref-57">[57]</a>
         <a href="#ref-58">[58]</a> <a href="#ref-37">[37]</a>
         <a href="#ref-59">[59]</a> <a href="#ref-39">[39]</a>
@@ -21542,7 +21535,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <p class="lecture-refs">
         References: <sup><a href="#ref-50">[50]</a>
         <a href="#ref-49">[49]</a> <a href="#ref-27">[27]</a>
-        <a href="#ref-43">[43]</a> <a href="#ref-6">[6]</a>
+        <a href="#ref-43">[43]</a> <a href="#ref-5">[5]</a>
         <a href="#ref-39">[39]</a></sup>
         </p>
         <p>An independent power producer (IPP) becomes an energy manager
@@ -23983,45 +23976,45 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         Sources and Uses.
         </li>
         <li id="ref-2">
-        <a href="https://www.svk.se/en/" target="_blank" rel="noopener noreferrer">Svenska
-        kraftnät, electricity statistics.</a>
-        </li>
-        <li id="ref-3">
-        <a href="https://www.esett.com/handbook/" target="_blank" rel="noopener noreferrer">eSett,
-        Nordic Imbalance Settlement Handbook v5.3.</a>
-        </li>
-        <li id="ref-4">
         <a href="https://eur-lex.europa.eu/eli/reg/2017/2195/oj" target="_blank" rel="noopener noreferrer">European
         Commission, Regulation (EU) 2017/2195 establishing a guideline
         on electricity balancing.</a>
         </li>
-        <li id="ref-5">
+        <li id="ref-3">
         Energy Storage - A Nontechnical Guide.
         </li>
-        <li id="ref-6">
+        <li id="ref-4">
+        <a href="https://www.svk.se/en/" target="_blank" rel="noopener noreferrer">Svenska
+        kraftnät, electricity statistics.</a>
+        </li>
+        <li id="ref-5">
         <a href="https://resource-platform.eu/" target="_blank" rel="noopener noreferrer">RE-Source
         Platform, Corporate PPA Guide, July 2025.</a>
         </li>
-        <li id="ref-7">
+        <li id="ref-6">
         <a href="https://www.nordpoolgroup.com/en/the-power-market/Bidding-areas/" target="_blank" rel="noopener noreferrer">Nord
         Pool, Bidding areas.</a>
         </li>
-        <li id="ref-8">
+        <li id="ref-7">
         <a href="https://www.svk.se/en/" target="_blank" rel="noopener noreferrer">Svenska
         kraftnät, Tariff charges.</a>
         </li>
-        <li id="ref-9">
+        <li id="ref-8">
         <a href="https://www.svk.se/en/" target="_blank" rel="noopener noreferrer">Svenska
         kraftnät, Principles and guidelines for connecting to the
         national grids.</a>
         </li>
-        <li id="ref-10">
+        <li id="ref-9">
         <a href="https://www.svk.se/en/" target="_blank" rel="noopener noreferrer">Svenska
         kraftnät, Network Development Plan 2026-2035.</a>
         </li>
-        <li id="ref-11">
+        <li id="ref-10">
         <a href="https://www.acer.europa.eu/electricity/infrastructure/network-tariffs" target="_blank" rel="noopener noreferrer">ACER,
         Electricity Network Tariff Practices in Europe 2025.</a>
+        </li>
+        <li id="ref-11">
+        <a href="https://www.esett.com/handbook/" target="_blank" rel="noopener noreferrer">eSett,
+        Nordic Imbalance Settlement Handbook v5.3.</a>
         </li>
         <li id="ref-12">
         <a href="https://www.svk.se/en/" target="_blank" rel="noopener noreferrer">Svenska
