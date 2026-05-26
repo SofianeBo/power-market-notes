@@ -1866,7 +1866,7 @@ Notes">
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.40.2
+        v0.41.0
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -2033,8 +2033,7 @@ Notes">
         <h4>Numerical Intuition</h4>
         <p>These are unit anchors:</p>
         <pre class="text"><code>1 MWh = 1 MW x 1 hour
-1 gigawatt-year (GW-year) = 1 GW x 8,760 hours = 8.76 terawatt-hours (TWh)
-1 TWh/year = 1,000,000 MWh / 8,760 h ~= 114 MW average</code></pre>
+1 gigawatt-year (GW-year) = 1 GW x 8,760 hours = 8.76 terawatt-hours (TWh)</code></pre>
         <p>These conversions are useful because electricity
         conversations constantly move between annual energy and hourly
         power.</p>
@@ -2056,14 +2055,14 @@ Notes">
         </section>
         <section id="mechanism" class="level4">
         <h4>Mechanism</h4>
-        <p>Power systems must serve demand at each moment. That makes
-        electricity different from a pile of coal or a barrel of
-        oil.</p>
-        <p>With many commodities, timing can be softened by storage.
-        With electricity, storage exists but is limited, costly, and
-        operationally constrained. So the system cares about both annual
-        energy and the rate at which energy is injected or withdrawn at
-        each moment.</p>
+        <p>Power systems must serve demand continuously. Energy can be
+        counted after the fact, but system operation depends on the rate
+        of injection and withdrawal during each delivery interval.</p>
+        <p>Storage can shift electricity across time, but it is limited
+        by power capacity, energy capacity, efficiency, state of charge,
+        location, and cost. The system therefore cares about both annual
+        energy and the rate at which energy is injected or
+        withdrawn.</p>
         <p>A market participant may therefore ask:</p>
         <ul>
         <li>How many MWh?</li>
@@ -2097,8 +2096,7 @@ Notes">
         ask both “How many MWh per year?” and “What hourly shape are we
         selling, and who carries the mismatch between production and
         customer demand?”</p>
-        <p>The 2026-05-16 Svenska kraftnät electricity-statistics source
-        says Swedish production and consumption statistics are based on
+        <p>In Sweden, production and consumption statistics are based on
         measured hourly values reported to eSett. The operational record
         is hourly because running and settling the system requires more
         than annual totals.</p>
@@ -2115,12 +2113,6 @@ Notes">
         <p>“Average power is the same as deliverable power.”</p>
         <p>Average power is a summary. Deliverability depends on timing,
         location, availability, and grid constraints.</p>
-        </section>
-        <section id="current-debates-or-caveats" class="level4">
-        <h4>Current Debates Or Caveats</h4>
-        <p>No current market-rule claim is needed here. The durable
-        mechanism is dimensional: power is a rate, energy accumulates,
-        and annual totals can hide the operational problem.</p>
         </section>
         <section id="recap" class="level4">
         <h4>Recap</h4>
@@ -2143,15 +2135,13 @@ Notes">
         References: <sup><a href="#ref-4">[4]</a>
         <a href="#ref-5">[5]</a></sup>
         </p>
-        <p>A solar portfolio is scheduled to deliver an hour of power.
-        Then the cloud arrives early. The spreadsheet still shows the
-        plan, but the wire sees the shortfall immediately: fewer MW are
-        entering the system than expected, and something else must move.
-        A grid is a physical system before it is a market, and balance
-        is a real-time requirement. Once plans can differ from actual
-        delivery, the same gap also becomes a market and settlement
-        problem: who adjusted, who remained short or long, and who
-        carries the cost.</p>
+        <p>A solar portfolio is scheduled to deliver power during the
+        next hour. Cloud cover arrives earlier than forecast, output
+        drops, and the system has to replace the missing MW in real
+        time. The schedule remains the commercial reference; physical
+        balance is handled continuously. This chapter separates those
+        two layers: the grid’s immediate balancing need and the later
+        settlement of the portfolio’s deviation from its position.</p>
         <section id="opening-puzzle-1" class="level4">
         <h4>Opening Puzzle</h4>
         <p>A <code>500 MW</code> solar portfolio is scheduled for the
@@ -2306,13 +2296,6 @@ If it lasts 1 hour: 5 MW x 1 h = 5 MWh</code></pre>
         <p>Storage can respond quickly and provide important services,
         but it has finite power, finite energy, efficiency losses,
         state-of-charge constraints, and opportunity costs.</p>
-        </section>
-        <section id="current-debates-or-caveats-1" class="level4">
-        <h4>Current Debates Or Caveats</h4>
-        <p>EU balancing rules and Nordic implementation details are
-        dated, rule-based topics. The discussion here stays at mechanism
-        level. Specific product rules, gate closures, platform status,
-        and imbalance price formulas need dated official sources.</p>
         </section>
         <section id="recap-1" class="level4">
         <h4>Recap</h4>
@@ -2491,7 +2474,7 @@ Hour 4: -10 MWh</code></pre>
         <p>Capacity factor compresses time into one ratio. It does not
         show hourly shape.</p>
         </section>
-        <section id="current-debates-or-caveats-2" class="level4">
+        <section id="current-debates-or-caveats" class="level4">
         <h4>Current Debates Or Caveats</h4>
         <p>Solar-heavy hours can lower residual load and realized solar
         prices when demand, exports, storage, or flexible load do not
@@ -2634,13 +2617,13 @@ grid cost = EUR 5/MWh</code></pre>
         national grid, connection should be made at the lowest suitable
         voltage level, there must be a tangible need, and Svenska
         kraftnät decides the connection point and technical design.</p>
-        <p>Third, tariff exposure. Svenska kraftnät’s 2026-05-16 tariff
-        source says national-grid subscribers pay capacity fees, usage
-        fees, and possible excess charges. The usage fee covers the cost
-        of buying electricity losses in the network. The same source
-        states that temporary subscriptions can be granted subject to
-        available network capacity and may be suspended if Svenska
-        kraftnät assesses that they may lead to congestion.</p>
+        <p>Third, tariff exposure. In the Swedish national-grid example
+        used here, subscribers pay capacity fees, usage fees, and
+        possible excess charges. The usage fee covers the cost of buying
+        electricity losses in the network. Temporary subscriptions can
+        be granted subject to available network capacity and may be
+        suspended if Svenska kraftnät assesses that they may lead to
+        congestion.</p>
         <p>Fourth, curtailment or limited access. ACER defines flexible
         connection agreements as agreed conditions that can limit and
         control injection or withdrawal. Svenska kraftnät’s network
@@ -2707,13 +2690,14 @@ grid cost = EUR 5/MWh</code></pre>
         maturity evidence, agreements, capacity allocation, and cost
         responsibility. The exact rules are jurisdiction-specific.</p>
         </section>
-        <section id="current-debates-or-caveats-3" class="level4">
+        <section id="current-debates-or-caveats-1" class="level4">
         <h4>Current Debates Or Caveats</h4>
-        <p>Tariff and connection claims are date-specific. The Swedish
-        national-grid tariff details above come from a 2026-05-16
-        Svenska kraftnät source. Project-specific distribution-grid
-        tariff treatment still needs the relevant distribution system
-        operator (DSO) source.</p>
+        <p>Tariff and connection claims depend on the rulebook, network
+        owner, voltage level, user class, and tariff year. The Swedish
+        national-grid details above are one dated example, not a
+        portable tariff model. Project-specific distribution-grid tariff
+        treatment still needs the relevant distribution system operator
+        (DSO) source.</p>
         <p>This chapter does not compare Nordic tariff regimes country
         by country. ACER’s tariff taxonomy is enough to show why casual
         comparison is risky: network charges combine different capacity,
@@ -3010,11 +2994,11 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         balancing services from qualified resources. One company may
         perform multiple roles, but the obligations are conceptually
         different.</p>
-        <p>In Sweden, the 2026-05-16 Svenska kraftnät source says BSP
-        and BRP roles were introduced contractually from May 1, 2024,
-        while full independent BSP implementation remains a staged
-        process expected by 2028 at the latest. That date anchors the
-        Swedish governance example.</p>
+        <p>In Sweden, BSP and BRP role separation started contractually
+        on 2024-05-01, while full independent BSP implementation remains
+        a staged process expected by 2028 at the latest in the cited
+        Svenska kraftnät material. That timeline anchors the Swedish
+        governance example.</p>
         </section>
         <section id="misconceptions-4" class="level4">
         <h4>Misconceptions</h4>
@@ -3029,7 +3013,7 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <p>Execution can be outsourced. Economic exposure, governance,
         and strategic understanding cannot be outsourced completely.</p>
         </section>
-        <section id="current-debates-or-caveats-4" class="level4">
+        <section id="current-debates-or-caveats-2" class="level4">
         <h4>Current Debates Or Caveats</h4>
         <p>Actor roles are jurisdiction-specific and changing. Swedish
         BSP/BRP implementation is explicitly date-specific; Nordic/eSett
@@ -3862,7 +3846,7 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <section id="in-practice-8" class="level4">
         <h4>In Practice</h4>
         <p>For a solar-plus-BESS project, reserve-market revenue may
-        look attractive in a spreadsheet. The review question is:</p>
+        look attractive in a model. The review question is:</p>
         <ul>
         <li>Was capacity reserved?</li>
         <li>Was activation likely?</li>
@@ -4116,7 +4100,7 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         <h4>Example</h4>
         <p>Consider a 100 MW solar plant connecting to a weak local
         grid.</p>
-        <p>The energy-only spreadsheet says:</p>
+        <p>The energy-only view says:</p>
         <pre class="text"><code>noon output = 100 MW
 price = 55 EUR/MWh
 revenue for one hour = EUR 5,500</code></pre>
@@ -6923,8 +6907,9 @@ evidence promise</code></pre>
         </tbody>
         </table>
         <p>This ledger defines the PPA economics. The legal drafting
-        matters, but the business question is simpler: when the world
-        differs from the spreadsheet, whose cash flow moves?</p>
+        matters, but the business question is simpler: when production,
+        prices, certificates, or settlement differ from the base case,
+        whose cash flow moves?</p>
         </section>
         <section id="mechanism-16" class="level4">
         <h4>Mechanism</h4>
@@ -9121,9 +9106,9 @@ unpriced_option_value</code></pre>
         whether each one beats the best feasible alternative use of the
         asset. Once that opportunity cost is priced, the model should
         separate underwritten floor, repeatable market value, optimizer
-        forecast, and option value. Extra spreadsheet rows create no
-        value unless the asset, contract, and investment case can carry
-        them together.</p>
+        forecast, and option value. Extra revenue rows create no value
+        unless the asset, contract, and investment case can carry them
+        together.</p>
         <div class="lecture-end">
 
         </div>
@@ -10727,7 +10712,7 @@ rebalance_value =
         <section id="why-wear-is-physical" class="level4">
         <h4>Why Wear Is Physical</h4>
         <p>The storage textbooks are useful here because they stop the
-        analyst from treating degradation as a spreadsheet tax.</p>
+        analyst from treating degradation as a flat cost line.</p>
         <p>Chemical batteries change internally as they charge and
         discharge. Storage references emphasize that cycle life depends
         on depth of discharge, discharge/charge rate, and environmental
@@ -11678,8 +11663,8 @@ Here is what remains merchant, operational, or partner-execution risk.</code></p
         price, curtailment, tariff cost, BESS revenue, debt service,
         contract protection, or merchant-tail value. Once the model
         separates lender-quality cash flow from equity upside and shows
-        what breaks first in downside, the spreadsheet becomes useful
-        for judgment rather than false precision.</p>
+        what breaks first in downside, it becomes useful for judgment
+        rather than false precision.</p>
         <div class="lecture-end">
 
         </div>
@@ -13010,10 +12995,10 @@ The marginal portfolio risk is materially different.</code></pre>
         </tr>
         </tbody>
         </table>
-        <p>The first versions may be spreadsheets or lightweight
-        databases. They need owners, versioning, checks, and
-        reconciliation. Unowned production spreadsheets are a control
-        failure, even when their formulas are clever.</p>
+        <p>The first versions may be lightweight models or databases.
+        They need owners, versioning, checks, and reconciliation.
+        Unowned production files are a control failure, even when their
+        formulas are clever.</p>
         </section>
         <section id="build-buy-outsource-or-defer" class="level4">
         <h4>Build, Buy, Outsource, Or Defer</h4>
@@ -13364,7 +13349,7 @@ expected shortfall = average loss when losses exceed that threshold</code></pre>
         <p>A margin call can force a cash scramble.</p>
         <p>A stale curve can make the valuation wrong.</p>
         <p>A missing position can make a limit meaningless.</p>
-        <p>Stale spreadsheet data may make the risk report wrong.</p>
+        <p>Stale model data may make the risk report wrong.</p>
         <p>A trading control system makes risk visible early enough for
         action.</p>
         </section>
@@ -13730,7 +13715,7 @@ collateral need = 900,000 x 80%
         <p>The debate is proportionality:</p>
         <ul>
         <li>Which controls are needed at a small portfolio scale?</li>
-        <li>When does spreadsheet control become too fragile?</li>
+        <li>When does local-file model control become too fragile?</li>
         <li>Which risks should be outsourced, and which risks remain
         with the asset owner?</li>
         <li>How should tail risk be measured when recent history is not
@@ -17426,14 +17411,13 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         <p>In Nordic practice, eSett’s Nordic Imbalance Settlement
         Handbook v5.3 is useful for settlement mechanics: agreements,
         imbalance settlement, balancing-service settlement, invoicing,
-        collateral, and risk management. A Svenska kraftnät source
-        fetched on 2026-05-16 is a dated Swedish implementation example
-        for the BSP/BRP actor-role split, stating that the contractual
-        split took effect on May 1, 2024 and that full independent BSP
-        implementation was expected no later than 2028 based on the
-        conditions in that source. Product-specific participation still
-        depends on the relevant country, product, rulebook, and
-        date.</p>
+        collateral, and risk management. Sweden provides a dated
+        implementation example for the BSP/BRP actor-role split: the
+        contractual split took effect on 2024-05-01, and the cited
+        Svenska kraftnät material described full independent BSP
+        implementation as staged toward 2028. Product-specific
+        participation still depends on the relevant country, product,
+        rulebook, and date.</p>
         <p>The practice-relevant framework is portable:</p>
         <ul>
         <li>outsource execution where external scale and 24/7 operations
@@ -18245,7 +18229,7 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <section id="in-practice-37" class="level4">
         <h4>In Practice</h4>
         <p>When facing a new investment or product decision, write the
-        first page before opening the spreadsheet.</p>
+        first page before opening the model.</p>
         <pre class="text"><code>1. What decision is being made?
 2. What physical constraint binds first?
 3. Who owns each obligation?
@@ -20528,7 +20512,7 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         state of charge, control rights, cycle budget, warranty
         envelope, data evidence, and grid connection must serve every
         product. Revenue stacking is constrained co-optimization; simple
-        spreadsheet addition double-counts the asset.</p>
+        revenue addition double-counts the asset.</p>
         </section>
         <section id="links-back-to-the-lectures-3" class="level4">
         <h4>Links Back To The Lectures</h4>
@@ -21955,7 +21939,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <tr>
         <td>1</td>
         <td>model register and assumption owner map</td>
-        <td>prevents uncontrolled spreadsheets</td>
+        <td>prevents uncontrolled local models</td>
         </tr>
         <tr>
         <td>2</td>
