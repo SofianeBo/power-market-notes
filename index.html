@@ -1866,7 +1866,7 @@ Notes">
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.42.0
+        v0.43.0
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -2522,23 +2522,29 @@ Hour 4: -10 MWh</code></pre>
         capability, the system has a bottleneck. Something must
         change:</p>
         <ul>
-        <li>prices separate by area;</li>
-        <li>generation is curtailed;</li>
-        <li>consumption increases locally;</li>
-        <li>storage charges;</li>
-        <li>grid capacity is reinforced;</li>
-        <li>connection rights are limited or conditional.</li>
+        <li>the local price can fall relative to neighboring areas,
+        because extra energy cannot leave freely;</li>
+        <li>generation can be curtailed, meaning the plant is asked or
+        forced to inject less than it could produce;</li>
+        <li>local demand can increase, for example through flexible
+        industrial load or a battery charging at the constrained
+        location;</li>
+        <li>export capability can be expanded through grid
+        reinforcement, although that is usually a planning and
+        investment action rather than an instant operating fix;</li>
+        <li>connection rights can be limited or conditional, meaning the
+        project may connect sooner or at lower reinforcement cost but
+        must accept limits on injection during constrained periods.</li>
         </ul>
         <p>Location is part of the asset.</p>
         </section>
         <section id="definitions-3" class="level4">
         <h4>Definitions</h4>
         <p>Transmission: transport of electricity on extra-high-voltage
-        and high-voltage interconnected systems, excluding supply, using
-        the ACER/EU definition.</p>
+        and high-voltage interconnected systems, excluding supply.</p>
         <p>Distribution: transport of electricity on high-, medium-, and
         low-voltage distribution systems for delivery to customers,
-        excluding supply, using the ACER/EU definition.</p>
+        excluding supply.</p>
         <p>Bidding zone / bidding area: a market area in which the
         market clears a price, with area prices able to differ when
         transmission constraints bind.</p>
@@ -2548,8 +2554,7 @@ Hour 4: -10 MWh</code></pre>
         technical conditions, capacity, costs, and process for
         connecting a facility to a grid.</p>
         <p>Grid tariff / network tariff: recurring charges paid for use
-        of the network. ACER distinguishes these from one-off connection
-        charges.</p>
+        of the network, distinct from one-off connection charges.</p>
         <p>Connection charge: typically a one-off charge covering part
         or all of the cost of connecting or upgrading a user’s
         connection.</p>
@@ -2564,20 +2569,20 @@ Hour 4: -10 MWh</code></pre>
         </section>
         <section id="numerical-intuition-3" class="level4">
         <h4>Numerical Intuition</h4>
-        <p>The unit habit matters more than any single tariff value.</p>
-        <p>Capacity charges often scale with subscribed power:</p>
-        <pre class="text"><code>annual capacity cost = subscribed MW x EUR/MW-year</code></pre>
-        <p>Energy or loss charges scale with actual energy:</p>
-        <pre class="text"><code>annual energy charge = delivered MWh x EUR/MWh</code></pre>
-        <p>To compare them in a project model, convert everything to an
-        energy basis:</p>
-        <pre class="text"><code>grid cost per MWh = annual grid cost / annual MWh delivered</code></pre>
-        <p>Example:</p>
+        <p>Some network charges scale with subscribed power:</p>
+        <pre class="text"><code>annual capacity charge =
+  subscribed capacity in MW x charge in EUR/MW-year</code></pre>
+        <p>Other charges scale with delivered or withdrawn energy:</p>
+        <pre class="text"><code>annual energy charge =
+  delivered MWh x charge in EUR/MWh</code></pre>
+        <p>To compare grid costs with a power price, put the annual grid
+        bill on a per-MWh basis:</p>
+        <pre class="text"><code>effective grid cost in EUR/MWh =
+  annual grid bill in EUR / delivered MWh</code></pre>
+        <p>Example with only one annual grid bill:</p>
         <pre class="text"><code>annual grid cost = EUR 1,000,000/year
 annual delivery = 200,000 MWh/year
-grid cost = EUR 5/MWh</code></pre>
-        <p>This illustrative number is a scenario value; country tariff
-        claims need current official sources.</p>
+effective grid cost = EUR 5/MWh</code></pre>
         <section id="worked-estimate-3" class="level5">
         <h5>Worked Estimate</h5>
         <p>Suppose a project subscribes for 100 MW of grid capacity and
@@ -2585,50 +2590,50 @@ grid cost = EUR 5/MWh</code></pre>
         <p>If recurring grid costs are <code>EUR 10,000/MW-year</code>,
         annual cost is:</p>
         <pre class="text"><code>100 MW x EUR 10,000/MW-year = EUR 1,000,000/year</code></pre>
-        <p>Converted to energy:</p>
+        <p>Expressed per delivered MWh:</p>
         <pre class="text"><code>EUR 1,000,000/year / 200,000 MWh/year = EUR 5/MWh</code></pre>
         <p>If the same project delivers only 100,000 MWh/year because of
         curtailment or lower production, the same annual capacity cost
         becomes:</p>
         <pre class="text"><code>EUR 1,000,000/year / 100,000 MWh/year = EUR 10/MWh</code></pre>
-        <p>The scaling lesson: MW-based costs punish low utilization.
-        Curtailment removes revenue and can raise fixed grid cost per
-        delivered MWh.</p>
+        <p>If the fixed MW-based charge stays the same but delivered MWh
+        halves, the effective grid cost doubles from
+        <code>EUR 5/MWh</code> to <code>EUR 10/MWh</code>. Curtailment
+        can therefore hurt twice: it removes revenue and spreads fixed
+        grid costs over fewer delivered MWh.</p>
         </section>
         </section>
         <section id="mechanism-3" class="level4">
         <h4>Mechanism</h4>
         <p>A grid constraint has several commercial faces.</p>
-        <p>First, market price. Nord Pool explains that when available
-        transmission capacity between bidding areas is constrained,
-        different area prices can be established. Power flows from
-        lower-price areas toward higher-price areas when constraints
-        bind.</p>
+        <p>First, market price. When transfer capacity between bidding
+        areas binds, area prices can separate. Energy tends to flow from
+        lower-price areas toward higher-price areas until the available
+        transfer capacity is full.</p>
         <p>Second, connection feasibility. A generator needs a
         connection point, technical design, and allocated capacity. In
-        Svenska kraftnät’s 2025 connection guidance for the Swedish
-        national grid, connection should be made at the lowest suitable
-        voltage level, there must be a tangible need, and Svenska
-        kraftnät decides the connection point and technical design.</p>
-        <p>Third, tariff exposure. In the Swedish national-grid example
-        used here, subscribers pay capacity fees, usage fees, and
-        possible excess charges. The usage fee covers the cost of buying
-        electricity losses in the network. Temporary subscriptions can
-        be granted subject to available network capacity and may be
-        suspended if Svenska kraftnät assesses that they may lead to
-        congestion.</p>
-        <p>Fourth, curtailment or limited access. ACER defines flexible
-        connection agreements as agreed conditions that can limit and
-        control injection or withdrawal. Svenska kraftnät’s network
-        development material discusses conditional connection agreements
-        as a temporary measure to connect actors before network measures
-        are in place, where the connecting party must accept
-        conditions.</p>
+        the Swedish national-grid example used here, the connection
+        process considers voltage level, tangible need, connection
+        point, and technical design. The practical point is general: a
+        production forecast is not enough if the project does not have
+        usable grid access.</p>
+        <p>Third, tariff exposure. Network charges can include capacity
+        fees, usage fees, loss charges, reactive-power charges, excess
+        charges, and one-off connection charges. A project model has to
+        show which charges scale with MW, which scale with MWh, and
+        which depend on voltage level, user class, metering design, and
+        tariff year.</p>
+        <p>Fourth, curtailment or limited access. A flexible or
+        conditional connection can make connection possible before full
+        reinforcement, but the right is not the same as firm
+        unrestricted export. The project may have to accept curtailment,
+        injection limits, or operating instructions during constrained
+        periods.</p>
         </section>
         <section id="example-3" class="level4">
         <h4>Example</h4>
         <p>Compare two identical 100 MW solar projects.</p>
-        <p>Project North:</p>
+        <p>Constrained export site:</p>
         <ul>
         <li>high generation potential;</li>
         <li>weak local demand;</li>
@@ -2636,7 +2641,7 @@ grid cost = EUR 5/MWh</code></pre>
         <li>high risk of area-price separation or curtailment;</li>
         <li>capacity-based grid costs.</li>
         </ul>
-        <p>Project Near Load:</p>
+        <p>Better grid-headroom site:</p>
         <ul>
         <li>slightly lower generation potential;</li>
         <li>better local demand or grid headroom;</li>
@@ -2690,12 +2695,12 @@ grid cost = EUR 5/MWh</code></pre>
         national-grid details above are one dated example, not a
         portable tariff model. Project-specific distribution-grid tariff
         treatment still needs the relevant distribution system operator
-        (DSO) source.</p>
+        (DSO) tariff material.</p>
         <p>This chapter does not compare Nordic tariff regimes country
-        by country. ACER’s tariff taxonomy is enough to show why casual
-        comparison is risky: network charges combine different capacity,
-        energy, loss, reactive-power, connection, voltage-level,
-        user-type, and national design choices.</p>
+        by country. Cross-European tariff taxonomies are enough to show
+        why casual comparison is risky: network charges combine
+        different capacity, energy, loss, reactive-power, connection,
+        voltage-level, user-type, and national design choices.</p>
         </section>
         <section id="recap-3" class="level4">
         <h4>Recap</h4>
@@ -3565,19 +3570,20 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         system problem if the error remains at delivery. It becomes an
         economic problem when settlement assigns a price to the
         deviation.</p>
-        <p>eSett’s Nordic material describes imbalance settlement as
-        using trades, consumption, production, MGA imbalance, and
-        imbalance adjustments. The exact algebra is handbook-specific,
-        but the mechanism is robust: the settlement operator
-        reconstructs who was long or short after the fact.</p>
-        <p>EU Regulation 2017/2195 frames imbalance pricing around
+        <p>Nordic imbalance settlement uses trades, consumption,
+        production, metering-grid-area imbalance, and imbalance
+        adjustments to reconstruct who was long or short after delivery.
+        The exact algebra is handbook-specific, but the mechanism is
+        robust: the settlement operator reconstructs the position after
+        the fact.</p>
+        <p>European balancing rules frame imbalance pricing around
         balancing energy and avoided activation. Imbalance settlement is
         part of the incentive system that nudges BRPs to help keep the
         system balanced.</p>
-        <p>Svenska kraftnät’s BRP/BSP material shows why roles matter. A
-        BRP carries balance responsibility. A BSP provides balancing
-        services. The same company may do both, but the roles are
-        conceptually different.</p>
+        <p>The BRP/BSP distinction is a role distinction, not just a
+        company label. A BRP carries balance responsibility. A BSP
+        provides balancing services. The same company may do both, but
+        the roles are conceptually different.</p>
         </section>
         <section id="examples-2" class="level4">
         <h4>Examples</h4>
@@ -3625,10 +3631,10 @@ energy deviation over 1 hour = -4 MWh</code></pre>
         </section>
         <section id="current-debates-and-caveats-2" class="level4">
         <h4>Current Debates And Caveats</h4>
-        <p>Swedish BRP/BSP role separation is date-specific. The Svenska
-        kraftnät source used here states that terms were decided in May
-        2023, the role split started on 2024-05-01, and full independent
-        BSP implementation is expected by 2028 at latest.</p>
+        <p>Swedish BRP/BSP role separation is date-specific. Terms were
+        decided in May 2023, the role split started on 2024-05-01, and
+        full independent BSP implementation is expected by 2028 at the
+        latest.</p>
         <p>Imbalance settlement period and market time unit claims are
         also date-specific, especially during 15-minute rollout.</p>
         </section>
@@ -5361,11 +5367,10 @@ Project 2: Danish solar-plus-BESS, DK2, separate import treatment, customer-shap
         <p>A Nordic project becomes model-ready when the regional label
         is decomposed into bidding area, area/system price exposure,
         grid rights, tariff treatment, settlement role, and contract
-        basis. Nord Pool explains the system-price and area-price
-        structure. eSett explains the Nordic settlement layer. TSOs,
-        DSOs, tariff documents, and connection agreements explain the
-        usable MW. A serious model keeps those layers separate before it
-        prices the asset.</p>
+        basis. Price formation, imbalance settlement, grid access, and
+        tariff exposure live in different rulebooks and data layers. A
+        serious model keeps those layers separate before it prices the
+        asset.</p>
         <div class="lecture-end">
 
         </div>
@@ -6016,9 +6021,9 @@ operating_cash_before_debt =
         <p>Construction contribution: a one-off contribution toward grid
         works needed for connection or reinforcement.</p>
         <p>Loss charge: a charge intended to recover network energy
-        losses. Svenska kraftnät’s tariff source states that from 1
-        January 2020, its energy-loss price is based on actual hourly
-        market price per bidding zone plus a supplement charge.</p>
+        losses. In the Swedish national-grid example, from 1 January
+        2020 the energy-loss price is based on the actual hourly market
+        price per bidding zone plus a supplement charge.</p>
         <p>Limited grid access: an arrangement where a user accepts
         disconnection, interruption, or constrained access under
         specified conditions, often in return for lower access cost.</p>
@@ -12213,9 +12218,8 @@ The marginal portfolio risk is materially different.</code></pre>
         frames imbalance settlement around BRPs, trades, metered data,
         and imbalance adjustments.</p>
         <p><code>BSP</code> is the party providing balancing services to
-        the TSO where qualified. Svenska kraftnät’s English page
-        describes the Swedish split of actor roles into BSP and BRP from
-        1 May 2024 and notes that full independent BSP implementation is
+        the TSO where qualified. In Sweden, BSP and BRP actor roles
+        split from 1 May 2024, with full independent BSP implementation
         expected by 2028 at the latest.</p>
         <p><code>Control right</code> is the right to decide, instruct,
         or veto an action: schedule, bid, dispatch, curtail, charge,
@@ -12499,12 +12503,10 @@ The marginal portfolio risk is materially different.</code></pre>
         <section id="in-practice-25" class="level4">
         <h4>In Practice</h4>
         <p>In Nordic practice, partner oversight must respect the
-        settlement model. The eSett handbook frames imbalance settlement
-        through trades, metering, reporting, settlement calculations,
-        invoicing, collateral/risk management, and market behaviour
-        monitoring. Svenska kraftnät’s BRP/BSP page adds an important
-        Swedish caveat: BSP and BRP roles are being separated, with
-        transition and IT-system constraints.</p>
+        settlement model: trades, metering, reporting, settlement
+        calculations, invoicing, collateral/risk management, and
+        market-behaviour monitoring. In Sweden, the BSP/BRP role split
+        adds transition and IT-system constraints.</p>
         <p>For a renewable IPP, the practical work product is a monthly
         governance pack:</p>
         <pre class="text"><code>1. What happened?
@@ -13799,13 +13801,12 @@ collateral need = 900,000 x 80%
         <section id="definitions-27" class="level4">
         <h4>Definitions</h4>
         <p>Ancillary services are services procured to maintain system
-        security and quality. Svenska kraftnät’s ancillary-service
-        material describes frequency containment, frequency restoration,
-        manual restoration, fast frequency response, and disturbance
-        reserves; other Nordic TSOs define their own product details.
-        The exact product rules, response requirements, qualification
-        process, and settlement design are
-        country/product/date-specific.</p>
+        security and quality. Nordic product families include frequency
+        containment, frequency restoration, manual restoration, fast
+        frequency response, disturbance reserves, and related reserve
+        products; each TSO defines its own product details. The exact
+        product rules, response requirements, qualification process, and
+        settlement design are country/product/date-specific.</p>
         <p>Reserve capacity means being available to respond. Activation
         or balancing energy means actually moving power when called. A
         battery can earn a capacity payment without much activation in
@@ -16347,19 +16348,17 @@ a revenue option, or a distraction for this site and portfolio?</code></pre>
         especially after contingencies. The transferable claim is that
         voltage support is locational. A service can have high value at
         one node and limited value elsewhere.</p>
-        <p>Second, Energinet’s 2025 Danish ancillary-service tender
-        conditions for DK1 and DK2 list stability properties such as
-        short-circuit power, inertia, reactive reserves, and voltage
-        control. In that material, Energinet describes checking load
-        flow, short-circuit power, N-1 situations, and reactive reserves
-        after operational schedules and again when operating conditions
-        change. Procurement timing is service-specific: the tender
-        conditions describe monthly, weekly, day-ahead, post-spot, and
-        intraday routes where required. Read this as dated evidence that
-        stability properties can be operational requirements or
-        procurement items; it does not establish that a generic
-        grid-forming inverter package is qualified, payable, or needed
-        at a specific site.</p>
+        <p>Second, the 2025 Danish ancillary-service tender conditions
+        for DK1 and DK2 list stability properties such as short-circuit
+        power, inertia, reactive reserves, and voltage control.
+        Operational checks include load flow, short-circuit power, N-1
+        situations, and reactive reserves after schedules are set and
+        again when operating conditions change. Procurement timing is
+        service-specific: monthly, weekly, day-ahead, post-spot, and
+        intraday routes may apply. This is dated evidence that stability
+        properties can be operational requirements or procurement items;
+        it is not a site-specific claim that a generic grid-forming
+        inverter package is qualified, payable, or needed.</p>
         <p>Third, Fingrid’s 2026-2035 grid development plan treats
         inverter-dominated areas as a stability problem requiring
         technical solutions such as grid-forming storage, synchronous
@@ -22265,6 +22264,15 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <p>An alphabetical reference for the main terms used in the
         course.</p>
         <dl class="glossary-list">
+        <dt id="glossary-acer" data-term="ACER" data-definition="European Union Agency for the Cooperation of Energy Regulators: EU agency that supports cooperation among national energy regulators and publishes EU-level monitoring, analysis, and guidance.">
+        ACER
+        </dt>
+        <dd>
+        European Union Agency for the Cooperation of Energy Regulators:
+        EU agency that supports cooperation among national energy
+        regulators and publishes EU-level monitoring, analysis, and
+        guidance.
+        </dd>
         <dt id="glossary-actionability-factor" data-term="Actionability factor" data-definition="Fraction of a model improvement that can become value after information timing, market access, liquidity, control rights, and constraints.">
         Actionability factor
         </dt>
@@ -23817,6 +23825,13 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         </dt>
         <dd>
         Capacity level contracted for grid use or tariff purposes.
+        </dd>
+        <dt id="glossary-svenska-kraftn-t" data-term="Svenska kraftnät" data-definition="Swedish transmission system operator responsible for the national transmission grid and power-system operation in Sweden.">
+        Svenska kraftnät
+        </dt>
+        <dd>
+        Swedish transmission system operator responsible for the
+        national transmission grid and power-system operation in Sweden.
         </dd>
         <dt id="glossary-system-adequacy" data-term="System adequacy" data-definition="Longer-term ability of the system to have enough resources and network capability to meet demand under credible conditions.">
         System adequacy
