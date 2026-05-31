@@ -1748,7 +1748,7 @@
         <section id="power-markets-casebook" class="level1">
         <h1>Power Markets Casebook</h1>
         <p class="course-version">
-        v0.43.0
+        v0.46.1
         </p>
         <blockquote>
         <p>Applied decision cases for turning market, grid, contract,
@@ -1878,6 +1878,11 @@
         <tr>
         <td>Raw as-produced clean energy</td>
         <td style="text-align: right;">45.0</td>
+        </tr>
+        <tr>
+        <td>Replacement clean energy and certificates for annual
+        shortfall</td>
+        <td style="text-align: right;">1.0</td>
         </tr>
         <tr>
         <td>Shape and firming cost</td>
@@ -2015,11 +2020,16 @@
         into the buyer’s requested profile. In this scenario, the buyer
         asks for <code>100 GWh/year</code> flat while the solar project
         produces <code>90 GWh/year</code>; the annual clean-energy
-        shortfall and any certificate-backed replacement supply have to
-        be priced separately from hard-hour firming. The quote is usable
-        only if the term sheet assigns the residual mismatch to a party,
-        a price, a cap, or a reopener.</p>
+        shortfall and any certificate-backed replacement supply need
+        their own line rather than being hidden inside hard-hour
+        firming. The quote is usable only if the term sheet assigns the
+        residual mismatch to a party, a price, a cap, or a reopener.</p>
         <table>
+        <colgroup>
+        <col style="width: 30%" />
+        <col style="width: 40%" />
+        <col style="width: 30%" />
+        </colgroup>
         <thead>
         <tr>
         <th>Component</th>
@@ -2031,6 +2041,12 @@
         <tr>
         <td>Raw as-produced clean energy</td>
         <td style="text-align: right;">45.0</td>
+        <td>Seller</td>
+        </tr>
+        <tr>
+        <td>Replacement clean energy and certificates for annual
+        shortfall</td>
+        <td style="text-align: right;">1.0</td>
         <td>Seller</td>
         </tr>
         <tr>
@@ -2070,17 +2086,24 @@
         </tr>
         <tr>
         <td><strong>Indicative shaped quote</strong></td>
-        <td style="text-align: right;"><strong>65.0</strong></td>
+        <td style="text-align: right;"><strong>66.0</strong></td>
         <td></td>
         </tr>
         </tbody>
         </table>
-        <p>At 65 EUR/MWh, the product sits below the buyer’s stated 68
+        <p>At 66 EUR/MWh, the product sits below the buyer’s stated 68
         EUR/MWh ceiling. The tail risk still needs an explicit
         boundary.</p>
         </section>
         <section id="numerical-intuition" class="level4">
         <h4>Numerical Intuition</h4>
+        <p>The annual clean-energy shortfall is:</p>
+        <pre class="text"><code>100 GWh/year - 90 GWh/year = 10 GWh/year</code></pre>
+        <p>If replacement clean energy and certificate handling cost
+        <code>10 EUR/MWh</code> more than the raw as-produced line in
+        this scenario, the annual shortfall adds:</p>
+        <pre class="text"><code>10,000 MWh/year x 10 EUR/MWh = 100,000 EUR/year
+100,000 EUR/year / 100,000 MWh/year = 1 EUR/MWh</code></pre>
         <p>The stress firming cost is:</p>
         <pre class="text"><code>20 MWh/h x 250 h/year x 120 EUR/MWh = 600,000 EUR/year</code></pre>
         <p>The fixed risk margin in the quote is:</p>
@@ -2089,16 +2112,16 @@
         by <code>400,000 EUR/year</code>.</p>
         <pre class="text"><code>Uncovered stress cost = 600,000 - 200,000 = 400,000 EUR/year
 Premium needed to absorb the full stress = 400,000 / 100,000 MWh = 4 EUR/MWh
-Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
+Full stress-inclusive fixed quote = 66 + 4 = 70 EUR/MWh</code></pre>
         <p>That price exceeds the buyer’s <code>68 EUR/MWh</code>
         ceiling. The shaped product is commercial at
-        <code>65 EUR/MWh</code> only if the term sheet caps, indexes,
+        <code>66 EUR/MWh</code> only if the term sheet caps, indexes,
         passes through, or reopens hard-hour firming beyond the quoted
         risk margin.</p>
         </section>
         <section id="decision-memo" class="level4">
         <h4>Decision Memo</h4>
-        <p>Recommendation: offer the shaped product at 65 EUR/MWh only
+        <p>Recommendation: offer the shaped product at 66 EUR/MWh only
         with a residual-firming collar.</p>
         <p>The collar should be explicit. In this scenario the fixed
         price includes <code>200,000 EUR/year</code> of risk margin. The
@@ -2106,7 +2129,7 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         or costs beyond it need a pass-through, index, hard cap, or
         reopener. If the buyer wants the seller to carry the full
         illustrated stress case inside the fixed price, the quote rises
-        to about <code>69 EUR/MWh</code>, above the stated buyer
+        to about <code>70 EUR/MWh</code>, above the stated buyer
         ceiling.</p>
         <p>The investment-committee test is whether the price, cap,
         credit terms, evidence package, data rights, and dispatch rights
@@ -2117,6 +2140,14 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         EUR/MWh. It is less valuable to the buyer, but it avoids making
         a fixed-price promise that the asset cannot physically support
         under stress.</p>
+        </section>
+        <section id="decision-boundary" class="level4">
+        <h4>Decision Boundary</h4>
+        <p>The offer is not “shaped PPA yes or no.” It is a choice among
+        fixed shape, bounded shape, indexed residual, partner-backed
+        firming, or as-produced fallback. The seller should approve the
+        highest-value promise whose residual exposure is capped,
+        evidenced, and controllable.</p>
         </section>
         <section id="assumption-flip" class="level4">
         <h4>Assumption Flip</h4>
@@ -2141,23 +2172,23 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         <section id="links-back-to-the-lectures" class="level4">
         <h4>Links Back To The Lectures</h4>
         <ul>
-        <li><a href="power-markets-course.html#v1-l03">Load Is Not
+        <li><a href="index.html#v1-l03">Load Is Not
         Energy</a></li>
-        <li><a href="power-markets-course.html#v1-l12">Solar
+        <li><a href="index.html#v1-l12">Solar
         Production</a></li>
-        <li><a href="power-markets-course.html#v2-l04">PPA Risk
+        <li><a href="index.html#v2-l04">PPA Risk
         Allocation</a></li>
-        <li><a href="power-markets-course.html#v2-l05">PPA Structure
+        <li><a href="index.html#v2-l05">PPA Structure
         Catalog</a></li>
-        <li><a href="power-markets-course.html#v2-l06">PPA
+        <li><a href="index.html#v2-l06">PPA
         Pricing</a></li>
-        <li><a href="power-markets-course.html#v2-l08">BESS Revenue
+        <li><a href="index.html#v2-l08">BESS Revenue
         Stacks</a></li>
-        <li><a href="power-markets-course.html#v2-l10">Dispatch
+        <li><a href="index.html#v2-l10">Dispatch
         Optimization</a></li>
-        <li><a href="power-markets-course.html#v2-l13">Project
+        <li><a href="index.html#v2-l13">Project
         Valuation</a></li>
-        <li><a href="power-markets-course.html#v3-l05">Future Of
+        <li><a href="index.html#v3-l05">Future Of
         PPAs</a></li>
         </ul>
         <div class="lecture-end">
@@ -2387,8 +2418,7 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         </tr>
         </tbody>
         </table>
-        <p>DNV’s storage-warranty review makes the second gate concrete.
-        A capacity warranty may care about usage/cycling degradation,
+        <p>A capacity warranty may care about usage/cycling degradation,
         calendar degradation, temperature, average state of charge,
         C-rate, data storage, and repair response. The case therefore
         treats “cycles/year” as a commercial shorthand. Before live use,
@@ -2513,6 +2543,60 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         and emergency uses are prioritized against the same state of
         charge</li>
         </ul>
+        <p>The rival memo should still be written. A 4-hour battery may
+        be the better strategic move if the project can contract longer
+        delivery, preserve scarce grid capacity, or avoid an expensive
+        future augmentation. The third and fourth hours need their own
+        paying scarcity; extra resilience language does not finance
+        them.</p>
+        <table>
+        <colgroup>
+        <col style="width: 50%" />
+        <col style="width: 50%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Rival 4h Argument</th>
+        <th>Evidence Needed</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>the customer will pay for longer firming</td>
+        <td>signed product premium, penalty structure, and hourly
+        shape</td>
+        </tr>
+        <tr>
+        <td>grid import/export rights make longer duration scarce</td>
+        <td>connection terms, tariff treatment, and curtailment
+        evidence</td>
+        </tr>
+        <tr>
+        <td>future augmentation would be expensive or impossible</td>
+        <td>layout, transformer, inverter, permit, and original
+        equipment manufacturer constraints</td>
+        </tr>
+        <tr>
+        <td>reserve or capacity products require longer sustain</td>
+        <td>named product rule, qualification path, and opportunity-cost
+        test</td>
+        </tr>
+        <tr>
+        <td>portfolio risk justifies extra duration</td>
+        <td>portfolio stress hours and alternatives to owning the
+        MWh</td>
+        </tr>
+        </tbody>
+        </table>
+        </section>
+        <section id="decision-boundary-1" class="level4">
+        <h4>Decision Boundary</h4>
+        <p>The case approves the 2-hour battery because it is the last
+        duration block that clears its own hurdle. The committee should
+        not reopen 4 hours because the average project economics look
+        better; it should reopen only when the third and fourth hours
+        have named paying events, compatible warranty and insurance
+        treatment, and deliverable grid rights.</p>
         </section>
         <section id="assumption-flip-1" class="level4">
         <h4>Assumption Flip</h4>
@@ -2545,17 +2629,17 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         <section id="links-back-to-the-lectures-1" class="level4">
         <h4>Links Back To The Lectures</h4>
         <ul>
-        <li><a href="power-markets-course.html#v1-l09">Frequency And
+        <li><a href="index.html#v1-l09">Frequency And
         Reserves</a></li>
-        <li><a href="power-markets-course.html#v1-l13">Battery Storage
+        <li><a href="index.html#v1-l13">Battery Storage
         And Time Shifting</a></li>
-        <li><a href="power-markets-course.html#v2-l08">BESS Revenue
+        <li><a href="index.html#v2-l08">BESS Revenue
         Stacks</a></li>
-        <li><a href="power-markets-course.html#v2-l09">Battery Duration
+        <li><a href="index.html#v2-l09">Battery Duration
         Selection</a></li>
-        <li><a href="power-markets-course.html#v2-l12">Battery
+        <li><a href="index.html#v2-l12">Battery
         Degradation, Warranties, And Operating Constraints</a></li>
-        <li><a href="power-markets-course.html#v3-l06">Storage Duration
+        <li><a href="index.html#v3-l06">Storage Duration
         And Long-Duration Flexibility</a></li>
         </ul>
         <div class="lecture-end">
@@ -2570,7 +2654,8 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         <a href="#ref-14">[14]</a> <a href="#ref-15">[15]</a>
         <a href="#ref-16">[16]</a> <a href="#ref-17">[17]</a>
         <a href="#ref-18">[18]</a> <a href="#ref-19">[19]</a>
-        <a href="#ref-20">[20]</a></sup>
+        <a href="#ref-20">[20]</a> <a href="#ref-21">[21]</a>
+        <a href="#ref-22">[22]</a> <a href="#ref-23">[23]</a></sup>
         </p>
         <p>Solar development often begins with land and irradiation.
         Project value often ends with grid access, tariffs, congestion,
@@ -2590,12 +2675,20 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         one can receive near-term investment resources.</p>
         <p>The highest-yield site must still be tested against grid
         economics and commercial optionality.</p>
+        <p>Recent official ACER and ENTSO-E evidence strengthens the
+        reason this is not late diligence. ACER’s 2024 infrastructure
+        and cross-zonal monitoring reports tie congestion, curtailment,
+        cross-zonal capacity, and grid investment to market value.
+        ENTSO-E’s TYNDP 2024 infrastructure-gaps report treats grid and
+        storage expansion as system-cost levers. The case should
+        therefore keep ranking sites by executable rights, not resource
+        quality alone.</p>
         </section>
         <section id="scenario-data-2" class="level4">
         <h4>Scenario Data</h4>
         <p>These are scenario assumptions. They are not tariff quotes or
-        connection terms. The named grid and tariff sources support the
-        categories to diligence: firm timing, reserved capacity,
+        connection terms. The grid and tariff examples used here support
+        the categories to diligence: firm timing, reserved capacity,
         import/export rights, limited-access terms, curtailment
         treatment, capacity-tariff exposure, and producer-payment
         geography.</p>
@@ -2925,14 +3018,21 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         interconnection feasibility study, permitting path, construction
         logistics, engineering, procurement, and construction (EPC)
         allocation, operations and maintenance (O&amp;M) assumptions,
-        and resource-assessment basis. The IFC solar guide treats these
-        as core bankability inputs rather than late-stage
-        documentation.</p>
+        and resource-assessment basis. These are core bankability inputs
+        rather than late-stage documentation.</p>
         <p>Site A should remain in development if the connection timing
         improves or if a buyer values the location enough to pay for the
         grid uncertainty. Site C is not a priority unless its low
         permitting complexity creates a materially faster path than
         assumed.</p>
+        </section>
+        <section id="decision-boundary-2" class="level4">
+        <h4>Decision Boundary</h4>
+        <p>Read the site ranking as a grid-rights decision. Site B wins
+        because its connection, import right, and timing make more
+        products executable. Site A becomes attractive again only when
+        those rights change, even if its P50 generation remains
+        higher.</p>
         </section>
         <section id="assumption-flip-2" class="level4">
         <h4>Assumption Flip</h4>
@@ -2956,19 +3056,19 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         <section id="links-back-to-the-lectures-2" class="level4">
         <h4>Links Back To The Lectures</h4>
         <ul>
-        <li><a href="power-markets-course.html#v1-l04">Networks, Bidding
+        <li><a href="index.html#v1-l04">Networks, Bidding
         Zones, And Tariffs</a></li>
-        <li><a href="power-markets-course.html#v1-l10">Voltage, Reactive
+        <li><a href="index.html#v1-l10">Voltage, Reactive
         Power, Inertia</a></li>
-        <li><a href="power-markets-course.html#v1-l14">Nordic Market
+        <li><a href="index.html#v1-l14">Nordic Market
         Structure, Settlement, And Grid Evidence</a></li>
-        <li><a href="power-markets-course.html#v2-l02">Grid Connection
+        <li><a href="index.html#v2-l02">Grid Connection
         And Tariff Economics</a></li>
-        <li><a href="power-markets-course.html#v2-l03">Solar Asset Cash
+        <li><a href="index.html#v2-l03">Solar Asset Cash
         Flow</a></li>
-        <li><a href="power-markets-course.html#v2-l14">Portfolio
+        <li><a href="index.html#v2-l14">Portfolio
         Modeling And Hedging</a></li>
-        <li><a href="power-markets-course.html#v3-l03">Grid Constraints
+        <li><a href="index.html#v3-l03">Grid Constraints
         And Portfolio Strategy</a></li>
         </ul>
         <div class="lecture-end">
@@ -2979,12 +3079,12 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         <section id="case-04" class="level3">
         <h3>Case 4. Battery Revenue Stacks Under Saturation</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-21">[21]</a>
-        <a href="#ref-22">[22]</a> <a href="#ref-23">[23]</a>
-        <a href="#ref-24">[24]</a> <a href="#ref-7">[7]</a>
+        References: <sup><a href="#ref-24">[24]</a>
+        <a href="#ref-25">[25]</a> <a href="#ref-26">[26]</a>
+        <a href="#ref-27">[27]</a> <a href="#ref-7">[7]</a>
         <a href="#ref-9">[9]</a> <a href="#ref-12">[12]</a>
-        <a href="#ref-25">[25]</a> <a href="#ref-13">[13]</a>
-        <a href="#ref-5">[5]</a> <a href="#ref-26">[26]</a></sup>
+        <a href="#ref-28">[28]</a> <a href="#ref-13">[13]</a>
+        <a href="#ref-5">[5]</a> <a href="#ref-29">[29]</a></sup>
         </p>
         <p>A battery revenue stack is a set of coupled obligations on
         the same MW, MWh, state of charge, grid rights, cycle budget,
@@ -3007,12 +3107,11 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         PPA delivery.</p>
         <p>The project cannot sell the same flexibility three times.</p>
         <p>An optimizer can schedule within the conflict; it cannot
-        remove the conflict. DNV’s hybrid-storage optimizer material is
-        useful here because it frames dispatch as a constrained problem
-        over market products, loss trees, interconnection limits,
-        cycling and throughput requirements, warranty strategies, and
-        capacity maintenance. A revenue stack is credible only if the
-        same constraint set governs every product in the stack.</p>
+        remove the conflict. The dispatch model has to include market
+        products, loss trees, interconnection limits, cycling and
+        throughput requirements, warranty strategies, and capacity
+        maintenance. A revenue stack is credible only if the same
+        constraint set governs every product in the stack.</p>
         </section>
         <section id="scenario-data-3" class="level4">
         <h4>Scenario Data</h4>
@@ -3155,18 +3254,17 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         </tbody>
         </table>
         <p>For Nordic reserve routes, add a product-specific appendix
-        before approving the stack. The Nordic transmission system
-        operators’ (TSOs’) 2025 battery paper separates fast frequency
-        reserve (FFR), frequency containment reserve for disturbances
-        (FCR-D), frequency containment reserve for normal operation
-        (FCR-N), automatic frequency restoration reserve (aFRR), and
-        manual frequency restoration reserve (mFRR) by response time,
-        endurance, bid size, and prequalification route. It also warns
-        that the same capacity cannot be bid in multiple markets for the
-        same delivery period. A revenue-stack proposal should therefore
-        show the exact delivery intervals where reserve capacity,
-        activation energy, PPA delivery, arbitrage, and state-of-charge
-        buffers overlap.</p>
+        before approving the stack. Fast frequency reserve (FFR),
+        frequency containment reserve for disturbances (FCR-D),
+        frequency containment reserve for normal operation (FCR-N),
+        automatic frequency restoration reserve (aFRR), and manual
+        frequency restoration reserve (mFRR) differ by response time,
+        endurance, bid size, and prequalification route. The same
+        capacity cannot be bid into conflicting obligations for the same
+        delivery period. A revenue-stack proposal should therefore show
+        the exact delivery intervals where reserve capacity, activation
+        energy, PPA delivery, arbitrage, and state-of-charge buffers
+        overlap.</p>
         </section>
         <section id="worked-solution-3" class="level4">
         <h4>Worked Solution</h4>
@@ -3218,6 +3316,15 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         expected value but stronger downside and lender readability. The
         shaped PPA route is attractive only if the PPA premium is high
         enough to compensate for lost merchant optionality.</p>
+        <p>The table drives the recommendation. The floor route gives up
+        <code>0.50 million EUR/year</code> of expected value versus full
+        merchant, but it adds <code>0.56 million EUR/year</code> of
+        financeable value in this scenario:</p>
+        <pre class="text"><code>0.90 - 0.34 = 0.56 million EUR/year</code></pre>
+        <p>The shaped PPA route has a better expected value than the
+        floor route, but its financeable value is incomplete until
+        residual firming, dispatch priority, and customer evidence terms
+        are written.</p>
         </section>
         <section id="numerical-intuition-3" class="level4">
         <h4>Numerical Intuition</h4>
@@ -3270,6 +3377,14 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         sizing, high collateral exposure, or no lender-readable revenue
         floor.</p>
         </section>
+        <section id="decision-boundary-3" class="level4">
+        <h4>Decision Boundary</h4>
+        <p>The stack should be approved by tranche, not as a single
+        blended revenue number. Reserve the MW, MWh, state-of-charge
+        band, cycle budget, and reporting obligation for each tranche.
+        Anything left unallocated is optionality; anything allocated
+        twice is an error.</p>
+        </section>
         <section id="assumption-flip-3" class="level4">
         <h4>Assumption Flip</h4>
         <p>The recommendation changes if merchant revenues saturate and
@@ -3307,17 +3422,17 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         <section id="links-back-to-the-lectures-3" class="level4">
         <h4>Links Back To The Lectures</h4>
         <ul>
-        <li><a href="power-markets-course.html#v1-l09">Frequency And
+        <li><a href="index.html#v1-l09">Frequency And
         Reserves</a></li>
-        <li><a href="power-markets-course.html#v1-l13">Battery Storage
+        <li><a href="index.html#v1-l13">Battery Storage
         And Time Shifting</a></li>
-        <li><a href="power-markets-course.html#v2-l08">BESS Revenue
+        <li><a href="index.html#v2-l08">BESS Revenue
         Stacks</a></li>
-        <li><a href="power-markets-course.html#v2-l10">Dispatch
+        <li><a href="index.html#v2-l10">Dispatch
         Optimization</a></li>
-        <li><a href="power-markets-course.html#v2-l13">Valuation Under
+        <li><a href="index.html#v2-l13">Valuation Under
         Uncertainty</a></li>
-        <li><a href="power-markets-course.html#v3-l01">BESS Revenue
+        <li><a href="index.html#v3-l01">BESS Revenue
         Saturation</a></li>
         </ul>
         <div class="lecture-end">
@@ -3329,10 +3444,10 @@ Full stress-inclusive fixed quote = 65 + 4 = 69 EUR/MWh</code></pre>
         <h3>Case 5. Balance-Responsibility And Balancing-Service
         Performance Audit</h3>
         <p class="lecture-refs">
-        References: <sup><a href="#ref-27">[27]</a>
-        <a href="#ref-21">[21]</a> <a href="#ref-28">[28]</a>
-        <a href="#ref-29">[29]</a> <a href="#ref-30">[30]</a>
-        <a href="#ref-31">[31]</a></sup>
+        References: <sup><a href="#ref-30">[30]</a>
+        <a href="#ref-24">[24]</a> <a href="#ref-31">[31]</a>
+        <a href="#ref-32">[32]</a> <a href="#ref-33">[33]</a>
+        <a href="#ref-34">[34]</a></sup>
         </p>
         <p>A trading or optimization partner can execute the market
         interface, but the asset owner still needs evidence before it
@@ -3785,6 +3900,14 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         permitted</li>
         </ul>
         </section>
+        <section id="decision-boundary-4" class="level4">
+        <h4>Decision Boundary</h4>
+        <p>The first enforceable decision is data remediation, not
+        blame. The owner should escalate partner economics only after
+        the benchmark can separate market conditions, missing data,
+        owner limits, asset constraints, and actual partner action. That
+        makes the scorecard harder to argue with.</p>
+        </section>
         <section id="assumption-flip-4" class="level4">
         <h4>Assumption Flip</h4>
         <p>The recommendation changes if complete raw files show that
@@ -3808,19 +3931,19 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <section id="links-back-to-the-lectures-4" class="level4">
         <h4>Links Back To The Lectures</h4>
         <ul>
-        <li><a href="power-markets-course.html#v1-l05">Market
+        <li><a href="index.html#v1-l05">Market
         Participants And Responsibilities</a></li>
-        <li><a href="power-markets-course.html#v1-l06">Market
+        <li><a href="index.html#v1-l06">Market
         Clock</a></li>
-        <li><a href="power-markets-course.html#v1-l08">Forecast Error
+        <li><a href="index.html#v1-l08">Forecast Error
         And Imbalance</a></li>
-        <li><a href="power-markets-course.html#v1-l09">Frequency And
+        <li><a href="index.html#v1-l09">Frequency And
         Reserves</a></li>
-        <li><a href="power-markets-course.html#v2-l11">Forecasting,
+        <li><a href="index.html#v2-l11">Forecasting,
         Error, And Commercial Value</a></li>
-        <li><a href="power-markets-course.html#v2-l15">Trading Partners
+        <li><a href="index.html#v2-l15">Trading Partners
         And Performance Scorecards</a></li>
-        <li><a href="power-markets-course.html#v2-l16">Analytical
+        <li><a href="index.html#v2-l16">Analytical
         Capability Development</a></li>
         </ul>
         <div class="lecture-end">
@@ -3832,10 +3955,11 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <h3>Case 6. Data-Centre 24/7 Product Test</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-1">[1]</a>
-        <a href="#ref-32">[32]</a> <a href="#ref-33">[33]</a>
-        <a href="#ref-34">[34]</a> <a href="#ref-4">[4]</a>
-        <a href="#ref-35">[35]</a> <a href="#ref-5">[5]</a>
-        <a href="#ref-2">[2]</a></sup>
+        <a href="#ref-35">[35]</a> <a href="#ref-36">[36]</a>
+        <a href="#ref-37">[37]</a> <a href="#ref-4">[4]</a>
+        <a href="#ref-38">[38]</a> <a href="#ref-39">[39]</a>
+        <a href="#ref-40">[40]</a> <a href="#ref-41">[41]</a>
+        <a href="#ref-5">[5]</a> <a href="#ref-2">[2]</a></sup>
         </p>
         <p>Large electricity buyers increasingly care about both when
         clean energy is produced and how many clean MWh are bought over
@@ -3857,6 +3981,16 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <p>The seller has solar assets, access to a battery project, and
         a trading partner. It does not own enough diverse clean
         generation to self-supply every hour.</p>
+        <p>IEA’s Energy and artificial intelligence (AI) report narrows
+        the case frame. Data-centre load growth is real, but this
+        product is exposed most directly to grid connection and
+        stress-hour flexibility. IEA estimates that data centres account
+        for less than 10% of global electricity-demand growth in its
+        2024-2030 Base Case, while around one-fifth of planned global
+        data-centre capacity by 2030 could face grid-delay risk. Its
+        flexibility analysis says small availability windows can matter
+        systemically. In this case, buyer flexibility is an approval
+        gate, not a free input.</p>
         </section>
         <section id="scenario-data-5" class="level4">
         <h4>Scenario Data</h4>
@@ -4293,6 +4427,60 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         </tr>
         </tbody>
         </table>
+        <p>The decision should also record the rival memo. A seller may
+        rationally pursue the broad product if the buyer is strategic,
+        the relationship opens a portfolio channel, and the seller can
+        buy the missing clean hours from a partner. That memo only
+        survives review if it names the residual-risk owner.</p>
+        <table>
+        <colgroup>
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Rival Claim</th>
+        <th>What Would Make It True</th>
+        <th>What Breaks It</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>the premium is worth the complexity</td>
+        <td>partner supply, evidence cost, credit cost, and stress-hour
+        firming fit inside the premium</td>
+        <td>the premium only covers ordinary hours</td>
+        </tr>
+        <tr>
+        <td>the buyer flexibility helps the product</td>
+        <td>control rights, telemetry, availability windows, and
+        compensation are written down</td>
+        <td>uptime policy blocks dispatch when the grid needs
+        flexibility</td>
+        </tr>
+        <tr>
+        <td>the claim can be supported</td>
+        <td>certificate status, cancellation, storage evidence, and
+        public language are agreed before signing</td>
+        <td>legal/accounting review happens after the sales promise</td>
+        </tr>
+        <tr>
+        <td>the seller should stretch for the customer</td>
+        <td>downside is capped and strategic upside is explicit</td>
+        <td>the contract turns relationship value into uncapped
+        procurement exposure</td>
+        </tr>
+        </tbody>
+        </table>
+        </section>
+        <section id="decision-boundary-5" class="level4">
+        <h4>Decision Boundary</h4>
+        <p>Approve only the claim layer that the evidence can carry.
+        Annual clean-energy coverage, shaped delivery, hourly matching,
+        flexibility service, and public claim support are different
+        products. A strategic buyer can justify extra work, but not
+        uncapped hard-hour procurement or undefined claim language.</p>
         </section>
         <section id="assumption-flip-5" class="level4">
         <h4>Assumption Flip</h4>
@@ -4319,25 +4507,25 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <section id="links-back-to-the-lectures-5" class="level4">
         <h4>Links Back To The Lectures</h4>
         <ul>
-        <li><a href="power-markets-course.html#v1-l03">Load Is Not
+        <li><a href="index.html#v1-l03">Load Is Not
         Energy</a></li>
-        <li><a href="power-markets-course.html#v1-l06">Market
+        <li><a href="index.html#v1-l06">Market
         Clock</a></li>
-        <li><a href="power-markets-course.html#v1-l12">Solar
+        <li><a href="index.html#v1-l12">Solar
         Production</a></li>
-        <li><a href="power-markets-course.html#v2-l05">PPA Structure
+        <li><a href="index.html#v2-l05">PPA Structure
         Catalog</a></li>
-        <li><a href="power-markets-course.html#v2-l06">PPA
+        <li><a href="index.html#v2-l06">PPA
         Pricing</a></li>
         <li><a
-        href="power-markets-course.html#v2-l11">Forecasting</a></li>
-        <li><a href="power-markets-course.html#v2-l14">Portfolio
+        href="index.html#v2-l11">Forecasting</a></li>
+        <li><a href="index.html#v2-l14">Portfolio
         Modeling And Hedging</a></li>
-        <li><a href="power-markets-course.html#v2-l17">Trading Risk,
+        <li><a href="index.html#v2-l17">Trading Risk,
         Credit, Liquidity, And Controls</a></li>
-        <li><a href="power-markets-course.html#v3-l05">Future Of
+        <li><a href="index.html#v3-l05">Future Of
         PPAs</a></li>
-        <li><a href="power-markets-course.html#v3-l07">Data Centres,
+        <li><a href="index.html#v3-l07">Data Centres,
         24/7 Procurement, And Flexibility</a></li>
         </ul>
         <div class="lecture-end">
@@ -4349,8 +4537,8 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <h3>Case 7. Year-One Energy-Management Operating Model</h3>
         <p class="lecture-refs">
         References: <sup><a href="#ref-6">[6]</a>
-        <a href="#ref-31">[31]</a> <a href="#ref-36">[36]</a>
-        <a href="#ref-30">[30]</a> <a href="#ref-1">[1]</a>
+        <a href="#ref-34">[34]</a> <a href="#ref-42">[42]</a>
+        <a href="#ref-33">[33]</a> <a href="#ref-1">[1]</a>
         <a href="#ref-5">[5]</a></sup>
         </p>
         <p>An independent power producer (IPP) becomes an energy manager
@@ -4537,6 +4725,76 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         </tr>
         </tbody>
         </table>
+        <p>Prioritize the roadmap with a simple decision-leverage score.
+        The score is not a market fact; it forces the team to explain
+        why a budget line deserves year-one capacity.</p>
+        <pre class="text"><code>decision leverage =
+  annual value at stake
+  x evidence readiness
+  x actionability
+  / year-one spend</code></pre>
+        <table>
+        <colgroup>
+        <col style="width: 13%" />
+        <col style="width: 17%" />
+        <col style="width: 17%" />
+        <col style="width: 17%" />
+        <col style="width: 17%" />
+        <col style="width: 17%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Workstream</th>
+        <th style="text-align: right;">Value At Stake</th>
+        <th style="text-align: right;">Evidence Readiness</th>
+        <th style="text-align: right;">Actionability</th>
+        <th style="text-align: right;">Year-One Spend</th>
+        <th style="text-align: right;">Score</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>PPA quote stack and risk map</td>
+        <td
+        style="text-align: right;"><code>560,000 EUR/year</code></td>
+        <td style="text-align: right;"><code>0.8</code></td>
+        <td style="text-align: right;"><code>0.8</code></td>
+        <td style="text-align: right;"><code>160,000 EUR</code></td>
+        <td style="text-align: right;"><code>2.2</code></td>
+        </tr>
+        <tr>
+        <td>BESS sizing and dispatch model</td>
+        <td
+        style="text-align: right;"><code>750,000 EUR/year</code></td>
+        <td style="text-align: right;"><code>0.6</code></td>
+        <td style="text-align: right;"><code>0.8</code></td>
+        <td style="text-align: right;"><code>140,000 EUR</code></td>
+        <td style="text-align: right;"><code>2.6</code></td>
+        </tr>
+        <tr>
+        <td>Partner leakage reduction</td>
+        <td
+        style="text-align: right;"><code>350,000 EUR/year</code></td>
+        <td style="text-align: right;"><code>0.3</code></td>
+        <td style="text-align: right;"><code>0.5</code></td>
+        <td style="text-align: right;"><code>170,000 EUR</code></td>
+        <td style="text-align: right;"><code>0.3</code></td>
+        </tr>
+        <tr>
+        <td>Portfolio risk pack</td>
+        <td
+        style="text-align: right;"><code>250,000 EUR/year</code></td>
+        <td style="text-align: right;"><code>0.6</code></td>
+        <td style="text-align: right;"><code>0.7</code></td>
+        <td style="text-align: right;"><code>110,000 EUR</code></td>
+        <td style="text-align: right;"><code>1.0</code></td>
+        </tr>
+        </tbody>
+        </table>
+        <p>The data-contract work is treated as a prerequisite rather
+        than a standalone value pool. Without it, the partner-leakage
+        score stays low because the company cannot prove which action
+        was feasible at the time.</p>
         <p>Control failures observed:</p>
         <ul>
         <li>commercial offers use inconsistent shape, basis,
@@ -4588,7 +4846,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <td>build/audit</td>
         <td style="text-align: right;"><code>130,000 EUR</code></td>
         <td>accountable owner + data engineer</td>
-        <td>unlocks all other controls</td>
+        <td>makes other controls usable</td>
         </tr>
         <tr>
         <td>PPA quote stack and risk map</td>
@@ -5035,6 +5293,14 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         minimum control layer should be in place before a larger trading
         platform or internal desk is considered.</p>
         </section>
+        <section id="decision-boundary-6" class="level4">
+        <h4>Decision Boundary</h4>
+        <p>This case funds control before ambition. The organization
+        should expand execution only after it can observe positions,
+        partner actions, settlement, limits, model changes, and cash
+        exposure. Otherwise a larger operating model increases activity
+        faster than accountability.</p>
+        </section>
         <section id="assumption-flip-6" class="level4">
         <h4>Assumption Flip</h4>
         <p>The recommendation changes if partners refuse or cannot
@@ -5058,17 +5324,17 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         <section id="links-back-to-the-lectures-6" class="level4">
         <h4>Links Back To The Lectures</h4>
         <ul>
-        <li><a href="power-markets-course.html#v2-l11">Forecasting,
+        <li><a href="index.html#v2-l11">Forecasting,
         Error, And Commercial Value</a></li>
-        <li><a href="power-markets-course.html#v2-l15">Trading Partners
+        <li><a href="index.html#v2-l15">Trading Partners
         And Performance Scorecards</a></li>
-        <li><a href="power-markets-course.html#v2-l16">Analytical
+        <li><a href="index.html#v2-l16">Analytical
         Capability Development</a></li>
-        <li><a href="power-markets-course.html#v3-l09">Data And Machine
+        <li><a href="index.html#v3-l09">Data And Machine
         Learning In Energy Management</a></li>
-        <li><a href="power-markets-course.html#v3-l10">Trading
+        <li><a href="index.html#v3-l10">Trading
         Capability Design</a></li>
-        <li><a href="power-markets-course.html#v3-l11">IPP Operating
+        <li><a href="index.html#v3-l11">IPP Operating
         Models For Active Portfolio Management</a></li>
         </ul>
         <div class="lecture-end">
@@ -6852,92 +7118,120 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
         reserve markets, April 2025.</a>
         </li>
         <li id="ref-14">
+        <a href="https://www.acer.europa.eu/" target="_blank" rel="noopener noreferrer">ACER,
+        Electricity Infrastructure Development to Support a Competitive
+        and Sustainable Energy System: 2024 Monitoring Report.</a>
+        </li>
+        <li id="ref-15">
+        <a href="https://www.acer.europa.eu/" target="_blank" rel="noopener noreferrer">ACER,
+        Transmission Capacities for Cross-Zonal Trade of Electricity and
+        Congestion Management in the EU: 2024 Market Monitoring
+        Report.</a>
+        </li>
+        <li id="ref-16">
+        <a href="https://tyndp.entsoe.eu/" target="_blank" rel="noopener noreferrer">ENTSO-E,
+        TYNDP 2024 Infrastructure Gaps Report.</a>
+        </li>
+        <li id="ref-17">
         <a href="https://www.svk.se/en/" target="_blank" rel="noopener noreferrer">Svenska
         kraftnät, Principles and guidelines for connecting to the
         national grids.</a>
         </li>
-        <li id="ref-15">
+        <li id="ref-18">
         <a href="https://www.svk.se/en/" target="_blank" rel="noopener noreferrer">Svenska
         kraftnät, Network Development Plan 2026-2035.</a>
         </li>
-        <li id="ref-16">
+        <li id="ref-19">
         Energinet, tariff design and tariff catalogue materials.
         </li>
-        <li id="ref-17">
+        <li id="ref-20">
         Fingrid, main grid service pricing.
         </li>
-        <li id="ref-18">
+        <li id="ref-21">
         Fingrid, Main Grid Development Plan 2026-2035.
         </li>
-        <li id="ref-19">
+        <li id="ref-22">
         Tom Brown and Philipp Glaum, Energy Economics Lecture 9: The
         Electricity Grid.
         </li>
-        <li id="ref-20">
+        <li id="ref-23">
         IFC / World Bank Group, Utility-Scale Solar Photovoltaic Power
         Plants: A Project Developer's Guide.
         </li>
-        <li id="ref-21">
+        <li id="ref-24">
         <a href="https://eur-lex.europa.eu/eli/reg/2017/2195/oj" target="_blank" rel="noopener noreferrer">European
         Commission, Regulation (EU) 2017/2195 establishing a guideline
         on electricity balancing.</a>
         </li>
-        <li id="ref-22">
+        <li id="ref-25">
         <a href="https://www.svk.se/en/" target="_blank" rel="noopener noreferrer">Svenska
         kraftnät, information on ancillary services.</a>
         </li>
-        <li id="ref-23">
+        <li id="ref-26">
         Energinet, Ancillary services to be delivered in Denmark: tender
         conditions.
         </li>
-        <li id="ref-24">
+        <li id="ref-27">
         ENTSO-E, PICASSO KPI Report 2025.
         </li>
-        <li id="ref-25">
+        <li id="ref-28">
         DNV, Hybrid Energy Resource Optimizer.
         </li>
-        <li id="ref-26">
+        <li id="ref-29">
         Julien Jomaux, The Big Beautiful Batteries; Long-term BESS
         Revenues: My Personal Take; The Revenue Illusion in Battery
         Storage.
         </li>
-        <li id="ref-27">
+        <li id="ref-30">
         <a href="https://www.esett.com/handbook/" target="_blank" rel="noopener noreferrer">eSett,
         Nordic Imbalance Settlement Handbook v5.3.</a>
         </li>
-        <li id="ref-28">
+        <li id="ref-31">
         <a href="https://www.svk.se/en/" target="_blank" rel="noopener noreferrer">Svenska
         kraftnät, Introduction of the BSP and BRP actor roles.</a>
         </li>
-        <li id="ref-29">
+        <li id="ref-32">
         Fingrid, Nordic Balancing Model materials on MARI, PICASSO, and
         Nordic balancing changes.
         </li>
-        <li id="ref-30">
+        <li id="ref-33">
         Priyanka Shinde, Efficient Trading in the Short-term Electricity
         Markets for Integration of Renewable Energy Sources.
         </li>
-        <li id="ref-31">
+        <li id="ref-34">
         Professional Risk Managers' International Association, The
         Professional Risk Managers' Guide to the Energy Market.
         </li>
-        <li id="ref-32">
+        <li id="ref-35">
         <a href="https://ghgprotocol.org/scope-2-guidance" target="_blank" rel="noopener noreferrer">GHG
         Protocol, Scope 2 Guidance.</a>
         </li>
-        <li id="ref-33">
+        <li id="ref-36">
         <a href="https://energytag.org/" target="_blank" rel="noopener noreferrer">EnergyTag,
         Granular Certificate Scheme Standard v2.</a>
         </li>
-        <li id="ref-34">
+        <li id="ref-37">
         Association of Issuing Bodies, EECS Rules Release 8 v1.10.
         </li>
-        <li id="ref-35">
+        <li id="ref-38">
         <a href="https://www.entsoe.eu/news/2026/05/08/from-energy-demand-to-grid-support-entso-e-explores-data-centres-dual-role/" target="_blank" rel="noopener noreferrer">ENTSO-E,
         Data centres and the power system: expected trends, challenges,
         and opportunities.</a>
         </li>
-        <li id="ref-36">
+        <li id="ref-39">
+        <a href="https://www.iea.org/reports/energy-and-ai" target="_blank" rel="noopener noreferrer">International
+        Energy Agency, Energy and AI.</a>
+        </li>
+        <li id="ref-40">
+        <a href="https://www.iea.org/reports/electricity-2026" target="_blank" rel="noopener noreferrer">International
+        Energy Agency, Electricity 2026: Analysis and Forecast to
+        2030.</a>
+        </li>
+        <li id="ref-41">
+        <a href="https://www.iea.org/reports/world-energy-outlook-2025" target="_blank" rel="noopener noreferrer">International
+        Energy Agency, World Energy Outlook 2025.</a>
+        </li>
+        <li id="ref-42">
         Iris Marie Mack, Energy Trading and Risk Management.
         </li>
         </ol>
