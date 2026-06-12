@@ -588,6 +588,7 @@ Notes">
 
     table {
       width: 100%;
+      table-layout: fixed;
       border-collapse: collapse;
       margin: 1.25rem 0;
       font-size: 0.92rem;
@@ -598,6 +599,7 @@ Notes">
       border: 1px solid var(--line);
       padding: 0.55rem 0.65rem;
       vertical-align: top;
+      overflow-wrap: anywhere;
     }
 
     th {
@@ -1866,7 +1868,7 @@ Notes">
         <section id="power-markets-course" class="level1">
         <h1>Power Markets: Technical Onboarding Notes</h1>
         <p class="course-version">
-        v0.46.1
+        v0.46.2
         </p>
         <blockquote>
         <p>Technical onboarding notes for learning power markets through
@@ -19764,6 +19766,43 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         </tr>
         </tbody>
         </table>
+        <p>For the dispatch appendix, use this synthetic annual summary.
+        It is a compressed exercise input, not an 8,760-row market
+        backtest.</p>
+        <table>
+        <thead>
+        <tr>
+        <th>Dispatch item</th>
+        <th style="text-align: right;">Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Average market price</td>
+        <td style="text-align: right;">58 EUR/MWh</td>
+        </tr>
+        <tr>
+        <td>PV-only capture price</td>
+        <td style="text-align: right;">45 EUR/MWh</td>
+        </tr>
+        <tr>
+        <td>PV+BESS capture price after dispatch</td>
+        <td style="text-align: right;">54 EUR/MWh</td>
+        </tr>
+        <tr>
+        <td>BESS energy charged from solar</td>
+        <td style="text-align: right;">12,000 MWh/year</td>
+        </tr>
+        <tr>
+        <td>BESS energy discharged after losses</td>
+        <td style="text-align: right;">10,560 MWh/year</td>
+        </tr>
+        <tr>
+        <td>Contract-sized shape test</td>
+        <td style="text-align: right;">100 GWh/year flat profile</td>
+        </tr>
+        </tbody>
+        </table>
         </section>
         <section id="commercial-workbench-companion" class="level4">
         <h4>Commercial Workbench Companion</h4>
@@ -19856,6 +19895,9 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         <h4>Tasks</h4>
         <ol type="1">
         <li>Build a quote stack for the shaped product.</li>
+        <li>Compare PV-only and PV+BESS dispatch value.</li>
+        <li>Quantify the contract-sized short/long exposure behind the
+        shaped-product premium.</li>
         <li>Identify which risks remain with the seller.</li>
         <li>Decide whether to offer the shaped product, offer only
         as-produced energy, or no-bid.</li>
@@ -19945,6 +19987,144 @@ Financing treatment                 Lenders may discount merchant or optimizatio
         EUR/MWh ceiling. The tail risk still needs an explicit
         boundary.</p>
         </section>
+        <section id="dispatch-and-baseload-premium-appendix"
+        class="level4">
+        <h4>Dispatch And Baseload Premium Appendix</h4>
+        <p>A senior quote review should test the customer promise at two
+        levels. First, does the battery improve the asset’s capture
+        value? Second, how much of that value can be assigned to the
+        shaped customer product after reserving dispatch rights,
+        degradation allowance, settlement obligations, and alternative
+        market use?</p>
+        <p>The synthetic dispatch summary gives the asset-level value
+        pool:</p>
+        <table>
+        <colgroup>
+        <col style="width: 21%" />
+        <col style="width: 28%" />
+        <col style="width: 28%" />
+        <col style="width: 21%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Metric</th>
+        <th style="text-align: right;">PV-only</th>
+        <th style="text-align: right;">PV+BESS</th>
+        <th>Commercial Use</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Project output basis</td>
+        <td style="text-align: right;">90,000 MWh/year</td>
+        <td style="text-align: right;">90,000 MWh/year</td>
+        <td>Same solar asset</td>
+        </tr>
+        <tr>
+        <td>Capture price</td>
+        <td style="text-align: right;">45 EUR/MWh</td>
+        <td style="text-align: right;">54 EUR/MWh</td>
+        <td>Revenue per solar MWh</td>
+        </tr>
+        <tr>
+        <td>Revenue</td>
+        <td style="text-align: right;">4.05 million EUR/year</td>
+        <td style="text-align: right;">4.86 million EUR/year</td>
+        <td>Before degradation, fees, warranty limits, and taxes</td>
+        </tr>
+        <tr>
+        <td>Gross timing uplift</td>
+        <td style="text-align: right;"></td>
+        <td style="text-align: right;">0.81 million EUR/year</td>
+        <td>Value pool to allocate</td>
+        </tr>
+        <tr>
+        <td>Uplift on solar output</td>
+        <td style="text-align: right;"></td>
+        <td style="text-align: right;">9.0 EUR/MWh</td>
+        <td>Asset-level uplift</td>
+        </tr>
+        <tr>
+        <td>Uplift on buyer volume</td>
+        <td style="text-align: right;"></td>
+        <td style="text-align: right;">8.1 EUR/MWh</td>
+        <td>Equivalent spread over 100 GWh/year</td>
+        </tr>
+        </tbody>
+        </table>
+        <pre class="text"><code>PV-only revenue = 90,000 MWh x 45 EUR/MWh = 4.05 million EUR/year
+PV+BESS revenue = 90,000 MWh x 54 EUR/MWh = 4.86 million EUR/year
+Gross timing uplift = 4.86 - 4.05 = 0.81 million EUR/year
+Equivalent spread over buyer volume = 810,000 / 100,000 MWh = 8.1 EUR/MWh</code></pre>
+        <p>Treat the 8.1 EUR/MWh as a value pool that must be allocated.
+        If the customer product consumes dispatch rights, state of
+        charge, cycle budget, and evening discharge capacity, the value
+        becomes an opportunity cost inside the shaped quote. If the
+        seller retains enough control to use the battery elsewhere, the
+        customer receives only the portion of battery value assigned to
+        the product.</p>
+        <p>The second test prices the shape on the contract-sized
+        promise rather than on the full project or portfolio. A
+        full-project view can let unrelated surplus hide the specific
+        cost of serving a flat buyer profile.</p>
+        <table>
+        <thead>
+        <tr>
+        <th>Contract-Sized Profile Test</th>
+        <th style="text-align: right;">No BESS Shaping</th>
+        <th style="text-align: right;">With BESS Shaping</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Short hours</td>
+        <td style="text-align: right;">4,300 h/year</td>
+        <td style="text-align: right;">2,900 h/year</td>
+        </tr>
+        <tr>
+        <td>Short volume bought</td>
+        <td style="text-align: right;">18,000 MWh/year</td>
+        <td style="text-align: right;">11,500 MWh/year</td>
+        </tr>
+        <tr>
+        <td>Average short purchase price</td>
+        <td style="text-align: right;">76 EUR/MWh</td>
+        <td style="text-align: right;">69 EUR/MWh</td>
+        </tr>
+        <tr>
+        <td>Long volume sold</td>
+        <td style="text-align: right;">18,000 MWh/year</td>
+        <td style="text-align: right;">10,800 MWh/year</td>
+        </tr>
+        <tr>
+        <td>Average long sale price</td>
+        <td style="text-align: right;">45 EUR/MWh</td>
+        <td style="text-align: right;">54 EUR/MWh</td>
+        </tr>
+        <tr>
+        <td>Expected net shape cost</td>
+        <td style="text-align: right;">558,000 EUR/year</td>
+        <td style="text-align: right;">210,300 EUR/year</td>
+        </tr>
+        <tr>
+        <td>Shape premium on buyer volume</td>
+        <td style="text-align: right;">5.6 EUR/MWh</td>
+        <td style="text-align: right;">2.1 EUR/MWh</td>
+        </tr>
+        </tbody>
+        </table>
+        <pre class="text"><code>No-BESS shape cost = (18,000 x 76) - (18,000 x 45) = 558,000 EUR/year
+No-BESS shape premium = 558,000 / 100,000 MWh = 5.6 EUR/MWh
+
+With-BESS shape cost = (11,500 x 69) - (10,800 x 54) = 210,300 EUR/year
+With-BESS shape premium = 210,300 / 100,000 MWh = 2.1 EUR/MWh
+Expected shape-cost reduction = 558,000 - 210,300 = 347,700 EUR/year</code></pre>
+        <p>This dispatch test strengthens the bounded-offer
+        recommendation while keeping the collar in place. The BESS
+        lowers expected shape cost in this scenario, while hard-hour
+        residuals can still dominate the fixed risk margin when the
+        system is stressed.</p>
+        </section>
         <section id="numerical-intuition-46" class="level4">
         <h4>Numerical Intuition</h4>
         <p>The annual clean-energy shortfall is:</p>
@@ -19981,6 +20161,14 @@ Full stress-inclusive fixed quote = 66 + 4 = 70 EUR/MWh</code></pre>
         illustrated stress case inside the fixed price, the quote rises
         to about <code>70 EUR/MWh</code>, above the stated buyer
         ceiling.</p>
+        <p>The dispatch appendix adds evidence for the bounded offer
+        while leaving stress risk in place. The BESS reduces the
+        expected contract-sized shape cost from <code>5.6 EUR/MWh</code>
+        to <code>2.1 EUR/MWh</code>, but the same flexibility also has
+        gross timing value and competing uses. The quote should keep the
+        battery opportunity-cost line unless the seller can prove that
+        the customer’s dispatch requirement and the alternative battery
+        value do not conflict.</p>
         <p>The investment-committee test is whether the price, cap,
         credit terms, evidence package, data rights, and dispatch rights
         describe the same product. If the buyer wants the seller to
@@ -19993,11 +20181,16 @@ Full stress-inclusive fixed quote = 66 + 4 = 70 EUR/MWh</code></pre>
         </section>
         <section id="decision-boundary-41" class="level4">
         <h4>Decision Boundary</h4>
-        <p>The offer is not “shaped PPA yes or no.” It is a choice among
-        fixed shape, bounded shape, indexed residual, partner-backed
-        firming, or as-produced fallback. The seller should approve the
-        highest-value promise whose residual exposure is capped,
-        evidenced, and controllable.</p>
+        <p>The approval question is broader than a binary shaped-PPA
+        vote. It is a choice among fixed shape, bounded shape, indexed
+        residual, partner-backed firming, or as-produced fallback. The
+        seller should approve the highest-value promise whose residual
+        exposure is capped, evidenced, and controllable.</p>
+        <p>Asset-level dispatch value can support the product case, but
+        the product decision should be made on the contract-sized
+        residual exposure. Portfolio surplus, unrelated merchant upside,
+        and average annual energy cannot erase a short-hour delivery
+        promise.</p>
         </section>
         <section id="assumption-flip" class="level4">
         <h4>Assumption Flip</h4>
@@ -20018,6 +20211,10 @@ Full stress-inclusive fixed quote = 66 + 4 = 70 EUR/MWh</code></pre>
         residual exposure. The product promises shape, timing,
         settlement, and fallback procurement alongside annual clean
         energy.</p>
+        <p>A second failure is treating gross BESS capture uplift as a
+        free customer discount. If the same MWh, cycles, state of
+        charge, and dispatch rights are needed for the shaped profile,
+        the uplift is part of the opportunity-cost test.</p>
         </section>
         <section id="links-back-to-the-lectures" class="level4">
         <h4>Links Back To The Lectures</h4>
@@ -25259,7 +25456,7 @@ data_and_observability_share = 0.12 / 0.50 = 24%</code></pre>
       }
 
       function courseHomePath() {
-        return window.location.protocol === "file:" ? "power-markets-course.html" : "index.html";
+        return "index.html";
       }
 
       function pdfPath(kind, versionText) {
